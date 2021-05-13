@@ -31,12 +31,12 @@ export default class ListScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  tabBar: {
+    ...palette.shadowedTopBar,
+  },
   label: {
     fontSize: 14,
     padding: 0,
-  },
-  tabBar: {
-    ...palette.shadowedTopBar,
   },
   indicator: {
     ...createIndicatorStyle({

@@ -20,6 +20,9 @@ target 'cafeteria' do
   # Damn flipper!
   # use_flipper!()
 
+  # We use vector icons!
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
   post_install do |installer|
     react_native_post_install(installer)
   end

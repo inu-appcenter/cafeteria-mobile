@@ -49,5 +49,6 @@ const styles = StyleSheet.create({
       marginHorizontal: 16,
     }),
     backgroundColor: colors.themeBlue,
+    borderRadius: 1,
   },
 });

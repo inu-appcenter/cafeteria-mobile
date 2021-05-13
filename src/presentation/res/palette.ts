@@ -28,6 +28,10 @@ const palette = StyleSheet.create({
     fontSize: 12,
   },
 
+  boldText: {
+    fontWeight: 'bold',
+  },
+
   whiteBackground: {
     backgroundColor: colors.white,
   },

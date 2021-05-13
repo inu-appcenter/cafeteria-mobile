@@ -7,6 +7,7 @@ import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/typ
 import {Image, Platform, StyleSheet} from 'react-native';
 import {GithubProfileSectionItem} from './GitHubProfileData';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import palette from '../../res/palette';
 
 export type GithubProfileParamList = {
   List: undefined;
@@ -19,7 +20,7 @@ export default class GithubScreen extends React.Component {
 
     const screenOptions: StackHeaderOptions = {
       headerBackTitleVisible: false,
-      headerTitleStyle: styles.boldText,
+      headerTitleStyle: palette.boldText,
       headerTintColor: colors.textPrimary,
       headerLeftContainerStyle: {
         left: Platform.OS === 'ios' ? 12 : 0,
@@ -36,8 +37,9 @@ export default class GithubScreen extends React.Component {
           options={{
             headerTitle: () => (
               <Image
-                resizeMode="center"
-                source={require('../../../../images/header_logo.png')}
+                style={styles.headerLogo}
+                resizeMode="contain"
+                source={require('../../res/images/header_logo.png')}
               />
             ),
             headerTitleAlign: 'center',
@@ -54,7 +56,7 @@ const styles = StyleSheet.create({
   noSeparator: {
     shadowColor: 'transparent',
   },
-  boldText: {
-    fontWeight: 'bold',
+  headerLogo: {
+    height: 17,
   },
 });

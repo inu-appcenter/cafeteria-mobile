@@ -15,6 +15,7 @@ export default class ListScreen extends React.Component {
         swipeEnabled={false}
         tabBarOptions={{
           style: styles.tabBar,
+          tabStyle: styles.tab,
           labelStyle: styles.label,
           indicatorStyle: styles.indicator,
           activeTintColor: colors.themeBlue,
@@ -33,6 +34,10 @@ export default class ListScreen extends React.Component {
 const styles = StyleSheet.create({
   tabBar: {
     ...palette.shadowedTopBar,
+  },
+  tab: {
+    paddingTop: 0,
+    height: 40,
   },
   label: {
     fontSize: 14,

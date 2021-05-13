@@ -1,11 +1,11 @@
 import React from 'react';
 import Carousel from '../../components/Carousel';
 import CardView from '../../components/CardView';
-import Touchable from '../../components/Touchable';
 import {divideArray} from '../../../common/utils/Array';
 import ItemSeparator from '../../components/ItemSeparator';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import MenuView from './MenuView';
+import MenuItem from './MenuItem';
 
 export default class MenuStackPager extends React.Component<{
   menus: MenuView[];
@@ -50,35 +50,6 @@ class ProfileStackCard extends React.Component<{
   }
 }
 
-class MenuItem extends React.Component<{menu: MenuView}, {lines: number}> {
-  state = {
-    lines: 1,
-  };
-
-  render() {
-    const {menu} = this.props;
-    const {lines} = this.state;
-    const setMaxLines = (max: number) => {
-      this.setState({
-        lines: max,
-      });
-    };
-
-    return (
-      <Touchable onPress={() => setMaxLines(5)}>
-        <View style={styles.profileItemWrapper}>
-          <Text
-            numberOfLines={lines}
-            ellipsizeMode={'tail'}
-            style={styles.profileItemText}>
-            {menu.menuText}
-          </Text>
-        </View>
-      </Touchable>
-    );
-  }
-}
-
 const styles = StyleSheet.create({
   sectionCarousel: {
     overflow: 'visible',
@@ -88,13 +59,5 @@ const styles = StyleSheet.create({
     // For android: prevent elevation shadow clipping.
     paddingTop: 12,
     paddingBottom: 16,
-  },
-
-  profileItemWrapper: {
-    padding: 20,
-  },
-
-  profileItemText: {
-    fontSize: 18,
   },
 });

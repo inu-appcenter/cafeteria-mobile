@@ -1,12 +1,12 @@
 import React from 'react';
-import ListPage from './ListPage';
+import CafeteriaListPage from './CafeteriaListPage';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import palette from '../../res/palette';
 import colors from '../../res/colors';
 import createIndicatorStyle from '../../components/utils/createIndicatorStyle';
 import {StyleSheet} from 'react-native';
 
-export default class ListScreen extends React.Component {
+export default class CafeteriaListScreen extends React.Component {
   render() {
     const Tab = createMaterialTopTabNavigator();
 
@@ -21,11 +21,11 @@ export default class ListScreen extends React.Component {
           activeTintColor: colors.themeBlue,
           inactiveTintColor: colors.textDisabled,
         }}>
-        <Tab.Screen name="오늘" component={ListPage} />
-        <Tab.Screen name="내일" component={ListPage} />
-        <Tab.Screen name="모레" component={ListPage} />
-        <Tab.Screen name="글피" component={ListPage} />
-        <Tab.Screen name="그글피" component={ListPage} />
+        <Tab.Screen name="오늘" component={CafeteriaListPage} />
+        <Tab.Screen name="내일" component={CafeteriaListPage} />
+        <Tab.Screen name="모레" component={CafeteriaListPage} />
+        <Tab.Screen name="글피" component={CafeteriaListPage} />
+        <Tab.Screen name="그글피" component={CafeteriaListPage} />
       </Tab.Navigator>
     );
   }

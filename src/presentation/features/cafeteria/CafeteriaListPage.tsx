@@ -1,17 +1,17 @@
 import React from 'react';
 import palette from '../../res/palette';
 import SectionHeader from './SectionHeader';
-import ProfileStackPager from './ProfileStackPager';
+import CornerStackPager from './CornerStackPager';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {GithubProfileParamList} from './GithubScreen';
+import {CafeteriaNavigationParams} from './CafeteriaScreen';
 import {Animated, StyleSheet, View} from 'react-native';
 import {exampleListItems, GithubProfileSectionItem} from './GitHubProfileData';
 
 type Props = {
-  navigation: StackNavigationProp<GithubProfileParamList, 'List'>;
+  navigation: StackNavigationProp<CafeteriaNavigationParams, 'List'>;
 };
 
-export default class ListPage extends React.Component<Props> {
+export default class CafeteriaListPage extends React.Component<Props> {
   render() {
     const {navigation} = this.props;
 
@@ -42,7 +42,7 @@ class SectionItem extends React.Component<
           onClickMore={() => navigation.navigate('Detail', {section})}
         />
 
-        <ProfileStackPager profiles={section.profiles} stackSize={3} />
+        <CornerStackPager profiles={section.profiles} stackSize={3} />
       </View>
     );
   }

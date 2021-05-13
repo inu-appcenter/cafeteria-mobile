@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeScreen from '../features/home/HomeScreen';
 import CounterScreen from '../features/counter/CounterScreen';
-import GithubScreen from '../features/github/GithubScreen';
+import CafeteriaScreen from '../features/cafeteria/CafeteriaScreen';
 import tabBarIconSelector from '../components/utils/tabBarIconSelector';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import colors from '../res/colors';
@@ -10,7 +10,7 @@ export default class MyNavigator extends React.Component {
   public icons = {
     Home: ['home', 'home-outline'],
     Counter: ['paw', 'paw-outline'],
-    GitHub: ['code', 'code-outline'],
+    Cafeteria: ['restaurant', 'restaurant-outline'],
   };
 
   render() {
@@ -26,7 +26,7 @@ export default class MyNavigator extends React.Component {
         })}>
         <BottomTab.Screen name="Home" component={HomeScreen} />
         <BottomTab.Screen name="Counter" component={CounterScreen} />
-        <BottomTab.Screen name="GitHub" component={GithubScreen} />
+        <BottomTab.Screen name="Cafeteria" component={CafeteriaScreen} />
       </BottomTab.Navigator>
     );
   }

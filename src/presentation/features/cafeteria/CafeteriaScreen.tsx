@@ -1,22 +1,22 @@
-import colors from '../../res/colors';
 import React from 'react';
+import colors from '../../res/colors';
+import palette from '../../res/palette';
 import BackIcon from '../../components/BackIcon';
-import ListScreen from './ListScreen';
-import DetailScreen from './DetailScreen';
+import CafeteriaListScreen from './CafeteriaListScreen';
+import CafeteriaDetailScreen from './CafeteriaDetailScreen';
 import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
 import {Image, Platform, StyleSheet} from 'react-native';
 import {GithubProfileSectionItem} from './GitHubProfileData';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
-import palette from '../../res/palette';
 
-export type GithubProfileParamList = {
+export type CafeteriaNavigationParams = {
   List: undefined;
   Detail: {section: GithubProfileSectionItem};
 };
 
-export default class GithubScreen extends React.Component {
+export default class CafeteriaScreen extends React.Component {
   render() {
-    const Stack = createStackNavigator<GithubProfileParamList>();
+    const Stack = createStackNavigator<CafeteriaNavigationParams>();
 
     const screenOptions: StackHeaderOptions = {
       headerBackTitleVisible: false,
@@ -33,7 +33,7 @@ export default class GithubScreen extends React.Component {
       <Stack.Navigator headerMode="screen" screenOptions={screenOptions}>
         <Stack.Screen
           name="List"
-          component={ListScreen}
+          component={CafeteriaListScreen}
           options={{
             headerTitle: () => (
               <Image
@@ -46,7 +46,7 @@ export default class GithubScreen extends React.Component {
             headerStyle: styles.noSeparator,
           }}
         />
-        <Stack.Screen name="Detail" component={DetailScreen} />
+        <Stack.Screen name="Detail" component={CafeteriaDetailScreen} />
       </Stack.Navigator>
     );
   }

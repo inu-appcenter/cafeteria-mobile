@@ -2,16 +2,16 @@ import React from 'react';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ScrollView, StyleSheet} from 'react-native';
-import {GithubProfileParamList} from './GithubScreen';
-import ProfileStackPager from './ProfileStackPager';
+import {CafeteriaNavigationParams} from './CafeteriaScreen';
+import CornerStackPager from './CornerStackPager';
 import palette from '../../res/palette';
 
 type Props = {
-  route: RouteProp<GithubProfileParamList, 'Detail'>;
-  navigation: StackNavigationProp<GithubProfileParamList, 'Detail'>;
+  route: RouteProp<CafeteriaNavigationParams, 'Detail'>;
+  navigation: StackNavigationProp<CafeteriaNavigationParams, 'Detail'>;
 };
 
-export default class DetailScreen extends React.Component<Props> {
+export default class CafeteriaDetailScreen extends React.Component<Props> {
   render() {
     const {route} = this.props;
     const {section} = route.params;
@@ -20,7 +20,7 @@ export default class DetailScreen extends React.Component<Props> {
       <ScrollView
         style={palette.whiteBackground}
         contentContainerStyle={styles.detailContentContainer}>
-        <ProfileStackPager profiles={section.profiles} />
+        <CornerStackPager profiles={section.profiles} />
       </ScrollView>
     );
   }

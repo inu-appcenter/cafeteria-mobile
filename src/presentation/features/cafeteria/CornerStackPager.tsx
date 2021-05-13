@@ -7,7 +7,7 @@ import CardView from '../../components/CardView';
 import ItemSeparator from '../../components/ItemSeparator';
 import Touchable from '../../components/Touchable';
 
-export default class ProfileStackPager extends React.Component<{
+export default class CornerStackPager extends React.Component<{
   profiles: GithubProfileItem[];
   stackSize?: number;
 }> {

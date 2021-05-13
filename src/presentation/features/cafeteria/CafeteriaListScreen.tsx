@@ -1,10 +1,10 @@
 import React from 'react';
-import CafeteriaListPage from './CafeteriaListPage';
-import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
-import palette from '../../res/palette';
 import colors from '../../res/colors';
-import createIndicatorStyle from '../../components/utils/createIndicatorStyle';
+import palette from '../../res/palette';
 import {StyleSheet} from 'react-native';
+import CafeteriaListPage from './CafeteriaListPage';
+import createIndicatorStyle from '../../components/utils/createIndicatorStyle';
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 export default class CafeteriaListScreen extends React.Component {
   render() {

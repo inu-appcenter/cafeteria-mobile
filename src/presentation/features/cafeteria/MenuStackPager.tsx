@@ -1,28 +1,28 @@
 import React from 'react';
-import {GithubProfileItem} from './GitHubProfileData';
 import Carousel from '../../components/Carousel';
-import {divideArray} from '../../../common/utils/Array';
-import {FlatList, StyleSheet, Text, View} from 'react-native';
 import CardView from '../../components/CardView';
-import ItemSeparator from '../../components/ItemSeparator';
 import Touchable from '../../components/Touchable';
+import {divideArray} from '../../../common/utils/Array';
+import ItemSeparator from '../../components/ItemSeparator';
+import {FlatList, StyleSheet, Text, View} from 'react-native';
+import MenuView from './MenuView';
 
-export default class CornerStackPager extends React.Component<{
-  profiles: GithubProfileItem[];
+export default class MenuStackPager extends React.Component<{
+  menus: MenuView[];
   stackSize?: number;
 }> {
   render() {
-    const {profiles, stackSize} = this.props;
+    const {menus, stackSize} = this.props;
 
     return (
       <Carousel
         gap={6}
         bounces={stackSize !== undefined}
-        data={divideArray(profiles, stackSize)}
+        data={divideArray(menus, stackSize)}
         style={styles.sectionCarousel}
         itemWidth={'88%'}
-        renderItem={i => <ProfileStackCard profiles={i.item} />}
-        keyExtractor={i => i[0].userId}
+        renderItem={i => <ProfileStackCard menus={i.item} />}
+        keyExtractor={i => i[0].cornerName}
         contentContainerStyle={styles.sectionCarouselContentContainer}
       />
     );
@@ -30,19 +30,19 @@ export default class CornerStackPager extends React.Component<{
 }
 
 class ProfileStackCard extends React.Component<{
-  profiles: GithubProfileItem[];
+  menus: MenuView[];
 }> {
   render() {
-    const {profiles} = this.props;
+    const {menus} = this.props;
 
     return (
       <CardView>
         <FlatList
           bounces={false}
-          data={profiles}
-          listKey={profiles[0].userId}
-          renderItem={i => <ProfileItem profile={i.item} />}
-          keyExtractor={i => i.userId}
+          data={menus}
+          listKey={menus[0].cornerName}
+          renderItem={i => <MenuItem menu={i.item} />}
+          keyExtractor={i => i.cornerName}
           ItemSeparatorComponent={ItemSeparator}
         />
       </CardView>
@@ -50,16 +50,13 @@ class ProfileStackCard extends React.Component<{
   }
 }
 
-class ProfileItem extends React.Component<
-  {profile: GithubProfileItem},
-  {lines: number}
-> {
+class MenuItem extends React.Component<{menu: MenuView}, {lines: number}> {
   state = {
     lines: 1,
   };
 
   render() {
-    const {profile} = this.props;
+    const {menu} = this.props;
     const {lines} = this.state;
     const setMaxLines = (max: number) => {
       this.setState({
@@ -74,7 +71,7 @@ class ProfileItem extends React.Component<
             numberOfLines={lines}
             ellipsizeMode={'tail'}
             style={styles.profileItemText}>
-            {`Profile of ${profile.userId}! Perform a long click to see what's next! Maybe this text will be ellipsized due to its too much length ;)`}
+            {menu.menuText}
           </Text>
         </View>
       </Touchable>

@@ -1,11 +1,12 @@
 import React from 'react';
 import palette from '../../res/palette';
 import SectionHeader from './SectionHeader';
-import CornerStackPager from './CornerStackPager';
+import MenuStackPager from './MenuStackPager';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {CafeteriaNavigationParams} from './CafeteriaScreen';
 import {Animated, StyleSheet, View} from 'react-native';
-import {exampleListItems, GithubProfileSectionItem} from './GitHubProfileData';
+import CafeteriaDummyData from './CafeteriaDummyData';
+import CafeteriaView from './CafeteriaView';
 
 type Props = {
   navigation: StackNavigationProp<CafeteriaNavigationParams, 'List'>;
@@ -18,9 +19,9 @@ export default class CafeteriaListPage extends React.Component<Props> {
     return (
       <Animated.FlatList
         style={palette.whiteBackground}
-        data={exampleListItems}
+        data={CafeteriaDummyData}
         renderItem={item => (
-          <SectionItem navigation={navigation} section={item.item} />
+          <CafeteriaSection navigation={navigation} cafeteria={item.item} />
         )}
         keyExtractor={i => i.title}
         contentContainerStyle={styles.rootListContentContainer}
@@ -29,20 +30,22 @@ export default class CafeteriaListPage extends React.Component<Props> {
   }
 }
 
-class SectionItem extends React.Component<
-  Props & {section: GithubProfileSectionItem}
+class CafeteriaSection extends React.Component<
+  Props & {cafeteria: CafeteriaView}
 > {
   render() {
-    const {navigation, section} = this.props;
+    const {navigation, cafeteria} = this.props;
 
     return (
       <View>
         <SectionHeader
-          title={section.title}
-          onClickMore={() => navigation.navigate('Detail', {section})}
+          title={cafeteria.title}
+          onClickMore={() =>
+            navigation.navigate('Detail', {cafeteria: cafeteria})
+          }
         />
 
-        <CornerStackPager profiles={section.profiles} stackSize={3} />
+        <MenuStackPager menus={cafeteria.menus} stackSize={3} />
       </View>
     );
   }

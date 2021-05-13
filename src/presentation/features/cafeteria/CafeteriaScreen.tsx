@@ -6,12 +6,12 @@ import CafeteriaListScreen from './CafeteriaListScreen';
 import CafeteriaDetailScreen from './CafeteriaDetailScreen';
 import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
 import {Image, Platform, StyleSheet} from 'react-native';
-import {GithubProfileSectionItem} from './GitHubProfileData';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
+import CafeteriaView from './CafeteriaView';
 
 export type CafeteriaNavigationParams = {
   List: undefined;
-  Detail: {section: GithubProfileSectionItem};
+  Detail: {cafeteria: CafeteriaView};
 };
 
 export default class CafeteriaScreen extends React.Component {

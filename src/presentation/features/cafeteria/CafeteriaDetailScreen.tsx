@@ -1,10 +1,10 @@
 import React from 'react';
+import palette from '../../res/palette';
 import {RouteProp} from '@react-navigation/native';
+import MenuStackPager from './MenuStackPager';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ScrollView, StyleSheet} from 'react-native';
 import {CafeteriaNavigationParams} from './CafeteriaScreen';
-import CornerStackPager from './CornerStackPager';
-import palette from '../../res/palette';
 
 type Props = {
   route: RouteProp<CafeteriaNavigationParams, 'Detail'>;
@@ -14,22 +14,22 @@ type Props = {
 export default class CafeteriaDetailScreen extends React.Component<Props> {
   render() {
     const {route} = this.props;
-    const {section} = route.params;
+    const {cafeteria} = route.params;
 
     return (
       <ScrollView
         style={palette.whiteBackground}
         contentContainerStyle={styles.detailContentContainer}>
-        <CornerStackPager profiles={section.profiles} />
+        <MenuStackPager menus={cafeteria.menus} />
       </ScrollView>
     );
   }
 
   componentDidMount() {
     const {route, navigation} = this.props;
-    const {section} = route.params;
+    const {cafeteria} = route.params;
 
-    navigation.setOptions({headerTitle: section.title});
+    navigation.setOptions({headerTitle: cafeteria.title});
   }
 }
 

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import color from './color';
+import colors from './colors';
 
 const palette = StyleSheet.create({
   centeringContainer: {
@@ -16,20 +16,20 @@ const palette = StyleSheet.create({
   },
 
   textPrimary: {
-    color: color.textPrimary,
+    color: colors.textPrimary,
     fontSize: 16,
   },
   textSecondary: {
-    color: color.textSecondary,
+    color: colors.textSecondary,
     fontSize: 14,
   },
   textTertiary: {
-    color: color.textTertiary,
+    color: colors.textTertiary,
     fontSize: 12,
   },
 
   whiteBackground: {
-    backgroundColor: color.white,
+    backgroundColor: colors.white,
   },
 
   shadowedTopBar: {

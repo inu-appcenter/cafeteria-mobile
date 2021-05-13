@@ -4,6 +4,7 @@ import CounterScreen from '../features/counter/CounterScreen';
 import GithubScreen from '../features/github/GithubScreen';
 import tabBarIconSelector from '../components/utils/tabBarIconSelector';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import colors from '../res/colors';
 
 export default class MyNavigator extends React.Component {
   public icons = {
@@ -17,6 +18,9 @@ export default class MyNavigator extends React.Component {
 
     return (
       <BottomTab.Navigator
+        tabBarOptions={{
+          activeTintColor: colors.themeBlue,
+        }}
         screenOptions={({route}) => ({
           tabBarIcon: tabBarIconSelector(this.icons, route.name),
         })}>

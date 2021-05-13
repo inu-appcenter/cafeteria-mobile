@@ -18,7 +18,7 @@ export default function tabBarIconSelector(
   return ({focused, color, size}) => {
     return (
       <Icons
-        name={icons[screenName]?.[focused ? 1 : 0] || 'error'}
+        name={icons[screenName]?.[focused ? 0 : 1] || 'error'}
         size={size}
         color={color}
       />

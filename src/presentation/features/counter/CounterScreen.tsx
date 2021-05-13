@@ -10,7 +10,7 @@ import {
 import {inject, observer} from 'mobx-react';
 import RootStore from '../../../store/RootStore';
 import CounterStore from './CounterStore';
-import color from '../../res/color';
+import colors from '../../res/colors';
 
 @inject(({counterStore}: RootStore) => ({store: counterStore}))
 @observer
@@ -29,7 +29,7 @@ export default class CounterScreen extends React.Component<{
             store.set(Number.parseInt(event.nativeEvent.text, 10))
           }
           style={styles.input}
-          placeholderTextColor={color.textTertiary}
+          placeholderTextColor={colors.textTertiary}
           keyboardType="numeric"
           returnKeyType="done"
           placeholder="change amount"

@@ -1,11 +1,10 @@
-import Icon from 'react-native-vector-icons/Feather';
-import color from '../../res/color';
+import colors from '../../res/colors';
 import React from 'react';
 import BackIcon from '../../components/BackIcon';
 import ListScreen from './ListScreen';
 import DetailScreen from './DetailScreen';
 import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
-import {Platform, StyleSheet} from 'react-native';
+import {Image, Platform, StyleSheet} from 'react-native';
 import {GithubProfileSectionItem} from './GitHubProfileData';
 import {createStackNavigator, TransitionPresets} from '@react-navigation/stack';
 
@@ -21,7 +20,7 @@ export default class GithubScreen extends React.Component {
     const screenOptions: StackHeaderOptions = {
       headerBackTitleVisible: false,
       headerTitleStyle: styles.boldText,
-      headerTintColor: color.textPrimary,
+      headerTintColor: colors.textPrimary,
       headerLeftContainerStyle: {
         left: Platform.OS === 'ios' ? 12 : 0,
       },
@@ -36,7 +35,10 @@ export default class GithubScreen extends React.Component {
           component={ListScreen}
           options={{
             headerTitle: () => (
-              <Icon name="code" size={27} color={color.textPrimary} />
+              <Image
+                resizeMode="center"
+                source={require('../../../../images/header_logo.png')}
+              />
             ),
             headerTitleAlign: 'center',
             headerStyle: styles.noSeparator,

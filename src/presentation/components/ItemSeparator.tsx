@@ -1,6 +1,6 @@
 import React from 'react';
 import {Platform, StyleSheet, View} from 'react-native';
-import color from '../res/color';
+import colors from '../res/colors';
 
 export default class ItemSeparator extends React.Component {
   render() {
@@ -12,6 +12,6 @@ const styles = StyleSheet.create({
   separator: {
     height: Platform.OS === 'android' ? 0.5 : 0.4,
     width: '100%',
-    backgroundColor: color.dividerColorLight,
+    backgroundColor: colors.dividerColorLight,
   },
 });

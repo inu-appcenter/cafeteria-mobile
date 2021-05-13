@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import React from 'react';
-import color from '../res/color';
+import colors from '../res/colors';
 import Touchable from './Touchable';
 
 interface Props extends TouchableWithoutFeedbackProps {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     shadowColor: 'black',
     borderRadius: 12,
-    backgroundColor: color.white,
+    backgroundColor: colors.white,
 
     // iOS
     shadowOffset: {width: 0, height: 4},

@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedbackProps,
 } from 'react-native';
-import color from '../res/color';
+import colors from '../res/colors';
 
 /**
  * Platform optimized touchable item.
@@ -14,7 +14,7 @@ export default class Touchable extends React.Component<TouchableWithoutFeedbackP
   render() {
     if (Platform.OS === 'android') {
       const ripple = TouchableNativeFeedback.Ripple(
-        color.rippleColorLight,
+        colors.rippleColorLight,
         false,
       );
 

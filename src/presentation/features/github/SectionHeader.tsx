@@ -7,7 +7,7 @@ import {
   ViewProps,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import color from '../../res/color';
+import colors from '../../res/colors';
 
 type Props = ViewProps & {
   title?: string;
@@ -22,7 +22,7 @@ export default class SectionHeader extends React.Component<Props> {
       <TouchableOpacity onPress={onClickMore}>
         <View style={[styles.container, style]}>
           <Text style={styles.headerText}>{title}</Text>
-          <Icon name="arrow-right" size={25} color={color.textPrimary} />
+          <Icon name="arrow-right" size={25} color={colors.textPrimary} />
         </View>
       </TouchableOpacity>
     );

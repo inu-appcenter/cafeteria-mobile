@@ -7,7 +7,7 @@ import React from 'react';
 import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import MyNavigator from './navigation/MyNavigator';
-import color from './res/color';
+import colors from './res/colors';
 import {Provider} from 'mobx-react';
 import RootStore from '../store/RootStore';
 
@@ -20,7 +20,7 @@ export default class App extends React.Component {
         <NavigationContainer>
           <StatusBar
             translucent={false}
-            backgroundColor={color.white}
+            backgroundColor={colors.white}
             barStyle={'dark-content'}
           />
           <MyNavigator />

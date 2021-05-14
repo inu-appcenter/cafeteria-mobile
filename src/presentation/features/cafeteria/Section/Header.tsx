@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import colors from '../../../res/colors';
+import palette from '../../../res/palette';
 
 type Props = ViewProps & {
   title?: string;
@@ -21,7 +22,7 @@ export default class Header extends React.Component<Props> {
     return (
       <TouchableOpacity onPress={onClickMore}>
         <View style={[styles.container, style]}>
-          <Text style={styles.headerText}>{title}</Text>
+          <Text style={palette.textHeader}>{title}</Text>
           <Icon name="arrow-right" size={25} color={colors.textPrimary} />
         </View>
       </TouchableOpacity>
@@ -36,10 +37,5 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginHorizontal: 24,
     marginTop: 16,
-  },
-
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
   },
 });

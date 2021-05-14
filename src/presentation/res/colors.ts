@@ -16,6 +16,6 @@ export default {
 
   dividerColorLight: '#0000001F',
 
-  shadowColor: '#555555',
+  shadow: '#555555',
   darkComponentBackground: '#222222',
 };

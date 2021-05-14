@@ -1,12 +1,8 @@
 import {makeAutoObservable} from 'mobx';
 
-export default class MembershipStore {
-  loggedIn: boolean = false;
-
+export default class LoginStore {
   idField: string = '';
   passwordField: string = '';
-
-  barcode: string = '';
 
   constructor() {
     makeAutoObservable(this);
@@ -19,6 +15,4 @@ export default class MembershipStore {
   setPasswordField(value: string) {
     this.passwordField = value;
   }
-
-  login() {}
 }

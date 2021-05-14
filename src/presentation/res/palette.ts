@@ -8,6 +8,10 @@ const palette = StyleSheet.create({
     justifyContent: 'center',
   },
 
+  fullSized: {
+    flex: 1,
+  },
+
   bottomFullWidth: {
     position: 'absolute',
     bottom: 6,
@@ -15,6 +19,11 @@ const palette = StyleSheet.create({
     end: 6,
   },
 
+  textHeader: {
+    color: colors.textPrimary,
+    fontSize: 24,
+    fontWeight: 'bold',
+  },
   textPrimary: {
     color: colors.textPrimary,
     fontSize: 16,

@@ -7,14 +7,14 @@ import {
   ViewProps,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
-import colors from '../../res/colors';
+import colors from '../../../res/colors';
 
 type Props = ViewProps & {
   title?: string;
   onClickMore?: () => void;
 };
 
-export default class SectionHeader extends React.Component<Props> {
+export default class Header extends React.Component<Props> {
   render() {
     const {title, onClickMore, style} = this.props;
 

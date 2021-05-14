@@ -1,26 +1,29 @@
 import React from 'react';
-import MenuView from './MenuView';
-import Touchable from '../../components/Touchable';
+import MenuView from '../MenuView';
+import Touchable from '../../../components/Touchable';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import palette from '../../res/palette';
+import palette from '../../../res/palette';
 
 const images = [
   null,
-  require('../../res/images/available_1.png'),
-  require('../../res/images/available_2.png'),
-  require('../../res/images/available_3.png'),
-  require('../../res/images/available_4.png'),
-  require('../../res/images/available_5.png'),
-  require('../../res/images/available_6.png'),
-  require('../../res/images/available_7.png'),
+  require('../../../res/images/available_1.png'),
+  require('../../../res/images/available_2.png'),
+  require('../../../res/images/available_3.png'),
+  require('../../../res/images/available_4.png'),
+  require('../../../res/images/available_5.png'),
+  require('../../../res/images/available_6.png'),
+  require('../../../res/images/available_7.png'),
 ];
 
 export default class MenuItem extends React.Component<
   {menu: MenuView},
   {lines: number}
 > {
+  private static COLLAPSED_MAX_LINES = 2;
+  private static EXPANDED_MAX_LINES = 5;
+
   state = {
-    lines: 1,
+    lines: MenuItem.COLLAPSED_MAX_LINES,
   };
 
   private get availableTimeImage() {
@@ -43,14 +46,15 @@ export default class MenuItem extends React.Component<
   render() {
     const {menu} = this.props;
     const {lines} = this.state;
-    const setMaxLines = (max: number) => {
+
+    const expand = () => {
       this.setState({
-        lines: max,
+        lines: MenuItem.EXPANDED_MAX_LINES,
       });
     };
 
     return (
-      <Touchable onPress={() => setMaxLines(5)}>
+      <Touchable onPress={() => expand()}>
         {/* Root */}
         <View style={styles.rootContainer}>
           {/* Available time view */}

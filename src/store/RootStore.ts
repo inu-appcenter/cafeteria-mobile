@@ -1,7 +1,7 @@
-import GithubProfileStore from '../presentation/features/cafeteria/GithubProfileStore';
 import CounterStore from '../presentation/features/counter/CounterStore';
+import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
 
 export default class RootStore {
-  githubProfileStore = new GithubProfileStore();
   counterStore = new CounterStore();
+  cafeteriaStore = new CafeteriaStore();
 }

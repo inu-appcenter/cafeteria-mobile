@@ -6,9 +6,22 @@ import CafeteriaListPage from './CafeteriaListPage';
 import createIndicatorStyle from '../../components/utils/createIndicatorStyle';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
+type DateTabParams = {
+  dateOffset: number;
+};
+
+export type CafeteriaDateTabNavigationParams = {
+  DateTab1: DateTabParams;
+  DateTab2: DateTabParams;
+  DateTab3: DateTabParams;
+  DateTab4: DateTabParams;
+  DateTab5: DateTabParams;
+};
+
 export default class CafeteriaListScreen extends React.Component {
   render() {
-    const Tab = createMaterialTopTabNavigator();
+    const Tab =
+      createMaterialTopTabNavigator<CafeteriaDateTabNavigationParams>();
 
     return (
       <Tab.Navigator
@@ -21,11 +34,36 @@ export default class CafeteriaListScreen extends React.Component {
           activeTintColor: colors.themeBlue,
           inactiveTintColor: colors.textDisabled,
         }}>
-        <Tab.Screen name="오늘" component={CafeteriaListPage} />
-        <Tab.Screen name="내일" component={CafeteriaListPage} />
-        <Tab.Screen name="모레" component={CafeteriaListPage} />
-        <Tab.Screen name="글피" component={CafeteriaListPage} />
-        <Tab.Screen name="그글피" component={CafeteriaListPage} />
+        <Tab.Screen
+          name="DateTab1"
+          component={CafeteriaListPage}
+          options={{title: '오늘'}}
+          initialParams={{dateOffset: +0}}
+        />
+        <Tab.Screen
+          name="DateTab2"
+          component={CafeteriaListPage}
+          options={{title: '내일'}}
+          initialParams={{dateOffset: +1}}
+        />
+        <Tab.Screen
+          name="DateTab3"
+          component={CafeteriaListPage}
+          options={{title: '모레'}}
+          initialParams={{dateOffset: +2}}
+        />
+        <Tab.Screen
+          name="DateTab4"
+          component={CafeteriaListPage}
+          options={{title: '글피'}}
+          initialParams={{dateOffset: +3}}
+        />
+        <Tab.Screen
+          name="DateTab5"
+          component={CafeteriaListPage}
+          options={{title: '그글피'}}
+          initialParams={{dateOffset: +4}}
+        />
       </Tab.Navigator>
     );
   }

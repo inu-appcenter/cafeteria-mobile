@@ -1,14 +1,16 @@
-import Menu from '../entities/Menu';
+import Menu from '../../domain/entities/Menu';
 import axios from 'axios';
 import moment from 'moment';
 import Config from '../../common/Config';
-import Corner from '../entities/Corner';
-import Cafeteria from '../entities/Cafeteria';
+import Corner from '../../domain/entities/Corner';
+import Cafeteria from '../../domain/entities/Cafeteria';
 import {plainToClass} from 'class-transformer';
 import Cache, {cachedFetch} from '../../common/utils/Cache';
 import PairedCache, {pairCachedFetch} from '../../common/utils/PairedCache';
 
-class CafeteriaRepository {
+export default class CafeteriaRepository {
+  static instance = new CafeteriaRepository();
+
   private url = {
     cafeteria: `${Config.baseUrl}/cafeteria`,
     corners: `${Config.baseUrl}/corners`,
@@ -94,5 +96,3 @@ class FetchResultReducer {
       .map(cafeteria => this.fillCorners(cafeteria));
   }
 }
-
-export default new CafeteriaRepository();

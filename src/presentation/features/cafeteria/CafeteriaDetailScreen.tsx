@@ -1,7 +1,7 @@
+import Pager from './Section/Pager';
 import React from 'react';
 import palette from '../../res/palette';
 import {RouteProp} from '@react-navigation/native';
-import Pager from './Section/Pager';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ScrollView, StyleSheet} from 'react-native';
 import {CafeteriaListDetailNavigationParams} from './CafeteriaScreen';

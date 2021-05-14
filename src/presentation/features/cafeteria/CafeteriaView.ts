@@ -1,5 +1,5 @@
 import MenuView from './MenuView';
-import Cafeteria from '../../../data/entities/Cafeteria';
+import Cafeteria from '../../../domain/entities/Cafeteria';
 
 export default class CafeteriaView {
   key: string = '';

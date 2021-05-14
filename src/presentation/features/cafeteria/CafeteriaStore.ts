@@ -1,6 +1,7 @@
-import {makeAutoObservable, runInAction} from 'mobx';
-import cafeteriaRepository from '../../../data/repositories/CafeteriaRepository';
+import Cafeteria from '../../../domain/entities/Cafeteria';
+import GetCafeteria from '../../../domain/usecases/GetCafeteria';
 import CafeteriaView from './CafeteriaView';
+import {makeAutoObservable} from 'mobx';
 
 export default class CafeteriaStore {
   cafeteria: Map<number, CafeteriaView[]> = new Map();
@@ -10,13 +11,18 @@ export default class CafeteriaStore {
   }
 
   fetch(dateOffset: number) {
-    cafeteriaRepository.getCafeteria(dateOffset).then(cafeteria => {
-      runInAction(() => {
-        this.cafeteria.set(
-          dateOffset,
-          cafeteria.map(c => CafeteriaView.fromCafeteria(c)),
-        );
-      });
+    GetCafeteria.run({dateOffset}).then(cafeteria => {
+      this.updateCafeteriaWithFetchedOnes(dateOffset, cafeteria);
     });
+  }
+
+  private updateCafeteriaWithFetchedOnes(
+    dateOffset: number,
+    fetched: Cafeteria[],
+  ) {
+    this.cafeteria.set(
+      dateOffset,
+      fetched.map(c => CafeteriaView.fromCafeteria(c)),
+    );
   }
 }

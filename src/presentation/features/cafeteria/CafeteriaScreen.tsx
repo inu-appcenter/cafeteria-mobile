@@ -19,7 +19,7 @@ export default class CafeteriaScreen extends React.Component {
     return (
       <Stack.Navigator
         headerMode="screen"
-        screenOptions={StackHeaderPresets.commonHeaderOptions}>
+        screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
         <Stack.Screen
           name="List"
           component={CafeteriaListScreen}

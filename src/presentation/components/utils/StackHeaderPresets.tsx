@@ -6,7 +6,7 @@ import {Platform} from 'react-native';
 import {TransitionPresets} from '@react-navigation/stack';
 import {StackHeaderOptions} from '@react-navigation/stack/lib/typescript/src/types';
 
-const commonHeaderOptions: StackHeaderOptions = {
+const commonStackHeaderOptions: StackHeaderOptions = {
   headerBackTitleVisible: false,
   headerTitleStyle: palette.boldText,
   headerTintColor: colors.textPrimary,
@@ -17,6 +17,17 @@ const commonHeaderOptions: StackHeaderOptions = {
   ...TransitionPresets.SlideFromRightIOS,
 };
 
+const commonModalHeaderOptions: StackHeaderOptions = {
+  headerBackTitleVisible: false,
+  headerTitleStyle: palette.boldText,
+  headerTintColor: colors.textPrimary,
+  headerLeftContainerStyle: {
+    left: Platform.OS === 'ios' ? 12 : 0,
+  },
+  headerBackImage: () => <BackIcon />,
+};
+
 export default {
-  commonHeaderOptions,
+  commonStackHeaderOptions,
+  commonModalHeaderOptions,
 };

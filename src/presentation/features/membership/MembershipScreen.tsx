@@ -1,12 +1,11 @@
-import React, {useEffect} from 'react';
-import LoginScreen from './LoginScreen';
-import BarcodeScreen from './BarcodeScreen';
-import {createStackNavigator} from '@react-navigation/stack';
-import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
-import OnboardingScreen from './OnboardingScreen';
+import React from 'react';
 import {observer} from 'mobx-react';
-import useStores from '../../hooks/useStores';
+import LoginScreen from './LoginScreen';
 import useUserState from '../../hooks/useUserState';
+import BarcodeScreen from './BarcodeScreen';
+import OnboardingScreen from './OnboardingScreen';
+import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
+import {createStackNavigator} from '@react-navigation/stack';
 
 export type MembershipNavigationParams = {
   Onboarding: undefined;

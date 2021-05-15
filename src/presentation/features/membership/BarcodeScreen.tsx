@@ -1,16 +1,25 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {MembershipNavigationParams} from './MembershipScreen';
+import CardView from '../../components/CardView';
+import {ScrollView, Text, View} from 'react-native';
 
-type Props = {
-  navigation: StackNavigationProp<MembershipNavigationParams, 'Barcode'>;
-};
-
-export default function BarcodeScreen({navigation}: Props) {
+export default function BarcodeScreen() {
   return (
-    <View>
-      <Text>adadadadadd</Text>
-    </View>
+    <ScrollView>
+      <CardView
+        style={{padding: 12, margin: 21, flex: 1, flexDirection: 'column'}}>
+        <View>
+          <Text>/* header */</Text>
+        </View>
+        <View>
+          <Text>/* logo and top/bottom shadow divider */</Text>
+        </View>
+        <View>
+          <Text>/* user info part */</Text>
+        </View>
+        <View>
+          <Text>/* barcode part */</Text>
+        </View>
+      </CardView>
+    </ScrollView>
   );
 }

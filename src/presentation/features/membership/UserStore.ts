@@ -39,8 +39,10 @@ export default class UserStore {
 
       this.isLoggedIn = true;
     } catch (e) {
+      // 여기서 예외가 잡히면 참 이상한 경우지만 충분히 일어날 수 있는 일입니다(ㅠㅠ).
+      // 예외를 위로 전파하지는 말고 로그인만 유도합니다!
+      console.log('하하 또 이상한 일이 일어났네요');
       this.isLoggedIn = false;
-      throw e;
     }
   }
 }

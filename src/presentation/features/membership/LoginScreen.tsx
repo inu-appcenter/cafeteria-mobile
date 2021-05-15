@@ -1,14 +1,14 @@
 import colors from '../../res/colors';
 import notify from '../../components/utils/notify';
 import palette from '../../res/palette';
+import {Button} from 'react-native-paper';
 import useStores from '../../hooks/useStores';
 import {observer} from 'mobx-react';
 import PaperPresets from '../../components/utils/PaperPresets';
 import Unauthorized from '../../../data/exceptions/Unauthorized';
 import React, {useState} from 'react';
-import {Button, TextInput} from 'react-native-paper';
-import {Text, View, ScrollView, StyleSheet} from 'react-native';
 import ClearableTextInput from '../../components/ClearableTextInput';
+import {Text, View, ScrollView, StyleSheet} from 'react-native';
 
 function LoginScreen() {
   const {userStore} = useStores();
@@ -42,30 +42,23 @@ function LoginScreen() {
         <ClearableTextInput
           {...PaperPresets.idTextInput}
           style={styles.input}
-          value={id}
           label="학번"
           onChangeText={text => setId(text)}
+          autoFocus={true}
         />
         <ClearableTextInput
           {...PaperPresets.passwordTextInput}
           style={styles.input}
-          value={password}
           label="비밀번호"
-          right={
-            <TextInput.Icon
-              onPress={() => notify('yeah')}
-              name={'close'}
-              color={colors.textSecondary}
-            />
-          }
           onChangeText={text => setPassword(text)}
+          onSubmitEditing={() => login()}
         />
         <Button
           loading={userStore.loading}
           {...PaperPresets.wideButton}
           style={styles.button}
           disabled={!formValid()}
-          onPress={login}>
+          onPress={() => login()}>
           로그인
         </Button>
         <Text style={styles.text}>

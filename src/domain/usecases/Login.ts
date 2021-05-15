@@ -6,16 +6,12 @@ type Params = {
   password: string;
 };
 
-type Results = {
-  succeeded: boolean;
-};
-
-class Login extends UseCase<Params | undefined, Results> {
+class Login extends UseCase<Params | undefined> {
   constructor(private readonly userRepository: UserRepository) {
     super();
   }
 
-  async onExecute(params: Params | undefined): Promise<Results> {
+  async onExecute(params: Params | undefined): Promise<void> {
     if (params === undefined) {
       return this.tryLoginWithSavedCredentials();
     } else {
@@ -23,12 +19,10 @@ class Login extends UseCase<Params | undefined, Results> {
     }
   }
 
-  private async tryLoginWithSavedCredentials(): Promise<Results> {
+  private async tryLoginWithSavedCredentials() {
     const credentials = await this.userRepository.getSavedUserCredentials();
     if (credentials === undefined) {
-      return {
-        succeeded: false,
-      };
+      throw new Error('저장된 사용자 정보가 없어요!');
     }
 
     const {token, barcode} = await this.userRepository.loginWithIdAndToken(
@@ -41,13 +35,9 @@ class Login extends UseCase<Params | undefined, Results> {
       token: token,
       barcode: barcode,
     });
-
-    return {
-      succeeded: true,
-    };
   }
 
-  private async tryLoginWithUserInput(params: Params): Promise<Results> {
+  private async tryLoginWithUserInput(params: Params) {
     const {token, barcode} = await this.userRepository.loginWithIdAndPassword(
       params.id,
       params.password,
@@ -58,10 +48,6 @@ class Login extends UseCase<Params | undefined, Results> {
       token: token,
       barcode: barcode,
     });
-
-    return {
-      succeeded: true,
-    };
   }
 }
 

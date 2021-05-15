@@ -1,6 +1,6 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Config from '../../common/Config';
 import axios from 'axios';
+import Config from '../../common/Config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export type UserCredentials = {
   id: string;

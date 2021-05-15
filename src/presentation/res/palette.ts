@@ -7,9 +7,18 @@ const palette = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
   fullSized: {
     flex: 1,
+  },
+  horizontalSpace: {
+    marginHorizontal: 12,
+  },
+  absoluteCenter: {
+    position: 'absolute',
+    top: 0,
+    end: 0,
+    start: 0,
+    bottom: 0,
   },
 
   bottomFullWidth: {

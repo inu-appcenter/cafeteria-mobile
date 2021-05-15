@@ -1,4 +1,4 @@
-export default abstract class UseCase<ParamT, ResultT> {
+export default abstract class UseCase<ParamT = void, ResultT = void> {
   async run(params: ParamT): Promise<ResultT> {
     console.log(
       `UseCase ${this.constructor.name} is running with params ${JSON.stringify(

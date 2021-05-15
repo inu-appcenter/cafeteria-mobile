@@ -4,7 +4,8 @@ import BarcodeScreen from './BarcodeScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import OnboardingScreen from './OnboardingScreen';
-import useGlobalState from '../../hooks/useGlobalState';
+import useUserState from '../../hooks/useUserState';
+import {observer} from 'mobx-react';
 
 export type MembershipNavigationParams = {
   Onboarding: undefined;
@@ -12,8 +13,8 @@ export type MembershipNavigationParams = {
   Barcode: undefined;
 };
 
-export default function MembershipScreen() {
-  const {isLoggedIn} = useGlobalState();
+function MembershipScreen() {
+  const {isLoggedIn} = useUserState();
 
   const Stack = createStackNavigator<MembershipNavigationParams>();
 
@@ -53,3 +54,5 @@ export default function MembershipScreen() {
     </Stack.Navigator>
   );
 }
+
+export default observer(MembershipScreen);

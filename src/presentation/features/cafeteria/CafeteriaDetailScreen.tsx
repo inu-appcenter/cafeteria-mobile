@@ -1,5 +1,5 @@
 import Pager from './Section/Pager';
-import React from 'react';
+import React, {useEffect} from 'react';
 import palette from '../../res/palette';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -17,7 +17,9 @@ type Props = {
 export default function CafeteriaDetailScreen({route, navigation}: Props) {
   const {cafeteria} = route.params;
 
-  navigation.setOptions({headerTitle: cafeteria.title});
+  useEffect(() => {
+    navigation.setOptions({headerTitle: cafeteria.title});
+  });
 
   return (
     <ScrollView

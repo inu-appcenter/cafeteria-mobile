@@ -12,6 +12,20 @@ const commonTextInput: typeof TextInput.defaultProps = {
   selectionColor: colors.themeBlue,
 };
 
+const idTextInput: typeof TextInput.defaultProps = {
+  ...commonTextInput,
+  returnKeyType: 'next',
+  keyboardType: 'number-pad',
+};
+
+const passwordTextInput: typeof TextInput.defaultProps = {
+  ...commonTextInput,
+  returnKeyType: 'go',
+  secureTextEntry: true,
+  clearTextOnFocus: true,
+  enablesReturnKeyAutomatically: true,
+};
+
 const wideButton: typeof Button.defaultProps = {
   contentStyle: {
     padding: 6,
@@ -23,5 +37,7 @@ const wideButton: typeof Button.defaultProps = {
 
 export default {
   commonTextInput,
+  idTextInput,
+  passwordTextInput,
   wideButton,
 };

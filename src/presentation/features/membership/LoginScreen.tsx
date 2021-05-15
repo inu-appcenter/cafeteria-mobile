@@ -8,6 +8,7 @@ import Unauthorized from '../../../data/exceptions/Unauthorized';
 import React, {useState} from 'react';
 import {Button, TextInput} from 'react-native-paper';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import ClearableTextInput from '../../components/ClearableTextInput';
 
 function LoginScreen() {
   const {userStore} = useStores();
@@ -38,20 +39,25 @@ function LoginScreen() {
   return (
     <View style={[palette.fullSized, palette.whiteBackground]}>
       <ScrollView contentContainerStyle={palette.horizontalSpace}>
-        <TextInput
-          {...PaperPresets.commonTextInput}
+        <ClearableTextInput
+          {...PaperPresets.idTextInput}
           style={styles.input}
-          returnKeyType="next"
-          keyboardType="number-pad"
+          value={id}
           label="학번"
           onChangeText={text => setId(text)}
         />
-        <TextInput
-          {...PaperPresets.commonTextInput}
+        <ClearableTextInput
+          {...PaperPresets.passwordTextInput}
           style={styles.input}
-          returnKeyType="go"
-          secureTextEntry={true}
+          value={password}
           label="비밀번호"
+          right={
+            <TextInput.Icon
+              onPress={() => notify('yeah')}
+              name={'close'}
+              color={colors.textSecondary}
+            />
+          }
           onChangeText={text => setPassword(text)}
         />
         <Button

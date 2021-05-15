@@ -15,6 +15,7 @@ function LoginScreen() {
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   const formValid = () => {
     return id.length > 0 && password.length > 0;
@@ -25,7 +26,12 @@ function LoginScreen() {
       return;
     }
 
+    if (loading) {
+      return;
+    }
+
     try {
+      setLoading(true);
       await userStore.login(id, password);
     } catch (e) {
       if (e instanceof Unauthorized) {
@@ -33,6 +39,8 @@ function LoginScreen() {
       } else {
         notify(e.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,7 +62,7 @@ function LoginScreen() {
           onSubmitEditing={() => login()}
         />
         <Button
-          loading={userStore.loading}
+          loading={loading}
           {...PaperPresets.wideButton}
           style={styles.button}
           disabled={!formValid()}

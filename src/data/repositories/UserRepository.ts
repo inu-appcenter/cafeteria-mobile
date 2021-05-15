@@ -1,12 +1,7 @@
 import axios from 'axios';
 import Config from '../../common/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
-export type UserCredentials = {
-  id: string;
-  token: string;
-  barcode: string;
-};
+import User from '../../domain/entities/User';
 
 export default class UserRepository {
   static instance = new UserRepository();
@@ -32,29 +27,26 @@ export default class UserRepository {
     };
   }
 
-  async hasSavedUserCredentials() {
-    return (await this.getSavedUserCredentials()) !== undefined;
+  async hasSavedUserInfo() {
+    return (await this.getSavedUserInfo()) !== undefined;
   }
 
-  async getSavedUserCredentials() {
+  async getSavedUserInfo() {
     const serializedUserInfo = await AsyncStorage.getItem(
-      'user_credentials_serialized',
+      'user_info_serialized',
     );
     if (serializedUserInfo === null) {
       return undefined;
     }
 
-    return JSON.parse(serializedUserInfo) as UserCredentials;
+    return JSON.parse(serializedUserInfo) as User;
   }
 
-  async saveUserCredentials(credentials: UserCredentials) {
-    await AsyncStorage.setItem(
-      'user_credentials_serialized',
-      JSON.stringify(credentials),
-    );
+  async saveUserInfo(user: User) {
+    await AsyncStorage.setItem('user_info_serialized', JSON.stringify(user));
   }
 
-  async removeUserCredentials() {
+  async removeUserInfo() {
     await AsyncStorage.removeItem('user_credentials_serialized');
   }
 }

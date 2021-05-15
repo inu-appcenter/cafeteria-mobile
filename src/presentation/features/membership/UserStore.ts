@@ -1,5 +1,6 @@
 import {makeAutoObservable} from 'mobx';
 import Login from '../../../domain/usecases/Login';
+import GetUser from '../../../domain/usecases/GetUser';
 
 export default class UserStore {
   private _isLoggedIn: boolean = false;
@@ -10,21 +11,11 @@ export default class UserStore {
     this._isLoggedIn = isLoggedIn;
   }
 
-  private _loading: boolean = false;
-  get loading() {
-    return this._loading;
-  }
-  set loading(loading) {
-    this._loading = loading;
-  }
-
   constructor() {
     makeAutoObservable(this);
   }
 
   async login(id: string, password: string) {
-    this.loading = true;
-
     try {
       await Login.run({id, password});
 
@@ -32,8 +23,24 @@ export default class UserStore {
     } catch (e) {
       this.isLoggedIn = false;
       throw e;
-    } finally {
-      this.loading = false;
+    }
+  }
+
+  async tryRememberedLogin() {
+    const savedUserInfo = await GetUser.run();
+    if (savedUserInfo === undefined) {
+      return;
+    }
+
+    try {
+      // 여기까지 왔다는건 학번과 토큰이 저장되어 있다는 것!
+      console.log(`학번이 ${savedUserInfo.id} 이신 분 자동로그인 하십니다.`);
+      await Login.run();
+
+      this.isLoggedIn = true;
+    } catch (e) {
+      this.isLoggedIn = false;
+      throw e;
     }
   }
 }

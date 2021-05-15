@@ -11,21 +11,17 @@ type Props = {
   cafeteria: CafeteriaView;
 };
 
-export default class Section extends React.Component<Props> {
-  render() {
-    const {navigation, cafeteria} = this.props;
+export default function Section({navigation, cafeteria}: Props) {
+  return (
+    <View>
+      <Header
+        title={cafeteria.title}
+        onClickMore={() =>
+          navigation.navigate('Detail', {cafeteria: cafeteria})
+        }
+      />
 
-    return (
-      <View>
-        <Header
-          title={cafeteria.title}
-          onClickMore={() =>
-            navigation.navigate('Detail', {cafeteria: cafeteria})
-          }
-        />
-
-        <Pager menus={cafeteria.menus} stackSize={3} />
-      </View>
-    );
-  }
+      <Pager menus={cafeteria.menus} stackSize={3} />
+    </View>
+  );
 }

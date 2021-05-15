@@ -10,15 +10,16 @@ import {StatusBar} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import MyNavigator from './navigation/MyNavigator';
 import colors from './res/colors';
-import {Provider} from 'mobx-react';
 import RootStore from '../store/RootStore';
+import StoreProvider from './hooks/StoreProvider';
 
 export default class App extends React.Component {
   render() {
+    // 루트 스토어 생성은 여기에서!
     const rootStore = new RootStore();
 
     return (
-      <Provider {...rootStore}>
+      <StoreProvider store={rootStore}>
         <NavigationContainer>
           <StatusBar
             translucent={false}
@@ -27,7 +28,7 @@ export default class App extends React.Component {
           />
           <MyNavigator />
         </NavigationContainer>
-      </Provider>
+      </StoreProvider>
     );
   }
 }

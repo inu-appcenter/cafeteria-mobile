@@ -12,27 +12,25 @@ export type CafeteriaListDetailNavigationParams = {
   Detail: {cafeteria: CafeteriaView};
 };
 
-export default class CafeteriaScreen extends React.Component {
-  render() {
-    const Stack = createStackNavigator<CafeteriaListDetailNavigationParams>();
+export default function CafeteriaScreen() {
+  const Stack = createStackNavigator<CafeteriaListDetailNavigationParams>();
 
-    return (
-      <Stack.Navigator
-        headerMode="screen"
-        screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-        <Stack.Screen
-          name="List"
-          component={CafeteriaListScreen}
-          options={{
-            headerTitle: () => <HeaderLogo />,
-            headerTitleAlign: 'center',
-            headerStyle: styles.noSeparator,
-          }}
-        />
-        <Stack.Screen name="Detail" component={CafeteriaDetailScreen} />
-      </Stack.Navigator>
-    );
-  }
+  return (
+    <Stack.Navigator
+      headerMode="screen"
+      screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
+      <Stack.Screen
+        name="List"
+        component={CafeteriaListScreen}
+        options={{
+          headerTitle: () => <HeaderLogo />,
+          headerTitleAlign: 'center',
+          headerStyle: styles.noSeparator,
+        }}
+      />
+      <Stack.Screen name="Detail" component={CafeteriaDetailScreen} />
+    </Stack.Navigator>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -7,14 +7,10 @@ type Props = {
   navigation: StackNavigationProp<MembershipNavigationParams, 'Barcode'>;
 };
 
-export default class BarcodeScreen extends React.Component<Props> {
-  render() {
-    const {navigation} = this.props;
-
-    return (
-      <View>
-        <Text>adadadadadd</Text>
-      </View>
-    );
-  }
+export default function BarcodeScreen({navigation}: Props) {
+  return (
+    <View>
+      <Text>adadadadadd</Text>
+    </View>
+  );
 }

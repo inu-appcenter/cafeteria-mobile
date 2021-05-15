@@ -1,8 +1,8 @@
 import React from 'react';
+import palette from '../../../res/palette';
 import MenuView from '../MenuView';
 import Touchable from '../../../components/Touchable';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import palette from '../../../res/palette';
 
 const images = [
   null,

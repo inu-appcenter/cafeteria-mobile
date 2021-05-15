@@ -10,27 +10,23 @@ type Props = {
   navigation: StackNavigationProp<MembershipNavigationParams, 'Onboarding'>;
 };
 
-export default class OnboardingScreen extends React.Component<Props> {
-  render() {
-    const {navigation} = this.props;
-
-    return (
-      <View style={styles.container}>
-        <View style={styles.textSection}>
-          <Text style={styles.title}>학생 할인 멤버십</Text>
-          <Text style={styles.body}>
-            재학생을 위한 할인 혜택을 제공합니다. 로그인하시고 이용해 보세요 :)
-          </Text>
-        </View>
-        <Button
-          {...PaperPresets.wideButton}
-          style={styles.button}
-          onPress={() => navigation.navigate('Login')}>
-          시작하기
-        </Button>
+export default function OnboardingScreen({navigation}: Props) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.textSection}>
+        <Text style={styles.title}>학생 할인 멤버십</Text>
+        <Text style={styles.body}>
+          재학생을 위한 할인 혜택을 제공합니다. 로그인하시고 이용해 보세요 :)
+        </Text>
       </View>
-    );
-  }
+      <Button
+        {...PaperPresets.wideButton}
+        style={styles.button}
+        onPress={() => navigation.navigate('Login')}>
+        시작하기
+      </Button>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({

@@ -1,56 +1,51 @@
-import React from 'react';
-import palette from '../../res/palette';
 import {
-  StyleSheet,
+  View,
   Text,
   TextInput,
+  StyleSheet,
   TouchableOpacity,
-  View,
 } from 'react-native';
-import {inject, observer} from 'mobx-react';
-import RootStore from '../../../store/RootStore';
-import CounterStore from './CounterStore';
+import React from 'react';
 import colors from '../../res/colors';
+import palette from '../../res/palette';
+import useStores from '../../hooks/useStores';
+import {observer} from 'mobx-react';
 
-@inject(({counterStore}: RootStore) => ({store: counterStore}))
-@observer
-export default class CounterScreen extends React.Component<{
-  store: CounterStore;
-}> {
-  render() {
-    const {store} = this.props;
+function CounterScreen() {
+  const {counterStore} = useStores();
 
-    return (
-      <View style={palette.centeringContainer}>
-        <Text style={styles.label}>Counter: {store.counterValue}</Text>
+  return (
+    <View style={palette.centeringContainer}>
+      <Text style={styles.label}>Counter: {counterStore.counterValue}</Text>
 
-        <TextInput
-          onSubmitEditing={event =>
-            store.set(Number.parseInt(event.nativeEvent.text, 10))
-          }
-          style={styles.input}
-          placeholderTextColor={colors.textTertiary}
-          keyboardType="numeric"
-          returnKeyType="done"
-          placeholder="change amount"
-        />
+      <TextInput
+        onSubmitEditing={event =>
+          counterStore.set(Number.parseInt(event.nativeEvent.text, 10))
+        }
+        style={styles.input}
+        placeholderTextColor={colors.textTertiary}
+        keyboardType="numeric"
+        returnKeyType="done"
+        placeholder="change amount"
+      />
 
-        <View style={styles.floatingView}>
-          <TouchableOpacity
-            style={styles.floatingButton}
-            onPress={() => store.increase()}>
-            <Text style={palette.textSecondary}>+</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.floatingButton}
-            onPress={() => store.decrease()}>
-            <Text style={palette.textSecondary}>-</Text>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.floatingView}>
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={() => counterStore.increase()}>
+          <Text style={palette.textSecondary}>+</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.floatingButton}
+          onPress={() => counterStore.decrease()}>
+          <Text style={palette.textSecondary}>-</Text>
+        </TouchableOpacity>
       </View>
-    );
-  }
+    </View>
+  );
 }
+
+export default observer(CounterScreen);
 
 const styles = StyleSheet.create({
   floatingView: {

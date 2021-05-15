@@ -14,26 +14,18 @@ type Props = {
   >;
 };
 
-export default class CafeteriaDetailScreen extends React.Component<Props> {
-  render() {
-    const {route} = this.props;
-    const {cafeteria} = route.params;
+export default function CafeteriaDetailScreen({route, navigation}: Props) {
+  const {cafeteria} = route.params;
 
-    return (
-      <ScrollView
-        style={palette.whiteBackground}
-        contentContainerStyle={styles.detailContentContainer}>
-        <Pager menus={cafeteria.menus} />
-      </ScrollView>
-    );
-  }
+  navigation.setOptions({headerTitle: cafeteria.title});
 
-  componentDidMount() {
-    const {route, navigation} = this.props;
-    const {cafeteria} = route.params;
-
-    navigation.setOptions({headerTitle: cafeteria.title});
-  }
+  return (
+    <ScrollView
+      style={palette.whiteBackground}
+      contentContainerStyle={styles.detailContentContainer}>
+      <Pager menus={cafeteria.menus} />
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({

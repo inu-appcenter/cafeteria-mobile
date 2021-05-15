@@ -18,55 +18,52 @@ export type CafeteriaDateTabNavigationParams = {
   DateTab5: DateTabParams;
 };
 
-export default class CafeteriaListScreen extends React.Component {
-  render() {
-    const Tab =
-      createMaterialTopTabNavigator<CafeteriaDateTabNavigationParams>();
+export default function CafeteriaListScreen() {
+  const Tab = createMaterialTopTabNavigator<CafeteriaDateTabNavigationParams>();
 
-    return (
-      <Tab.Navigator
-        swipeEnabled={false}
-        tabBarOptions={{
-          style: styles.tabBar,
-          tabStyle: styles.tab,
-          labelStyle: styles.label,
-          indicatorStyle: styles.indicator,
-          activeTintColor: colors.themeBlue,
-          inactiveTintColor: colors.textDisabled,
-        }}>
-        <Tab.Screen
-          name="DateTab1"
-          component={CafeteriaListPage}
-          options={{title: '오늘'}}
-          initialParams={{dateOffset: +0}}
-        />
-        <Tab.Screen
-          name="DateTab2"
-          component={CafeteriaListPage}
-          options={{title: '내일'}}
-          initialParams={{dateOffset: +1}}
-        />
-        <Tab.Screen
-          name="DateTab3"
-          component={CafeteriaListPage}
-          options={{title: '모레'}}
-          initialParams={{dateOffset: +2}}
-        />
-        <Tab.Screen
-          name="DateTab4"
-          component={CafeteriaListPage}
-          options={{title: '글피'}}
-          initialParams={{dateOffset: +3}}
-        />
-        <Tab.Screen
-          name="DateTab5"
-          component={CafeteriaListPage}
-          options={{title: '그글피'}}
-          initialParams={{dateOffset: +4}}
-        />
-      </Tab.Navigator>
-    );
-  }
+  return (
+    <Tab.Navigator
+      swipeEnabled={false}
+      tabBarOptions={{
+        style: styles.tabBar,
+        tabStyle: styles.tab,
+        labelStyle: styles.label,
+        indicatorStyle: styles.indicator,
+        activeTintColor: colors.themeBlue,
+        inactiveTintColor: colors.textDisabled,
+      }}>
+      <Tab.Screen
+        name="DateTab1"
+        component={CafeteriaListPage}
+        options={{title: '오늘'}}
+        initialParams={{dateOffset: +0}}
+      />
+      <Tab.Screen
+        name="DateTab2"
+        component={CafeteriaListPage}
+        options={{title: '내일'}}
+        initialParams={{dateOffset: +1}}
+      />
+      <Tab.Screen
+        name="DateTab3"
+        component={CafeteriaListPage}
+        options={{title: '모레'}}
+        initialParams={{dateOffset: +2}}
+      />
+      <Tab.Screen
+        name="DateTab4"
+        component={CafeteriaListPage}
+        options={{title: '글피'}}
+        initialParams={{dateOffset: +3}}
+      />
+      <Tab.Screen
+        name="DateTab5"
+        component={CafeteriaListPage}
+        options={{title: '그글피'}}
+        initialParams={{dateOffset: +4}}
+      />
+    </Tab.Navigator>
+  );
 }
 
 const styles = StyleSheet.create({

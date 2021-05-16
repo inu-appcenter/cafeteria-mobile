@@ -2,6 +2,7 @@ import React from 'react';
 import Carousel from '../../../components/Carousel';
 import MenuView from '../MenuView';
 import MenuCard from './MenuCard';
+import EmptyView from '../EmptyView';
 import {StyleSheet} from 'react-native';
 import {divideArray} from '../../../../common/utils/Array';
 
@@ -11,7 +12,7 @@ type Props = {
 };
 
 export default function Pager({menus, stackSize}: Props) {
-  return (
+  const horizontalPager = (
     <Carousel
       gap={6}
       data={divideArray(menus, stackSize)}
@@ -23,6 +24,14 @@ export default function Pager({menus, stackSize}: Props) {
       contentContainerStyle={styles.sectionCarouselContentContainer}
     />
   );
+
+  const emptyView = (
+    <EmptyView
+      whatWentWrong={'식당 정보는 있는데 메뉴를 불러오지는 못했습니다 ㅠ'}
+    />
+  );
+
+  return menus.length > 0 ? horizontalPager : emptyView;
 }
 
 const styles = StyleSheet.create({

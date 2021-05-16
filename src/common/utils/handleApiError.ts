@@ -6,7 +6,8 @@ import InternalError from '../../data/exceptions/InternalError';
 
 export default function handleApiError(e: Error) {
   if (e! instanceof ApiError) {
-    throw e;
+    notify(`예상치 못한 오류입니다! ${e}`);
+    return;
   }
 
   if (e instanceof CannotReach) {
@@ -16,10 +17,8 @@ export default function handleApiError(e: Error) {
   } else if (e instanceof InternalError) {
     notify('서버 내부에서 문제가 생겼습니다.');
   } else if (e instanceof UnhandledHttpError) {
-    notify(
-      `응답 코드 ${e.statusCode}입니다. 이런 문제가 생길 줄은 몰랐습니다!`,
-    );
+    notify(`응답 코드 ${e.statusCode}입니다.`);
+  } else {
+    notify(`미처 처리하지 못한 오류입니다! ${e}`);
   }
-
-  throw e;
 }

@@ -1,17 +1,18 @@
-import palette from '../../res/palette';
+import useApi from './useApi';
 import Section from './Section';
-import {observer} from 'mobx-react';
+import palette from '../../res/palette';
 import useStores from '../../hooks/useStores';
+import EmptyView from '../../components/EmptyView';
+import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
+import LoadingView from '../../components/LoadingView';
+import handleApiError from '../../../common/utils/handleApiError';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Animated, StyleSheet} from 'react-native';
 import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs';
 import {CafeteriaDateTabNavigationParams} from './CafeteriaListScreen';
 import {CafeteriaListDetailNavigationParams} from './CafeteriaScreen';
-import EmptyView from './EmptyView';
-import useApi from './useApi';
-import handleApiError from '../../../common/utils/handleApiError';
 
 type Props = {
   route: RouteProp<CafeteriaDateTabNavigationParams, 'DateTab1'>;
@@ -24,6 +25,7 @@ type Props = {
 function CafeteriaListPage({route, navigation}: Props) {
   const {dateOffset} = route.params;
   const {cafeteriaStore} = useStores();
+  const data = cafeteriaStore.cafeteria.get(dateOffset);
 
   const [loading, fetch] = useApi(() => cafeteriaStore.fetch(dateOffset));
 
@@ -36,17 +38,7 @@ function CafeteriaListPage({route, navigation}: Props) {
     'List'
   >;
 
-  const cafeteriaList = (
-    <Animated.FlatList
-      style={palette.whiteBackground}
-      data={cafeteriaStore.cafeteria.get(dateOffset)}
-      renderItem={item => (
-        <Section navigation={parentNavigation} cafeteria={item.item} />
-      )}
-      keyExtractor={i => i.title}
-      contentContainerStyle={styles.rootListContentContainer}
-    />
-  );
+  const loadingView = <LoadingView />;
 
   const emptyView = (
     <EmptyView
@@ -55,9 +47,27 @@ function CafeteriaListPage({route, navigation}: Props) {
     />
   );
 
-  return (cafeteriaStore.cafeteria.get(dateOffset)?.length || 0) > 0
-    ? cafeteriaList
-    : emptyView;
+  const contentsView = (
+    <Animated.FlatList
+      style={palette.whiteBackground}
+      data={data}
+      renderItem={item => (
+        <Section navigation={parentNavigation} cafeteria={item.item} />
+      )}
+      keyExtractor={i => i.title}
+      contentContainerStyle={styles.rootListContentContainer}
+    />
+  );
+
+  const contentEmpty = (data?.length || 0) === 0;
+
+  if (loading) {
+    return loadingView;
+  } else if (contentEmpty) {
+    return emptyView;
+  } else {
+    return contentsView;
+  }
 }
 
 export default observer(CafeteriaListPage);

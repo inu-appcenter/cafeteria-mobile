@@ -1,6 +1,6 @@
 import React from 'react';
-import colors from '../../res/colors';
-import palette from '../../res/palette';
+import colors from '../res/colors';
+import palette from '../res/palette';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 type Props = ViewProps & {

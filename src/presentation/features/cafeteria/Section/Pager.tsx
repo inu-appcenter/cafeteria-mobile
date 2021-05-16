@@ -28,6 +28,7 @@ export default function Pager({menus, stackSize}: Props) {
   const emptyView = (
     <EmptyView
       whatWentWrong={'식당 정보는 있는데 메뉴를 불러오지는 못했습니다 ㅠ'}
+      showBorder={true}
     />
   );
 

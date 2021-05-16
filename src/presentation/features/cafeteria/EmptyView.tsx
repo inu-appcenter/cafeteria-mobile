@@ -5,11 +5,20 @@ import {StyleSheet, Text, View, ViewProps} from 'react-native';
 
 type Props = ViewProps & {
   whatWentWrong: string;
+  showBorder: boolean;
 };
 
-export default function EmptyView({style, whatWentWrong}: Props) {
+export default function EmptyView({style, whatWentWrong, showBorder}: Props) {
+  const computedBorderStyle = showBorder
+    ? {
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: colors.textTertiary,
+      }
+    : {};
+
   return (
-    <View style={[styles.emptyView, style]}>
+    <View style={[styles.emptyView, computedBorderStyle, style]}>
       <Text style={styles.title}>뭔가심상치않은일이일어났습니다🧐</Text>
       <Text style={styles.body}>{whatWentWrong}</Text>
     </View>
@@ -22,9 +31,6 @@ const styles = StyleSheet.create({
     padding: 12,
     marginHorizontal: 16,
     marginVertical: 8,
-    borderRadius: 12,
-    borderWidth: 1,
-    borderColor: colors.textTertiary,
   },
 
   title: {

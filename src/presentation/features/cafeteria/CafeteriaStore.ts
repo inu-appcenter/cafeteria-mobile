@@ -10,10 +10,10 @@ export default class CafeteriaStore {
     makeAutoObservable(this);
   }
 
-  fetch(dateOffset: number) {
-    GetCafeteria.run({dateOffset}).then(cafeteria => {
-      this.updateCafeteriaWithFetchedOnes(dateOffset, cafeteria);
-    });
+  async fetch(dateOffset: number) {
+    const cafeteria = await GetCafeteria.run({dateOffset});
+
+    this.updateCafeteriaWithFetchedOnes(dateOffset, cafeteria);
   }
 
   private updateCafeteriaWithFetchedOnes(

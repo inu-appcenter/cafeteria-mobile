@@ -9,13 +9,16 @@ import Unauthorized from '../../../data/exceptions/Unauthorized';
 import React, {useState} from 'react';
 import ClearableTextInput from '../../components/ClearableTextInput';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
+import useApi from '../cafeteria/useApi';
+import handleApiError from '../../../common/utils/handleApiError';
 
 function LoginScreen() {
   const {userStore} = useStores();
 
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+
+  const [loading, invoke] = useApi(() => userStore.login(id, password));
 
   const formValid = () => {
     return id.length > 0 && password.length > 0;
@@ -26,22 +29,11 @@ function LoginScreen() {
       return;
     }
 
-    if (loading) {
-      return;
-    }
-
-    try {
-      setLoading(true);
-      await userStore.login(id, password);
-    } catch (e) {
-      if (e instanceof Unauthorized) {
-        notify('로그인에 실패하였습니다. 학번과 비밀번호를 확인해 주세요 :)');
-      } else {
-        notify(e.message);
-      }
-    } finally {
-      setLoading(false);
-    }
+    invoke().catch(e =>
+      e instanceof Unauthorized
+        ? notify('로그인에 실패하였습니다. 학번과 비밀번호를 확인해 주세요 :)')
+        : handleApiError(e),
+    );
   };
 
   return (

@@ -3,19 +3,26 @@ import Unauthorized from '../../data/exceptions/Unauthorized';
 import UnhandledHttpError from '../../data/exceptions/UnhandledHttpError';
 
 export default function setupAxios() {
+  axios.interceptors.request.use(undefined, (error: any) => {
+    throw createRequestError(error.code);
+  });
+
   axios.interceptors.response.use(undefined, (error: any) => {
-    const errorClass = findProperErrorTypeForStatusCode(error.response.status);
-    throw new errorClass();
+    throw createResponseError(error.response.status);
   });
 }
 
-type Class = {new (...args: any[]): any};
+function createRequestError(errorCode: string): ApiError {
+  return new CannotReach(errorCode);
+}
 
-function findProperErrorTypeForStatusCode(statusCode: number): Class {
+function createResponseError(statusCode: number): ApiError {
   switch (statusCode) {
     case 401:
-      return Unauthorized;
+      return new Unauthorized();
+    case 500:
+      return new InternalError();
     default:
-      return UnhandledHttpError;
+      return new UnhandledHttpError(statusCode);
   }
 }

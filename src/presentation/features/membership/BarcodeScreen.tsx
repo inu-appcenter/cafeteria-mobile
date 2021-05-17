@@ -6,17 +6,21 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
+  NativeModules,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import colors from '../../res/colors';
 import palette from '../../res/palette';
 import Barcode from 'react-native-barcode-builder';
 import CardView from '../../components/CardView';
 import useUserState from '../../hooks/useUserState';
 import VerticalShadow from '../../components/VerticalShadow';
+import useScreenBrightness from '../../hooks/useScreenBrightness';
 
 export default function BarcodeScreen() {
   const {userId, barcode} = useUserState();
+
+  const [toggleBrightness] = useScreenBrightness();
 
   if (userId === undefined || barcode === undefined) {
     console.error(
@@ -75,7 +79,7 @@ export default function BarcodeScreen() {
 
   return (
     <ScrollView style={palette.whiteBackground}>
-      <CardView onPress={() => {}} style={styles.cardViewContainer}>
+      <CardView onPress={toggleBrightness} style={styles.cardViewContainer}>
         {header}
         {logoImage}
         {userInfo}

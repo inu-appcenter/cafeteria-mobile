@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import {Platform, StyleSheet} from 'react-native';
 import colors from './colors';
 
 const palette = StyleSheet.create({
@@ -48,6 +48,10 @@ const palette = StyleSheet.create({
 
   boldText: {
     fontWeight: 'bold',
+  },
+  lightText: {
+    fontFamily: Platform.OS === 'android' ? 'sans-serif-light' : undefined,
+    fontWeight: '300',
   },
 
   whiteBackground: {

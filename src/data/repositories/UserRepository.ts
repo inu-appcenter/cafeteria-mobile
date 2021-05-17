@@ -8,6 +8,7 @@ export default class UserRepository {
 
   private url = {
     login: `${Config.baseUrl}/login`,
+    activateBarcode: `${Config.baseUrl}/activateBarcode`,
   };
 
   async loginWithIdAndPassword(id: string, password: string) {
@@ -48,5 +49,9 @@ export default class UserRepository {
 
   async removeUserInfo() {
     await AsyncStorage.removeItem('user_credentials_serialized');
+  }
+
+  async activateBarcode() {
+    await axios.put(this.url.activateBarcode);
   }
 }

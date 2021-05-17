@@ -6,28 +6,26 @@ import {
   ScrollView,
   StyleSheet,
   Dimensions,
-  NativeModules,
 } from 'react-native';
-import React, {useState} from 'react';
+import useApi from '../cafeteria/useApi';
 import colors from '../../res/colors';
 import palette from '../../res/palette';
 import Barcode from 'react-native-barcode-builder';
 import CardView from '../../components/CardView';
 import useUserState from '../../hooks/useUserState';
 import VerticalShadow from '../../components/VerticalShadow';
+import ActivateBarcode from '../../../domain/usecases/ActivateBarcode';
+import React, {useEffect} from 'react';
 import useScreenBrightness from '../../hooks/useScreenBrightness';
 
 export default function BarcodeScreen() {
   const {userId, barcode} = useUserState();
-
   const [toggleBrightness] = useScreenBrightness();
+  const [_, activateBarcode] = useApi(() => ActivateBarcode.run());
 
-  if (userId === undefined || barcode === undefined) {
-    console.error(
-      '멤버십 바코드 화면을 렌더링하는 데에 필요한 사용자 정보가 없네요!',
-    );
-    return null;
-  }
+  useEffect(() => {
+    activateBarcode();
+  }, []);
 
   const header = (
     <View style={styles.header}>
@@ -69,7 +67,7 @@ export default function BarcodeScreen() {
     <View style={{padding: 10}}>
       <Barcode
         text={barcode}
-        value={barcode}
+        value={barcode || 'invalid'}
         width={barcodeWidth}
         height={99}
         format="CODE128"

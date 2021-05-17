@@ -2,10 +2,10 @@ import {useState} from 'react';
 
 /**
  * 스테이트-풀 한 로직 재활용해 봅시다!!!!!!!!!!!!
- * @param networkAction
+ * @param apiCall
  */
 export default function useApi(
-  networkAction: () => void,
+  apiCall: () => void,
 ): [boolean, () => Promise<void>] {
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +16,7 @@ export default function useApi(
 
     try {
       setLoading(true);
-      await networkAction();
+      await apiCall();
     } finally {
       setLoading(false);
     }

@@ -23,7 +23,7 @@ function MembershipScreen() {
       key="onboarding_screen"
       name="Onboarding"
       component={OnboardingScreen}
-      options={{title: '학생 할인 멤버십'}}
+      options={{headerShown: false}}
     />
   );
 

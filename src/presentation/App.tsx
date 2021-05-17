@@ -7,12 +7,10 @@ import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 
 export default function App() {
-  // 루트 스토어 생성은 여기에서!
   const rootStore = new RootStore();
 
-  // 로그인은 빠르게!
   useEffect(() => {
-    rootStore.userStore.tryRememberedLogin();
+    onAppStart(rootStore);
   }, []);
 
   return (
@@ -27,4 +25,12 @@ export default function App() {
       </NavigationContainer>
     </StoreProvider>
   );
+}
+
+async function onAppStart({userStore}: RootStore) {
+  try {
+    await userStore.tryRememberedLoginIfAvailable();
+  } catch (e) {
+    console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`);
+  }
 }

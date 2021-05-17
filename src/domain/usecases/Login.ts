@@ -25,6 +25,8 @@ class Login extends UseCase<Params | void> {
       throw new Error('저장된 사용자 정보가 없어요!');
     }
 
+    console.log(`학번이 ${credentials.id} 이신 분 자동로그인 하십니다.`);
+
     const {token, barcode} = await this.userRepository.loginWithIdAndToken(
       credentials.id,
       credentials.token,

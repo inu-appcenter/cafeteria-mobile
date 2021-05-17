@@ -1,14 +1,38 @@
-import {makeAutoObservable} from 'mobx';
 import Login from '../../../domain/usecases/Login';
 import GetUser from '../../../domain/usecases/GetUser';
+import {makeAutoObservable} from 'mobx';
 
 export default class UserStore {
   private _isLoggedIn: boolean = false;
   get isLoggedIn() {
     return this._isLoggedIn;
   }
-  set isLoggedIn(isLoggedIn) {
-    this._isLoggedIn = isLoggedIn;
+  set isLoggedIn(value) {
+    this._isLoggedIn = value;
+  }
+
+  private _isTryingRememberedLogin: boolean = false;
+  get isTryingRememberedLogin() {
+    return this._isTryingRememberedLogin;
+  }
+  set isTryingRememberedLogin(value) {
+    this._isTryingRememberedLogin = value;
+  }
+
+  private _userId: string | undefined = undefined;
+  get userId() {
+    return this._userId;
+  }
+  set userId(value) {
+    this._userId = value;
+  }
+
+  private _barcode: string | undefined = undefined;
+  get barcode() {
+    return this._barcode;
+  }
+  set barcode(value) {
+    this._barcode = value;
   }
 
   constructor() {
@@ -19,30 +43,48 @@ export default class UserStore {
     try {
       await Login.run({id, password});
 
-      this.isLoggedIn = true;
+      await this.onLoginSuccess();
     } catch (e) {
-      this.isLoggedIn = false;
+      await this.onLoginFail();
       throw e;
     }
   }
 
-  async tryRememberedLogin() {
+  async tryRememberedLoginIfAvailable() {
     const savedUserInfo = await GetUser.run();
     if (savedUserInfo === undefined) {
       return;
     }
 
     try {
-      // 여기까지 왔다는건 학번과 토큰이 저장되어 있다는 것!
-      console.log(`학번이 ${savedUserInfo.id} 이신 분 자동로그인 하십니다.`);
+      this.isTryingRememberedLogin = true;
+
       await Login.run();
 
-      this.isLoggedIn = true;
+      await this.onLoginSuccess();
     } catch (e) {
-      // 여기서 예외가 잡히면 참 이상한 경우지만 충분히 일어날 수 있는 일입니다(ㅠㅠ).
-      // 예외를 위로 전파하지는 말고 로그인만 유도합니다!
-      console.log('하하 또 이상한 일이 일어났네요');
-      this.isLoggedIn = false;
+      await this.onLoginFail();
+      throw e;
+    } finally {
+      this.isTryingRememberedLogin = false;
     }
+  }
+
+  private async onLoginSuccess() {
+    const user = await GetUser.run();
+    if (user === undefined) {
+      console.error('로그인 성공했다면서 저장된 사용자가 없다구요!?!?');
+      return;
+    }
+
+    this.userId = user.id;
+    this.barcode = user.barcode;
+    this.isLoggedIn = true;
+  }
+
+  private async onLoginFail() {
+    this.userId = undefined;
+    this.barcode = undefined;
+    this.isLoggedIn = false;
   }
 }

@@ -1,5 +1,8 @@
 import axios from 'axios';
+import ApiError from '../../data/exceptions/ApiError';
 import Unauthorized from '../../data/exceptions/Unauthorized';
+import InternalError from '../../data/exceptions/InternalError';
+import CannotReachServer from '../../data/exceptions/CannotReachServer';
 import UnhandledHttpError from '../../data/exceptions/UnhandledHttpError';
 
 export default function setupAxios() {
@@ -13,7 +16,7 @@ export default function setupAxios() {
 }
 
 function createRequestError(errorCode: string): ApiError {
-  return new CannotReach(errorCode);
+  return new CannotReachServer(errorCode);
 }
 
 function createResponseError(statusCode: number): ApiError {

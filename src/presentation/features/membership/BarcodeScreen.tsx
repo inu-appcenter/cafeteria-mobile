@@ -1,36 +1,36 @@
-import React from 'react';
-import CardView from '../../components/CardView';
 import {
-  Dimensions,
+  Text,
+  View,
   Image,
   Platform,
   ScrollView,
-  Text,
-  View,
+  StyleSheet,
+  Dimensions,
 } from 'react-native';
-import palette from '../../res/palette';
-import VerticalShadow from '../../components/VerticalShadow';
+import React from 'react';
 import colors from '../../res/colors';
+import palette from '../../res/palette';
 import Barcode from 'react-native-barcode-builder';
+import CardView from '../../components/CardView';
+import useUserState from '../../hooks/useUserState';
+import VerticalShadow from '../../components/VerticalShadow';
 
 export default function BarcodeScreen() {
-  const userId = '201701562';
-  const barcodeValue = '1210209372';
-  const barcodeWidth = Dimensions.get('window').width / 140;
+  const {userId, barcode} = useUserState();
+
+  if (userId === undefined || barcode === undefined) {
+    console.error(
+      '멤버십 바코드 화면을 렌더링하는 데에 필요한 사용자 정보가 없네요!',
+    );
+    return null;
+  }
 
   const header = (
-    <View
-      style={{
-        flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        paddingHorizontal: 8,
-        paddingVertical: 12,
-      }}>
+    <View style={styles.header}>
       <Image
-        resizeMode="contain"
-        style={{height: 30, width: 140}}
+        style={styles.headerUiCoopLogo}
         source={require('../../res/images/uicoop_logo.png')}
+        resizeMode="contain"
       />
       <Text style={[palette.textPrimary, palette.boldText]}>
         소비자생활협동조합
@@ -39,26 +39,13 @@ export default function BarcodeScreen() {
   );
 
   const logoImage = (
-    <View
-      style={{
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}>
+    <View style={styles.logoImage}>
       <VerticalShadow />
-      <View
-        style={{
-          paddingVertical: 60,
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}>
+      <View style={styles.logoImageInternalContainer}>
         <Image
-          style={{
-            height: 16,
-          }}
-          resizeMode="contain"
+          style={styles.logoImageContent}
           source={require('../../res/images/header_logo.png')}
+          resizeMode="contain"
         />
       </View>
       <VerticalShadow reversed />
@@ -67,31 +54,18 @@ export default function BarcodeScreen() {
 
   const userInfo = (
     <View style={{padding: 16}}>
-      <Text
-        style={{
-          color: colors.textPrimary,
-          fontSize: 14,
-          fontWeight: 'bold',
-        }}>
-        학번
-      </Text>
-      <Text
-        style={{
-          ...palette.lightText,
-          color: colors.textPrimary,
-          fontSize: 24,
-          marginTop: Platform.OS === 'android' ? 0 : 6,
-        }}>
-        {userId}
-      </Text>
+      <Text style={styles.userInfoIdLabel}>학번</Text>
+      <Text style={styles.userInfoIdValue}>{userId}</Text>
     </View>
   );
+
+  const barcodeWidth = Dimensions.get('window').width / 140;
 
   const barcodeImage = (
     <View style={{padding: 10}}>
       <Barcode
-        text={barcodeValue}
-        value={barcodeValue}
+        text={barcode}
+        value={barcode}
         width={barcodeWidth}
         height={99}
         format="CODE128"
@@ -100,10 +74,8 @@ export default function BarcodeScreen() {
   );
 
   return (
-    <ScrollView>
-      <CardView
-        onPress={() => {}}
-        style={{margin: 21, flex: 1, flexDirection: 'column'}}>
+    <ScrollView style={palette.whiteBackground}>
+      <CardView onPress={() => {}} style={styles.cardViewContainer}>
         {header}
         {logoImage}
         {userInfo}
@@ -112,3 +84,47 @@ export default function BarcodeScreen() {
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  cardViewContainer: {
+    margin: 21,
+    flex: 1,
+    flexDirection: 'column',
+  },
+  header: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    paddingVertical: 12,
+    paddingHorizontal: 8,
+  },
+  headerUiCoopLogo: {
+    width: 140,
+    height: 30,
+  },
+  logoImage: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  logoImageInternalContainer: {
+    alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    paddingVertical: 60,
+  },
+  logoImageContent: {
+    height: 16,
+  },
+  userInfoIdLabel: {
+    color: colors.textPrimary,
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  userInfoIdValue: {
+    ...palette.lightText,
+    color: colors.textPrimary,
+    fontSize: 24,
+    marginTop: Platform.OS === 'android' ? 0 : 6,
+  },
+});

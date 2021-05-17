@@ -56,13 +56,17 @@ export default class CafeteriaRepository {
       await this.fetchMenus(dateStringAfterOffset),
     ).reduce();
   }
+
+  async getCafeteriaOnly() {
+    return new FetchResultReducer(await this.fetchCafeteria()).reduce(false);
+  }
 }
 
 class FetchResultReducer {
   constructor(
     private readonly cafeteria: object[],
-    private readonly corners: object[],
-    private readonly menus: object[],
+    private readonly corners?: object[],
+    private readonly menus?: object[],
   ) {}
 
   private transformOptions = {
@@ -70,6 +74,10 @@ class FetchResultReducer {
   };
 
   private fillCorners(cafeteria: Cafeteria) {
+    if (!this.corners) {
+      return cafeteria;
+    }
+
     cafeteria.corners = this.corners
       // @ts-ignore
       .filter(rawCorner => rawCorner['cafeteria-id'] === cafeteria.id)
@@ -80,6 +88,10 @@ class FetchResultReducer {
   }
 
   private fillMenus(corner: Corner) {
+    if (!this.menus) {
+      return corner;
+    }
+
     corner.menus = this.menus
       // @ts-ignore
       .filter(rawMenu => rawMenu['corner-id'] === corner.id)
@@ -88,11 +100,15 @@ class FetchResultReducer {
     return corner;
   }
 
-  reduce() {
-    return this.cafeteria
-      .map(rawCafeteria =>
-        plainToClass(Cafeteria, rawCafeteria, this.transformOptions),
-      )
-      .map(cafeteria => this.fillCorners(cafeteria));
+  reduce(fillContents: boolean = true) {
+    const cafeteriaUnfilled = this.cafeteria.map(rawCafeteria =>
+      plainToClass(Cafeteria, rawCafeteria, this.transformOptions),
+    );
+
+    if (!fillContents) {
+      return cafeteriaUnfilled;
+    }
+
+    return cafeteriaUnfilled.map(cafeteria => this.fillCorners(cafeteria));
   }
 }

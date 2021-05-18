@@ -7,10 +7,10 @@ import {ScrollView, StyleSheet} from 'react-native';
 import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
-  route: RouteProp<CafeteriaListDetailNavigationParams, 'Detail'>;
+  route: RouteProp<CafeteriaListDetailNavigationParams, 'CafeteriaDetail'>;
   navigation: StackNavigationProp<
     CafeteriaListDetailNavigationParams,
-    'Detail'
+    'CafeteriaDetail'
   >;
 };
 

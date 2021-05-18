@@ -27,7 +27,7 @@ export default function OnboardingScreen({navigation}: Props) {
         </Text>
       </View>
       <Button
-        {...PaperPresets.wideButton}
+        {...PaperPresets.wideThemedButton}
         style={styles.button}
         onPress={() => navigation.navigate('Login')}>
         시작하기

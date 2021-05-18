@@ -7,7 +7,7 @@ import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 type Props = {
   navigation: StackNavigationProp<
     CafeteriaListDetailNavigationParams,
-    'Reorder'
+    'CafeteriaReorder'
   >;
 };
 
@@ -18,7 +18,7 @@ export default function ReorderHeaderButton({navigation}: Props) {
       size={24}
       style={palette.iconHeaderButton}
       onPress={() => {
-        navigation.navigate('Reorder');
+        navigation.navigate('CafeteriaReorder');
       }}
     />
   );

@@ -55,7 +55,7 @@ function LoginScreen() {
         />
         <Button
           loading={loading}
-          {...PaperPresets.wideButton}
+          {...PaperPresets.wideThemedButton}
           style={styles.button}
           disabled={!formValid()}
           onPress={() => login()}>

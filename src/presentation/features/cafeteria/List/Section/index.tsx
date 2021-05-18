@@ -7,7 +7,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {CafeteriaListDetailNavigationParams} from '../../CafeteriaScreen';
 
 type Props = {
-  navigation: StackNavigationProp<CafeteriaListDetailNavigationParams, 'List'>;
+  navigation: StackNavigationProp<
+    CafeteriaListDetailNavigationParams,
+    'CafeteriaList'
+  >;
   cafeteria: CafeteriaWithMenuView;
 };
 
@@ -17,7 +20,7 @@ export default function Section({navigation, cafeteria}: Props) {
       <Header
         title={cafeteria.title}
         onClickMore={() =>
-          navigation.navigate('Detail', {cafeteria: cafeteria})
+          navigation.navigate('CafeteriaDetail', {cafeteria: cafeteria})
         }
       />
 

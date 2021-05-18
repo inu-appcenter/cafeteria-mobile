@@ -5,6 +5,9 @@ export default {
   transparent: '#00000000',
 
   themeBlue: '#3DBEF4',
+  uicoopGreen: '',
+  kakaoYellow: '#FEE500',
+  callGreen: '#4CD964',
 
   textPrimary: '#262B31',
   textSecondary: '#70808D',

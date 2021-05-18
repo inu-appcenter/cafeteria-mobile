@@ -2,17 +2,17 @@ import React from 'react';
 import HeaderLogo from './List/HeaderLogo';
 import {StyleSheet} from 'react-native';
 import ReorderScreen from './Reorder/ReorderScreen';
-import CafeteriaWithMenuView from './CafeteriaWithMenuView';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
-import ReorderHeaderButton from './Reorder/ReorderHeaderButton';
+import ReorderHeaderButton from './List/ReorderHeaderButton';
 import CafeteriaListScreen from './List/CafeteriaListScreen';
 import CafeteriaDetailScreen from './Detail/CafeteriaDetailScreen';
+import CafeteriaWithMenuView from './CafeteriaWithMenuView';
 import {createStackNavigator} from '@react-navigation/stack';
 
 export type CafeteriaListDetailNavigationParams = {
-  List: undefined;
-  Detail: {cafeteria: CafeteriaWithMenuView};
-  Reorder: undefined;
+  CafeteriaList: undefined;
+  CafeteriaDetail: {cafeteria: CafeteriaWithMenuView};
+  CafeteriaReorder: undefined;
 };
 
 export default function CafeteriaScreen() {
@@ -23,7 +23,7 @@ export default function CafeteriaScreen() {
       headerMode="screen"
       screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
       <Stack.Screen
-        name="List"
+        name="CafeteriaList"
         component={CafeteriaListScreen}
         options={({navigation}) => ({
           headerTitle: () => <HeaderLogo />,
@@ -32,9 +32,9 @@ export default function CafeteriaScreen() {
           headerRight: () => <ReorderHeaderButton navigation={navigation} />,
         })}
       />
-      <Stack.Screen name="Detail" component={CafeteriaDetailScreen} />
+      <Stack.Screen name="CafeteriaDetail" component={CafeteriaDetailScreen} />
       <Stack.Screen
-        name="Reorder"
+        name="CafeteriaReorder"
         component={ReorderScreen}
         options={{
           title: '순서 변경',

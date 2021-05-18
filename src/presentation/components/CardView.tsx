@@ -19,27 +19,28 @@ export default class CardView extends React.Component<Props> {
   render() {
     const {style, children, onPress} = this.props;
 
-    const card = (
-      <View
-        style={{
-          ...styles.card,
-          ...style,
-        }}>
-        {children}
-      </View>
-    );
+    const card = <View style={{...styles.card, ...style}}>{children}</View>;
 
     if (onPress === undefined) {
       return card;
+    } else {
+      return (
+        <Touchable
+          style={styles.fullSizedWrapper}
+          onPress={e => onPress?.call(undefined, e)}>
+          {card}
+        </Touchable>
+      );
     }
-
-    return (
-      <Touchable onPress={e => onPress?.call(undefined, e)}>{card}</Touchable>
-    );
   }
 }
 
 const styles = StyleSheet.create({
+  fullSizedWrapper: {
+    width: '100%',
+    height: '100%',
+  },
+
   card: {
     overflow: Platform.OS === 'android' ? 'hidden' : 'visible',
     shadowColor: 'black',

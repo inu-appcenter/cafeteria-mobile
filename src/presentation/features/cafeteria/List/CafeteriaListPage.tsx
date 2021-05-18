@@ -39,7 +39,7 @@ function CafeteriaListPage({route, navigation}: Props) {
 
   const parentNavigation = navigation as unknown as StackNavigationProp<
     CafeteriaListDetailNavigationParams,
-    'List'
+    'CafeteriaList'
   >;
 
   const loadingView = <LoadingView />;

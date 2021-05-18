@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderLogo from './List/HeaderLogo';
 import {StyleSheet} from 'react-native';
 import ReorderScreen from './Reorder/ReorderScreen';
-import CafeteriaView from './CafeteriaView';
+import CafeteriaWithMenuView from './CafeteriaWithMenuView';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import ReorderHeaderButton from './Reorder/ReorderHeaderButton';
 import CafeteriaListScreen from './List/CafeteriaListScreen';
@@ -11,7 +11,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 export type CafeteriaListDetailNavigationParams = {
   List: undefined;
-  Detail: {cafeteria: CafeteriaView};
+  Detail: {cafeteria: CafeteriaWithMenuView};
   Reorder: undefined;
 };
 

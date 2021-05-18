@@ -1,13 +1,21 @@
 import Icon from 'react-native-vector-icons/Feather';
-import React from 'react';
+import useApi from '../../hooks/useApi';
 import colors from '../../res/colors';
 import {Alert} from 'react-native';
 import palette from '../../res/palette';
-import GetCafeteriaOnly from '../../../domain/usecases/GetCafeteriaOnly';
+import useStores from '../../hooks/useStores';
+import React, {useEffect} from 'react';
 
 export default function MembershipInfoHeaderButton() {
+  const {cafeteriaStore} = useStores();
+  const [, fetch] = useApi(() => cafeteriaStore.fetchCafeteria());
+
+  useEffect(() => {
+    fetch();
+  }, []);
+
   const showAvailableMembershipUsages = async () => {
-    const supportedCafeteria = (await GetCafeteriaOnly.run())
+    const supportedCafeteria = cafeteriaStore.cafeteria
       .filter(c => c.supportDiscount)
       .map(c => c.displayName)
       .join(', ');

@@ -2,13 +2,13 @@ import React from 'react';
 import Pager from './Pager';
 import {View} from 'react-native';
 import Header from './Header';
-import CafeteriaView from '../../CafeteriaView';
+import CafeteriaWithMenuView from '../../CafeteriaWithMenuView';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {CafeteriaListDetailNavigationParams} from '../../CafeteriaScreen';
 
 type Props = {
   navigation: StackNavigationProp<CafeteriaListDetailNavigationParams, 'List'>;
-  cafeteria: CafeteriaView;
+  cafeteria: CafeteriaWithMenuView;
 };
 
 export default function Section({navigation, cafeteria}: Props) {

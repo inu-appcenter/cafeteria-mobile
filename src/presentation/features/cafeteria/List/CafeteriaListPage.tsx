@@ -25,9 +25,11 @@ type Props = {
 function CafeteriaListPage({route, navigation}: Props) {
   const {dateOffset} = route.params;
   const {cafeteriaStore} = useStores();
-  const data = cafeteriaStore.cafeteria.get(dateOffset);
+  const data = cafeteriaStore.getCafeteriaWithMenus(dateOffset);
 
-  const [loading, fetch] = useApi(() => cafeteriaStore.fetch(dateOffset));
+  const [loading, fetch] = useApi(() =>
+    cafeteriaStore.fetchCafeteriaWithMenusPerDay(dateOffset),
+  );
 
   useEffect(() => {
     fetch().catch(e => handleApiError(e));

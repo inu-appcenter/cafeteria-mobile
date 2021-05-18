@@ -1,7 +1,7 @@
+import User from '../../domain/entities/User';
 import axios from 'axios';
 import Config from '../../common/Config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import User from '../../domain/entities/User';
 
 export default class UserRepository {
   static instance = new UserRepository();

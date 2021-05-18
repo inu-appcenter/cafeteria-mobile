@@ -12,7 +12,7 @@ class GetCafeteria extends UseCase<Params, Cafeteria[]> {
   }
 
   async onExecute({dateOffset}: Params): Promise<Cafeteria[]> {
-    return this.cafeteriaRepository.getCafeteria(dateOffset);
+    return await this.cafeteriaRepository.getCafeteria(dateOffset);
   }
 }
 

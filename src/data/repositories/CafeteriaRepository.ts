@@ -4,6 +4,7 @@ import moment from 'moment';
 import Config from '../../common/Config';
 import Corner from '../../domain/entities/Corner';
 import Cafeteria from '../../domain/entities/Cafeteria';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {plainToClass} from 'class-transformer';
 import Cache, {cachedFetch} from '../../common/utils/Cache';
 import PairedCache, {pairCachedFetch} from '../../common/utils/PairedCache';
@@ -59,6 +60,22 @@ export default class CafeteriaRepository {
 
   async getCafeteriaOnly() {
     return new FetchResultReducer(await this.fetchCafeteria()).reduce(false);
+  }
+
+  async saveOrders(orderedCafeteriaIds: number[]) {
+    await AsyncStorage.setItem(
+      'cafeteria_ordered_ids',
+      JSON.stringify(orderedCafeteriaIds),
+    );
+  }
+
+  async getOrders(): Promise<number[]> {
+    const saved = await AsyncStorage.getItem('cafeteria_ordered_ids');
+    if (saved === null) {
+      return [];
+    }
+
+    return JSON.parse(saved) as number[];
   }
 }
 

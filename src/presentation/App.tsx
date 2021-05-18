@@ -2,7 +2,7 @@ import React from 'react';
 import colors from './res/colors';
 import BugStore from '../store/RootStore';
 import {StatusBar} from 'react-native';
-import MyNavigator from './navigation/MyNavigator';
+import MainNavigator from './navigation/MainNavigator';
 import StoreProvider from './hooks/StoreProvider';
 import {NavigationContainer} from '@react-navigation/native';
 
@@ -17,7 +17,7 @@ export default function App() {
           backgroundColor={colors.white}
           barStyle={'dark-content'}
         />
-        <MyNavigator />
+        <MainNavigator />
       </NavigationContainer>
     </StoreProvider>
   );

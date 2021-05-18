@@ -1,6 +1,10 @@
 import React from 'react';
-import Icons from 'react-native-vector-icons/Ionicons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs/src/types';
+
+type ComponentType = {new (...args: any[]): React.Component<any, any, any>};
+
+export type IconConfigs = Record<string, [string, string, ComponentType?]>;
 
 /**
  * Tab bar icon selector generator for BottomTabNavigator.
@@ -12,12 +16,14 @@ import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs/src/type
  * @param screenName name of the route.
  */
 export default function tabBarIconSelector(
-  icons: Record<string, string[]>,
+  icons: IconConfigs,
   screenName: string,
 ): BottomTabNavigationOptions['tabBarIcon'] {
   return ({focused, color, size}) => {
+    const IconClass = icons[screenName]?.[2] || Ionicons;
+
     return (
-      <Icons
+      <IconClass
         name={icons[screenName]?.[focused ? 0 : 1] || 'error'}
         size={size}
         color={color}

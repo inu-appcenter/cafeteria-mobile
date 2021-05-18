@@ -27,12 +27,14 @@ function CafeteriaListPage({route, navigation}: Props) {
   const {cafeteriaStore} = useStores();
   const data = cafeteriaStore.getCafeteriaWithMenus(dateOffset);
 
-  const [loading, fetch] = useApi(() =>
+  const [loading, invoke] = useApi(() =>
     cafeteriaStore.fetchCafeteriaWithMenusPerDay(dateOffset),
   );
 
+  const fetch = () => invoke().catch(e => handleApiError(e));
+
   useEffect(() => {
-    fetch().catch(e => handleApiError(e));
+    fetch();
   }, []);
 
   const parentNavigation = navigation as unknown as StackNavigationProp<
@@ -44,8 +46,9 @@ function CafeteriaListPage({route, navigation}: Props) {
 
   const emptyView = (
     <EmptyView
-      whatWentWrong={'절대 생기면 안 되는 문제가 발생했습니다!'}
+      whatWentWrong={'서버로부터 식당 목록을 가져오지 못했습니다!'}
       showBorder={false}
+      retry={() => fetch()}
     />
   );
 

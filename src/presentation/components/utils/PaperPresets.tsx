@@ -35,9 +35,16 @@ const wideButton: typeof Button.defaultProps = {
   mode: 'contained',
 };
 
+const grayBorderedButton: typeof Button.defaultProps = {
+  labelStyle: {color: colors.textSecondary, fontSize: 12},
+  color: 'gray',
+  mode: 'outlined',
+};
+
 export default {
   commonTextInput,
   idTextInput,
   passwordTextInput,
   wideButton,
+  grayBorderedButton,
 };

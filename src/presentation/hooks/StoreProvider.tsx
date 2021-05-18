@@ -1,10 +1,10 @@
-import RootStore from '../../store/RootStore';
+import BugStore from '../../store/RootStore';
 import React, {createContext, ReactNode} from 'react';
 
-export const StoreContext = createContext<RootStore>({} as RootStore);
+export const StoreContext = createContext<BugStore>({} as BugStore);
 
 type Props = {
-  store: RootStore;
+  store: BugStore;
   children: ReactNode;
 };
 

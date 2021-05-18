@@ -6,17 +6,17 @@ import CannotReachServer from '../../data/exceptions/CannotReachServer';
 import UnhandledHttpError from '../../data/exceptions/UnhandledHttpError';
 
 export default function setupAxios() {
-  axios.interceptors.request.use(undefined, (error: any) => {
-    throw createRequestError(error.code);
-  });
-
   axios.interceptors.response.use(undefined, (error: any) => {
-    throw createResponseError(error.response.status);
+    if (error.response) {
+      throw createResponseError(error.response.status);
+    } else {
+      throw createConnectionError();
+    }
   });
 }
 
-function createRequestError(errorCode: string): ApiError {
-  return new CannotReachServer(errorCode);
+function createConnectionError(): ApiError {
+  return new CannotReachServer();
 }
 
 function createResponseError(statusCode: number): ApiError {

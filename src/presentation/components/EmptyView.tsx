@@ -2,13 +2,21 @@ import React from 'react';
 import colors from '../res/colors';
 import palette from '../res/palette';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
+import {Button} from 'react-native-paper';
+import PaperPresets from './utils/PaperPresets';
 
 type Props = ViewProps & {
   whatWentWrong: string;
   showBorder: boolean;
+  retry?: () => void;
 };
 
-export default function EmptyView({style, whatWentWrong, showBorder}: Props) {
+export default function EmptyView({
+  style,
+  whatWentWrong,
+  showBorder,
+  retry,
+}: Props) {
   const computedBorderStyle = showBorder
     ? {
         borderRadius: 12,
@@ -17,10 +25,20 @@ export default function EmptyView({style, whatWentWrong, showBorder}: Props) {
       }
     : {};
 
+  const retryButton = (
+    <Button
+      {...PaperPresets.grayBorderedButton}
+      onPress={retry}
+      style={styles.retryButton}>
+      다시 시도
+    </Button>
+  );
+
   return (
     <View style={[styles.emptyView, computedBorderStyle, style]}>
-      <Text style={styles.title}>뭔가심상치않은일이일어났습니다🧐</Text>
+      <Text style={styles.title}>정보가 없습니다🧐</Text>
       <Text style={styles.body}>{whatWentWrong}</Text>
+      {retry ? retryButton : null}
     </View>
   );
 }
@@ -41,5 +59,9 @@ const styles = StyleSheet.create({
   body: {
     ...palette.textSecondary,
     marginTop: 8,
+  },
+
+  retryButton: {
+    marginTop: 16,
   },
 });

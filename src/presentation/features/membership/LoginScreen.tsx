@@ -9,7 +9,7 @@ import Unauthorized from '../../../data/exceptions/Unauthorized';
 import React, {useState} from 'react';
 import ClearableTextInput from '../../components/ClearableTextInput';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
-import useApi from '../cafeteria/useApi';
+import useApi from '../../hooks/useApi';
 import handleApiError from '../../../common/utils/handleApiError';
 
 function LoginScreen() {

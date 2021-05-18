@@ -1,10 +1,10 @@
 import React from 'react';
-import Carousel from '../../../components/Carousel';
-import MenuView from '../MenuView';
+import Carousel from '../../../../components/Carousel';
+import MenuView from '../../MenuView';
 import MenuCard from './MenuCard';
-import EmptyView from '../../../components/EmptyView';
+import EmptyView from '../../../../components/EmptyView';
 import {StyleSheet} from 'react-native';
-import {divideArray} from '../../../../common/utils/Array';
+import {divideArray} from '../../../../../common/utils/Array';
 
 type Props = {
   menus: MenuView[];

@@ -69,6 +69,10 @@ const palette = StyleSheet.create({
     // Android
     elevation: 4,
   },
+
+  iconHeaderButton: {
+    paddingHorizontal: 18,
+  },
 });
 
 export default palette;

@@ -1,10 +1,10 @@
-import Pager from './Section/Pager';
+import Pager from '../List/Section/Pager';
 import React, {useEffect} from 'react';
-import palette from '../../res/palette';
+import palette from '../../../res/palette';
 import {RouteProp} from '@react-navigation/native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {ScrollView, StyleSheet} from 'react-native';
-import {CafeteriaListDetailNavigationParams} from './CafeteriaScreen';
+import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
   route: RouteProp<CafeteriaListDetailNavigationParams, 'Detail'>;

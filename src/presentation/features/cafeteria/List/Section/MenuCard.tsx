@@ -1,9 +1,9 @@
 import React from 'react';
-import MenuView from '../MenuView';
-import CardView from '../../../components/CardView';
+import MenuView from '../../MenuView';
+import CardView from '../../../../components/CardView';
 import MenuItem from './MenuItem';
 import {FlatList} from 'react-native';
-import ItemSeparator from '../../../components/ItemSeparator';
+import ItemSeparator from '../../../../components/ItemSeparator';
 
 type Props = {
   menus: MenuView[];

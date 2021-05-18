@@ -7,7 +7,7 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import useApi from '../cafeteria/useApi';
+import useApi from '../../hooks/useApi';
 import colors from '../../res/colors';
 import palette from '../../res/palette';
 import Barcode from 'react-native-barcode-builder';
@@ -21,7 +21,7 @@ import useScreenBrightness from '../../hooks/useScreenBrightness';
 export default function BarcodeScreen() {
   const {userId, barcode} = useUserState();
   const [toggleBrightness] = useScreenBrightness();
-  const [_, activateBarcode] = useApi(() => ActivateBarcode.run());
+  const [, activateBarcode] = useApi(() => ActivateBarcode.run());
 
   useEffect(() => {
     activateBarcode();

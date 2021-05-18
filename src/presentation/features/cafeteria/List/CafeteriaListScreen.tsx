@@ -1,9 +1,9 @@
 import React from 'react';
-import colors from '../../res/colors';
-import palette from '../../res/palette';
+import colors from '../../../res/colors';
+import palette from '../../../res/palette';
 import {StyleSheet} from 'react-native';
 import CafeteriaListPage from './CafeteriaListPage';
-import createIndicatorStyle from '../../components/utils/createIndicatorStyle';
+import createIndicatorStyle from '../../../components/utils/createIndicatorStyle';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 type DateTabParams = {

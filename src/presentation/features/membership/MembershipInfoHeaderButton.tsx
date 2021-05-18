@@ -1,10 +1,11 @@
-import React from 'react';
 import Icon from 'react-native-vector-icons/Feather';
+import React from 'react';
 import colors from '../../res/colors';
+import {Alert} from 'react-native';
+import palette from '../../res/palette';
 import GetCafeteriaOnly from '../../../domain/usecases/GetCafeteriaOnly';
-import {Alert, StyleSheet} from 'react-native';
 
-export default function MembershipInfoButton() {
+export default function MembershipInfoHeaderButton() {
   const showAvailableMembershipUsages = async () => {
     const supportedCafeteria = (await GetCafeteriaOnly.run())
       .filter(c => c.supportDiscount)
@@ -22,14 +23,8 @@ export default function MembershipInfoButton() {
       name={'info'}
       size={24}
       color={colors.textPrimary}
-      style={styles.iconButton}
+      style={palette.iconHeaderButton}
       onPress={showAvailableMembershipUsages}
     />
   );
 }
-
-const styles = StyleSheet.create({
-  iconButton: {
-    paddingHorizontal: 18,
-  },
-});

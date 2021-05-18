@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import React from 'react';
-import colors from '../../../res/colors';
-import palette from '../../../res/palette';
+import colors from '../../../../res/colors';
+import palette from '../../../../res/palette';
 
 type Props = ViewProps & {
   title?: string;

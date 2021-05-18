@@ -6,7 +6,7 @@ export default function HeaderLogo() {
     <Image
       style={styles.headerLogo}
       resizeMode="contain"
-      source={require('../../res/images/header_logo.png')}
+      source={require('../../../res/images/header_logo.png')}
     />
   );
 }

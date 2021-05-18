@@ -1,18 +1,18 @@
 import React from 'react';
-import palette from '../../../res/palette';
-import MenuView from '../MenuView';
-import Touchable from '../../../components/Touchable';
+import palette from '../../../../res/palette';
+import MenuView from '../../MenuView';
+import Touchable from '../../../../components/Touchable';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 const images = [
   null,
-  require('../../../res/images/available_1.png'),
-  require('../../../res/images/available_2.png'),
-  require('../../../res/images/available_3.png'),
-  require('../../../res/images/available_4.png'),
-  require('../../../res/images/available_5.png'),
-  require('../../../res/images/available_6.png'),
-  require('../../../res/images/available_7.png'),
+  require('../../../../res/images/available_1.png'),
+  require('../../../../res/images/available_2.png'),
+  require('../../../../res/images/available_3.png'),
+  require('../../../../res/images/available_4.png'),
+  require('../../../../res/images/available_5.png'),
+  require('../../../../res/images/available_6.png'),
+  require('../../../../res/images/available_7.png'),
 ];
 
 export default class MenuItem extends React.Component<

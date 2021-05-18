@@ -6,8 +6,7 @@ import BarcodeScreen from './BarcodeScreen';
 import OnboardingScreen from './OnboardingScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
-import {Text} from 'react-native';
-import MembershipInfoButton from './MembershipInfoButton';
+import MembershipInfoHeaderButton from './MembershipInfoHeaderButton';
 
 export type MembershipNavigationParams = {
   Onboarding: undefined;
@@ -34,7 +33,10 @@ function MembershipScreen() {
       key="barcode_screen"
       name="Barcode"
       component={BarcodeScreen}
-      options={{title: '멤버십', headerRight: () => <MembershipInfoButton />}}
+      options={{
+        title: '멤버십',
+        headerRight: () => <MembershipInfoHeaderButton />,
+      }}
     />
   );
 

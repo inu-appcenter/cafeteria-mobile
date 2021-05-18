@@ -2,9 +2,9 @@ import React from 'react';
 import Pager from './Pager';
 import {View} from 'react-native';
 import Header from './Header';
-import CafeteriaView from '../CafeteriaView';
+import CafeteriaView from '../../CafeteriaView';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
+import {CafeteriaListDetailNavigationParams} from '../../CafeteriaScreen';
 
 type Props = {
   navigation: StackNavigationProp<CafeteriaListDetailNavigationParams, 'List'>;

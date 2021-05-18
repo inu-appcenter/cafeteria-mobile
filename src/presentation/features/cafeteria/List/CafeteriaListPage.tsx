@@ -1,18 +1,18 @@
-import useApi from './useApi';
+import useApi from '../../../hooks/useApi';
 import Section from './Section';
-import palette from '../../res/palette';
-import useStores from '../../hooks/useStores';
-import EmptyView from '../../components/EmptyView';
+import palette from '../../../res/palette';
+import useStores from '../../../hooks/useStores';
+import EmptyView from '../../../components/EmptyView';
 import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
-import LoadingView from '../../components/LoadingView';
-import handleApiError from '../../../common/utils/handleApiError';
+import LoadingView from '../../../components/LoadingView';
+import handleApiError from '../../../../common/utils/handleApiError';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Animated, StyleSheet} from 'react-native';
 import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs';
 import {CafeteriaDateTabNavigationParams} from './CafeteriaListScreen';
-import {CafeteriaListDetailNavigationParams} from './CafeteriaScreen';
+import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
   route: RouteProp<CafeteriaDateTabNavigationParams, 'DateTab1'>;

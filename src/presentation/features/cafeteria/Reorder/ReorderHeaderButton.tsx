@@ -14,7 +14,7 @@ type Props = {
 export default function ReorderHeaderButton({navigation}: Props) {
   return (
     <Icon
-      name="reorder"
+      name="sort"
       size={24}
       style={palette.iconHeaderButton}
       onPress={() => {

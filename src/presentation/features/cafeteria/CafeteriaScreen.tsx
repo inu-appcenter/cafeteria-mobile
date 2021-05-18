@@ -33,7 +33,13 @@ export default function CafeteriaScreen() {
         })}
       />
       <Stack.Screen name="Detail" component={CafeteriaDetailScreen} />
-      <Stack.Screen name="Reorder" component={ReorderScreen} />
+      <Stack.Screen
+        name="Reorder"
+        component={ReorderScreen}
+        options={{
+          title: '순서 변경',
+        }}
+      />
     </Stack.Navigator>
   );
 }

@@ -11,7 +11,7 @@ export default {
   textTertiary: '#B7B9C0',
   textDisabled: '#808080',
 
-  rippleColorLight: '#00000040',
+  rippleColorLight: '#00000020',
   rippleColorDark: '#FFFFFF40',
 
   dividerColorLight: '#0000001F',

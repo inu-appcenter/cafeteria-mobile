@@ -38,7 +38,6 @@ export default class CardView extends React.Component<Props> {
 const styles = StyleSheet.create({
   fullSizedWrapper: {
     width: '100%',
-    height: '100%',
   },
 
   card: {

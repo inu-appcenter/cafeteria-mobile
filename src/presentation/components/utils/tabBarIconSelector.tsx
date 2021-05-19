@@ -1,10 +1,12 @@
-import React from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {IconProps} from 'react-native-vector-icons/Icon';
+import React, {ComponentType} from 'react';
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs/src/types';
 
-type ComponentType = {new (...args: any[]): React.Component<any, any, any>};
-
-export type IconConfigs = Record<string, [string, string, ComponentType?]>;
+export type IconConfigs = Record<
+  string,
+  [string, string, ComponentType<IconProps>?]
+>;
 
 /**
  * Tab bar icon selector generator for BottomTabNavigator.

@@ -1,11 +1,11 @@
 import React from 'react';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button} from 'react-native-paper';
-import PaperPresets from '../../components/utils/PaperPresets';
-import colors from '../../res/colors';
-import palette from '../../res/palette';
+import PaperPresets from '../../../components/utils/PaperPresets';
+import colors from '../../../res/colors';
+import palette from '../../../res/palette';
 
-export default function SupportContactsScreen() {
+export default function Contacts() {
   return (
     <ScrollView style={palette.whiteBackground}>
       <View style={styles.container}>

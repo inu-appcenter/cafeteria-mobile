@@ -3,6 +3,7 @@ import palette from '../../../../res/palette';
 import MenuView from '../../MenuView';
 import Touchable from '../../../../components/Touchable';
 import {Image, StyleSheet, Text, View} from 'react-native';
+import colors from '../../../../res/colors';
 
 const images = [
   null,
@@ -76,8 +77,8 @@ export default class MenuItem extends React.Component<
 
             {/* Price and calorie */}
             <View style={styles.bottomTextContainer}>
-              <Text style={palette.textSecondary}>{menu.cornerName}</Text>
-              <Text style={palette.textSecondary}>
+              <Text style={styles.metadataText}>{menu.cornerName}</Text>
+              <Text style={styles.metadataText}>
                 {this.priceAndCalorieString}
               </Text>
             </View>
@@ -108,6 +109,7 @@ const styles = StyleSheet.create({
   },
 
   foodsText: {
+    color: colors.textPrimary,
     fontSize: 14,
     fontWeight: 'bold',
   },
@@ -116,5 +118,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 8,
+  },
+
+  metadataText: {
+    color: colors.textSecondary,
+    fontSize: 14,
   },
 });

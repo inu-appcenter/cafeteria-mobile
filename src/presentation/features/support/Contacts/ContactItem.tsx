@@ -25,7 +25,8 @@ export default function ContactItem({
     <CardView
       style={{
         marginHorizontal: 16,
-        marginTop: 18,
+        marginTop: 16,
+        marginBottom: 12,
         padding: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -49,10 +50,13 @@ export default function ContactItem({
       </Text>
       <Button
         mode="contained"
-        labelStyle={[palette.textPrimary, {color: colors.white}]}
+        labelStyle={[
+          palette.textPrimary,
+          {color: colors.white, paddingVertical: 4},
+        ]}
         color={colors.themeBlue}
         onPress={action}
-        style={{alignSelf: 'stretch', marginTop: 21, paddingVertical: 4}}>
+        style={{alignSelf: 'stretch', marginTop: 21}}>
         {buttonText}
       </Button>
     </CardView>

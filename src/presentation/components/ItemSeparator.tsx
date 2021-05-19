@@ -8,7 +8,7 @@ export default function ItemSeparator({style}: ViewProps) {
 
 const styles = StyleSheet.create({
   separator: {
-    height: Platform.OS === 'android' ? 0.5 : 0.4,
+    height: Platform.OS === 'android' ? 0.5 : 0.3,
     alignSelf: 'stretch',
     backgroundColor: colors.dividerColorLight,
   },

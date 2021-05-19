@@ -18,7 +18,7 @@ export default {
   rippleColorLight: '#00000020',
   rippleColorDark: '#FFFFFF40',
 
-  dividerColorLight: '#0000001F',
+  dividerColorLight: '#0000002F',
 
   shadow: '#555555',
   darkComponentBackground: '#222222',

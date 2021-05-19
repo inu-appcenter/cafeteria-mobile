@@ -2,6 +2,7 @@ import React from 'react';
 import palette from '../../../res/palette';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import ItemSeparator from '../../../components/ItemSeparator';
 import SupportOption from './SupportOption';
 import ContactsButton from './ContactsButton';
 import {SupportMainNavigation} from '../SupportScreen';
@@ -12,33 +13,52 @@ type Props = {
 };
 
 export default function Main({navigation}: Props) {
+  const contacts = <ContactsButton navigation={navigation} />;
+  const separator = <ItemSeparator style={{marginVertical: 12}} />;
+
+  const generalSupportOptions = (
+    <SupportOption.Section navigation={navigation}>
+      <SupportOption.Item
+        icon={['notification', AntDesign]}
+        title="공지"
+        navigationDestination="SupportNotices"
+      />
+      <SupportOption.Item
+        icon={['message-square', Feather]}
+        title="1:1 문의"
+        navigationDestination="SupportAskAndAnswers"
+      />
+      <SupportOption.Item
+        icon={['archive', Feather]}
+        title="자주 묻는 질문"
+        navigationDestination="SupportFrequentQuestions"
+      />
+    </SupportOption.Section>
+  );
+
+  const termsAndServices = (
+    <SupportOption.Section navigation={navigation}>
+      <SupportOption.Item
+        icon={['info', Feather]}
+        title="서비스 이용 안내"
+        navigationDestination="SupportServiceHelp"
+      />
+      <SupportOption.Item
+        icon={['file-text', Feather]}
+        title="개인정보처리방침"
+        navigationDestination="SupportServiceHelp"
+      />
+    </SupportOption.Section>
+  );
+
   return (
     <ScrollView style={palette.whiteBackground}>
       <View style={styles.container}>
-        <ContactsButton navigation={navigation} />
-
-        <SupportOption.Section navigation={navigation}>
-          <SupportOption.Item
-            icon={['notification', AntDesign]}
-            title="공지"
-            navigationDestination="SupportNotices"
-          />
-          <SupportOption.Item
-            icon={['message-square', Feather]}
-            title="1:1 문의"
-            navigationDestination="SupportAskAndAnswers"
-          />
-          <SupportOption.Item
-            icon={['archive', Feather]}
-            title="자주 묻는 질문"
-            navigationDestination="SupportFrequentQuestions"
-          />
-          <SupportOption.Item
-            icon={['info', Feather]}
-            title="서비스 이용 안내"
-            navigationDestination="SupportServiceHelp"
-          />
-        </SupportOption.Section>
+        {contacts}
+        {generalSupportOptions}
+        {separator}
+        {termsAndServices}
+        {separator}
       </View>
     </ScrollView>
   );

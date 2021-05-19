@@ -10,6 +10,7 @@ import Contacts from './Contacts';
 import ServiceHelp from './ServiceHelp';
 import FrequentQuestions from './FrequentQuestions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
+import TermsAndConditions from './TermsAndConditions';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
@@ -18,6 +19,7 @@ export type SupportNavigationParams = {
   SupportServiceHelp: undefined;
   SupportAskAndAnswers: undefined;
   SupportFrequentQuestions: undefined;
+  SupportTermsAndConditions: undefined;
 };
 
 export type SupportMainNavigation = StackNavigationProp<
@@ -61,6 +63,11 @@ export default function SupportScreen() {
         name={'SupportServiceHelp'}
         component={ServiceHelp}
         options={{title: '서비스 이용 안내'}}
+      />
+      <Stack.Screen
+        name={'SupportTermsAndConditions'}
+        component={TermsAndConditions}
+        options={{title: '개인정보처리방침'}}
       />
     </Stack.Navigator>
   );

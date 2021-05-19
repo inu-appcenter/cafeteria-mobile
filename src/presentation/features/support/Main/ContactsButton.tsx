@@ -15,7 +15,7 @@ export default function ContactsButton({navigation}: Props) {
     <CardView
       style={styles.helpCard}
       onPress={() => navigation.navigate('SupportContacts')}>
-      <View style={styles.helpCardTextContentContainer}>
+      <View>
         <Text style={styles.helpCardTitleText}>
           서비스 이용에 불편을 겪고 계신가요?
         </Text>
@@ -30,13 +30,12 @@ const styles = StyleSheet.create({
   helpCard: {
     alignSelf: 'stretch',
     margin: 16,
+    paddingVertical: 12,
+    paddingStart: 12,
+    paddingEnd: 4,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-
-  helpCardTextContentContainer: {
-    padding: 12,
   },
 
   helpCardTitleText: {

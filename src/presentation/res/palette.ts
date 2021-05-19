@@ -33,6 +33,11 @@ const palette = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
   },
+  textSubHeader: {
+    color: colors.textPrimary,
+    fontSize: 21,
+    fontWeight: 'bold',
+  },
   textPrimary: {
     color: colors.textPrimary,
     fontSize: 16,

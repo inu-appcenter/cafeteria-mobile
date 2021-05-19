@@ -42,7 +42,7 @@ export default function Item({
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
-          paddingHorizontal: 16,
+          paddingHorizontal: 12,
           paddingVertical: 12,
         }}>
         <View
@@ -55,7 +55,7 @@ export default function Item({
             name={icon[0]}
             size={22}
             color={colors.textPrimary}
-            style={{marginStart: 6}}
+            style={{marginStart: 8}}
           />
           <Text style={{...palette.textPrimary, marginStart: 12}}>{title}</Text>
         </View>

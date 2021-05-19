@@ -33,7 +33,7 @@ export default function ContactItem({
       }}>
       <Image
         resizeMode="contain"
-        style={{height: 35, marginVertical: 12}}
+        style={{height: 37, marginVertical: 8}}
         source={imageSource}
       />
       <Text style={[palette.textSubHeader, {marginTop: 12}]}>{title}</Text>

@@ -10,7 +10,7 @@ export default function Contacts() {
         <ContactItem
           imageSource={require('../../../res/images/uicoop_logo.png')}
           title="소비자생활협동조합"
-          body={'소비자생활협동조합에 문의하시고\n도움을 받으실 수 있습니다.'}
+          body={'소비자생활협동조합에 문의하시면\n도움을 받으실 수 있습니다.'}
           buttonText="전화하기"
           action={() => {}}
         />

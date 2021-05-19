@@ -18,7 +18,7 @@ export default function Section({style, children, navigation}: Props) {
   });
 
   const childrenWithSeparator = childrenWithProps?.map((child, index) => {
-    const separator = <ItemSeparator style={{marginStart: 21}} />;
+    const separator = <ItemSeparator style={{marginStart: 54}} />;
     const isLast = index === childrenWithProps.length - 1;
     const inTheMiddle = !isLast;
 

@@ -25,7 +25,7 @@ export default function ContactItem({
     <CardView
       style={{
         marginHorizontal: 16,
-        marginVertical: 12,
+        marginTop: 18,
         padding: 16,
         flexDirection: 'column',
         alignItems: 'center',

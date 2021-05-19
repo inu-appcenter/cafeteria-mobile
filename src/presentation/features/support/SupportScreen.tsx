@@ -42,7 +42,7 @@ export default function SupportScreen() {
       <Stack.Screen
         name={'SupportContacts'}
         component={Contacts}
-        options={{title: '연락처'}}
+        options={{title: '문의 연락처'}}
       />
       <Stack.Screen
         name={'SupportNotices'}

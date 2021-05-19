@@ -1,7 +1,6 @@
 import React from 'react';
-import ItemSeparator from '../../../../components/ItemSeparator';
 import {SupportMainNavigation} from '../../SupportScreen';
-import {ScrollView, StyleSheet, View, ViewProps} from 'react-native';
+import {ScrollView, StyleSheet, ViewProps} from 'react-native';
 
 type Props = ViewProps & {
   children: React.ReactNode[] | React.ReactNode;
@@ -17,29 +16,9 @@ export default function Section({style, children, navigation}: Props) {
     return child;
   });
 
-  const childrenWithSeparator = childrenWithProps?.map((child, index) => {
-    const separator = (
-      <ItemSeparator
-        style={{
-          marginStart: 54,
-          backgroundColor: '#00000000',
-        }}
-      />
-    );
-    const isLast = index === childrenWithProps.length - 1;
-    const inTheMiddle = !isLast;
-
-    return (
-      <View key={index.toString()}>
-        {child}
-        {inTheMiddle ? separator : null}
-      </View>
-    );
-  });
-
   return (
     <ScrollView style={[styles.horizontallyFull, style]}>
-      {childrenWithSeparator}
+      {childrenWithProps}
     </ScrollView>
   );
 }

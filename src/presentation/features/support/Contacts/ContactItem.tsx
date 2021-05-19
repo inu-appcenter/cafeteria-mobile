@@ -25,8 +25,7 @@ export default function ContactItem({
     <CardView
       style={{
         marginHorizontal: 16,
-        marginTop: 16,
-        marginBottom: 12,
+        marginTop: 21,
         padding: 16,
         flexDirection: 'column',
         alignItems: 'center',
@@ -39,9 +38,9 @@ export default function ContactItem({
       <Text style={[palette.textSubHeader, {marginTop: 12}]}>{title}</Text>
       <Text
         style={[
-          palette.textPrimary,
+          palette.textSecondary,
           {
-            marginTop: 12,
+            marginTop: 8,
             textAlign: 'center',
             marginHorizontal: 12,
           },

@@ -30,12 +30,12 @@ const palette = StyleSheet.create({
 
   textHeader: {
     color: colors.textPrimary,
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: 'bold',
   },
   textSubHeader: {
     color: colors.textPrimary,
-    fontSize: 21,
+    fontSize: 19,
     fontWeight: 'bold',
   },
   textPrimary: {

@@ -13,6 +13,6 @@ export default function HeaderLogo() {
 
 const styles = StyleSheet.create({
   headerLogo: {
-    height: 17,
+    height: 15,
   },
 });

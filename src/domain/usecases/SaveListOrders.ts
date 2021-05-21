@@ -1,7 +1,7 @@
 import UseCase from './UseCase';
 import CafeteriaRepository from '../../data/repositories/CafeteriaRepository';
 
-class SetOrders extends UseCase<number[], void> {
+class SaveListOrders extends UseCase<number[], void> {
   constructor(private readonly cafeteriaRepository: CafeteriaRepository) {
     super();
   }
@@ -11,4 +11,4 @@ class SetOrders extends UseCase<number[], void> {
   }
 }
 
-export default new SetOrders(CafeteriaRepository.instance);
+export default new SaveListOrders(CafeteriaRepository.instance);

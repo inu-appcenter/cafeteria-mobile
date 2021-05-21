@@ -1,14 +1,14 @@
+import Main from './features/main/Main';
 import React from 'react';
 import colors from './res/colors';
-import BugStore from '../store/RootStore';
+import RootStore from '../store/RootStore';
 import {StatusBar} from 'react-native';
-import MainNavigator from './navigation/MainNavigator';
 import StoreProvider from './hooks/StoreProvider';
 import {NavigationContainer} from '@react-navigation/native';
 
-export default function App() {
-  const rootStore = new BugStore();
+const rootStore = new RootStore();
 
+export default function App() {
   return (
     <StoreProvider store={rootStore}>
       <NavigationContainer>
@@ -17,7 +17,7 @@ export default function App() {
           backgroundColor={colors.white}
           barStyle={'dark-content'}
         />
-        <MainNavigator />
+        <Main />
       </NavigationContainer>
     </StoreProvider>
   );

@@ -1,8 +1,8 @@
-import GetOrders from '../../../domain/usecases/GetOrders';
-import SetOrders from '../../../domain/usecases/SetOrders';
 import Cafeteria from '../../../domain/entities/Cafeteria';
 import GetCafeteria from '../../../domain/usecases/GetCafeteria';
 import CafeteriaView from './CafeteriaView';
+import GetListOrders from '../../../domain/usecases/GetListOrders';
+import SaveListOrders from '../../../domain/usecases/SaveListOrders';
 import GetOrderApplier from '../../../domain/usecases/GetOrderApplier';
 import GetCafeteriaOnly from '../../../domain/usecases/GetCafeteriaOnly';
 import {makeAutoObservable} from 'mobx';
@@ -41,13 +41,13 @@ export default class CafeteriaStore {
   }
 
   private async loadOrders() {
-    this.orderedIds = await GetOrders.run();
+    this.orderedIds = await GetListOrders.run();
   }
 
   async setOrders(orderedIds: number[]) {
     this.orderedIds = orderedIds;
 
-    await SetOrders.run(orderedIds);
+    await SaveListOrders.run(orderedIds);
   }
 
   async fetchCafeteria() {

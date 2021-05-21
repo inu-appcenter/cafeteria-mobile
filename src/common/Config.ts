@@ -4,6 +4,6 @@ export default {
   contacts: {
     uicoopPhoneNumber: '0328359795',
     serviceAdminPhoneNumber: '01029222661',
-    inuAppcenterKakaoTalkUrl: 'https://pf.kakao.com/_xgxaSLd',
+    inuAppcenterKakaoTalkUrl: 'https://pf.kakao.com/_xgxaSLd/chat',
   },
 };

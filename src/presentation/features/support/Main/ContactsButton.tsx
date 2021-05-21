@@ -1,3 +1,4 @@
+import Icon from 'react-native-vector-icons/Feather';
 import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
@@ -5,7 +6,6 @@ import CardView from '../../../components/CardView';
 import ChevronRight from '../../../components/ChevronRight';
 import {SupportMainNavigation} from '../SupportScreen';
 import {StyleSheet, Text, View} from 'react-native';
-import Icon from 'react-native-vector-icons/Feather';
 
 type Props = {
   navigation: SupportMainNavigation;

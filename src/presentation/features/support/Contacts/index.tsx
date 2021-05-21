@@ -1,8 +1,8 @@
 import React from 'react';
-import {Linking, ScrollView, StyleSheet, Text, View} from 'react-native';
-
-import ContactItem from './ContactItem';
 import Config from '../../../../common/Config';
+import palette from '../../../res/palette';
+import ContactItem from './ContactItem';
+import {Linking, ScrollView, StyleSheet, View} from 'react-native';
 
 export default function Contacts() {
   const urlOpener = (url: string) => () => {
@@ -10,7 +10,7 @@ export default function Contacts() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={palette.whiteBackground}>
       <View style={styles.container}>
         <ContactItem
           imageSource={require('../../../res/images/uicoop_logo.png')}

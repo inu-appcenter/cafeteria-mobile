@@ -1,12 +1,12 @@
 import Modal from 'react-native-modal';
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import useStores from '../../hooks/useStores';
-import {observer} from 'mobx-react';
 import colors from '../../res/colors';
 import palette from '../../res/palette';
 import {Button} from 'react-native-paper';
+import useStores from '../../hooks/useStores';
+import {observer} from 'mobx-react';
 import PaperPresets from '../../components/utils/PaperPresets';
+import {StyleSheet, Text, View} from 'react-native';
 
 function NoticeModal() {
   const {noticeStore} = useStores();
@@ -16,16 +16,9 @@ function NoticeModal() {
       isVisible={noticeStore.currentNotice !== undefined}
       swipeDirection="down"
       onSwipeComplete={() => noticeStore.dismissCurrentNotice()}
-      style={{justifyContent: 'flex-end', margin: 0}}>
-      <View
-        style={{
-          width: '100%',
-          minHeight: 240,
-          backgroundColor: colors.white,
-          borderRadius: 20,
-          justifyContent: 'space-between',
-        }}>
-        <View style={{paddingHorizontal: 28, paddingVertical: 32}}>
+      style={styles.modal}>
+      <View style={styles.modalContentContainer}>
+        <View style={styles.upperContainer}>
           <Text style={styles.textTitle}>
             {noticeStore.currentNotice?.title}
           </Text>
@@ -34,12 +27,8 @@ function NoticeModal() {
 
         <Button
           {...PaperPresets.wideThemedButton}
-          labelStyle={{
-            color: 'white',
-            fontSize: 16,
-            paddingBottom: 34,
-          }}
-          style={{borderRadius: 0}}
+          labelStyle={styles.buttonLabel}
+          style={styles.button}
           onPress={() => noticeStore.dismissCurrentNotice()}>
           닫기
         </Button>
@@ -51,11 +40,34 @@ function NoticeModal() {
 export default observer(NoticeModal);
 
 const styles = StyleSheet.create({
+  modal: {
+    justifyContent: 'flex-end',
+    margin: 0,
+  },
+  modalContentContainer: {
+    width: '100%',
+    minHeight: 240,
+    backgroundColor: colors.white,
+    borderRadius: 20,
+    justifyContent: 'space-between',
+  },
+  upperContainer: {
+    paddingHorizontal: 28,
+    paddingVertical: 32,
+  },
   textTitle: {
     ...palette.textSubHeader,
   },
   textBody: {
     ...palette.textPrimary,
     marginTop: 16,
+  },
+  button: {
+    borderRadius: 0,
+  },
+  buttonLabel: {
+    color: 'white',
+    fontSize: 16,
+    paddingBottom: 34,
   },
 });

@@ -3,6 +3,7 @@ import Notice from '../../domain/entities/Notice';
 import Config from '../../common/Config';
 import {plainToClass} from 'class-transformer';
 import Cache, {cachedFetch} from '../../common/utils/Cache';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type NoticeFetchParams = {
   os: string;
@@ -32,5 +33,15 @@ export default class NoticeRepository {
     const rawNotices: object[] = await this.fetchCafeteria(params);
 
     return rawNotices.map(rawNotice => plainToClass(Notice, rawNotice));
+  }
+
+  async dismissNotice(noticeId: number) {
+    await AsyncStorage.setItem('dismissed_notice_id', noticeId.toString());
+  }
+
+  async getDismissedNoticeId() {
+    return Number.parseInt(
+      (await AsyncStorage.getItem('dismissed_notice_id')) || '0',
+    );
   }
 }

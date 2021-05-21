@@ -1,12 +1,27 @@
-import NoticeView from './NoticeView';
-import GetAllNotices from '../../../../domain/usecases/GetAllNotices';
-import {makeAutoObservable, runInAction} from 'mobx';
-import handleApiError from '../../../../common/utils/handleApiError';
 import sleep from '../../../../common/utils/sleep';
+import NoticeView from './NoticeView';
+import GetNewNotice from '../../../../domain/usecases/GetNewNotice';
+import DismissNotice from '../../../../domain/usecases/DismissNotice';
+import GetAllNotices from '../../../../domain/usecases/GetAllNotices';
+import handleApiError from '../../../../common/utils/handleApiError';
+import {makeAutoObservable} from 'mobx';
 
 export default class NoticeStore {
-  notices: NoticeView[] = [];
-  currentNotice: NoticeView | undefined = undefined;
+  private _notices: NoticeView[] = [];
+  get notices() {
+    return this._notices;
+  }
+  set notices(value) {
+    this._notices = value;
+  }
+
+  private _currentNotice: NoticeView | undefined = undefined;
+  get currentNotice() {
+    return this._currentNotice;
+  }
+  set currentNotice(value) {
+    this._currentNotice = value;
+  }
 
   constructor() {
     makeAutoObservable(this);
@@ -16,19 +31,19 @@ export default class NoticeStore {
 
   async fetch() {
     const notices = await GetAllNotices.run();
+    this.notices = notices.map(n => NoticeView.fromNotice(n));
 
-    runInAction(() => {
-      this.notices = notices.map(n => NoticeView.fromNotice(n));
-    });
+    await sleep(500);
 
-    sleep(500).then(() =>
-      runInAction(() => {
-        this.currentNotice = this.notices[0];
-      }),
-    );
+    const newNotice = await GetNewNotice.run();
+    this.currentNotice = newNotice
+      ? NoticeView.fromNotice(newNotice)
+      : undefined;
   }
 
-  dismissCurrentNotice() {
+  async dismissCurrentNotice() {
+    await DismissNotice.run(this.currentNotice?.id);
+
     this.currentNotice = undefined;
   }
 }

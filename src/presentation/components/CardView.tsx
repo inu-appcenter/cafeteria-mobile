@@ -19,7 +19,7 @@ export default class CardView extends React.Component<Props> {
   render() {
     const {style, children, onPress} = this.props;
 
-    const card = <View style={{...styles.card, ...style}}>{children}</View>;
+    const card = <View style={[styles.card, style]}>{children}</View>;
 
     if (onPress === undefined) {
       return card;

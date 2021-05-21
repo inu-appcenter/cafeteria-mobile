@@ -1,9 +1,14 @@
 import React from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Linking, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 import ContactItem from './ContactItem';
+import Config from '../../../../common/Config';
 
 export default function Contacts() {
+  const urlOpener = (url: string) => () => {
+    Linking.openURL(url);
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -12,7 +17,7 @@ export default function Contacts() {
           title="소비자생활협동조합"
           body={'소비자생활협동조합에 문의하시면\n도움을 받으실 수 있습니다.'}
           buttonText="전화하기"
-          action={() => {}}
+          action={urlOpener(`tel:${Config.contacts.uicoopPhoneNumber}`)}
         />
         <ContactItem
           imageSource={require('../../../res/images/potato.png')}
@@ -21,7 +26,7 @@ export default function Contacts() {
             '대부분의 문제는 서비스 개발자/관리자에게\n직접 문의하시면 빠르게 해결됩니다.'
           }
           buttonText="전화하기"
-          action={() => {}}
+          action={urlOpener(`tel:${Config.contacts.serviceAdminPhoneNumber}`)}
         />
         <ContactItem
           imageSource={require('../../../res/images/inu_appcenter.png')}
@@ -30,7 +35,7 @@ export default function Contacts() {
             '카페테리아 서비스에 대해 궁금하신 사항은\n카카오톡 앱센터 채널로 문의 주시면\n답변드리겠습니다.'
           }
           buttonText="카카오톡에서 열기"
-          action={() => {}}
+          action={urlOpener(`${Config.contacts.inuAppcenterKakaoTalkUrl}`)}
         />
       </View>
     </ScrollView>

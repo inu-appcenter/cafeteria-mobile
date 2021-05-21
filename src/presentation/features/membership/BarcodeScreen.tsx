@@ -89,9 +89,10 @@ export default function BarcodeScreen() {
 
 const styles = StyleSheet.create({
   cardViewContainer: {
-    margin: 21,
+    margin: 22,
     flex: 1,
     flexDirection: 'column',
+    borderRadius: 18,
   },
   header: {
     alignItems: 'center',

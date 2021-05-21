@@ -1,29 +1,16 @@
-import React, {useEffect} from 'react';
-import {FlatList, Text, View} from 'react-native';
-import useApi from '../../../hooks/useApi';
-import GetAllNotices from '../../../../domain/usecases/GetAllNotices';
-import handleApiError from '../../../../common/utils/handleApiError';
-import LoadingView from '../../../components/LoadingView';
+import React from 'react';
+import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
+import {FlatList} from 'react-native';
 import NoticeItem from './NoticeItem';
 import ItemSeparator from '../../../components/ItemSeparator';
-import palette from '../../../res/palette';
 
 export default function Notices() {
   const {noticeStore} = useStores();
-  const [loading, fetch] = useApi(() => noticeStore.fetch());
 
-  const fetchNotices = () => {
-    fetch().catch(e => handleApiError(e));
-  };
+  // 공지는 스토어 생성 시점에 로드되기 때문에 여기서 따로 로드할 필요가 없습니다.
 
-  useEffect(() => {
-    fetchNotices();
-  }, []);
-
-  const loadingView = <LoadingView />;
-
-  const contents = (
+  return (
     <FlatList
       style={palette.whiteBackground}
       data={noticeStore.notices}
@@ -31,6 +18,4 @@ export default function Notices() {
       ItemSeparatorComponent={() => <ItemSeparator />}
     />
   );
-
-  return loading ? loadingView : contents;
 }

@@ -1,11 +1,11 @@
-import React, {useState} from 'react';
-import colors from '../../../res/colors';
-import palette from '../../../res/palette';
+import colors from '../../../../res/colors';
+import palette from '../../../../res/palette';
 import {Button} from 'react-native-paper';
-import PaperPresets from '../../../components/utils/PaperPresets';
+import PaperPresets from '../../../../components/utils/PaperPresets';
+import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
-export default function AskScreen() {
+export default function Ask() {
   const [content, setContent] = useState('');
 
   return (

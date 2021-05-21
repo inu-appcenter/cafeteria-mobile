@@ -3,12 +3,12 @@ import palette from '../../../res/palette';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {observer} from 'mobx-react';
+import useUserState from '../../../hooks/useUserState';
 import SupportOption from './SupportOption';
 import ItemSeparator from '../../../components/ItemSeparator';
 import ContactsButton from './ContactsButton';
 import {SupportMainNavigation} from '../SupportScreen';
 import {ScrollView, StyleSheet, View} from 'react-native';
-import useUserState from '../../../hooks/useUserState';
 
 type Props = {
   navigation: SupportMainNavigation;

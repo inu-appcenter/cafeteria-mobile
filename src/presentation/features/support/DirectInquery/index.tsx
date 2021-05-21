@@ -1,9 +1,9 @@
+import Ask from './Ask';
 import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
-import AskScreen from './AskScreen';
+import History from './History';
 import {StyleSheet} from 'react-native';
-import HistoryScreen from './HistoryScreen';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
 type AskAndAnswersNavigationParams = {
@@ -25,12 +25,12 @@ export default function DirectInquiry() {
       }}>
       <Tab.Screen
         name="DirectInquiryAsk"
-        component={AskScreen}
+        component={Ask}
         options={{title: '문의하기'}}
       />
       <Tab.Screen
         name="DirectInquiryHistory"
-        component={HistoryScreen}
+        component={History}
         options={{title: '지난 문의 내역'}}
       />
     </Tab.Navigator>

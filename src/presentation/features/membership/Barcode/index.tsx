@@ -7,18 +7,19 @@ import {
   StyleSheet,
   Dimensions,
 } from 'react-native';
-import useApi from '../../hooks/useApi';
-import colors from '../../res/colors';
-import palette from '../../res/palette';
-import Barcode from 'react-native-barcode-builder';
-import CardView from '../../components/CardView';
-import useUserState from '../../hooks/useUserState';
-import VerticalShadow from '../../components/VerticalShadow';
-import ActivateBarcode from '../../../domain/usecases/ActivateBarcode';
+import useApi from '../../../hooks/useApi';
+import colors from '../../../res/colors';
+import palette from '../../../res/palette';
+import CardView from '../../../components/CardView';
+import {observer} from 'mobx-react';
+import useUserState from '../../../hooks/useUserState';
+import BarcodeBuilder from 'react-native-barcode-builder';
+import VerticalShadow from '../../../components/VerticalShadow';
+import ActivateBarcode from '../../../../domain/usecases/ActivateBarcode';
 import React, {useEffect} from 'react';
-import useScreenBrightness from '../../hooks/useScreenBrightness';
+import useScreenBrightness from '../../../hooks/useScreenBrightness';
 
-export default function BarcodeScreen() {
+function Barcode() {
   const {userId, barcode} = useUserState();
   const [toggleBrightness] = useScreenBrightness();
   const [, activateBarcode] = useApi(() => ActivateBarcode.run());
@@ -31,7 +32,7 @@ export default function BarcodeScreen() {
     <View style={styles.header}>
       <Image
         style={styles.headerUiCoopLogo}
-        source={require('../../res/images/uicoop_logo.png')}
+        source={require('../../../res/images/uicoop_logo.png')}
         resizeMode="contain"
       />
       <Text style={[palette.textPrimary, palette.boldText]}>
@@ -46,7 +47,7 @@ export default function BarcodeScreen() {
       <View style={styles.logoImageInternalContainer}>
         <Image
           style={styles.logoImageContent}
-          source={require('../../res/images/header_logo.png')}
+          source={require('../../../res/images/header_logo.png')}
           resizeMode="contain"
         />
       </View>
@@ -65,7 +66,7 @@ export default function BarcodeScreen() {
 
   const barcodeImage = (
     <View style={{padding: 10}}>
-      <Barcode
+      <BarcodeBuilder
         text={barcode}
         value={barcode || 'invalid'}
         width={barcodeWidth}
@@ -86,6 +87,8 @@ export default function BarcodeScreen() {
     </ScrollView>
   );
 }
+
+export default observer(Barcode);
 
 const styles = StyleSheet.create({
   cardViewContainer: {

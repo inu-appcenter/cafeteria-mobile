@@ -1,18 +1,18 @@
-import useApi from '../../hooks/useApi';
-import colors from '../../res/colors';
-import notify from '../../components/utils/notify';
-import palette from '../../res/palette';
+import useApi from '../../../hooks/useApi';
+import colors from '../../../res/colors';
+import notify from '../../../components/utils/notify';
+import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
-import useStores from '../../hooks/useStores';
+import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
-import PaperPresets from '../../components/utils/PaperPresets';
-import Unauthorized from '../../../data/exceptions/Unauthorized';
-import handleApiError from '../../../common/utils/handleApiError';
+import PaperPresets from '../../../components/utils/PaperPresets';
+import Unauthorized from '../../../../data/exceptions/Unauthorized';
+import handleApiError from '../../../../common/utils/handleApiError';
 import React, {useState} from 'react';
-import ClearableTextInput from '../../components/ClearableTextInput';
+import ClearableTextInput from '../../../components/ClearableTextInput';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
 
-function LoginScreen() {
+function Login() {
   const {userStore} = useStores();
 
   const [id, setId] = useState('');
@@ -74,7 +74,7 @@ function LoginScreen() {
   );
 }
 
-export default observer(LoginScreen);
+export default observer(Login);
 
 const styles = StyleSheet.create({
   input: {

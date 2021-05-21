@@ -1,18 +1,19 @@
 import React from 'react';
-import palette from '../../res/palette';
+import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
-import LoadingView from '../../components/LoadingView';
-import useUserState from '../../hooks/useUserState';
-import PaperPresets from '../../components/utils/PaperPresets';
+import {observer} from 'mobx-react';
+import LoadingView from '../../../components/LoadingView';
+import useUserState from '../../../hooks/useUserState';
+import PaperPresets from '../../../components/utils/PaperPresets';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StyleSheet, Text, View} from 'react-native';
-import {MembershipNavigationParams} from './MembershipScreen';
+import {MembershipNavigationParams} from '../MembershipScreen';
 
 type Props = {
   navigation: StackNavigationProp<MembershipNavigationParams, 'Onboarding'>;
 };
 
-export default function OnboardingScreen({navigation}: Props) {
+function Onboarding({navigation}: Props) {
   const {isTryingRememberedLogin} = useUserState();
 
   const loadingView = <LoadingView />;
@@ -36,6 +37,8 @@ export default function OnboardingScreen({navigation}: Props) {
 
   return isTryingRememberedLogin ? loadingView : onboardingContents;
 }
+
+export default observer(Onboarding);
 
 const styles = StyleSheet.create({
   container: {

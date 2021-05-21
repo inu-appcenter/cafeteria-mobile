@@ -1,12 +1,12 @@
 import React from 'react';
+import Login from './Login';
+import Barcode from './Barcode';
+import Onboarding from './Onboarding';
 import {observer} from 'mobx-react';
-import LoginScreen from './LoginScreen';
 import useUserState from '../../hooks/useUserState';
-import BarcodeScreen from './BarcodeScreen';
-import OnboardingScreen from './OnboardingScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
-import MembershipInfoHeaderButton from './MembershipInfoHeaderButton';
+import MembershipInfoHeaderButton from './Barcode/MembershipInfoHeaderButton';
 
 export type MembershipNavigationParams = {
   Onboarding: undefined;
@@ -23,7 +23,7 @@ function MembershipScreen() {
     <Stack.Screen
       key="onboarding_screen"
       name="Onboarding"
-      component={OnboardingScreen}
+      component={Onboarding}
       options={{headerShown: false}}
     />
   );
@@ -32,7 +32,7 @@ function MembershipScreen() {
     <Stack.Screen
       key="barcode_screen"
       name="Barcode"
-      component={BarcodeScreen}
+      component={Barcode}
       options={{
         title: '멤버십',
         headerRight: () => <MembershipInfoHeaderButton />,
@@ -44,7 +44,7 @@ function MembershipScreen() {
     <Stack.Screen
       key="login_screen"
       name="Login"
-      component={LoginScreen}
+      component={Login}
       options={{title: '로그인'}}
     />
   );

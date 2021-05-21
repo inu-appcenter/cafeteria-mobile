@@ -1,9 +1,9 @@
 import Icon from 'react-native-vector-icons/Feather';
-import useApi from '../../hooks/useApi';
-import colors from '../../res/colors';
+import useApi from '../../../hooks/useApi';
+import colors from '../../../res/colors';
 import {Alert} from 'react-native';
-import palette from '../../res/palette';
-import useStores from '../../hooks/useStores';
+import palette from '../../../res/palette';
+import useStores from '../../../hooks/useStores';
 import React, {useEffect} from 'react';
 
 export default function MembershipInfoHeaderButton() {

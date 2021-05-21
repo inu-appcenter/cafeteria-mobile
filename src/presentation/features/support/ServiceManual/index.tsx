@@ -1,7 +1,7 @@
 import React from 'react';
 import Config from '../../../../common/Config';
-import {WebView} from 'react-native-webview';
+import LoadingWebView from '../../../components/LoadingWebView';
 
 export default function ServiceManual() {
-  return <WebView source={{uri: Config.webPageUrl.serviceManual}} />;
+  return <LoadingWebView uri={Config.webPageUrl.serviceManual} />;
 }

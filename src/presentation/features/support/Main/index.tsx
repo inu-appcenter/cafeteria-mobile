@@ -2,19 +2,31 @@ import React from 'react';
 import palette from '../../../res/palette';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import {observer} from 'mobx-react';
 import SupportOption from './SupportOption';
 import ItemSeparator from '../../../components/ItemSeparator';
 import ContactsButton from './ContactsButton';
 import {SupportMainNavigation} from '../SupportScreen';
 import {ScrollView, StyleSheet, View} from 'react-native';
+import useUserState from '../../../hooks/useUserState';
 
 type Props = {
   navigation: SupportMainNavigation;
 };
 
-export default function Main({navigation}: Props) {
+function Main({navigation}: Props) {
+  const {isLoggedIn} = useUserState();
+
   const contacts = <ContactsButton navigation={navigation} />;
   const separator = <ItemSeparator style={{marginVertical: 12}} />;
+
+  const directInquiryOption = (
+    <SupportOption.Item
+      icon={['message-square', Feather]}
+      title="1:1 문의"
+      navigationDestination="SupportDirectInquiry"
+    />
+  );
 
   const generalSupportOptions = (
     <SupportOption.Section navigation={navigation}>
@@ -23,11 +35,7 @@ export default function Main({navigation}: Props) {
         title="공지"
         navigationDestination="SupportNotices"
       />
-      <SupportOption.Item
-        icon={['message-square', Feather]}
-        title="1:1 문의"
-        navigationDestination="SupportDirectInquiry"
-      />
+      {isLoggedIn ? directInquiryOption : null}
       <SupportOption.Item
         icon={['archive', Feather]}
         title="자주 묻는 질문"
@@ -63,6 +71,8 @@ export default function Main({navigation}: Props) {
     </ScrollView>
   );
 }
+
+export default observer(Main);
 
 const styles = StyleSheet.create({
   container: {

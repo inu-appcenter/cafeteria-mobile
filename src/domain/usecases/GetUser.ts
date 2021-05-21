@@ -8,7 +8,7 @@ class GetUser extends UseCase<void, User | undefined> {
   }
 
   async onExecute(_: void): Promise<User | undefined> {
-    return await this.userRepository.getSavedUserInfo();
+    return this.userRepository.getSavedUserInfo();
   }
 }
 

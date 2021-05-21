@@ -8,7 +8,7 @@ class GetCafeteriaOnly extends UseCase<void, Cafeteria[]> {
   }
 
   async onExecute(_: void): Promise<Cafeteria[]> {
-    return await this.cafeteriaRepository.getCafeteriaOnly();
+    return this.cafeteriaRepository.getCafeteriaOnly();
   }
 }
 

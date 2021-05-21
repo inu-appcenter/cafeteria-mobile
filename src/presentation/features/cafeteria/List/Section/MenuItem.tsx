@@ -1,7 +1,7 @@
-import React from 'react';
 import colors from '../../../../res/colors';
 import MenuView from '../../MenuView';
 import Touchable from '../../../../components/Touchable';
+import React, {useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 const images = [
@@ -15,66 +15,46 @@ const images = [
   require('../../../../res/images/available_7.png'),
 ];
 
-export default class MenuItem extends React.Component<
-  {menu: MenuView},
-  {lines: number}
-> {
-  private static COLLAPSED_MAX_LINES = 2;
-  private static EXPANDED_MAX_LINES = 5;
+type Props = {
+  menu: MenuView;
+};
 
-  state = {
-    lines: MenuItem.COLLAPSED_MAX_LINES,
-  };
+export default function MenuItem({menu}: Props) {
+  const COLLAPSED_MAX_LINES = 2;
+  const EXPANDED_MAX_LINES = 5;
 
-  private get availableTimeImage() {
-    const {menu} = this.props;
+  const [lines, setLines] = useState(COLLAPSED_MAX_LINES);
 
-    return images[menu.availableAt];
-  }
+  return (
+    <Touchable onPress={() => setLines(EXPANDED_MAX_LINES)}>
+      {/* Root */}
+      <View style={styles.rootContainer}>
+        {/* Available time view */}
+        <Image
+          style={styles.availableTimeImage}
+          resizeMode="contain"
+          source={images[menu.availableAt]}
+        />
 
-  render() {
-    const {menu} = this.props;
-    const {lines} = this.state;
+        {/* The rest */}
+        <View style={styles.textPartContainer}>
+          {/* Foods */}
+          <Text
+            numberOfLines={lines}
+            ellipsizeMode={'tail'}
+            style={styles.foodsText}>
+            {menu.foodsText}
+          </Text>
 
-    const expand = () => {
-      this.setState({
-        lines: MenuItem.EXPANDED_MAX_LINES,
-      });
-    };
-
-    return (
-      <Touchable onPress={() => expand()}>
-        {/* Root */}
-        <View style={styles.rootContainer}>
-          {/* Available time view */}
-          <Image
-            style={styles.availableTimeImage}
-            resizeMode="contain"
-            source={this.availableTimeImage}
-          />
-
-          {/* The rest */}
-          <View style={styles.textPartContainer}>
-            {/* Foods */}
-            <Text
-              numberOfLines={lines}
-              ellipsizeMode={'tail'}
-              style={styles.foodsText}>
-              {menu.foodsText}
-            </Text>
-
-            {/* Price and calorie */}
-            <View style={styles.bottomTextContainer}>
-              <Text style={styles.metadataText}>{menu.cornerName}</Text>
-              <Text style={styles.metadataText}>
-                {menu.priceAndCalorieText}
-              </Text>
-            </View>
+          {/* Price and calorie */}
+          <View style={styles.bottomTextContainer}>
+            <Text style={styles.metadataText}>{menu.cornerName}</Text>
+            <Text style={styles.metadataText}>{menu.priceAndCalorieText}</Text>
           </View>
         </View>
-      </Touchable>
-    );
-  }
+      </View>
+    </Touchable>
+  );
 }
 
 const styles = StyleSheet.create({

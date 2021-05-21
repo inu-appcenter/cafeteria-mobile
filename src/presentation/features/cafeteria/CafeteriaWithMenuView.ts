@@ -13,16 +13,7 @@ export default class CafeteriaWithMenuView {
       key: `${cafeteria.id}`,
       title: cafeteria.displayName,
       menus: cafeteria.corners
-        .map(corner =>
-          corner.menus.map((menu, index) => ({
-            key: `${cafeteria.id}-${corner.id}-${index}`, // 예시: '1-6-2'
-            cornerName: corner.displayName,
-            availableAt: corner.availableAt,
-            foods: menu.foods,
-            price: menu.price,
-            calorie: menu.calorie,
-          })),
-        )
+        .map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner))
         .flat(),
     };
   }

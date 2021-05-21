@@ -1,9 +1,8 @@
 import React from 'react';
-import palette from '../../../../res/palette';
+import colors from '../../../../res/colors';
 import MenuView from '../../MenuView';
 import Touchable from '../../../../components/Touchable';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import colors from '../../../../res/colors';
 
 const images = [
   null,
@@ -31,17 +30,6 @@ export default class MenuItem extends React.Component<
     const {menu} = this.props;
 
     return images[menu.availableAt];
-  }
-
-  private get priceAndCalorieString() {
-    const {menu} = this.props;
-
-    const caloriePart = `${Number(menu.calorie).toLocaleString()}kcal`;
-    const pricePart = `${Number(menu.price).toLocaleString()}원`;
-    const separatorPart =
-      caloriePart.length > 0 && pricePart.length > 0 ? ' · ' : '';
-
-    return caloriePart + separatorPart + pricePart;
   }
 
   render() {
@@ -72,14 +60,14 @@ export default class MenuItem extends React.Component<
               numberOfLines={lines}
               ellipsizeMode={'tail'}
               style={styles.foodsText}>
-              {menu.foods.join(', ')}
+              {menu.foodsText}
             </Text>
 
             {/* Price and calorie */}
             <View style={styles.bottomTextContainer}>
               <Text style={styles.metadataText}>{menu.cornerName}</Text>
               <Text style={styles.metadataText}>
-                {this.priceAndCalorieString}
+                {menu.priceAndCalorieText}
               </Text>
             </View>
           </View>

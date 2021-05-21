@@ -2,8 +2,8 @@ import React from 'react';
 import palette from '../../../res/palette';
 import Feather from 'react-native-vector-icons/Feather';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import ItemSeparator from '../../../components/ItemSeparator';
 import SupportOption from './SupportOption';
+import ItemSeparator from '../../../components/ItemSeparator';
 import ContactsButton from './ContactsButton';
 import {SupportMainNavigation} from '../SupportScreen';
 import {ScrollView, StyleSheet, View} from 'react-native';
@@ -41,12 +41,12 @@ export default function Main({navigation}: Props) {
       <SupportOption.Item
         icon={['info', Feather]}
         title="서비스 이용 안내"
-        navigationDestination="SupportServiceHelp"
+        navigationDestination="SupportServiceManual"
       />
       <SupportOption.Item
         icon={['file-text', Feather]}
         title="개인정보처리방침"
-        navigationDestination="SupportServiceHelp"
+        navigationDestination="SupportTermsAndConditions"
       />
     </SupportOption.Section>
   );

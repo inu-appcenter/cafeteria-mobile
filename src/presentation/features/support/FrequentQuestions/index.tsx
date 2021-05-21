@@ -1,10 +1,7 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {WebView} from 'react-native-webview';
+import Config from '../../../../common/Config';
 
 export default function FrequentQuestions() {
-  return (
-    <View>
-      <Text>Hello!!</Text>
-    </View>
-  );
+  return <WebView source={{uri: Config.webPageUrl.frequentQuestions}} />;
 }

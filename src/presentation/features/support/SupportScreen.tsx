@@ -7,7 +7,7 @@ import Ask from './Ask';
 import Main from './Main';
 import Notices from './Notices';
 import Contacts from './Contacts';
-import ServiceHelp from './ServiceHelp';
+import ServiceHelp from './ServiceManual';
 import FrequentQuestions from './FrequentQuestions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import TermsAndConditions from './TermsAndConditions';
@@ -16,7 +16,7 @@ export type SupportNavigationParams = {
   SupportMain: undefined;
   SupportNotices: undefined;
   SupportContacts: undefined;
-  SupportServiceHelp: undefined;
+  SupportServiceManual: undefined;
   SupportAskAndAnswers: undefined;
   SupportFrequentQuestions: undefined;
   SupportTermsAndConditions: undefined;
@@ -35,37 +35,37 @@ export default function SupportScreen() {
       headerMode="screen"
       screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
       <Stack.Screen
-        name={'SupportMain'}
+        name="SupportMain"
         component={Main}
         options={{title: '지원'}}
       />
       <Stack.Screen
-        name={'SupportContacts'}
+        name="SupportContacts"
         component={Contacts}
         options={{title: '문의 연락처'}}
       />
       <Stack.Screen
-        name={'SupportNotices'}
+        name="SupportNotices"
         component={Notices}
         options={{title: '공지'}}
       />
       <Stack.Screen
-        name={'SupportAskAndAnswers'}
+        name="SupportAskAndAnswers"
         component={Ask}
         options={{title: '1:1 문의'}}
       />
       <Stack.Screen
-        name={'SupportFrequentQuestions'}
+        name="SupportFrequentQuestions"
         component={FrequentQuestions}
         options={{title: '자주 묻는 질문'}}
       />
       <Stack.Screen
-        name={'SupportServiceHelp'}
+        name="SupportServiceManual"
         component={ServiceHelp}
         options={{title: '서비스 이용 안내'}}
       />
       <Stack.Screen
-        name={'SupportTermsAndConditions'}
+        name="SupportTermsAndConditions"
         component={TermsAndConditions}
         options={{title: '개인정보처리방침'}}
       />

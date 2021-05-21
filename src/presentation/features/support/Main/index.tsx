@@ -26,7 +26,7 @@ export default function Main({navigation}: Props) {
       <SupportOption.Item
         icon={['message-square', Feather]}
         title="1:1 문의"
-        navigationDestination="SupportAskAndAnswers"
+        navigationDestination="SupportDirectInquiry"
       />
       <SupportOption.Item
         icon={['archive', Feather]}

@@ -3,21 +3,21 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import Ask from './Ask';
 import Main from './Main';
 import Notices from './Notices';
 import Contacts from './Contacts';
 import ServiceHelp from './ServiceManual';
+import DirectInquiry from './DirectInquery';
 import FrequentQuestions from './FrequentQuestions';
-import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import TermsAndConditions from './TermsAndConditions';
+import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
   SupportNotices: undefined;
   SupportContacts: undefined;
   SupportServiceManual: undefined;
-  SupportAskAndAnswers: undefined;
+  SupportDirectInquiry: undefined;
   SupportFrequentQuestions: undefined;
   SupportTermsAndConditions: undefined;
 };
@@ -50,8 +50,8 @@ export default function SupportScreen() {
         options={{title: '공지'}}
       />
       <Stack.Screen
-        name="SupportAskAndAnswers"
-        component={Ask}
+        name="SupportDirectInquiry"
+        component={DirectInquiry}
         options={{title: '1:1 문의'}}
       />
       <Stack.Screen

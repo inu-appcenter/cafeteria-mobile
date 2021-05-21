@@ -43,14 +43,14 @@ function LoginScreen() {
           {...PaperPresets.idTextInput}
           style={styles.input}
           label="학번"
-          onChangeText={text => setId(text)}
+          onChangeText={setId}
           autoFocus={true}
         />
         <ClearableTextInput
           {...PaperPresets.passwordTextInput}
           style={styles.input}
           label="비밀번호"
-          onChangeText={text => setPassword(text)}
+          onChangeText={setPassword}
           onSubmitEditing={() => login()}
         />
         <Button

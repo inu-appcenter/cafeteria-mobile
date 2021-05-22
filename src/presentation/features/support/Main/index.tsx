@@ -47,7 +47,7 @@ function Main({navigation}: Props) {
   const termsAndServices = (
     <SupportOption.Section navigation={navigation}>
       <SupportOption.Item
-        icon={['info', Feather]}
+        icon={['help-circle', Feather]}
         title="서비스 이용 안내"
         navigationDestination="SupportServiceManual"
       />
@@ -55,6 +55,11 @@ function Main({navigation}: Props) {
         icon={['file-text', Feather]}
         title="개인정보처리방침"
         navigationDestination="SupportTermsAndConditions"
+      />
+      <SupportOption.Item
+        icon={['info', Feather]}
+        title="오픈소스 라이선스"
+        navigationDestination="SupportOpenSourceLicenses"
       />
     </SupportOption.Section>
   );

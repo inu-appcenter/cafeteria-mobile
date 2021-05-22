@@ -12,5 +12,6 @@ export default {
     serviceManual: 'https://web.inu-cafeteria.app/manual',
     termsAndConditions:
       'https://raw.githubusercontent.com/inu-appcenter/terms-and-conditions/master/카페테리아-개인정보처리방침.txt',
+    ossNotices: 'https://web.inu-cafeteria.app/oss-notices/index.txt',
   },
 };

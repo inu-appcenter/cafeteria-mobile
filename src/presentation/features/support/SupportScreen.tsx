@@ -11,6 +11,7 @@ import DirectInquiry from './DirectInquery';
 import FrequentQuestions from './FrequentQuestions';
 import TermsAndConditions from './TermsAndConditions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
+import OpenSourceLicenses from './OpenSourceLicenses';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
@@ -20,6 +21,7 @@ export type SupportNavigationParams = {
   SupportDirectInquiry: undefined;
   SupportFrequentQuestions: undefined;
   SupportTermsAndConditions: undefined;
+  SupportOpenSourceLicenses: undefined;
 };
 
 export type SupportMainNavigation = StackNavigationProp<
@@ -68,6 +70,11 @@ export default function SupportScreen() {
         name="SupportTermsAndConditions"
         component={TermsAndConditions}
         options={{title: '개인정보처리방침'}}
+      />
+      <Stack.Screen
+        name="SupportOpenSourceLicenses"
+        component={OpenSourceLicenses}
+        options={{title: '오픈소스 라이선스'}}
       />
     </Stack.Navigator>
   );

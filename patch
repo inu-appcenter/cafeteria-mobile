@@ -1,0 +1,11 @@
+#!/bin/bash
+
+command='npm version patch -m "chore(release): v%s"'
+
+printf "This will execute the following command:\n"
+printf "\n\t%s\n\n" "$command"
+printf "Press any key to proceed..."
+
+read
+
+$command

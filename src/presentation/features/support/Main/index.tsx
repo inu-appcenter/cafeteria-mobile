@@ -8,6 +8,7 @@ import SupportOption from './SupportOption';
 import ItemSeparator from '../../../components/ItemSeparator';
 import ContactsButton from './ContactsButton';
 import {SupportMainNavigation} from '../SupportScreen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScrollView, StyleSheet, View} from 'react-native';
 
 type Props = {
@@ -28,29 +29,39 @@ function Main({navigation}: Props) {
     />
   );
 
-  const generalSupportOptions = (
+  const general = (
     <SupportOption.Section navigation={navigation}>
       <SupportOption.Item
         icon={['notification', AntDesign]}
         title="공지"
         navigationDestination="SupportNotices"
       />
+      <SupportOption.Item
+        icon={['code-braces', MaterialCommunityIcons]}
+        title="버전"
+        navigationDestination="SupportVersion"
+      />
+    </SupportOption.Section>
+  );
+
+  const support = (
+    <SupportOption.Section navigation={navigation}>
       {isLoggedIn ? directInquiryOption : null}
       <SupportOption.Item
         icon={['archive', Feather]}
         title="자주 묻는 질문"
         navigationDestination="SupportFrequentQuestions"
       />
-    </SupportOption.Section>
-  );
-
-  const termsAndServices = (
-    <SupportOption.Section navigation={navigation}>
       <SupportOption.Item
         icon={['help-circle', Feather]}
         title="서비스 이용 안내"
         navigationDestination="SupportServiceManual"
       />
+    </SupportOption.Section>
+  );
+
+  const terms = (
+    <SupportOption.Section navigation={navigation}>
       <SupportOption.Item
         icon={['file-text', Feather]}
         title="개인정보처리방침"
@@ -68,9 +79,11 @@ function Main({navigation}: Props) {
     <ScrollView style={palette.whiteBackground}>
       <View style={styles.container}>
         {contacts}
-        {generalSupportOptions}
+        {general}
         {separator}
-        {termsAndServices}
+        {support}
+        {separator}
+        {terms}
         {separator}
       </View>
     </ScrollView>

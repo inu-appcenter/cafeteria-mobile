@@ -12,10 +12,12 @@ import FrequentQuestions from './FrequentQuestions';
 import TermsAndConditions from './TermsAndConditions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import OpenSourceLicenses from './OpenSourceLicenses';
+import Version from './Version';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
   SupportNotices: undefined;
+  SupportVersion: undefined;
   SupportContacts: undefined;
   SupportServiceManual: undefined;
   SupportDirectInquiry: undefined;
@@ -50,6 +52,11 @@ export default function SupportScreen() {
         name="SupportNotices"
         component={Notices}
         options={{title: '공지'}}
+      />
+      <Stack.Screen
+        name="SupportVersion"
+        component={Version}
+        options={{title: '버전'}}
       />
       <Stack.Screen
         name="SupportDirectInquiry"

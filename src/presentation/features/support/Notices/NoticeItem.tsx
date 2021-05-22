@@ -15,9 +15,9 @@ export default function NoticeItem({notice}: Props) {
   const toggleExpanded = () => setExpanded(!expanded);
 
   const chevron = expanded ? (
-    <Icons name={'chevron-up'} size={20} color={colors.textTertiary} />
+    <Icons name={'chevron-up'} size={20} color={colors.textSecondary} />
   ) : (
-    <Icons name={'chevron-down'} size={20} color={colors.textTertiary} />
+    <Icons name={'chevron-down'} size={20} color={colors.textSecondary} />
   );
 
   const titleArea = (
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   textDate: {
-    ...palette.textTertiary,
+    ...palette.textSubSecondary,
   },
   textTitle: {
     ...palette.textPrimary,
@@ -69,7 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.grayishWhite,
   },
   bodyText: {
-    ...palette.textPrimary,
-    fontSize: 14,
+    ...palette.textSubPrimary,
   },
 });

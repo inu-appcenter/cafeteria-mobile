@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react';
-import {FlatList, Text, View} from 'react-native';
 import useApi from '../../../../hooks/useApi';
+import palette from '../../../../res/palette';
 import useStores from '../../../../hooks/useStores';
-import handleApiError from '../../../../../common/utils/handleApiError';
+import {FlatList} from 'react-native';
 import LoadingView from '../../../../components/LoadingView';
+import InquiryItem from './InquiryItem';
+import ItemSeparator from '../../../../components/ItemSeparator';
+import handleApiError from '../../../../../common/utils/handleApiError';
+import React, {useEffect} from 'react';
+import {observer} from 'mobx-react';
 
-export default function History() {
+function History() {
   const {directInquiryStore} = useStores();
 
   const [loading, fetch] = useApi(() => directInquiryStore.fetchHistories());
@@ -22,14 +26,14 @@ export default function History() {
 
   const content = (
     <FlatList
+      style={palette.whiteBackground}
       data={directInquiryStore.histories}
-      renderItem={() => (
-        <View>
-          <Text>dehuj</Text>
-        </View>
-      )}
+      renderItem={i => <InquiryItem inquiry={i.item} />}
+      ItemSeparatorComponent={ItemSeparator}
     />
   );
 
   return loading ? loadingView : content;
 }
+
+export default observer(History);

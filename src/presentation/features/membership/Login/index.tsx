@@ -25,6 +25,10 @@ function Login() {
   };
 
   const login = async () => {
+    if (loading) {
+      return;
+    }
+
     if (!formValid()) {
       return;
     }
@@ -41,6 +45,7 @@ function Login() {
       <ScrollView contentContainerStyle={palette.horizontalSpace}>
         <ClearableTextInput
           {...PaperPresets.idTextInput}
+          value={id}
           style={styles.input}
           label="학번"
           onChangeText={setId}
@@ -48,17 +53,18 @@ function Login() {
         />
         <ClearableTextInput
           {...PaperPresets.passwordTextInput}
+          value={password}
           style={styles.input}
           label="비밀번호"
           onChangeText={setPassword}
           onSubmitEditing={() => login()}
         />
         <Button
-          loading={loading}
           {...PaperPresets.wideThemedButton}
           style={styles.button}
+          loading={loading}
           disabled={!formValid()}
-          onPress={() => login()}>
+          onPress={login}>
           로그인
         </Button>
         <Text style={styles.text}>

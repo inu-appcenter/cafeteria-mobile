@@ -12,10 +12,12 @@ export default class DirectInquiryRepository {
     ask: `${Config.baseUrl}/ask`,
     answers: `${Config.baseUrl}/answers`,
     questions: `${Config.baseUrl}/questions`,
+    markAnswerRead: (answerId: number) =>
+      `${Config.baseUrl}/markAnswerRead/${answerId}`,
   };
 
-  async ask(content: string) {
-    await axios.post(this.url.ask);
+  async ask(deviceInfo: string, version: string, content: string) {
+    await axios.post(this.url.ask, {deviceInfo, version, content});
   }
 
   private async fetchQuestions() {
@@ -31,6 +33,10 @@ export default class DirectInquiryRepository {
       await this.fetchQuestions(),
       await this.fetchAnswers(),
     ).reduce();
+  }
+
+  async markAnswerRead(answerId: number) {
+    await axios.post(this.url.markAnswerRead(answerId));
   }
 }
 

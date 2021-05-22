@@ -1,6 +1,8 @@
-import QuestionWithAnswerView from './QuestionWithAnswerView';
+import MakeInquiry from '../../../../domain/usecases/MakeInquiry';
+import MarkAnswerRead from '../../../../domain/usecases/MarkAnswerRead';
+import GetInquiryHistories from '../../../../domain/usecases/GetInquiryHistories';
 import {makeAutoObservable} from 'mobx';
-import GetInquiryHistories from '../../../../domain/entities/GetInquiryHistories';
+import QuestionWithAnswerView from './QuestionWithAnswerView';
 
 export default class DirectInquiryStore {
   private _histories: QuestionWithAnswerView[] = [];
@@ -23,5 +25,11 @@ export default class DirectInquiryStore {
     );
   }
 
-  async ask(content: string) {}
+  async ask(content: string) {
+    await MakeInquiry.run({content});
+  }
+
+  async markAnswerRead(answerId: number) {
+    await MarkAnswerRead.run({answerId});
+  }
 }

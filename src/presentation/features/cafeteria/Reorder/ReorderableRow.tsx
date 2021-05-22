@@ -17,16 +17,17 @@ export default function ReorderableRow({
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: 24,
-      paddingVertical: 16,
+      padding: 16,
     },
   });
 
   return (
     <TouchableWithoutFeedback onLongPress={drag} delayLongPress={50}>
       <View style={computedStyles.rowContainer}>
-        <Text style={palette.textHeader}>{item.displayName}</Text>
-        <Icon name="menu" size={24} />
+        <Text style={[palette.textPrimary, palette.boldText]}>
+          {item.displayName}
+        </Text>
+        <Icon name="menu" size={24} color={colors.textSecondary} />
       </View>
     </TouchableWithoutFeedback>
   );

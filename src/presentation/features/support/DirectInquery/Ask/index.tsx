@@ -1,17 +1,44 @@
 import colors from '../../../../res/colors';
+import useApi from '../../../../hooks/useApi';
+import notify from '../../../../components/utils/notify';
 import palette from '../../../../res/palette';
 import {Button} from 'react-native-paper';
+import useStores from '../../../../hooks/useStores';
 import PaperPresets from '../../../../components/utils/PaperPresets';
+import handleApiError from '../../../../../common/utils/handleApiError';
 import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
 export default function Ask() {
+  const {directInquiryStore} = useStores();
+
   const [content, setContent] = useState('');
+
+  const [loading, ask] = useApi(() => directInquiryStore.ask(content));
+  const [, fetchHistories] = useApi(() => directInquiryStore.fetchHistories());
+
+  const submitQuestion = async () => {
+    if (loading) {
+      return;
+    }
+
+    try {
+      await ask();
+      notify('문의가 접수되었습니다.');
+      setContent('');
+
+      // 문의 직후에는 지난 문의 내역을 업데이트해 줍니다.
+      await fetchHistories();
+    } catch (e) {
+      handleApiError(e);
+    }
+  };
 
   return (
     <ScrollView style={palette.whiteBackground}>
       <View>
         <TextInput
+          value={content}
           style={styles.input}
           onChangeText={setContent}
           multiline={true}
@@ -22,8 +49,10 @@ export default function Ask() {
         />
         <Button
           {...PaperPresets.wideThemedButton}
-          disabled={content.length <= 0}
-          style={styles.button}>
+          style={styles.button}
+          onPress={submitQuestion}
+          loading={loading}
+          disabled={content.length <= 0}>
           문의하기
         </Button>
       </View>
@@ -36,7 +65,7 @@ const styles = StyleSheet.create({
     ...palette.textPrimary,
     height: 200,
     margin: 16,
-    paddingTop: 12, // paddingVertical은 안되고 paddingTop + paddingBottom은 된다!
+    paddingTop: 12, // paddingVertical은 안되고 paddingTop + paddingBottom은 된다! 왜냐? multiline이라서..
     paddingBottom: 12,
     paddingHorizontal: 12,
     textAlignVertical: 'top',

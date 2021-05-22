@@ -42,9 +42,17 @@ const palette = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 16,
   },
+  textSubPrimary: {
+    color: colors.textPrimary,
+    fontSize: 14,
+  },
   textSecondary: {
     color: colors.textSecondary,
     fontSize: 14,
+  },
+  textSubSecondary: {
+    color: colors.textSecondary,
+    fontSize: 12,
   },
   textTertiary: {
     color: colors.textTertiary,

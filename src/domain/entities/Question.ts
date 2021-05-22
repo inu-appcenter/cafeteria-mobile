@@ -8,7 +8,7 @@ export default class Question {
   @Expose()
   content: string = '';
 
-  @Expose({name: 'create-at'})
+  @Expose({name: 'created-at'})
   createdAt: number = 0;
 
   answer?: Answer = undefined;

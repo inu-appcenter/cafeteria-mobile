@@ -10,6 +10,7 @@ import DraggableFlatList, {
 import React, {useCallback, useEffect} from 'react';
 
 import ReorderableRow from './ReorderableRow';
+import ItemSeparator from '../../../components/ItemSeparator';
 
 LogBox.ignoreLogs(['ReactNativeFiberHostComponent']);
 
@@ -33,6 +34,7 @@ function ReorderScreen() {
       onDragEnd={({data}) => cafeteriaStore.setOrders(data.map(c => c.id))}
       renderItem={renderItem}
       keyExtractor={item => item.id.toString()}
+      ItemSeparatorComponent={ItemSeparator}
     />
   );
 }

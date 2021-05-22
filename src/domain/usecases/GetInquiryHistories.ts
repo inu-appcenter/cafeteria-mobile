@@ -1,5 +1,5 @@
-import UseCase from '../usecases/UseCase';
-import Question from './Question';
+import UseCase from './UseCase';
+import Question from '../entities/Question';
 import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
 
 class GetInquiryHistories extends UseCase<void, Question[]> {

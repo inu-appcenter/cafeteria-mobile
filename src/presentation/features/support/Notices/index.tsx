@@ -12,10 +12,10 @@ export default function Notices() {
 
   return (
     <FlatList
-      style={palette.whiteBackground}
       data={noticeStore.notices}
+      style={palette.whiteBackground}
       renderItem={i => <NoticeItem notice={i.item} />}
-      ItemSeparatorComponent={() => <ItemSeparator />}
+      ItemSeparatorComponent={ItemSeparator}
     />
   );
 }

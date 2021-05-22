@@ -1,11 +1,11 @@
-import colors from '../../../../res/colors';
+import palette from '../../../../res/palette';
 import MenuView from '../../MenuView';
 import Touchable from '../../../../components/Touchable';
 import React, {useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 
 const images = [
-  null,
+  null, // 0번 인덱스는 버립니다! 1부터 7까지만 써요.
   require('../../../../res/images/available_1.png'),
   require('../../../../res/images/available_2.png'),
   require('../../../../res/images/available_3.png'),
@@ -41,7 +41,7 @@ export default function MenuItem({menu}: Props) {
           {/* Foods */}
           <Text
             numberOfLines={lines}
-            ellipsizeMode={'tail'}
+            ellipsizeMode="tail"
             style={styles.foodsText}>
             {menu.foodsText}
           </Text>
@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
   },
 
   foodsText: {
-    color: colors.textPrimary,
-    fontSize: 14,
+    ...palette.textSubPrimary,
     fontWeight: 'bold',
   },
 
@@ -89,7 +88,6 @@ const styles = StyleSheet.create({
   },
 
   metadataText: {
-    color: colors.textSecondary,
-    fontSize: 14,
+    ...palette.textSecondary,
   },
 });

@@ -1,5 +1,6 @@
 import UseCase from './UseCase';
 import DeviceInfo from 'react-native-device-info';
+import PackageInfo from '../../common/PackageInfo';
 import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
 
 type Params = {
@@ -15,7 +16,7 @@ class MakeInquiry extends UseCase<Params, void> {
 
   async onExecute(params: Params): Promise<void> {
     const deviceInfo = `${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}; ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`;
-    const version = '0.1.0'; // TODO 버저닝 어케하지..
+    const version = PackageInfo.version;
 
     await this.directInquiryRepository.ask(deviceInfo, version, params.content);
   }

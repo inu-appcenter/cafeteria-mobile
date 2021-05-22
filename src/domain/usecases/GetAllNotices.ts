@@ -1,6 +1,7 @@
 import Notice from '../entities/Notice';
 import UseCase from './UseCase';
 import {Platform} from 'react-native';
+import PackageInfo from '../../common/PackageInfo';
 import NoticeRepository from '../../data/repositories/NoticeRepository';
 
 class GetAllNotices extends UseCase<void, Notice[]> {
@@ -11,7 +12,7 @@ class GetAllNotices extends UseCase<void, Notice[]> {
   async onExecute(params: void): Promise<Notice[]> {
     return this.noticeRepository.getAllNotices({
       os: Platform.OS,
-      appVersion: '0.1.0', // TODO 진짜 버전을 알아내보자! 이건 버저닝 틀 잡히면 하자!
+      appVersion: PackageInfo.version,
     });
   }
 }

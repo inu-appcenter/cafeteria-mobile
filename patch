@@ -8,4 +8,4 @@ printf "Press any key to proceed..."
 
 read
 
-$command
+eval $command

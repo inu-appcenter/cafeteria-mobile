@@ -37,10 +37,6 @@ export default class UserStore {
 
   constructor() {
     makeAutoObservable(this);
-
-    this.tryRememberedLoginIfAvailable().catch(e =>
-      console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`),
-    );
   }
 
   async login(id: string, password: string) {

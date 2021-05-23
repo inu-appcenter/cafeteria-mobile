@@ -15,7 +15,7 @@ function History() {
   const [loading, fetch] = useApi(() => directInquiryStore.fetchHistories());
 
   const fetchHistories = () => {
-    fetch().catch(e => handleApiError(e));
+    fetch().catch(handleApiError);
   };
 
   useEffect(() => {

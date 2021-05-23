@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">cafeteria</string>
+    <string name="description_splashscreen">This is a splash logo</string>
 </resources>

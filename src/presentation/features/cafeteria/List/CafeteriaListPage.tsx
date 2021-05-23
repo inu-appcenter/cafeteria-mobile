@@ -31,7 +31,7 @@ function CafeteriaListPage({route, navigation}: Props) {
     cafeteriaStore.fetchCafeteriaWithMenusPerDay(dateOffset),
   );
 
-  const fetch = () => invoke().catch(e => handleApiError(e));
+  const fetch = () => invoke().catch(handleApiError);
 
   useEffect(() => {
     fetch();

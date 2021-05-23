@@ -25,26 +25,27 @@ export default class NoticeStore {
 
   constructor() {
     makeAutoObservable(this);
-
-    this.fetch().catch(e => handleApiError(e));
   }
 
   async fetch() {
-    await this.fetchNotices();
-    await sleep(500);
-    await this.fetchOneNewNotice();
+    await Promise.all([this.fetchNotices(), this.fetchOneNewNotice()]);
   }
 
   private async fetchNotices() {
     const notices = await GetAllNotices.run();
+
     this.notices = notices.map(n => NoticeView.fromNotice(n));
   }
 
   private async fetchOneNewNotice() {
     const newNotice = await GetNewNotice.run();
-    this.currentNotice = newNotice
-      ? NoticeView.fromNotice(newNotice)
-      : undefined;
+    if (newNotice === undefined) {
+      return;
+    }
+
+    setTimeout(() => {
+      this.currentNotice = NoticeView.fromNotice(newNotice);
+    }, 500);
   }
 
   async dismissCurrentNotice() {

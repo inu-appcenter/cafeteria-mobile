@@ -69,7 +69,7 @@ export default function InquiryItem({inquiry}: Props) {
     if (!answerRead && inquiry.answer !== undefined) {
       directInquiryStore
         .markAnswerRead(inquiry.answer.id)
-        .catch(e => handleApiError(e));
+        .catch(handleApiError);
 
       // 위 요청이 성공했든 아니든 일단 컴포넌트에서는 답변을 읽은 것으로 시각적 피드백을 줍니다.
       setAnswerRead(true);

@@ -10,4 +10,11 @@ export default class RootStore {
   cafeteriaStore = new CafeteriaStore();
   membershipStore = new MembershipStore();
   directInquiryStore = new DirectInquiryStore();
+
+  async init() {
+    await Promise.all([
+      this.userStore.tryRememberedLoginIfAvailable(),
+      this.noticeStore.fetch(),
+    ]);
+  }
 }

@@ -11,10 +11,18 @@ export default class RootStore {
   membershipStore = new MembershipStore();
   directInquiryStore = new DirectInquiryStore();
 
+  private initialized = false;
+
   async init() {
+    if (this.initialized) {
+      return;
+    }
+
     await Promise.all([
       this.noticeStore.fetch(),
       this.userStore.tryRememberedLoginSilentlyIfAvailable(),
     ]);
+
+    this.initialized = true;
   }
 }

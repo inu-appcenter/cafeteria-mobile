@@ -29,9 +29,9 @@ export default function App() {
     <StoreProvider store={rootStore}>
       <NavigationContainer>
         <StatusBar
+          barStyle={'dark-content'}
           translucent={false}
           backgroundColor={colors.white}
-          barStyle={'dark-content'}
         />
         <Main />
       </NavigationContainer>

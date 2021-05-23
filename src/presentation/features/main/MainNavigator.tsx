@@ -1,15 +1,15 @@
 import React from 'react';
 import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import SupportScreen from '../support/SupportScreen';
 import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
 import MembershipScreen from '../membership/MembershipScreen';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import tabBarIconSelector, {
   IconConfigs,
 } from '../../components/utils/tabBarIconSelector';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {StyleSheet} from 'react-native';
 
 const icons: IconConfigs = {
   Cafeteria: ['restaurant', 'restaurant', MaterialIcons],

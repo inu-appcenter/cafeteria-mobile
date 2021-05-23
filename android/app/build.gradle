@@ -67,8 +67,7 @@ project.ext.react = [
     // override which node gets called and with what additional arguments
     nodeExecutableAndArgs: ["node"],
 
-    // Enable hermes in order to use Reanimated2.
-    enableHermes         : true
+    enableHermes         : false
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"

@@ -77,7 +77,7 @@ function Main({navigation}: Props) {
 
   return (
     <ScrollView style={palette.whiteBackground}>
-      <View style={styles.container}>
+      <View>
         {contacts}
         {general}
         {separator}
@@ -91,11 +91,3 @@ function Main({navigation}: Props) {
 }
 
 export default observer(Main);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-});

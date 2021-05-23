@@ -93,9 +93,8 @@ export default observer(Barcode);
 const styles = StyleSheet.create({
   cardViewContainer: {
     margin: 22,
-    flex: 1,
-    flexDirection: 'column',
     borderRadius: 18,
+    flexDirection: 'column',
   },
   header: {
     alignItems: 'center',

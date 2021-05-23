@@ -44,6 +44,7 @@
     "@babel/core": "^7.12.9",
     "@babel/plugin-proposal-decorators": "^7.13.15",
     "@babel/runtime": "^7.12.5",
+    "@bam.tech/react-native-make": "^3.0.3",
     "@react-native-community/eslint-config": "^2.0.0",
     "@types/axios": "^0.14.0",
     "@types/jest": "^26.0.20",

@@ -20,7 +20,7 @@ export default function DirectInquiry() {
         style: styles.tabBar,
         labelStyle: styles.label,
         indicatorStyle: styles.indicator,
-        activeTintColor: colors.mainTint,
+        activeTintColor: colors.textPrimary,
         inactiveTintColor: colors.textDisabled,
       }}>
       <Tab.Screen
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 0,
   },
   indicator: {
-    backgroundColor: colors.mainTint,
+    backgroundColor: colors.textPrimary,
     borderRadius: 1,
   },
 });

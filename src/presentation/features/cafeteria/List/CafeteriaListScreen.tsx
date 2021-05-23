@@ -29,7 +29,7 @@ export default function CafeteriaListScreen() {
         tabStyle: styles.tab,
         labelStyle: styles.label,
         indicatorStyle: styles.indicator,
-        activeTintColor: colors.mainTint,
+        activeTintColor: colors.textPrimary,
         inactiveTintColor: colors.textDisabled,
       }}>
       <Tab.Screen
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
       numberOfTabs: 5,
       marginHorizontal: 16,
     }),
-    backgroundColor: colors.mainTint,
+    backgroundColor: colors.textPrimary,
     borderRadius: 1,
   },
 });

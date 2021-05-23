@@ -6,12 +6,12 @@ export default {
   black: '#000000',
   transparent: '#00000000',
 
-  mainTint: '#40c482',
+  mainTint: '#3DB4F4',
 
   textPrimary: '#262B31',
   textSecondary: '#70808D',
-  textTertiary: '#B7B9C0',
-  textDisabled: '#808080',
+  textTertiary: '#A5A7AD',
+  textDisabled: '#A5A7AD',
 
   rippleColorLight: '#00000020',
   rippleColorDark: '#FFFFFF40',

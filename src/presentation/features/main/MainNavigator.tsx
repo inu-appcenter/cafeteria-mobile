@@ -9,6 +9,7 @@ import tabBarIconSelector, {
   IconConfigs,
 } from '../../components/utils/tabBarIconSelector';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {StyleSheet} from 'react-native';
 
 const icons: IconConfigs = {
   Cafeteria: ['restaurant', 'restaurant', MaterialIcons],
@@ -22,7 +23,9 @@ export default function MainNavigator() {
   return (
     <BottomTab.Navigator
       tabBarOptions={{
-        activeTintColor: colors.mainTint,
+        activeTintColor: colors.textPrimary,
+        inactiveTintColor: colors.textDisabled,
+        labelStyle: styles.tabBarLabel,
       }}
       screenOptions={({route}) => ({
         tabBarIcon: tabBarIconSelector(icons, route.name),
@@ -45,3 +48,9 @@ export default function MainNavigator() {
     </BottomTab.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  tabBarLabel: {
+    fontSize: 12,
+  },
+});

@@ -1,8 +1,8 @@
+import Page from './Page';
 import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import {StyleSheet} from 'react-native';
-import CafeteriaListPage from './CafeteriaListPage';
 import createIndicatorStyle from '../../../components/utils/createIndicatorStyle';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
@@ -18,7 +18,7 @@ export type CafeteriaDateTabNavigationParams = {
   DateTab5: DateTabParams;
 };
 
-export default function CafeteriaListScreen() {
+export default function List() {
   const Tab = createMaterialTopTabNavigator<CafeteriaDateTabNavigationParams>();
 
   return (
@@ -34,31 +34,31 @@ export default function CafeteriaListScreen() {
       }}>
       <Tab.Screen
         name="DateTab1"
-        component={CafeteriaListPage}
+        component={Page}
         options={{title: '오늘'}}
         initialParams={{dateOffset: +0}}
       />
       <Tab.Screen
         name="DateTab2"
-        component={CafeteriaListPage}
+        component={Page}
         options={{title: '내일'}}
         initialParams={{dateOffset: +1}}
       />
       <Tab.Screen
         name="DateTab3"
-        component={CafeteriaListPage}
+        component={Page}
         options={{title: '모레'}}
         initialParams={{dateOffset: +2}}
       />
       <Tab.Screen
         name="DateTab4"
-        component={CafeteriaListPage}
+        component={Page}
         options={{title: '글피'}}
         initialParams={{dateOffset: +3}}
       />
       <Tab.Screen
         name="DateTab5"
-        component={CafeteriaListPage}
+        component={Page}
         options={{title: '그글피'}}
         initialParams={{dateOffset: +4}}
       />

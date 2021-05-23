@@ -1,9 +1,6 @@
-import React from 'react';
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
 import Main from './Main';
+import React from 'react';
+import Version from './Version';
 import Notices from './Notices';
 import Contacts from './Contacts';
 import ServiceHelp from './ServiceManual';
@@ -12,7 +9,10 @@ import FrequentQuestions from './FrequentQuestions';
 import TermsAndConditions from './TermsAndConditions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import OpenSourceLicenses from './OpenSourceLicenses';
-import Version from './Version';
+import {
+  createStackNavigator,
+  StackNavigationProp,
+} from '@react-navigation/stack';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;

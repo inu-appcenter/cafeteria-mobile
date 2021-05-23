@@ -14,7 +14,7 @@ type Props = {
   >;
 };
 
-export default function CafeteriaDetailScreen({route, navigation}: Props) {
+export default function Detail({route, navigation}: Props) {
   const {cafeteria} = route.params;
 
   useEffect(() => {

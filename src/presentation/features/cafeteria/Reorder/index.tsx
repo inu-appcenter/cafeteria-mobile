@@ -3,18 +3,17 @@ import palette from '../../../res/palette';
 import {LogBox} from 'react-native';
 import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
+import ItemSeparator from '../../../components/ItemSeparator';
 import CafeteriaView from '../CafeteriaView';
+import ReorderableRow from './ReorderableRow';
+import React, {useCallback, useEffect} from 'react';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-import React, {useCallback, useEffect} from 'react';
-
-import ReorderableRow from './ReorderableRow';
-import ItemSeparator from '../../../components/ItemSeparator';
 
 LogBox.ignoreLogs(['ReactNativeFiberHostComponent']);
 
-function ReorderScreen() {
+function Reorder() {
   const {cafeteriaStore} = useStores();
   const [, fetch] = useApi(() => cafeteriaStore.fetchCafeteria());
 
@@ -39,4 +38,4 @@ function ReorderScreen() {
   );
 }
 
-export default observer(ReorderScreen);
+export default observer(Reorder);

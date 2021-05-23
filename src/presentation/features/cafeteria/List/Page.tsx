@@ -11,7 +11,7 @@ import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Animated, StyleSheet} from 'react-native';
 import {MaterialTopTabNavigationProp} from '@react-navigation/material-top-tabs';
-import {CafeteriaDateTabNavigationParams} from './CafeteriaListScreen';
+import {CafeteriaDateTabNavigationParams} from './';
 import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
   >;
 };
 
-function CafeteriaListPage({route, navigation}: Props) {
+function Page({route, navigation}: Props) {
   const {dateOffset} = route.params;
   const {cafeteriaStore} = useStores();
   const data = cafeteriaStore.getCafeteriaWithMenus(dateOffset);
@@ -75,7 +75,7 @@ function CafeteriaListPage({route, navigation}: Props) {
   }
 }
 
-export default observer(CafeteriaListPage);
+export default observer(Page);
 
 const styles = StyleSheet.create({
   rootListContentContainer: {

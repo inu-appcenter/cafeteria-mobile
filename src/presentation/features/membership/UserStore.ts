@@ -50,7 +50,7 @@ export default class UserStore {
     }
   }
 
-  async tryRememberedLoginIfAvailable() {
+  async tryRememberedLoginSilentlyIfAvailable() {
     const savedUserInfo = await GetUser.run();
     if (savedUserInfo === undefined) {
       return;
@@ -64,7 +64,8 @@ export default class UserStore {
       await this.onLoginSuccess();
     } catch (e) {
       await this.onLoginFail();
-      throw e;
+      console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`);
+      // 여기서는 throw 하지 않습니다! 되면 좋고 안되면 그냥 안된거임!
     } finally {
       this.isTryingRememberedLogin = false;
     }

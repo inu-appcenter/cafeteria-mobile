@@ -23,6 +23,7 @@ export default class Touchable extends React.Component<TouchableWithoutFeedbackP
           background={ripple}
           useForeground={true}
           {...this.props}
+          style={{}}
         />
       );
     } else {

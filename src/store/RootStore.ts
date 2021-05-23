@@ -13,7 +13,7 @@ export default class RootStore {
 
   async init() {
     await Promise.all([
-      this.userStore.tryRememberedLoginIfAvailable(),
+      this.userStore.tryRememberedLoginSilentlyIfAvailable(),
       this.noticeStore.fetch(),
     ]);
   }

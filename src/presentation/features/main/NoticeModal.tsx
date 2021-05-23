@@ -6,7 +6,7 @@ import {Button} from 'react-native-paper';
 import useStores from '../../hooks/useStores';
 import {observer} from 'mobx-react';
 import PaperPresets from '../../components/utils/PaperPresets';
-import {StyleSheet, Text, View} from 'react-native';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 function NoticeModal() {
   const {noticeStore} = useStores();
@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
   buttonLabel: {
     color: 'white',
     fontSize: 16,
-    paddingBottom: 34,
+    paddingBottom: Platform.OS === 'ios' ? 34 : 0,
   },
 });

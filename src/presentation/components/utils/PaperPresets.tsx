@@ -1,7 +1,8 @@
 import colors from '../../res/colors';
-import {Button, TextInput} from 'react-native-paper';
+import {Button} from 'react-native-paper';
+import {PaperTextInputPropsWithoutRef} from './PaperPropTypes';
 
-const commonTextInput: typeof TextInput.defaultProps = {
+const commonTextInput: PaperTextInputPropsWithoutRef = {
   mode: 'outlined',
   theme: {
     colors: {
@@ -12,13 +13,13 @@ const commonTextInput: typeof TextInput.defaultProps = {
   selectionColor: colors.mainTint,
 };
 
-const idTextInput: typeof TextInput.defaultProps = {
+const idTextInput: PaperTextInputPropsWithoutRef = {
   ...commonTextInput,
   returnKeyType: 'next',
   keyboardType: 'number-pad',
 };
 
-const passwordTextInput: typeof TextInput.defaultProps = {
+const passwordTextInput: PaperTextInputPropsWithoutRef = {
   ...commonTextInput,
   returnKeyType: 'go',
   secureTextEntry: true,

@@ -8,8 +8,8 @@ import {observer} from 'mobx-react';
 import PaperPresets from '../../../components/utils/PaperPresets';
 import Unauthorized from '../../../../data/exceptions/Unauthorized';
 import handleApiError from '../../../../common/utils/handleApiError';
-import React, {useState} from 'react';
 import ClearableTextInput from '../../../components/ClearableTextInput';
+import React, {createRef, useState} from 'react';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
 
 function Login() {
@@ -19,6 +19,8 @@ function Login() {
   const [password, setPassword] = useState('');
 
   const [loading, invoke] = useApi(() => userStore.login(id, password));
+
+  const passwordFieldRef = createRef<ClearableTextInput>();
 
   const formValid = () => {
     return id.length > 0 && password.length > 0;
@@ -50,9 +52,11 @@ function Login() {
           label="학번"
           onChangeText={setId}
           autoFocus={true}
+          onSubmitEditing={() => passwordFieldRef.current?.focus()}
         />
         <ClearableTextInput
           {...PaperPresets.passwordTextInput}
+          ref={passwordFieldRef}
           value={password}
           style={styles.input}
           label="비밀번호"

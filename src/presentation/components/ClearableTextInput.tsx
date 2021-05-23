@@ -1,38 +1,60 @@
-import {View} from 'react-native';
+import React from 'react';
 import colors from '../res/colors';
 import {TextInput} from 'react-native-paper';
-import React, {useState} from 'react';
+import {TextInput as NativeTextInput} from 'react-native';
+import {PaperTextInputPropsWithoutRef} from './utils/PaperPropTypes';
 
-export default function ClearableTextInput(
-  props: typeof TextInput.defaultProps,
-) {
-  const [internalValue, setInternalValue] = useState('');
+type Props = PaperTextInputPropsWithoutRef;
 
-  const updateText = (text: string) => {
-    setInternalValue(text);
-    props?.onChangeText?.call(undefined, text);
+type State = {
+  internalValue: string;
+};
+
+export default class ClearableTextInput extends React.Component<Props, State> {
+  state: State = {
+    internalValue: '',
   };
 
-  const valueExists = () => {
-    return internalValue.length > 0;
-  };
+  /**
+   * ClearableTextInput는 외부에 focus 메소드를 제공합니다.
+   * 해당 메소드가 작동하기 위해서는 내부의 TextInput으로 focus 이벤트를 전달해야 하기에
+   * TextInput 객체의 레퍼런스를 보관합니다.
+   */
+  private inputRef = React.createRef<NativeTextInput>();
 
-  const clearButton = valueExists() ? (
-    <TextInput.Icon
-      onPress={() => updateText('')}
-      name={'close'}
-      color={colors.textSecondary}
-    />
-  ) : (
-    <View />
-  );
+  private valueExists() {
+    return this.state.internalValue.length > 0;
+  }
 
-  return (
-    <TextInput
-      {...props}
-      right={clearButton}
-      value={internalValue}
-      onChangeText={newText => updateText(newText)}
-    />
-  );
+  private updateText(text: string) {
+    this.setState({
+      internalValue: text,
+    });
+    this.props?.onChangeText?.call(undefined, text);
+  }
+
+  render() {
+    const clearButton = this.valueExists() ? (
+      <TextInput.Icon
+        onPress={() => this.updateText('')}
+        name={'close'}
+        color={colors.textSecondary}
+      />
+    ) : null;
+
+    return (
+      <TextInput
+        {...this.props}
+        ref={this.inputRef}
+        right={clearButton}
+        value={this.state.internalValue}
+        onChangeText={newText => this.updateText(newText)}
+      />
+    );
+  }
+
+  focus() {
+    // focus 이벤트를 전달합니다.
+    this.inputRef.current?.focus();
+  }
 }

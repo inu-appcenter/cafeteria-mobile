@@ -5,11 +5,11 @@ const commonTextInput: typeof TextInput.defaultProps = {
   mode: 'outlined',
   theme: {
     colors: {
-      primary: colors.themeBlue,
+      primary: colors.mainTint,
       placeholder: colors.textSecondary,
     },
   },
-  selectionColor: colors.themeBlue,
+  selectionColor: colors.mainTint,
 };
 
 const idTextInput: typeof TextInput.defaultProps = {
@@ -38,7 +38,7 @@ const wideThemedButton: typeof Button.defaultProps = {
     padding: 6,
   },
   labelStyle: {color: 'white', fontSize: 16},
-  color: colors.themeBlue,
+  color: colors.mainTint,
   mode: 'contained',
 };
 

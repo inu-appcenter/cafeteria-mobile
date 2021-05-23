@@ -6,10 +6,7 @@ export default {
   black: '#000000',
   transparent: '#00000000',
 
-  themeBlue: '#3DBEF4',
-  uicoopGreen: '',
-  kakaoYellow: '#FEE500',
-  callGreen: '#4CD964',
+  mainTint: '#40c482',
 
   textPrimary: '#262B31',
   textSecondary: '#70808D',

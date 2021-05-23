@@ -16,7 +16,7 @@ export default function LoadingWebView({uri}: Props) {
       startInLoadingState={true}
       renderLoading={() => (
         <View style={styles.container}>
-          <ActivityIndicator size={32} color={colors.themeBlue} />
+          <ActivityIndicator size={32} color={colors.mainTint} />
         </View>
       )}
     />

@@ -44,7 +44,7 @@ export default function Ask() {
           multiline={true}
           autoFocus={true}
           placeholder="문의하실 내용을 입력해 주세요 :)"
-          selectionColor={colors.themeBlue}
+          selectionColor={colors.mainTint}
           placeholderTextColor={colors.textSecondary}
         />
         <Button

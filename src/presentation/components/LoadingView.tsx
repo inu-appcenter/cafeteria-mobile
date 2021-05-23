@@ -7,7 +7,7 @@ import {ActivityIndicator} from 'react-native-paper';
 export default function LoadingView() {
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
-      <ActivityIndicator size={32} color={colors.themeBlue} />
+      <ActivityIndicator size={32} color={colors.mainTint} />
     </View>
   );
 }

@@ -53,7 +53,7 @@ export default function ContactItem({
           palette.textPrimary,
           {color: colors.white, paddingVertical: 4},
         ]}
-        color={colors.themeBlue}
+        color={colors.mainTint}
         onPress={action}
         style={{alignSelf: 'stretch', marginTop: 21}}>
         {buttonText}

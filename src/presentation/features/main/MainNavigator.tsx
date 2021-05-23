@@ -22,7 +22,7 @@ export default function MainNavigator() {
   return (
     <BottomTab.Navigator
       tabBarOptions={{
-        activeTintColor: colors.themeBlue,
+        activeTintColor: colors.mainTint,
       }}
       screenOptions={({route}) => ({
         tabBarIcon: tabBarIconSelector(icons, route.name),

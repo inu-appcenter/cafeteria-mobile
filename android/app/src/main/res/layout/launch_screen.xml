@@ -2,14 +2,16 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/splashprimary">
 
     <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="180dp"
+        android:layout_height="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:contentDescription="@string/description_splashscreen"
         android:scaleType="fitCenter"
-        android:background="@color/splashprimary"
         android:src="@drawable/splashscreen"/>
 
 </RelativeLayout>

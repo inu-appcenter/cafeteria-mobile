@@ -6,9 +6,11 @@ import 'reflect-metadata'; // 이 녀석 위치가 참 중요합니다. 제일 �
 
 import App from './src/presentation/App';
 import setupAxios from './src/common/utils/setupAxios';
-import {AppRegistry} from 'react-native';
 import {name as appName} from './app.json';
+import {AppRegistry, LogBox} from 'react-native';
 
 setupAxios();
+
+LogBox.ignoreLogs(['ReactNativeFiberHostComponent', 'Reanimated 2']);
 
 AppRegistry.registerComponent(appName, () => App);

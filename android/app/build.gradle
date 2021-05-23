@@ -12,10 +12,10 @@ project.ext.react = [
     entryFile            : "index.js",
 
     // https://reactnative.dev/docs/performance#enable-the-ram-format
-    // bundleCommand          : "ram-bundle",
+    bundleCommand          : "ram-bundle",
 
     // supply additional arguments to the packager
-    // extraPackagerArgs      : ["--indexed-ram-bundle"],
+    extraPackagerArgs      : ["--indexed-ram-bundle"],
 
     // whether to bundle JS and assets in debug mode
     bundleInDebug        : false,

@@ -211,7 +211,7 @@ PODS:
     - React-Core
   - react-native-splash-screen (3.2.0):
     - React
-  - react-native-webview (11.6.1):
+  - react-native-webview (11.4.3):
     - React-Core
   - React-perflogger (0.64.0)
   - React-RCTActionSheet (0.64.0):
@@ -476,7 +476,7 @@ SPEC CHECKSUMS:
   react-native-device-brightness: 338996ca3ff740abcdde6eac10844dbf19e636e2
   react-native-safe-area-context: e471852c5ed67eea4b10c5d9d43c1cebae3b231d
   react-native-splash-screen: 200d11d188e2e78cea3ad319964f6142b6384865
-  react-native-webview: 1b16ef457d58598bdf9fc7e473ac251267714b4b
+  react-native-webview: 5d05c17ff4a2075735d72c54acb5317c1737a0f5
   React-perflogger: 9c547d8f06b9bf00cb447f2b75e8d7f19b7e02af
   React-RCTActionSheet: 3080b6e12e0e1a5b313c8c0050699b5c794a1b11
   React-RCTAnimation: 3f96f21a497ae7dabf4d2f150ee43f906aaf516f

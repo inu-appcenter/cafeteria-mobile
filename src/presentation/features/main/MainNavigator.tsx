@@ -1,11 +1,9 @@
 import React from 'react';
 import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {register} from 'react-native-bundle-splitter';
 import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import SupportScreen from '../support/SupportScreen';
-import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
-import MembershipScreen from '../membership/MembershipScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import tabBarIconSelector, {
   IconConfigs,
@@ -32,17 +30,23 @@ export default function MainNavigator() {
       })}>
       <BottomTab.Screen
         name="Cafeteria"
-        component={CafeteriaScreen}
+        component={register({
+          loader: () => import('../cafeteria/CafeteriaScreen'),
+        })}
         options={{title: '식단'}}
       />
       <BottomTab.Screen
         name="Membership"
-        component={MembershipScreen}
+        component={register({
+          loader: () => import('../membership/MembershipScreen'),
+        })}
         options={{title: '할인'}}
       />
       <BottomTab.Screen
         name="Support"
-        component={SupportScreen}
+        component={register({
+          loader: () => import('../support/SupportScreen'),
+        })}
         options={{title: '지원'}}
       />
     </BottomTab.Navigator>

@@ -1,6 +1,5 @@
 import useApi from '../../../hooks/useApi';
 import palette from '../../../res/palette';
-import {LogBox} from 'react-native';
 import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
 import ItemSeparator from '../../../components/ItemSeparator';
@@ -10,8 +9,6 @@ import React, {useCallback, useEffect} from 'react';
 import DraggableFlatList, {
   RenderItemParams,
 } from 'react-native-draggable-flatlist';
-
-LogBox.ignoreLogs(['ReactNativeFiberHostComponent']);
 
 function Reorder() {
   const {cafeteriaStore} = useStores();

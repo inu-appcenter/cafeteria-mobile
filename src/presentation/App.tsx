@@ -10,14 +10,9 @@ import {NavigationContainer} from '@react-navigation/native';
 
 const rootStore = new RootStore();
 
-async function initializeApp() {
-  setTimeout(() => SplashScreen.hide(), 100);
-
-  try {
-    await rootStore.init();
-  } catch (e) {
-    handleApiError(e);
-  }
+function initializeApp() {
+  SplashScreen.hide();
+  rootStore.startInitialization();
 }
 
 export default function App() {

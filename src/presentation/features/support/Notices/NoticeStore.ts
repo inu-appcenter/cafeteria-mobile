@@ -1,9 +1,7 @@
-import sleep from '../../../../common/utils/sleep';
 import NoticeView from './NoticeView';
 import GetNewNotice from '../../../../domain/usecases/GetNewNotice';
 import DismissNotice from '../../../../domain/usecases/DismissNotice';
 import GetAllNotices from '../../../../domain/usecases/GetAllNotices';
-import handleApiError from '../../../../common/utils/handleApiError';
 import {makeAutoObservable} from 'mobx';
 
 export default class NoticeStore {
@@ -27,25 +25,19 @@ export default class NoticeStore {
     makeAutoObservable(this);
   }
 
-  async fetch() {
-    await Promise.all([this.fetchNotices(), this.fetchOneNewNotice()]);
-  }
-
-  private async fetchNotices() {
+  async fetchAllNotices() {
     const notices = await GetAllNotices.run();
 
     this.notices = notices.map(n => NoticeView.fromNotice(n));
   }
 
-  private async fetchOneNewNotice() {
+  async fetchNewNotice() {
     const newNotice = await GetNewNotice.run();
     if (newNotice === undefined) {
       return;
     }
 
-    setTimeout(() => {
-      this.currentNotice = NoticeView.fromNotice(newNotice);
-    }, 500);
+    this.currentNotice = NoticeView.fromNotice(newNotice);
   }
 
   async dismissCurrentNotice() {

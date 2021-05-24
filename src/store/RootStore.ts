@@ -11,18 +11,29 @@ export default class RootStore {
   membershipStore = new MembershipStore();
   directInquiryStore = new DirectInquiryStore();
 
-  private initialized = false;
+  private initializationStarted = false;
 
-  async init() {
-    if (this.initialized) {
+  startInitialization() {
+    if (this.initializationStarted) {
       return;
     }
 
-    await Promise.all([
-      this.noticeStore.fetch(),
-      this.userStore.tryRememberedLoginSilentlyIfAvailable(),
-    ]);
+    this.userStore
+      .rememberedLogin()
+      .catch(e =>
+        console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`),
+      );
 
-    this.initialized = true;
+    setTimeout(
+      () =>
+        this.noticeStore
+          .fetchNewNotice()
+          .catch(e =>
+            console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`),
+          ),
+      500,
+    );
+
+    this.initializationStarted = true;
   }
 }

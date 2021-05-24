@@ -12,6 +12,7 @@ const rootStore = new RootStore();
 
 function initializeApp() {
   SplashScreen.hide();
+
   rootStore.startInitialization();
 }
 

@@ -27,6 +27,7 @@
     "mobx-react": "^7.1.0",
     "moment": "^2.29.1",
     "react": "17.0.1",
+    "react-dom": "^17.0.2",
     "react-native": "0.64.0",
     "react-native-barcode-builder": "^2.0.0",
     "react-native-bundle-splitter": "^2.1.0",
@@ -65,16 +66,5 @@
   },
   "resolutions": {
     "@types/react": "^17"
-  },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "jsx",
-      "json",
-      "node"
-    ]
   }
 }

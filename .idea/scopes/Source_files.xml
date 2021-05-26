@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Source files" pattern="file[cafeteria-mobile]:__tests__/*||file[cafeteria-mobile]:src/*||file[cafeteria-mobile]:scripts/*||file[cafeteria-mobile]:src//*||file:index.js" />
+</component>

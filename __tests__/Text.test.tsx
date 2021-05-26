@@ -17,11 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import App from '../src/presentation/App';
 import React from 'react';
+import {Text} from 'react-native';
 import renderer from 'react-test-renderer';
-import 'react-native';
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+it('renders text correctly', () => {
+  renderer.create(<Text>hello!</Text>);
 });

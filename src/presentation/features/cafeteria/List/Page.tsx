@@ -67,7 +67,7 @@ function Page({route, navigation}: Props) {
     <EmptyView
       whatWentWrong={'서버로부터 식당 목록을 가져오지 못했습니다!'}
       showBorder={false}
-      retry={() => fetch()}
+      retry={fetch}
     />
   );
 

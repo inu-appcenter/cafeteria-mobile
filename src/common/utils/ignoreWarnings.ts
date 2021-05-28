@@ -17,6 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function isHttpRequestSuccessful(statusCode: number) {
-  return statusCode >= 200 && statusCode <= 299;
+import {LogBox} from "react-native";
+
+export default function ignoreWarnings() {
+  LogBox.ignoreLogs(['ReactNativeFiberHostComponent', 'Reanimated 2']);
 }

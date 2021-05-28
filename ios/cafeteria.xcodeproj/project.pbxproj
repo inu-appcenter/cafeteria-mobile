@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2AB8AA562660E0D2000ADA61 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2AB8AA552660E0D2000ADA61 /* AppCenter-Config.plist */; };
 		2ABEE90C265A7A42001D501D /* SplashScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ABEE90B265A7A42001D501D /* SplashScreen.storyboard */; };
 		DCADDE0FBF346C287C261EB9 /* libPods-cafeteria-cafeteriaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F8A7E043F1438196D247609 /* libPods-cafeteria-cafeteriaTests.a */; };
 		ED6F35E606A93D4F84213F59 /* libPods-cafeteria.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BBA7CC4EB632E902D13C693 /* libPods-cafeteria.a */; };
@@ -37,6 +38,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = cafeteria/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = cafeteria/main.m; sourceTree = "<group>"; };
 		1706D53F23CD48028F7683F6 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
+		2AB8AA552660E0D2000ADA61 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "cafeteria/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		2ABEE90B265A7A42001D501D /* SplashScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = SplashScreen.storyboard; path = cafeteria/SplashScreen.storyboard; sourceTree = "<group>"; };
 		2F8A7E043F1438196D247609 /* libPods-cafeteria-cafeteriaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cafeteria-cafeteriaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34C44268151FDD0A2D03DCFB /* Pods-cafeteria.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafeteria.release.xcconfig"; path = "Target Support Files/Pods-cafeteria/Pods-cafeteria.release.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				2AB8AA552660E0D2000ADA61 /* AppCenter-Config.plist */,
 			);
 			name = cafeteria;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				2ABEE90C265A7A42001D501D /* SplashScreen.storyboard in Resources */,
+				2AB8AA562660E0D2000ADA61 /* AppCenter-Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -494,7 +498,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = cafeteria/Info.plist;
@@ -502,6 +506,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 4.3.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -523,13 +528,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 6;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = AANGG4Q668;
 				INFOPLIST_FILE = cafeteria/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 4.3.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

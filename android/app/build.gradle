@@ -25,7 +25,8 @@ project.ext.react = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle" // 이거 추가하래요! -_-
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle" // 폰트
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle" // 코드푸시
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -78,7 +79,7 @@ android {
         applicationId "com.inu.cafeteria"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 6
+        versionCode 7
         versionName "4.3.0-beta.0"
     }
 
@@ -165,4 +166,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+
 applyNativeModulesAppBuildGradle(project)

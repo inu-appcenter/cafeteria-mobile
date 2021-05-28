@@ -30,7 +30,6 @@ const rootStore = new RootStore();
 
 function initializeApp() {
   Splash.hide();
-
   rootStore.startInitialization();
 }
 

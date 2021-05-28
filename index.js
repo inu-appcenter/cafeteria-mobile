@@ -29,6 +29,6 @@ import ignoreWarnings from './src/common/utils/ignoreWarnings';
 
 setupAxios();
 ignoreWarnings();
-codePush.disallowRestart(); // 앱이 켜지다가 재시작되는 일은 없을겁니다. Mandatory라도!
+codePush.disallowRestart();
 
 AppRegistry.registerComponent(name, () => codePush(App));

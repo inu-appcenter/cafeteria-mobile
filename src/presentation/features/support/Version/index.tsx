@@ -17,42 +17,46 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../hooks/useApi';
 import palette from '../../../res/palette';
-import {Button} from 'react-native-paper';
-import codePush from 'react-native-code-push';
 import PackageInfo from '../../../../common/PackageInfo';
-import PaperPresets from '../../../components/utils/PaperPresets';
-import CheckForUpdates from '../../../../domain/usecases/CheckForUpdates';
-import {StyleSheet, Text, View} from 'react-native';
+import codePush, {LocalPackage} from 'react-native-code-push';
 import React, {useEffect, useState} from 'react';
+import {Platform, StyleSheet, Text, View} from 'react-native';
 
 export default function Version() {
-  const [loading, check] = useApi(() => CheckForUpdates.run());
-
-  const [codePushLabel, setCodePushLabel] = useState('-');
+  const [packageInfo, setPackageInfo] = useState<LocalPackage | null>();
+  const [title, setTitle] = useState('');
 
   useEffect(() => {
-    codePush.getUpdateMetadata().then(metadata => {
-      setCodePushLabel(metadata?.label || '-');
+    codePush.getUpdateMetadata(codePush.UpdateState.LATEST).then(metadata => {
+      setPackageInfo(metadata);
+      setTitle(
+        metadata === null || metadata?.isPending
+          ? '대기중인 업데이트가 있습니다.'
+          : '최신 버전입니다.',
+      );
     });
   }, []);
+
+  const minimumSupportedOsVersion =
+    Platform.OS === 'ios' ? 'iOS 12.0' : 'Android 8.0';
 
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={palette.textPrimary}>앱 버전: {PackageInfo.version}</Text>
-        <Text style={[palette.textSecondary, styles.marginOnTop]}>
-          Bundle 버전: {codePushLabel}
-        </Text>
+        <Text style={palette.textSubHeader}>{title}</Text>
+        <View style={styles.versionDataContainer}>
+          <Text style={[palette.textSecondary]}>
+            앱 버전: {PackageInfo.version}
+          </Text>
+          <Text style={[palette.textSecondary, styles.marginOnTop]}>
+            최신 Bundle 버전: {packageInfo?.label?.replace('v', '') || '-'}
+          </Text>
+        </View>
       </View>
-      <Button
-        {...PaperPresets.wideThemedButton}
-        style={styles.button}
-        loading={loading}
-        onPress={check}>
-        업데이트 확인
-      </Button>
+      <Text style={[palette.textTertiary, styles.marginOnBottom]}>
+        {minimumSupportedOsVersion} 이상 지원합니다.
+      </Text>
     </View>
   );
 }
@@ -61,6 +65,7 @@ const styles = StyleSheet.create({
   container: {
     ...palette.whiteBackground,
     flexDirection: 'column',
+    alignItems: 'center',
     flex: 1,
   },
   contentContainer: {
@@ -68,10 +73,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  marginOnTop: {
-    marginTop: 8,
+  versionDataContainer: {
+    marginTop: 16,
+    alignItems: 'center',
   },
-  button: {
-    margin: 12,
+  marginOnTop: {
+    marginTop: 4,
+  },
+  marginOnBottom: {
+    marginBottom: 12,
   },
 });

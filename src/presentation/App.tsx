@@ -22,7 +22,6 @@ import colors from './res/colors';
 import Splash from './components/Splash';
 import RootStore from '../store/RootStore';
 import {StatusBar} from 'react-native';
-import InstallUpdate from '../domain/usecases/InstallUpdate';
 import StoreProvider from './hooks/StoreProvider';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -30,7 +29,7 @@ import {NavigationContainer} from '@react-navigation/native';
 const rootStore = new RootStore();
 
 function initializeApp() {
-  InstallUpdate.run().then(() => Splash.hide());
+  Splash.hide();
 
   rootStore.startInitialization();
 }

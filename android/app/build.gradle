@@ -4,24 +4,27 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     // the name of the generated asset file containing your JS bundle
-    bundleAssetName      : "index.android.bundle",
+    bundleAssetName       : "index.android.bundle",
 
     // the entry file for bundle generation. If none specified and
     // "index.android.js" exists, it will be used. Otherwise "index.js" is
     // default. Can be overridden with ENTRY_FILE environment variable.
-    entryFile            : "index.js",
+    entryFile             : "index.js",
 
     // https://reactnative.dev/docs/performance#enable-the-ram-format
-    bundleCommand          : "ram-bundle",
+    bundleCommand         : "ram-bundle",
 
     // supply additional arguments to the packager
-    extraPackagerArgs      : ["--indexed-ram-bundle"],
+    extraPackagerArgs     : ["--indexed-ram-bundle"],
 
     // whether to bundle JS and assets in debug mode
-    bundleInDebug        : false,
+    bundleInDebug         : false,
+
+    // whether to bundle JS and assets in releaseStaging mode
+    bundleInReleaseStaging: true,
 
     // whether to bundle JS and assets in release mode
-    bundleInRelease      : true
+    bundleInRelease       : true
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -103,10 +106,21 @@ android {
 
     buildTypes {
         debug {
+            resValue "string", "CodePushDeploymentKey", '""'
+
             signingConfig signingConfigs.debug
         }
+        releaseStaging {
+            resValue "string", "CodePushDeploymentKey", '"sBtl9UhH5-wUQn0_5gSXX-7CovzQMszgaiqbE"'
+
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+
+            matchingFallbacks = ['release']
+        }
         release {
-            signingConfig signingConfigs.debug
+            resValue "string", "CodePushDeploymentKey", '"G0_XRJ3LeB43UMgvkGCxSsBvyfezWbVL-3Jys"'
+
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

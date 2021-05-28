@@ -53,9 +53,11 @@
 		8BBA7CC4EB632E902D13C693 /* libPods-cafeteria.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-cafeteria.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8EEEDD7BDAA0417C9C090692 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		9050012DB5C5B5DC0723DF88 /* Pods-cafeteria.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafeteria.debug.xcconfig"; path = "Target Support Files/Pods-cafeteria/Pods-cafeteria.debug.xcconfig"; sourceTree = "<group>"; };
+		9AA9CD418D64F1D396067F86 /* Pods-cafeteria.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafeteria.staging.xcconfig"; path = "Target Support Files/Pods-cafeteria/Pods-cafeteria.staging.xcconfig"; sourceTree = "<group>"; };
 		A95AF086CCF546AD999AE023 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
 		AA5E445EF9D245029B49E62D /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		ABC37380CA194BEEB159BE09 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
+		C93BBDBC58867A159694AE98 /* Pods-cafeteria-cafeteriaTests.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-cafeteria-cafeteriaTests.staging.xcconfig"; path = "Target Support Files/Pods-cafeteria-cafeteriaTests/Pods-cafeteria-cafeteriaTests.staging.xcconfig"; sourceTree = "<group>"; };
 		CC7F20A6C5A54066A835D12F /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		CDD387A3CB334336980B0FF4 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		CF9EE4389E03459DAC66FD96 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
@@ -167,6 +169,8 @@
 				34C44268151FDD0A2D03DCFB /* Pods-cafeteria.release.xcconfig */,
 				E8FB1B8DCEA8F0E5B31EEC6B /* Pods-cafeteria-cafeteriaTests.debug.xcconfig */,
 				EA18FD93CBD800377349FE4E /* Pods-cafeteria-cafeteriaTests.release.xcconfig */,
+				9AA9CD418D64F1D396067F86 /* Pods-cafeteria.staging.xcconfig */,
+				C93BBDBC58867A159694AE98 /* Pods-cafeteria-cafeteriaTests.staging.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -611,7 +615,7 @@
 		};
 		2AB8AA5826610E74000ADA61 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34C44268151FDD0A2D03DCFB /* Pods-cafeteria.release.xcconfig */;
+			baseConfigurationReference = 9AA9CD418D64F1D396067F86 /* Pods-cafeteria.staging.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -639,7 +643,7 @@
 		};
 		2AB8AA5926610E74000ADA61 /* Staging */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EA18FD93CBD800377349FE4E /* Pods-cafeteria-cafeteriaTests.release.xcconfig */;
+			baseConfigurationReference = C93BBDBC58867A159694AE98 /* Pods-cafeteria-cafeteriaTests.staging.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;

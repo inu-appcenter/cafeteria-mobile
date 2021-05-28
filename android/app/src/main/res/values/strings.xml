@@ -3,5 +3,4 @@
 
     <string name="appCenterCrashes_whenToSendCrashes" moduleConfig="true" translatable="false">DO_NOT_ASK_JAVASCRIPT</string>
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
-    <string name="CodePushDeploymentKey" moduleConfig="true" tools:ignore="Typos">sBtl9UhH5-wUQn0_5gSXX-7CovzQMszgaiqbE</string>
 </resources>

@@ -19,7 +19,8 @@
 
 import Main from './features/main/Main';
 import colors from './res/colors';
-import Splash from "./components/Splash";
+import Splash from './components/Splash';
+import codePush from 'react-native-code-push';
 import RootStore from '../store/RootStore';
 import {StatusBar} from 'react-native';
 import StoreProvider from './hooks/StoreProvider';
@@ -34,7 +35,7 @@ function initializeApp() {
   rootStore.startInitialization();
 }
 
-export default function App() {
+function App() {
   useEffect(() => {
     initializeApp();
   }, []);
@@ -52,3 +53,5 @@ export default function App() {
     </StoreProvider>
   );
 }
+
+export default codePush(App);

@@ -20,9 +20,9 @@
 import Main from './features/main/Main';
 import colors from './res/colors';
 import Splash from './components/Splash';
-import codePush from 'react-native-code-push';
 import RootStore from '../store/RootStore';
 import {StatusBar} from 'react-native';
+import InstallUpdate from '../domain/usecases/InstallUpdate';
 import StoreProvider from './hooks/StoreProvider';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -30,12 +30,12 @@ import {NavigationContainer} from '@react-navigation/native';
 const rootStore = new RootStore();
 
 function initializeApp() {
-  Splash.hide();
+  InstallUpdate.run().then(() => Splash.hide());
 
   rootStore.startInitialization();
 }
 
-function App() {
+export default function App() {
   useEffect(() => {
     initializeApp();
   }, []);
@@ -53,15 +53,3 @@ function App() {
     </StoreProvider>
   );
 }
-
-/**
- * By default, CodePush will check for updates on every app start.
- * If an update is available, it will be silently downloaded, and installed
- * the next time the app is restarted (either explicitly by the end user or by the OS),
- * which ensures the least invasive experience for your end users.
- * If an available update is mandatory, then it will be installed immediately,
- * ensuring that the end user gets it as soon as possible.
- *
- * https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-plugin
- */
-export default codePush(App);

@@ -17,12 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import RNBootSplash from "react-native-bootsplash";
+import RNBootSplash from 'react-native-bootsplash';
 
 export default {
   hide() {
     RNBootSplash.hide({fade: true}).then(() =>
       console.log('스플래시 화면 종료합니다!'),
     );
-  }
-}
+  },
+};

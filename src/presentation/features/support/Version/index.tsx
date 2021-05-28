@@ -18,14 +18,36 @@
  */
 
 import React from 'react';
+import useApi from '../../../hooks/useApi';
 import palette from '../../../res/palette';
+import {Button} from 'react-native-paper';
 import PackageInfo from '../../../../common/PackageInfo';
-import {Text, View} from 'react-native';
+import PaperPresets from '../../../components/utils/PaperPresets';
+import CheckForUpdates from '../../../../domain/usecases/CheckForUpdates';
+import {StyleSheet, Text, View} from 'react-native';
 
 export default function Version() {
+  const [loading, check] = useApi(() => CheckForUpdates.run());
+
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
       <Text style={palette.textPrimary}>앱 버전: {PackageInfo.version}</Text>
+      <Button
+        {...PaperPresets.wideThemedButton}
+        style={styles.button}
+        loading={loading}
+        onPress={check}>
+        업데이트 확인
+      </Button>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    end: 12,
+    start: 12,
+    bottom: 12,
+    position: 'absolute',
+  },
+});

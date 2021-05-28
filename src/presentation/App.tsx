@@ -54,4 +54,14 @@ function App() {
   );
 }
 
+/**
+ * By default, CodePush will check for updates on every app start.
+ * If an update is available, it will be silently downloaded, and installed
+ * the next time the app is restarted (either explicitly by the end user or by the OS),
+ * which ensures the least invasive experience for your end users.
+ * If an available update is mandatory, then it will be installed immediately,
+ * ensuring that the end user gets it as soon as possible.
+ *
+ * https://docs.microsoft.com/en-us/appcenter/distribution/codepush/rn-plugin
+ */
 export default codePush(App);

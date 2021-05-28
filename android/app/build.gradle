@@ -113,6 +113,7 @@ android {
         releaseStaging {
             resValue "string", "CodePushDeploymentKey", '"sBtl9UhH5-wUQn0_5gSXX-7CovzQMszgaiqbE"'
 
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
 
@@ -121,6 +122,7 @@ android {
         release {
             resValue "string", "CodePushDeploymentKey", '"G0_XRJ3LeB43UMgvkGCxSsBvyfezWbVL-3Jys"'
 
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }

@@ -24,7 +24,7 @@ import App from './src/presentation/App';
 import {name} from './app.json';
 import setupAxios from './src/common/utils/setupAxios';
 import {AppRegistry} from 'react-native';
-import ignoreWarnings from "./src/common/utils/ignoreWarnings";
+import ignoreWarnings from './src/common/utils/ignoreWarnings';
 
 setupAxios();
 ignoreWarnings();

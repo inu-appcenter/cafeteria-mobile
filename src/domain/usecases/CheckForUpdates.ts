@@ -37,7 +37,10 @@ class CheckForUpdates extends UseCase {
       installMode: codePush.InstallMode.IMMEDIATE,
     });
 
-    if (syncStatus === codePush.SyncStatus.UP_TO_DATE) {
+    if (
+      syncStatus === codePush.SyncStatus.UP_TO_DATE ||
+      syncStatus === codePush.SyncStatus.UPDATE_INSTALLED
+    ) {
       alert('업데이트 없음', '최신 버전입니다.');
     }
   }

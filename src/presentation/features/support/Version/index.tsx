@@ -21,11 +21,12 @@ import Icons from 'react-native-vector-icons/MaterialIcons';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
+import {observer} from 'mobx-react';
 import PackageInfo from '../../../../common/PackageInfo';
 import React, {useEffect} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
-export default function Version() {
+function Version() {
   const {versionStore} = useStores();
 
   useEffect(() => {
@@ -61,6 +62,8 @@ export default function Version() {
     </View>
   );
 }
+
+export default observer(Version);
 
 const styles = StyleSheet.create({
   container: {

@@ -32,7 +32,7 @@ export default class NoticeStore {
     this._notices = value;
   }
 
-  private _currentNotice: NoticeView | undefined = undefined;
+  private _currentNotice?: NoticeView = undefined;
   get currentNotice() {
     return this._currentNotice;
   }

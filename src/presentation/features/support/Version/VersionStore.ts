@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import codePush, {LocalPackage} from 'react-native-code-push';
+import codePush, {Package} from 'react-native-code-push';
 import {makeAutoObservable} from 'mobx';
 
 export default class VersionStore {
-  private _runningUpdate?: LocalPackage;
+  private _runningUpdate?: Package = undefined; // 대입 꼭 필요!
   get runningUpdate() {
     return this._runningUpdate;
   }
@@ -29,7 +29,7 @@ export default class VersionStore {
     this._runningUpdate = value;
   }
 
-  private _pendingUpdate?: LocalPackage;
+  private _pendingUpdate?: Package = undefined;
   get pendingUpdate() {
     return this._pendingUpdate;
   }
@@ -47,6 +47,8 @@ export default class VersionStore {
   }
 
   private async fetchMetadata(state: codePush.UpdateState) {
-    return (await codePush.getUpdateMetadata(state)) || undefined;
+    const result = await codePush.getUpdateMetadata(state);
+
+    return result || undefined;
   }
 }

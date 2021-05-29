@@ -17,13 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import BugStore from '../../store/RootStore';
+import RootStore from '../../store/RootStore';
 import React, {createContext, ReactNode} from 'react';
 
-export const StoreContext = createContext<BugStore>({} as BugStore);
+export const StoreContext = createContext<RootStore>({} as RootStore);
 
 type Props = {
-  store: BugStore;
+  store: RootStore;
   children: ReactNode;
 };
 

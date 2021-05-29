@@ -19,12 +19,14 @@
 
 import UserStore from '../presentation/features/membership/UserStore';
 import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
+import VersionStore from '../presentation/features/support/Version/VersionStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
 import DirectInquiryStore from '../presentation/features/support/DirectInquery/DirectInquiryStore';
 
 export default class RootStore {
   userStore = new UserStore();
   noticeStore = new NoticeStore();
+  versionStore = new VersionStore();
   cafeteriaStore = new CafeteriaStore();
   directInquiryStore = new DirectInquiryStore();
 

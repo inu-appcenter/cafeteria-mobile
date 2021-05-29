@@ -54,7 +54,7 @@ function MembershipScreen() {
       component={Barcode}
       options={{
         title: '멤버십',
-        headerRight: () => <MembershipInfoHeaderButton />,
+        headerRight: MembershipInfoHeaderButton,
       }}
     />
   );

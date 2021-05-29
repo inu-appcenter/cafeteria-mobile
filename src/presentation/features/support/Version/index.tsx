@@ -17,25 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import Icons from 'react-native-vector-icons/MaterialIcons';
+import colors from '../../../res/colors';
 import palette from '../../../res/palette';
+import useStores from '../../../hooks/useStores';
 import PackageInfo from '../../../../common/PackageInfo';
-import codePush, {LocalPackage} from 'react-native-code-push';
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
 export default function Version() {
-  const [packageInfo, setPackageInfo] = useState<LocalPackage | null>();
-  const [title, setTitle] = useState('');
+  const {versionStore} = useStores();
 
   useEffect(() => {
-    codePush.getUpdateMetadata(codePush.UpdateState.LATEST).then(metadata => {
-      setPackageInfo(metadata);
-      setTitle(
-        metadata === null || metadata?.isPending
-          ? '대기중인 업데이트가 있습니다.'
-          : '최신 버전입니다.',
-      );
-    });
+    versionStore.fetchVersionInfo();
   }, []);
 
   const minimumSupportedOsVersion =
@@ -44,15 +38,22 @@ export default function Version() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainer}>
-        <Text style={palette.textSubHeader}>{title}</Text>
-        <View style={styles.versionDataContainer}>
-          <Text style={[palette.textSecondary]}>
-            앱 버전: {PackageInfo.version}
-          </Text>
-          <Text style={[palette.textSecondary, styles.marginOnTop]}>
-            최신 Bundle 버전: {packageInfo?.label?.replace('v', '') || '-'}
-          </Text>
-        </View>
+        <Icons
+          name={versionStore.pendingUpdate ? 'autorenew' : 'check'}
+          style={styles.marginOnBottom}
+          color={colors.textPrimary}
+          size={36}
+        />
+
+        <Text style={[palette.textSubHeader, styles.marginOnTop]}>
+          {versionStore.pendingUpdate
+            ? '대기중인 업데이트가 있습니다.'
+            : '최신 버전입니다.'}
+        </Text>
+        <Text style={[palette.textSecondary, styles.marginOnTop]}>
+          현재 버전 {PackageInfo.version}(
+          {versionStore.runningUpdate?.label || '-'})
+        </Text>
       </View>
       <Text style={[palette.textTertiary, styles.marginOnBottom]}>
         {minimumSupportedOsVersion} 이상 지원합니다.
@@ -73,12 +74,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  versionDataContainer: {
-    marginTop: 16,
-    alignItems: 'center',
-  },
   marginOnTop: {
-    marginTop: 4,
+    marginTop: 12,
   },
   marginOnBottom: {
     marginBottom: 12,

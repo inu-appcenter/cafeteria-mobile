@@ -32,6 +32,7 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
+import UpdateInfoHeaderButton from './Version/UpdateInfoHeaderButton';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
@@ -75,7 +76,10 @@ export default function SupportScreen() {
       <Stack.Screen
         name="SupportVersion"
         component={Version}
-        options={{title: '버전'}}
+        options={{
+          title: '버전',
+          headerRight: UpdateInfoHeaderButton,
+        }}
       />
       <Stack.Screen
         name="SupportDirectInquiry"

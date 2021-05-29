@@ -8,8 +8,9 @@
     "test": "jest",
     "start": "react-native start",
     "android": "react-native run-android",
+    "preversion": "npm test",
     "postinstall": "patch-package",
-    "postversion": "react-native-version"
+    "postversion": "react-native-version && git push && git push --tags"
   },
   "dependencies": {
     "@adrianso/react-native-device-brightness": "^1.2.4",

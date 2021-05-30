@@ -33,6 +33,7 @@
 ## 업데이트 로그
 
 ### 2021.5.30 v4.3.0
+- 버전 코드(Current Project Version, Version Code) 400부터 시작.
 - 출시 및 배포.
 
 ### 2021.5.29 v4.3.0-beta.4

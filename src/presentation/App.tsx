@@ -18,12 +18,11 @@
  */
 
 import Main from './features/main/Main';
-import colors from './res/colors';
 import Splash from './components/Splash';
 import RootStore from '../store/RootStore';
-import {StatusBar} from 'react-native';
 import StoreProvider from './hooks/StoreProvider';
 import React, {useEffect} from 'react';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {NavigationContainer} from '@react-navigation/native';
 
 const rootStore = new RootStore();
@@ -40,14 +39,11 @@ export default function App() {
 
   return (
     <StoreProvider store={rootStore}>
-      <NavigationContainer>
-        <StatusBar
-          barStyle={'dark-content'}
-          translucent={false}
-          backgroundColor={colors.white}
-        />
-        <Main />
-      </NavigationContainer>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Main />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </StoreProvider>
   );
 }

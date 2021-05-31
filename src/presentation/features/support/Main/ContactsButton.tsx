@@ -38,7 +38,7 @@ export default function ContactsButton({navigation}: Props) {
       <View style={styles.container}>
         <Icon name="phone" size={24} />
         <View style={styles.rightContainer}>
-          <View>
+          <View style={styles.helpCardTextContainer}>
             <Text style={styles.helpCardTitleText}>
               서비스 이용에 불편을 겪고 계신가요?
             </Text>
@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginStart: 12,
+  },
+  helpCardTextContainer: {
+    flex: 1,
   },
   helpCardTitleText: {
     ...palette.textPrimary,

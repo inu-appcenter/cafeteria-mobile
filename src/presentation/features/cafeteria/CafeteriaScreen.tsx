@@ -19,7 +19,8 @@
 
 import List from './List';
 import React from 'react';
-import {register} from 'react-native-bundle-splitter';
+import Detail from './Detail';
+import Reorder from './Reorder';
 import HeaderLogo from './List/HeaderLogo';
 import {StyleSheet} from 'react-native';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
@@ -50,13 +51,10 @@ export default function CafeteriaScreen() {
           headerRight: () => <ReorderHeaderButton navigation={navigation} />,
         })}
       />
-      <Stack.Screen
-        name="CafeteriaDetail"
-        component={register({loader: () => import('./Detail')})}
-      />
+      <Stack.Screen name="CafeteriaDetail" component={Detail} />
       <Stack.Screen
         name="CafeteriaReorder"
-        component={register({loader: () => import('./Reorder')})}
+        component={Reorder}
         options={{
           title: '순서 변경',
         }}

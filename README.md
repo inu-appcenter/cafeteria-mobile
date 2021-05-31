@@ -32,6 +32,11 @@
 
 ## 업데이트 로그
 
+### 2021.6.1 v4.3.1
+- RAM-bundle 더 이상 사용하지 않음.
+- 4인치를 포함한 네모화면(홈버튼 달린) iOS 기기에서 하단 padding이 올바르지 않은 문제 해결.
+- ItemSeparator가 정확히 한 픽셀 높이를 가지도록 수정.
+
 ### 2021.5.30 v4.3.0
 - 버전 코드(Current Project Version, Version Code) 400부터 시작.
 - 출시 및 배포.

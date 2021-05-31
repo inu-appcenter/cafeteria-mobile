@@ -25,10 +25,20 @@ import {Button} from 'react-native-paper';
 import useStores from '../../hooks/useStores';
 import {observer} from 'mobx-react';
 import PaperPresets from '../../components/utils/PaperPresets';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
 function NoticeModal() {
   const {noticeStore} = useStores();
+  const {bottom} = useSafeAreaInsets();
+
+  const computedStyles = StyleSheet.create({
+    buttonLabel: {
+      color: 'white',
+      fontSize: 16,
+      paddingBottom: bottom,
+    },
+  });
 
   return (
     <Modal
@@ -46,7 +56,7 @@ function NoticeModal() {
 
         <Button
           {...PaperPresets.wideThemedButton}
-          labelStyle={styles.buttonLabel}
+          labelStyle={computedStyles.buttonLabel}
           style={styles.button}
           onPress={() => noticeStore.dismissCurrentNotice()}>
           닫기
@@ -83,10 +93,5 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 0,
-  },
-  buttonLabel: {
-    color: 'white',
-    fontSize: 16,
-    paddingBottom: Platform.OS === 'ios' ? 34 : 0,
   },
 });

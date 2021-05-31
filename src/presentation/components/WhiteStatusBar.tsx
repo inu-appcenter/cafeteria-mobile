@@ -18,21 +18,15 @@
  */
 
 import React from 'react';
-import {View} from 'react-native';
-import palette from '../../res/palette';
-import {observer} from 'mobx-react';
-import NoticeModal from './NoticeModal';
-import MainNavigator from './MainNavigator';
-import WhiteStatusBar from '../../components/WhiteStatusBar';
+import colors from '../res/colors';
+import {StatusBar} from 'react-native';
 
-function Main() {
+export default function WhiteStatusBar() {
   return (
-    <View style={palette.fullSized}>
-      <WhiteStatusBar />
-      <MainNavigator />
-      <NoticeModal />
-    </View>
+    <StatusBar
+      barStyle={'dark-content'}
+      translucent={false}
+      backgroundColor={colors.white}
+    />
   );
 }
-
-export default observer(Main);

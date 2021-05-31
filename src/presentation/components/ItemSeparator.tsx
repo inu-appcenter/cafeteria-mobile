@@ -19,7 +19,7 @@
 
 import React from 'react';
 import colors from '../res/colors';
-import {Platform, StyleSheet, View, ViewProps} from 'react-native';
+import {PixelRatio, StyleSheet, View, ViewProps} from 'react-native';
 
 export default function ItemSeparator({style}: ViewProps) {
   return <View style={[styles.separator, style]} />;
@@ -27,7 +27,7 @@ export default function ItemSeparator({style}: ViewProps) {
 
 const styles = StyleSheet.create({
   separator: {
-    height: Platform.OS === 'android' ? 0.5 : 0.3,
+    height: 1 / PixelRatio.get(), // 어떤 기기에서든 정확히 한 픽셀!
     alignSelf: 'stretch',
     backgroundColor: colors.dividerColorLight,
   },

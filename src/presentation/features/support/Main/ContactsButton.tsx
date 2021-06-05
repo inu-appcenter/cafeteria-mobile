@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Icon from 'react-native-vector-icons/Feather';
+import Icon from 'react-native-vector-icons/FontAwesome';
 import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
@@ -36,7 +36,9 @@ export default function ContactsButton({navigation}: Props) {
       style={styles.helpCard}
       onPress={() => navigation.navigate('SupportContacts')}>
       <View style={styles.container}>
-        <Icon name="phone" size={24} />
+        <View style={styles.callIconContainer}>
+          <Icon name="phone" size={24} color={colors.white} />
+        </View>
         <View style={styles.rightContainer}>
           <View style={styles.helpCardTextContainer}>
             <Text style={styles.helpCardTitleText}>
@@ -62,6 +64,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-start',
+  },
+  callIconContainer: {
+    backgroundColor: colors.green,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 36,
+    height: 36,
   },
   rightContainer: {
     flex: 1,

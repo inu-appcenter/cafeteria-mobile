@@ -102,6 +102,14 @@ const palette = StyleSheet.create({
     elevation: 4,
   },
 
+  noSeparator: {
+    // iOS
+    shadowOpacity: 0,
+
+    // Android
+    elevation: 0,
+  },
+
   iconHeaderButton: {
     paddingHorizontal: 18,
   },

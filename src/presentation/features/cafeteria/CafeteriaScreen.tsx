@@ -21,8 +21,8 @@ import List from './List';
 import React from 'react';
 import Detail from './Detail';
 import Reorder from './Reorder';
+import palette from '../../res/palette';
 import HeaderLogo from './List/HeaderLogo';
-import {StyleSheet} from 'react-native';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import ReorderHeaderButton from './List/ReorderHeaderButton';
 import CafeteriaWithMenuView from './CafeteriaWithMenuView';
@@ -46,7 +46,7 @@ export default function CafeteriaScreen() {
         component={List}
         options={({navigation}) => ({
           headerTitle: () => <HeaderLogo />,
-          headerStyle: styles.noSeparator,
+          headerStyle: palette.noSeparator,
           headerTitleAlign: 'center',
           headerRight: () => <ReorderHeaderButton navigation={navigation} />,
         })}
@@ -62,9 +62,3 @@ export default function CafeteriaScreen() {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  noSeparator: {
-    shadowColor: 'transparent',
-  },
-});

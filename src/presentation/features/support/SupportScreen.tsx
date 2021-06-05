@@ -33,6 +33,7 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import UpdateInfoHeaderButton from './Version/UpdateInfoHeaderButton';
+import palette from '../../res/palette';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
@@ -84,7 +85,7 @@ export default function SupportScreen() {
       <Stack.Screen
         name="SupportDirectInquiry"
         component={DirectInquiry}
-        options={{title: '1:1 문의'}}
+        options={{title: '1:1 문의', headerStyle: palette.noSeparator}}
       />
       <Stack.Screen
         name="SupportFrequentQuestions"

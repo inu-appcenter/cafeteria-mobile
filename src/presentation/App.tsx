@@ -30,9 +30,10 @@ import CheckAndInstallUpdate from '../domain/usecases/CheckAndInstallUpdate';
 const rootStore = new RootStore();
 
 function initializeApp() {
-  Splash.hide();
-  rootStore.startInitialization();
   CheckAndInstallUpdate.run();
+  rootStore.startInitialization();
+
+  Splash.hide();
 }
 
 export default function App() {

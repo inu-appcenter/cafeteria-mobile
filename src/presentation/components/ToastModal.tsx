@@ -62,7 +62,7 @@ export default function ToastPlaceHolder() {
   return (
     <Toast
       config={toastConfig}
-      topOffset={top}
+      topOffset={top + 12}
       ref={ref => Toast.setRef(ref)}
     />
   );

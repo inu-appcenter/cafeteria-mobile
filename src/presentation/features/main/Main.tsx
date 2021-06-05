@@ -21,7 +21,8 @@ import React from 'react';
 import {View} from 'react-native';
 import palette from '../../res/palette';
 import {observer} from 'mobx-react';
-import NoticeModal from './NoticeModal';
+import ToastModal from '../../components/ToastModal';
+import NoticeModal from '../../components/NoticeModal';
 import MainNavigator from './MainNavigator';
 import WhiteStatusBar from '../../components/WhiteStatusBar';
 
@@ -31,6 +32,7 @@ function Main() {
       <WhiteStatusBar />
       <MainNavigator />
       <NoticeModal />
+      <ToastModal />
     </View>
   );
 }

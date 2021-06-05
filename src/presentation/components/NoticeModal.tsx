@@ -19,14 +19,14 @@
 
 import Modal from 'react-native-modal';
 import React from 'react';
-import colors from '../../res/colors';
-import palette from '../../res/palette';
+import colors from '../res/colors';
+import palette from '../res/palette';
 import {Button} from 'react-native-paper';
-import useStores from '../../hooks/useStores';
+import useStores from '../hooks/useStores';
 import {observer} from 'mobx-react';
-import PaperPresets from '../../components/utils/PaperPresets';
-import {StyleSheet, Text, View} from 'react-native';
+import PaperPresets from './utils/PaperPresets';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {StyleSheet, Text, View} from 'react-native';
 
 function NoticeModal() {
   const {noticeStore} = useStores();

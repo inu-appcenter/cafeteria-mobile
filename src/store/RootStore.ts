@@ -22,6 +22,7 @@ import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
 import VersionStore from '../presentation/features/support/Version/VersionStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
 import DirectInquiryStore from '../presentation/features/support/DirectInquery/DirectInquiryStore';
+import doLater from '../common/utils/doLater';
 
 export default class RootStore {
   userStore = new UserStore();
@@ -43,14 +44,10 @@ export default class RootStore {
         console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`),
       );
 
-    setTimeout(
-      () =>
-        this.noticeStore
-          .fetchNewNotice()
-          .catch(e =>
-            console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`),
-          ),
-      500,
+    doLater(() =>
+      this.noticeStore
+        .fetchNewNotice()
+        .catch(e => console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`)),
     );
 
     this.initializationStarted = true;

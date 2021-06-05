@@ -42,8 +42,18 @@ export default class VersionStore {
   }
 
   async fetchVersionInfo() {
-    this.runningUpdate = await this.fetchMetadata(codePush.UpdateState.RUNNING);
-    this.pendingUpdate = await this.fetchMetadata(codePush.UpdateState.PENDING);
+    try {
+      this.runningUpdate = await this.fetchMetadata(
+        codePush.UpdateState.RUNNING,
+      );
+      this.pendingUpdate = await this.fetchMetadata(
+        codePush.UpdateState.PENDING,
+      );
+    } catch (e) {
+      console.log(
+        'CodePush 업데이트 정보를 가져오지 못했습니다. 아마 deployment key가 없나봐요',
+      );
+    }
   }
 
   private async fetchMetadata(state: codePush.UpdateState) {

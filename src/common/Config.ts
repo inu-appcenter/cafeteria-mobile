@@ -1,3 +1,5 @@
+import {Platform} from 'react-native';
+
 /**
  * This file is part of INU Cafeteria.
  *
@@ -32,5 +34,13 @@ export default {
     termsAndConditions:
       'https://raw.githubusercontent.com/inu-appcenter/terms-and-conditions/master/카페테리아-개인정보처리방침.txt',
     ossNotices: 'https://web.inu-cafeteria.app/oss-notices/index.txt',
+  },
+
+  update: {
+    minimumBackgroundDurationMinutes: 10,
+  },
+
+  version: {
+    minimumSupported: Platform.OS === 'ios' ? 'iOS 12.0' : 'Android 8.0',
   },
 };

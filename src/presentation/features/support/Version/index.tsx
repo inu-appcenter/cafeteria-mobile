@@ -25,6 +25,7 @@ import {observer} from 'mobx-react';
 import PackageInfo from '../../../../common/PackageInfo';
 import React, {useEffect} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import Config from '../../../../common/Config';
 
 function Version() {
   const {versionStore} = useStores();
@@ -32,9 +33,6 @@ function Version() {
   useEffect(() => {
     versionStore.fetchVersionInfo();
   }, []);
-
-  const minimumSupportedOsVersion =
-    Platform.OS === 'ios' ? 'iOS 12.0' : 'Android 8.0';
 
   return (
     <View style={styles.container}>
@@ -57,7 +55,7 @@ function Version() {
         </Text>
       </View>
       <Text style={[palette.textTertiary, styles.marginOnBottom]}>
-        {minimumSupportedOsVersion} 이상 지원합니다.
+        {Config.version.minimumSupported} 이상 지원합니다.
       </Text>
     </View>
   );

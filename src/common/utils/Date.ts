@@ -19,6 +19,8 @@
 
 import moment from 'moment';
 
+moment.locale('ko'); // 한글사랑 합시다 후후
+
 export function formatElapsedDate(timestamp: number) {
   const now = moment();
   const then = moment(timestamp);

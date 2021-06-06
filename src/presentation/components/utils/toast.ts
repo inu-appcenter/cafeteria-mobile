@@ -23,9 +23,10 @@ export default function toast(
   title: string,
   message?: string,
   duration?: number,
+  type?: 'info' | 'success' | 'error',
 ) {
   Toast.show({
-    type: 'info',
+    type: type ?? 'info',
     text1: title,
     text2: message,
     autoHide: duration !== 0,

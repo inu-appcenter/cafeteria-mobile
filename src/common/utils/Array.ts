@@ -30,3 +30,14 @@ export function divideArray<T>(array: ReadonlyArray<T>, divider?: number) {
 
   return dividedArray;
 }
+
+export function shuffleArray<T>(unshuffled: Array<T>) {
+  return unshuffled
+    .map(a => ({sort: Math.random(), value: a}))
+    .sort((a, b) => a.sort - b.sort)
+    .map(a => a.value);
+}
+
+export function randomPick<T>(array: T[]) {
+  return array[Math.floor(Math.random() * array.length)];
+}

@@ -24,8 +24,16 @@ import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
 import PackageInfo from '../../../../common/PackageInfo';
 import React, {useEffect} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import Config from '../../../../common/Config';
+import HaveSomeFun from '../../../../domain/usecases/HaveSomeFun';
+import Touchable from '../../../components/Touchable';
 
 function Version() {
   const {versionStore} = useStores();
@@ -36,23 +44,27 @@ function Version() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.contentContainer}>
-        <Icons
-          name={versionStore.pendingUpdate ? 'autorenew' : 'check'}
-          style={styles.marginOnBottom}
-          color={colors.textPrimary}
-          size={36}
-        />
+      <View style={styles.contentContainerWrapper}>
+        <Touchable onPress={() => HaveSomeFun.run()}>
+          <View style={styles.contentContainer}>
+            <Icons
+              name={versionStore.pendingUpdate ? 'autorenew' : 'check'}
+              style={styles.marginOnBottom}
+              color={colors.textPrimary}
+              size={36}
+            />
 
-        <Text style={[palette.textSubHeader, styles.marginOnTop]}>
-          {versionStore.pendingUpdate
-            ? '대기중인 업데이트가 있습니다.'
-            : '최신 버전입니다.'}
-        </Text>
-        <Text style={[palette.textSecondary, styles.marginOnTop]}>
-          현재 버전 {PackageInfo.version}(
-          {versionStore.runningUpdate?.label || '-'})
-        </Text>
+            <Text style={[palette.textSubHeader, styles.marginOnTop]}>
+              {versionStore.pendingUpdate
+                ? '대기중인 업데이트가 있습니다.'
+                : '최신 버전입니다.'}
+            </Text>
+            <Text style={[palette.textSecondary, styles.marginOnTop]}>
+              현재 버전 {PackageInfo.version}(
+              {versionStore.runningUpdate?.label || '-'})
+            </Text>
+          </View>
+        </Touchable>
       </View>
       <Text style={[palette.textTertiary, styles.marginOnBottom]}>
         {Config.version.minimumSupported} 이상 지원합니다.
@@ -70,10 +82,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
   },
-  contentContainer: {
+  contentContainerWrapper: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  contentContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    padding: 24,
+    overflow: 'hidden',
+    borderRadius: 24,
   },
   marginOnTop: {
     marginTop: 12,

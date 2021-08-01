@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
   },
   headerUiCoopLogo: {
     width: 140,
-    height: 30,
+    height: 27,
   },
   logoImage: {
     alignItems: 'center',

@@ -24,16 +24,9 @@ import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
 import PackageInfo from '../../../../common/PackageInfo';
 import React, {useEffect} from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  View,
-} from 'react-native';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import Config from '../../../../common/Config';
 import HaveSomeFun from '../../../../domain/usecases/HaveSomeFun';
-import Touchable from '../../../components/Touchable';
 
 function Version() {
   const {versionStore} = useStores();
@@ -45,7 +38,7 @@ function Version() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainerWrapper}>
-        <Touchable onPress={() => HaveSomeFun.run()}>
+        <TouchableWithoutFeedback onPress={() => HaveSomeFun.run()}>
           <View style={styles.contentContainer}>
             <Icons
               name={versionStore.pendingUpdate ? 'autorenew' : 'check'}
@@ -64,7 +57,7 @@ function Version() {
               {versionStore.runningUpdate?.label || '-'})
             </Text>
           </View>
-        </Touchable>
+        </TouchableWithoutFeedback>
       </View>
       <Text style={[palette.textTertiary, styles.marginOnBottom]}>
         {Config.version.minimumSupported} 이상 지원합니다.

@@ -36,10 +36,6 @@ export default {
     ossNotices: 'https://web.inu-cafeteria.app/oss-notices/index.txt',
   },
 
-  update: {
-    minimumBackgroundDurationMinutes: 10,
-  },
-
   version: {
     minimumSupported: Platform.OS === 'ios' ? 'iOS 12.0' : 'Android 8.0',
   },

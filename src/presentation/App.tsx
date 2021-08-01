@@ -20,30 +20,25 @@
 import Main from './features/main/Main';
 import Splash from './components/Splash';
 import RootStore from '../store/RootStore';
-import useAppState from 'react-native-appstate-hook';
 import StoreProvider from './hooks/StoreProvider';
-import React, {useEffect} from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
+import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import CheckAndInstallUpdate from '../domain/usecases/CheckAndInstallUpdate';
 
 const rootStore = new RootStore();
 
 function initializeApp() {
-  CheckAndInstallUpdate.run();
-  rootStore.startInitialization();
-
-  Splash.hide();
+  CheckAndInstallUpdate.run().finally(() => {
+    rootStore.startInitialization();
+    Splash.hide();
+  });
 }
 
 export default function App() {
   useEffect(() => {
     initializeApp();
   }, []);
-
-  useAppState({
-    onForeground: () => CheckAndInstallUpdate.run(),
-  });
 
   return (
     <StoreProvider store={rootStore}>

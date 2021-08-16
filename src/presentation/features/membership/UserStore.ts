@@ -58,9 +58,9 @@ export default class UserStore {
     makeAutoObservable(this);
   }
 
-  async login(id: string, password: string) {
+  async login(studentId: string, password: string) {
     try {
-      await Login.run({id, password});
+      await Login.run({studentId, password});
 
       await this.onLoginSuccess();
     } catch (e) {
@@ -96,7 +96,7 @@ export default class UserStore {
       return;
     }
 
-    this.userId = user.id;
+    this.userId = user.studentId;
     this.barcode = user.barcode;
     this.isLoggedIn = true;
   }

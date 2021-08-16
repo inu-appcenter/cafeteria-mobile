@@ -19,9 +19,10 @@
 
 import UseCase from './UseCase';
 import UserRepository from '../../data/repositories/UserRepository';
+import User from '../entities/User';
 
 type Params = {
-  id: string;
+  studentId: string;
   password: string;
 };
 
@@ -31,7 +32,7 @@ class Login extends UseCase<Params | void> {
   }
 
   async onExecute(params: Params | void): Promise<void> {
-    if (params === undefined) {
+    if (params == null) {
       return this.tryLoginWithSavedCredentials();
     } else {
       return this.tryLoginWithUserInput(params);
@@ -39,36 +40,33 @@ class Login extends UseCase<Params | void> {
   }
 
   private async tryLoginWithSavedCredentials() {
-    const credentials = await this.userRepository.getSavedUserInfo();
-    if (credentials === undefined) {
+    const user = await this.userRepository.getSavedUserInfo();
+    if (user === undefined) {
       throw new Error('저장된 사용자 정보가 없어요!');
     }
 
-    console.log(`학번이 ${credentials.id} 이신 분 자동로그인 하십니다.`);
+    console.log(`${user.description()} 자동로그인 하십니다.`);
 
-    const {token, barcode} = await this.userRepository.loginWithIdAndToken(
-      credentials.id,
-      credentials.token,
-    );
+    const result = await this.userRepository.login(user.rememberMeLoginParams());
 
-    await this.userRepository.saveUserInfo({
-      id: credentials.id,
-      token: token,
-      barcode: barcode,
-    });
+    user.update(result);
+
+    await this.userRepository.saveUserInfo(user);
   }
 
-  private async tryLoginWithUserInput(params: Params) {
-    const {token, barcode} = await this.userRepository.loginWithIdAndPassword(
-      params.id,
-      params.password,
-    );
-
-    await this.userRepository.saveUserInfo({
-      id: params.id,
-      token: token,
-      barcode: barcode,
+  private async tryLoginWithUserInput({studentId, password}: Params) {
+    const user = User.create({
+      studentId,
     });
+
+    const result = await this.userRepository.login({
+      studentId,
+      password,
+    });
+
+    user.update(result);
+
+    await this.userRepository.saveUserInfo(user);
   }
 }
 

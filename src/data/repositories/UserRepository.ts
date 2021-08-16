@@ -30,20 +30,13 @@ export default class UserRepository {
     activateBarcode: `${Config.baseUrl}/activateBarcode`,
   };
 
-  async loginWithIdAndPassword(id: string, password: string) {
-    return this.login({id, password});
-  }
-
-  async loginWithIdAndToken(id: string, token: string) {
-    return this.login({id, token});
-  }
-
-  private async login(params: object) {
+  async login(params: Record<string, string | undefined>) {
     const {data} = await axios.post(this.url.login, params);
+    const {rememberMeToken, barcode} = data;
 
     return {
-      token: data.token,
-      barcode: data.barcode,
+      rememberMeToken,
+      barcode,
     };
   }
 
@@ -59,11 +52,11 @@ export default class UserRepository {
       return undefined;
     }
 
-    return JSON.parse(serializedUserInfo) as User;
+    return User.parse(serializedUserInfo);
   }
 
   async saveUserInfo(user: User) {
-    await AsyncStorage.setItem('user_info_serialized', JSON.stringify(user));
+    await AsyncStorage.setItem('user_info_serialized', user.serialize());
   }
 
   async removeUserInfo() {

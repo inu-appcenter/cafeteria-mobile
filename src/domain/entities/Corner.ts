@@ -27,10 +27,10 @@ export default class Corner {
   @Expose()
   name: string = '';
 
-  @Expose({name: 'display-name'})
+  @Expose()
   displayName: string = '';
 
-  @Expose({name: 'available-at'})
+  @Expose()
   availableAt: number = 0;
 
   menus: Menu[] = [];

@@ -18,7 +18,7 @@
  */
 
 import Corner from './Corner';
-import {Expose} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 
 export default class Cafeteria {
   @Expose()
@@ -27,17 +27,18 @@ export default class Cafeteria {
   @Expose()
   name: string = '';
 
-  @Expose({name: 'display-name'})
+  @Expose()
   displayName: string = '';
 
-  @Expose({name: 'support-menu'})
+  @Expose()
   supportMenu: boolean = false;
 
-  @Expose({name: 'support-discount'})
+  @Expose()
   supportDiscount: boolean = false;
 
-  @Expose({name: 'support-notification'})
+  @Expose()
   supportNotification: boolean = false;
 
+  @Type(() => Corner)
   corners: Corner[] = [];
 }

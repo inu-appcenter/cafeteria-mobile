@@ -34,7 +34,7 @@ export default class CafeteriaRepository {
   private url = {
     cafeteria: `${Config.baseUrl}/cafeteria`,
     corners: `${Config.baseUrl}/corners`,
-    menus: (date: string) => `${Config.baseUrl}/menus?date=${date}&split=true`,
+    menus: (date: string) => `${Config.baseUrl}/menus?date=${date}`,
   };
 
   private cache = {
@@ -51,10 +51,7 @@ export default class CafeteriaRepository {
   }
 
   private async fetchCorner() {
-    return cachedFetch(
-      this.cache.corners,
-      async () => (await axios.get(this.url.corners)).data,
-    );
+    return cachedFetch(this.cache.corners, async () => (await axios.get(this.url.corners)).data);
   }
 
   private async fetchMenus(dateString: string) {
@@ -66,9 +63,7 @@ export default class CafeteriaRepository {
   }
 
   async getCafeteria(dateOffset: number) {
-    const dateStringAfterOffset = moment()
-      .add(dateOffset, 'days')
-      .format('YYYYMMDD');
+    const dateStringAfterOffset = moment().add(dateOffset, 'days').format('YYYYMMDD');
 
     return new FetchResultReducer(
       await this.fetchCafeteria(),
@@ -82,10 +77,7 @@ export default class CafeteriaRepository {
   }
 
   async saveOrders(orderedCafeteriaIds: number[]) {
-    await AsyncStorage.setItem(
-      'cafeteria_ordered_ids',
-      JSON.stringify(orderedCafeteriaIds),
-    );
+    await AsyncStorage.setItem('cafeteria_ordered_ids', JSON.stringify(orderedCafeteriaIds));
   }
 
   async getOrders(): Promise<number[]> {
@@ -116,7 +108,7 @@ class FetchResultReducer {
 
     cafeteria.corners = this.corners
       // @ts-ignore
-      .filter(rawCorner => rawCorner['cafeteria-id'] === cafeteria.id)
+      .filter(rawCorner => rawCorner['cafeteriaId'] === cafeteria.id)
       .map(rawCorner => plainToClass(Corner, rawCorner, this.transformOptions))
       .map(corner => this.fillMenus(corner));
 
@@ -130,7 +122,7 @@ class FetchResultReducer {
 
     corner.menus = this.menus
       // @ts-ignore
-      .filter(rawMenu => rawMenu['corner-id'] === corner.id)
+      .filter(rawMenu => rawMenu['cornerId'] === corner.id)
       .map(rawMenu => plainToClass(Menu, rawMenu, this.transformOptions));
 
     return corner;

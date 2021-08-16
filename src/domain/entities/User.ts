@@ -17,8 +17,68 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import assert from 'assert';
+
 export default class User {
-  id: string = '';
-  token: string = '';
-  barcode: string = '';
+  studentId?: string;
+  phoneNumber?: string;
+
+  rememberMeToken: string;
+  barcode?: string;
+
+  static parse(serialized: string): User {
+    return User.create(JSON.parse(serialized));
+  }
+
+  static create(properties: Partial<User>): User {
+    const created = Object.assign(new User(), properties);
+    created.assertStudentOrGuest();
+
+    return created;
+  }
+
+  private assertStudentOrGuest() {
+    assert(
+      this.isStudent() || this.isGuest(),
+      new Error('사용자는 학생 또는 외부인이어야 합니다.'),
+    );
+  }
+
+  update(properties: Partial<User>): User {
+    return Object.assign(this, properties);
+  }
+
+  serialize() {
+    return JSON.stringify(this);
+  }
+
+  isStudent() {
+    return this.studentId != null && this.phoneNumber == null;
+  }
+
+  isGuest() {
+    return this.studentId == null && this.phoneNumber != null;
+  }
+
+  description() {
+    if (this.isStudent()) {
+      return `학번이 ${this.studentId}인 사용자`;
+    } else {
+      return `전화번호가 ${this.phoneNumber}인 외부 사용자`;
+    }
+  }
+
+  rememberMeLoginParams() {
+    if (this.isStudent()) {
+      return {
+        studentId: this.studentId!,
+        rememberMeToken: this.rememberMeToken,
+      };
+    } else {
+      return {
+        phoneNumber: this.phoneNumber!,
+        rememberMeToken: this.rememberMeToken,
+      };
+    }
+  }
 }

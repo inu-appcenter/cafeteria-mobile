@@ -17,15 +17,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useStores from './useStores';
+import React from 'react';
+import {Text} from 'react-native';
 
-export default function useUserState() {
-  const {userStore} = useStores();
-
-  return {
-    user: userStore.user,
-    isLoggedIn: userStore.isLoggedIn,
-    isLoggedInAsStudent: userStore.isLoggedInAsStudent,
-    isTryingRememberedLogin: userStore.isTryingRememberedLogin,
-  };
+export default function List() {
+  return <Text>예약 가능한 식당 리스트!!</Text>;
 }

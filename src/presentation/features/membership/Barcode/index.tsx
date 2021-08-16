@@ -32,6 +32,7 @@ import useScreenBrightness from '../../../hooks/useScreenBrightness';
 
 function Barcode() {
   const {user} = useUserState();
+
   const [toggleBrightness] = useScreenBrightness();
   const [, activateBarcode] = useApi(() => ActivateBarcode.run());
 

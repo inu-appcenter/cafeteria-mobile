@@ -18,18 +18,18 @@
  */
 
 import React from 'react';
-import palette from '../../../res/palette';
-import {Button} from 'react-native-paper';
-import {observer} from 'mobx-react';
-import LoadingView from '../../../components/LoadingView';
-import useUserState from '../../../hooks/useUserState';
-import PaperPresets from '../../../components/utils/PaperPresets';
-import {StackNavigationProp} from '@react-navigation/stack';
 import {StyleSheet, Text, View} from 'react-native';
-import {MembershipNavigationParams} from '../MembershipScreen';
+import {StackNavigationProp} from '@react-navigation/stack';
+import useUserState from '../../../hooks/useUserState';
+import LoadingView from '../../../components/LoadingView';
+import {Button} from 'react-native-paper';
+import PaperPresets from '../../../components/utils/PaperPresets';
+import {observer} from 'mobx-react';
+import palette from '../../../res/palette';
+import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
-  navigation: StackNavigationProp<MembershipNavigationParams, 'MembershipOnboarding'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOnboarding'>;
 };
 
 function Onboarding({navigation}: Props) {
@@ -37,20 +37,33 @@ function Onboarding({navigation}: Props) {
 
   const loadingView = <LoadingView />;
 
-  const onboardingContents = (
-    <View style={styles.container}>
-      <View style={styles.textSection}>
-        <Text style={styles.title}>🎁 학생 할인 멤버십 🎁</Text>
-        <Text style={styles.body}>
-          {`생협에서는 재학생을 위한 할인 혜택을 제공합니다.\n로그인하시고 이용해 보세요😊`}
-        </Text>
-      </View>
+  const choices = (
+    <View style={styles.buttonArray}>
       <Button
         {...PaperPresets.wideThemedButton}
         style={styles.primaryButton}
-        onPress={() => navigation.navigate('MembershipStudentLogin')}>
-        시작하기
+        onPress={() => navigation.navigate('BookingStudentLogin')}>
+        재학생 로그인
       </Button>
+      <Text style={[palette.textSubSecondary, styles.alternativeText]}>재학생이 아니신가요?</Text>
+      <Button
+        {...PaperPresets.wideNeutralButton}
+        style={styles.secondaryButton}
+        onPress={() => navigation.navigate('BookingGuestLogin')}>
+        게스트 로그인
+      </Button>
+    </View>
+  );
+
+  const onboardingContents = (
+    <View style={styles.container}>
+      <View style={styles.textSection}>
+        <Text style={styles.title}>! 예약 !</Text>
+        <Text style={styles.body}>
+          {`식당에 예약하고 입장하실 수 있습니다.\n로그인하시고 이용해 보세요😊`}
+        </Text>
+      </View>
+      {choices}
     </View>
   );
 
@@ -79,10 +92,18 @@ const styles = StyleSheet.create({
     marginTop: 18,
     textAlign: 'center',
   },
-  primaryButton: {
+  buttonArray: {
     end: 12,
     start: 12,
     bottom: 12,
     position: 'absolute',
+  },
+  primaryButton: {},
+  secondaryButton: {
+    marginTop: 8,
+  },
+  alternativeText: {
+    marginTop: 8,
+    alignSelf: 'center',
   },
 });

@@ -68,7 +68,7 @@ export default function Ask() {
         />
         <Button
           {...PaperPresets.wideThemedButton}
-          style={styles.button}
+          style={styles.primaryButton}
           onPress={submitQuestion}
           loading={loading}
           disabled={content.length <= 0}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
   },
-  button: {
+  primaryButton: {
     marginHorizontal: 16,
   },
 });

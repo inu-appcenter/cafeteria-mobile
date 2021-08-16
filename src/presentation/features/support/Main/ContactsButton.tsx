@@ -25,15 +25,19 @@ import CardView from '../../../components/CardView';
 import ChevronRight from '../../../components/ChevronRight';
 import {SupportMainNavigation} from '../SupportScreen';
 import {StyleSheet, Text, View} from 'react-native';
+import useStores from '../../../hooks/useStores';
 
 type Props = {
   navigation: SupportMainNavigation;
 };
 
 export default function ContactsButton({navigation}: Props) {
+  const {userStore} = useStores();
+
   return (
     <CardView
       style={styles.helpCard}
+      onLongPress={() => userStore.logout()} // TODO
       onPress={() => navigation.navigate('SupportContacts')}>
       <View style={styles.container}>
         <View style={styles.callIconContainer}>
@@ -41,9 +45,7 @@ export default function ContactsButton({navigation}: Props) {
         </View>
         <View style={styles.rightContainer}>
           <View style={styles.helpCardTextContainer}>
-            <Text style={styles.helpCardTitleText}>
-              서비스 이용에 불편을 겪고 계신가요?
-            </Text>
+            <Text style={styles.helpCardTitleText}>서비스 이용에 불편을 겪고 계신가요?</Text>
             <Text style={styles.helpCardBodyText}>문의 가능한 연락처 보기</Text>
           </View>
           <ChevronRight />

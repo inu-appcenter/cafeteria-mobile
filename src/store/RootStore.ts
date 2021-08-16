@@ -19,7 +19,7 @@
 
 import doLater from '../common/utils/doLater';
 import QnAStore from '../presentation/features/support/QnA/QnAStore';
-import UserStore from '../presentation/features/membership/UserStore';
+import UserStore from '../presentation/features/login/UserStore';
 import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
 import VersionStore from '../presentation/features/support/Version/VersionStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';

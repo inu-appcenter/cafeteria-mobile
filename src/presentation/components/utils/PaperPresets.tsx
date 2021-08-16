@@ -48,17 +48,26 @@ const passwordTextInput: PaperTextInputPropsWithoutRef = {
 
 const wideButton: typeof Button.defaultProps = {
   contentStyle: {
-    padding: 6,
+    paddingVertical: 4,
   },
   mode: 'contained',
 };
 
 const wideThemedButton: typeof Button.defaultProps = {
   contentStyle: {
-    padding: 6,
+    paddingVertical: 4,
   },
   labelStyle: {color: 'white', fontSize: 16},
   color: colors.mainTint,
+  mode: 'contained',
+};
+
+const wideNeutralButton: typeof Button.defaultProps = {
+  contentStyle: {
+    paddingVertical: 4,
+  },
+  labelStyle: {color: colors.textSecondary, fontSize: 16},
+  color: colors.neutralGray,
   mode: 'contained',
 };
 
@@ -74,5 +83,6 @@ export default {
   passwordTextInput,
   wideButton,
   wideThemedButton,
+  wideNeutralButton,
   grayBorderedButton,
 };

@@ -17,15 +17,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useStores from './useStores';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
+import palette from '../../../../res/palette';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {BookingMainNavigationParams} from '../index';
 
-export default function useUserState() {
-  const {userStore} = useStores();
+type Props = {
+  navigation: StackNavigationProp<BookingMainNavigationParams, 'BookingMyList'>;
+};
 
-  return {
-    user: userStore.user,
-    isLoggedIn: userStore.isLoggedIn,
-    isLoggedInAsStudent: userStore.isLoggedInAsStudent,
-    isTryingRememberedLogin: userStore.isTryingRememberedLogin,
-  };
+export default function MyBookingsHeaderButton({navigation}: Props) {
+  return (
+    <Icon
+      name="person"
+      size={24}
+      style={palette.iconHeaderButton}
+      onPress={() => {
+        navigation.navigate('BookingMyList');
+      }}
+    />
+  );
 }

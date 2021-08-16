@@ -45,9 +45,7 @@ export default class UserRepository {
   }
 
   async getSavedUserInfo() {
-    const serializedUserInfo = await AsyncStorage.getItem(
-      'user_info_serialized',
-    );
+    const serializedUserInfo = await AsyncStorage.getItem('user_info_serialized');
     if (serializedUserInfo === null) {
       return undefined;
     }
@@ -60,7 +58,7 @@ export default class UserRepository {
   }
 
   async removeUserInfo() {
-    await AsyncStorage.removeItem('user_credentials_serialized');
+    await AsyncStorage.removeItem('user_info_serialized');
   }
 
   async activateBarcode() {

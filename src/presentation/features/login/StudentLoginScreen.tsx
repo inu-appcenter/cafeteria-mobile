@@ -17,27 +17,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../hooks/useApi';
-import colors from '../../../res/colors';
-import notify from '../../../components/utils/notify';
-import palette from '../../../res/palette';
+import useApi from '../../hooks/useApi';
+import colors from '../../res/colors';
+import notify from '../../components/utils/notify';
+import palette from '../../res/palette';
 import {Button} from 'react-native-paper';
-import useStores from '../../../hooks/useStores';
+import useStores from '../../hooks/useStores';
 import {observer} from 'mobx-react';
-import PaperPresets from '../../../components/utils/PaperPresets';
-import Unauthorized from '../../../../data/exceptions/Unauthorized';
-import handleApiError from '../../../../common/utils/handleApiError';
-import ClearableTextInput from '../../../components/ClearableTextInput';
+import PaperPresets from '../../components/utils/PaperPresets';
+import Unauthorized from '../../../data/exceptions/Unauthorized';
+import handleApiError from '../../../common/utils/handleApiError';
+import ClearableTextInput from '../../components/ClearableTextInput';
 import React, {createRef, useState} from 'react';
 import {Text, View, ScrollView, StyleSheet} from 'react-native';
 
-function Login() {
+function StudentLoginScreen() {
   const {userStore} = useStores();
 
   const [studentId, setStudentId] = useState('');
   const [password, setPassword] = useState('');
 
-  const [loading, invoke] = useApi(() => userStore.login(studentId, password));
+  const [loading, invoke] = useApi(() => userStore.studentLogin(studentId, password));
 
   const passwordFieldRef = createRef<ClearableTextInput>();
 
@@ -82,7 +82,7 @@ function Login() {
         />
         <Button
           {...PaperPresets.wideThemedButton}
-          style={styles.button}
+          style={styles.primaryButton}
           loading={loading}
           disabled={!formValid()}
           onPress={login}>
@@ -101,7 +101,7 @@ function Login() {
   );
 }
 
-export default observer(Login);
+export default observer(StudentLoginScreen);
 
 const styles = StyleSheet.create({
   input: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingVertical: 0,
   },
-  button: {
+  primaryButton: {
     marginTop: 16,
   },
   text: {

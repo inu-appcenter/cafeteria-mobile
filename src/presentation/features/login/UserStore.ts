@@ -17,18 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import User from '../../../domain/entities/User';
 import Login from '../../../domain/usecases/Login';
 import GetUser from '../../../domain/usecases/GetUser';
 import {makeAutoObservable} from 'mobx';
-import User from '../../../domain/entities/User';
 
 export default class UserStore {
-  private _isTryingRememberedLogin: boolean = false;
-  get isTryingRememberedLogin() {
-    return this._isTryingRememberedLogin;
+  private _user?: User;
+  get user() {
+    return this._user;
   }
-  set isTryingRememberedLogin(value) {
-    this._isTryingRememberedLogin = value;
+  set user(value) {
+    this._user = value;
   }
 
   private _isLoggedIn: boolean = false;
@@ -39,19 +39,27 @@ export default class UserStore {
     this._isLoggedIn = value;
   }
 
-  private _user?: User;
-  get user() {
-    return this._user;
+  private _isLoggedInAsStudent: boolean = false;
+  get isLoggedInAsStudent() {
+    return this._isLoggedInAsStudent;
   }
-  set user(value) {
-    this._user = value;
+  set isLoggedInAsStudent(value) {
+    this._isLoggedInAsStudent = value;
+  }
+
+  private _isTryingRememberedLogin: boolean = false;
+  get isTryingRememberedLogin() {
+    return this._isTryingRememberedLogin;
+  }
+  set isTryingRememberedLogin(value) {
+    this._isTryingRememberedLogin = value;
   }
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  async login(studentId: string, password: string) {
+  async studentLogin(studentId: string, password: string) {
     try {
       await Login.run({studentId, password});
 
@@ -89,12 +97,19 @@ export default class UserStore {
       return;
     }
 
-    this.isLoggedIn = true;
     this.user = user;
+    this.isLoggedIn = true;
+    this.isLoggedInAsStudent = user.isStudent;
   }
 
   private async onLoginFail() {
-    this.isLoggedIn = false;
     this.user = undefined;
+    this.isLoggedIn = false;
+    this.isLoggedInAsStudent = false;
+  }
+
+  // TODO
+  async logout() {
+    await this.onLoginFail();
   }
 }

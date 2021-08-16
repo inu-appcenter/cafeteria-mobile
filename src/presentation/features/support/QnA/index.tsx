@@ -25,13 +25,13 @@ import History from './History';
 import {StyleSheet} from 'react-native';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 
-type AskAndAnswersNavigationParams = {
-  DirectInquiryAsk: undefined;
-  DirectInquiryHistory: undefined;
+type QnANavigationParams = {
+  QnAAsk: undefined;
+  QnAHistory: undefined;
 };
 
-export default function DirectInquiry() {
-  const Tab = createMaterialTopTabNavigator<AskAndAnswersNavigationParams>();
+export default function QnA() {
+  const Tab = createMaterialTopTabNavigator<QnANavigationParams>();
 
   return (
     <Tab.Navigator
@@ -42,16 +42,8 @@ export default function DirectInquiry() {
         activeTintColor: colors.textPrimary,
         inactiveTintColor: colors.textDisabled,
       }}>
-      <Tab.Screen
-        name="DirectInquiryAsk"
-        component={Ask}
-        options={{title: '문의하기'}}
-      />
-      <Tab.Screen
-        name="DirectInquiryHistory"
-        component={History}
-        options={{title: '지난 문의 내역'}}
-      />
+      <Tab.Screen name="QnAAsk" component={Ask} options={{title: '문의하기'}} />
+      <Tab.Screen name="QnAHistory" component={History} options={{title: '지난 문의 내역'}} />
     </Tab.Navigator>
   );
 }

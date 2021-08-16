@@ -29,39 +29,31 @@ import QuestionWithAnswerView from '../QuestionWithAnswerView';
 import {StyleSheet, Text, View} from 'react-native';
 
 type Props = {
-  inquiry: QuestionWithAnswerView;
+  qna: QuestionWithAnswerView;
 };
 
-export default function InquiryItem({inquiry}: Props) {
+export default function QnAItem({qna}: Props) {
   const COLLAPSED_MAX_LINES = 2;
   const EXPANDED_MAX_LINES = 0;
 
-  const {directInquiryStore} = useStores();
+  const {qnaStore} = useStores();
   const [lines, setLines] = useState(COLLAPSED_MAX_LINES);
-  const [answerRead, setAnswerRead] = useState(inquiry.answer?.read);
+  const [answerRead, setAnswerRead] = useState(qna.answer?.read);
 
   const questionPart = (
     <View>
       <View style={styles.questionMetadataContainer}>
-        <Text style={palette.textSubSecondary}>{inquiry.date}</Text>
-        <Text style={palette.textSubSecondary}>{inquiry.answerStatus}</Text>
+        <Text style={palette.textSubSecondary}>{qna.date}</Text>
+        <Text style={palette.textSubSecondary}>{qna.answerStatus}</Text>
       </View>
-      <Text
-        style={styles.questionBody}
-        numberOfLines={lines}
-        ellipsizeMode="tail">
-        {inquiry.content}
+      <Text style={styles.questionBody} numberOfLines={lines} ellipsizeMode="tail">
+        {qna.content}
       </Text>
     </View>
   );
 
   const answerUnreadDot = (
-    <Octicons
-      name="primitive-dot"
-      color="orange"
-      style={styles.answerUnreadDotStyle}
-      size={16}
-    />
+    <Octicons name="primitive-dot" color="orange" style={styles.answerUnreadDotStyle} size={16} />
   );
 
   const answerPart = (
@@ -70,13 +62,10 @@ export default function InquiryItem({inquiry}: Props) {
       <View style={styles.answerRightContainer}>
         <View style={styles.answerTitleContainer}>
           {answerRead ? null : answerUnreadDot}
-          <Text style={styles.answerTitle}>{inquiry.answer?.title}</Text>
+          <Text style={styles.answerTitle}>{qna.answer?.title}</Text>
         </View>
-        <Text
-          style={styles.answerBody}
-          numberOfLines={lines}
-          ellipsizeMode="tail">
-          {inquiry.answer?.body}
+        <Text style={styles.answerBody} numberOfLines={lines} ellipsizeMode="tail">
+          {qna.answer?.body}
         </Text>
       </View>
     </View>
@@ -85,10 +74,8 @@ export default function InquiryItem({inquiry}: Props) {
   const focusAnswer = () => {
     setLines(EXPANDED_MAX_LINES);
 
-    if (!answerRead && inquiry.answer !== undefined) {
-      directInquiryStore
-        .markAnswerRead(inquiry.answer.id)
-        .catch(handleApiError);
+    if (!answerRead && qna.answer !== undefined) {
+      qnaStore.markAnswerRead(qna.answer.id).catch(handleApiError);
 
       // 위 요청이 성공했든 아니든 일단 컴포넌트에서는 답변을 읽은 것으로 시각적 피드백을 줍니다.
       setAnswerRead(true);
@@ -99,7 +86,7 @@ export default function InquiryItem({inquiry}: Props) {
     <Touchable onPress={focusAnswer}>
       <View style={styles.container}>
         {questionPart}
-        {inquiry.answer ? answerPart : null}
+        {qna.answer ? answerPart : null}
       </View>
     </Touchable>
   );

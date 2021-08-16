@@ -22,8 +22,8 @@ import Config from '../../common/Config';
 import Question from '../../domain/entities/Question';
 import {plainToClass} from 'class-transformer';
 
-export default class DirectInquiryRepository {
-  static instance = new DirectInquiryRepository();
+export default class QnARepository {
+  static instance = new QnARepository();
 
   private url = {
     ask: `${Config.baseUrl}/ask`,
@@ -40,7 +40,10 @@ export default class DirectInquiryRepository {
   }
 
   async getHistories() {
-    return plainToClass(Question, await this.fetchQuestions());
+    // 최신순부터
+    return plainToClass(Question, (await this.fetchQuestions()) as any[]).sort(
+      (a, b) => b.askedAt.getTime() - a.askedAt.getTime(),
+    );
   }
 
   async markAnswerRead(answerId: number) {

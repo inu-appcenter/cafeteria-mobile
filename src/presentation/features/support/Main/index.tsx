@@ -40,11 +40,11 @@ function Main({navigation}: Props) {
   const contacts = <ContactsButton navigation={navigation} />;
   const separator = <ItemSeparator style={{marginVertical: 12}} />;
 
-  const directInquiryOption = (
+  const qnaOption = (
     <SupportOption.Item
       icon={['message-square', Feather]}
       title="1:1 문의"
-      navigationDestination="SupportDirectInquiry"
+      navigationDestination="SupportQuestionAndAnswer"
     />
   );
 
@@ -65,7 +65,7 @@ function Main({navigation}: Props) {
 
   const support = (
     <SupportOption.Section navigation={navigation}>
-      {isLoggedIn ? directInquiryOption : null}
+      {isLoggedIn ? qnaOption : null}
       <SupportOption.Item
         icon={['archive', Feather]}
         title="자주 묻는 질문"

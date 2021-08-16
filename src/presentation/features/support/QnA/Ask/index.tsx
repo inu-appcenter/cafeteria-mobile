@@ -29,12 +29,12 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
 export default function Ask() {
-  const {directInquiryStore} = useStores();
+  const {qnaStore} = useStores();
 
   const [content, setContent] = useState('');
 
-  const [loading, ask] = useApi(() => directInquiryStore.ask(content));
-  const [, fetchHistories] = useApi(() => directInquiryStore.fetchHistories());
+  const [loading, ask] = useApi(() => qnaStore.ask(content));
+  const [, fetchHistories] = useApi(() => qnaStore.fetchHistories());
 
   const submitQuestion = async () => {
     if (loading) {

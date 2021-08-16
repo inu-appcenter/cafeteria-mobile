@@ -17,19 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import doLater from '../common/utils/doLater';
+import QnAStore from '../presentation/features/support/QnA/QnAStore';
 import UserStore from '../presentation/features/membership/UserStore';
 import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
 import VersionStore from '../presentation/features/support/Version/VersionStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
-import DirectInquiryStore from '../presentation/features/support/DirectInquery/DirectInquiryStore';
-import doLater from '../common/utils/doLater';
 
 export default class RootStore {
+  qnaStore = new QnAStore();
   userStore = new UserStore();
   noticeStore = new NoticeStore();
   versionStore = new VersionStore();
   cafeteriaStore = new CafeteriaStore();
-  directInquiryStore = new DirectInquiryStore();
 
   private initializationStarted = false;
 
@@ -40,9 +40,7 @@ export default class RootStore {
 
     this.userStore
       .rememberedLogin()
-      .catch(e =>
-        console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`),
-      );
+      .catch(e => console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`));
 
     doLater(() =>
       this.noticeStore

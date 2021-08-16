@@ -23,15 +23,12 @@ import Version from './Version';
 import Notices from './Notices';
 import Contacts from './Contacts';
 import ServiceHelp from './ServiceManual';
-import DirectInquiry from './DirectInquery';
+import QnA from './QnA';
 import FrequentQuestions from './FrequentQuestions';
 import TermsAndConditions from './TermsAndConditions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import OpenSourceLicenses from './OpenSourceLicenses';
-import {
-  createStackNavigator,
-  StackNavigationProp,
-} from '@react-navigation/stack';
+import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import UpdateInfoHeaderButton from './Version/UpdateInfoHeaderButton';
 import palette from '../../res/palette';
 
@@ -41,16 +38,13 @@ export type SupportNavigationParams = {
   SupportVersion: undefined;
   SupportContacts: undefined;
   SupportServiceManual: undefined;
-  SupportDirectInquiry: undefined;
+  SupportQuestionAndAnswer: undefined;
   SupportFrequentQuestions: undefined;
   SupportTermsAndConditions: undefined;
   SupportOpenSourceLicenses: undefined;
 };
 
-export type SupportMainNavigation = StackNavigationProp<
-  SupportNavigationParams,
-  'SupportMain'
->;
+export type SupportMainNavigation = StackNavigationProp<SupportNavigationParams, 'SupportMain'>;
 
 const Stack = createStackNavigator<SupportNavigationParams>();
 
@@ -59,21 +53,9 @@ export default function SupportScreen() {
     <Stack.Navigator
       headerMode="screen"
       screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      <Stack.Screen
-        name="SupportMain"
-        component={Main}
-        options={{title: '지원'}}
-      />
-      <Stack.Screen
-        name="SupportContacts"
-        component={Contacts}
-        options={{title: '문의 연락처'}}
-      />
-      <Stack.Screen
-        name="SupportNotices"
-        component={Notices}
-        options={{title: '공지'}}
-      />
+      <Stack.Screen name="SupportMain" component={Main} options={{title: '지원'}} />
+      <Stack.Screen name="SupportContacts" component={Contacts} options={{title: '문의 연락처'}} />
+      <Stack.Screen name="SupportNotices" component={Notices} options={{title: '공지'}} />
       <Stack.Screen
         name="SupportVersion"
         component={Version}
@@ -83,8 +65,8 @@ export default function SupportScreen() {
         }}
       />
       <Stack.Screen
-        name="SupportDirectInquiry"
-        component={DirectInquiry}
+        name="SupportQuestionAndAnswer"
+        component={QnA}
         options={{title: '1:1 문의', headerStyle: palette.noSeparator}}
       />
       <Stack.Screen

@@ -18,19 +18,25 @@
  */
 
 import UseCase from './UseCase';
-import Question from '../entities/Question';
-import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
+import DeviceInfo from 'react-native-device-info';
+import PackageInfo from '../../common/PackageInfo';
+import QnARepository from '../../data/repositories/QnARepository';
 
-class GetInquiryHistories extends UseCase<void, Question[]> {
-  constructor(
-    private readonly directInquiryRepository: DirectInquiryRepository,
-  ) {
+type Params = {
+  content: string;
+};
+
+class Ask extends UseCase<Params, void> {
+  constructor(private readonly qnaRepository: QnARepository) {
     super();
   }
 
-  async onExecute(params: void): Promise<Question[]> {
-    return this.directInquiryRepository.getHistories();
+  async onExecute(params: Params): Promise<void> {
+    const deviceInfo = `${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}; ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`;
+    const version = PackageInfo.version;
+
+    await this.qnaRepository.ask(deviceInfo, version, params.content);
   }
 }
 
-export default new GetInquiryHistories(DirectInquiryRepository.instance);
+export default new Ask(QnARepository.instance);

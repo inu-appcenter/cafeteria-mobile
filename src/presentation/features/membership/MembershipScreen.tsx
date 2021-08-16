@@ -69,10 +69,7 @@ function MembershipScreen() {
   );
 
   return (
-    <Stack.Navigator
-      mode="modal"
-      headerMode="screen"
-      screenOptions={StackHeaderPresets.commonModalHeaderOptions}>
+    <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
       {isLoggedInAsStudent ? [barcodeScreen] : [onboardingScreen, loginScreen]}
     </Stack.Navigator>
   );

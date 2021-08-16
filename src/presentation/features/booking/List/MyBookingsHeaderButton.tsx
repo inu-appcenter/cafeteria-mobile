@@ -19,12 +19,12 @@
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
-import palette from '../../../../res/palette';
+import palette from '../../../res/palette';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {BookingMainNavigationParams} from '../index';
+import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
-  navigation: StackNavigationProp<BookingMainNavigationParams, 'BookingMyList'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingMyBookings'>;
 };
 
 export default function MyBookingsHeaderButton({navigation}: Props) {
@@ -34,7 +34,7 @@ export default function MyBookingsHeaderButton({navigation}: Props) {
       size={24}
       style={palette.iconHeaderButton}
       onPress={() => {
-        navigation.navigate('BookingMyList');
+        navigation.navigate('BookingMyBookings');
       }}
     />
   );

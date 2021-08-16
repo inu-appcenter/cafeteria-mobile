@@ -20,16 +20,9 @@
 import Login from '../../../domain/usecases/Login';
 import GetUser from '../../../domain/usecases/GetUser';
 import {makeAutoObservable} from 'mobx';
+import User from '../../../domain/entities/User';
 
 export default class UserStore {
-  private _isLoggedIn: boolean = false;
-  get isLoggedIn() {
-    return this._isLoggedIn;
-  }
-  set isLoggedIn(value) {
-    this._isLoggedIn = value;
-  }
-
   private _isTryingRememberedLogin: boolean = false;
   get isTryingRememberedLogin() {
     return this._isTryingRememberedLogin;
@@ -38,20 +31,20 @@ export default class UserStore {
     this._isTryingRememberedLogin = value;
   }
 
-  private _userId: string | undefined = undefined;
-  get userId() {
-    return this._userId;
+  private _isLoggedIn: boolean = false;
+  get isLoggedIn() {
+    return this._isLoggedIn;
   }
-  set userId(value) {
-    this._userId = value;
+  set isLoggedIn(value) {
+    this._isLoggedIn = value;
   }
 
-  private _barcode: string | undefined = undefined;
-  get barcode() {
-    return this._barcode;
+  private _user?: User;
+  get user() {
+    return this._user;
   }
-  set barcode(value) {
-    this._barcode = value;
+  set user(value) {
+    this._user = value;
   }
 
   constructor() {
@@ -96,14 +89,12 @@ export default class UserStore {
       return;
     }
 
-    this.userId = user.studentId;
-    this.barcode = user.barcode;
     this.isLoggedIn = true;
+    this.user = user;
   }
 
   private async onLoginFail() {
-    this.userId = undefined;
-    this.barcode = undefined;
     this.isLoggedIn = false;
+    this.user = undefined;
   }
 }

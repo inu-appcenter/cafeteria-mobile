@@ -38,10 +38,7 @@ export default class User {
   }
 
   private assertStudentOrGuest() {
-    assert(
-      this.isStudent() || this.isGuest(),
-      new Error('사용자는 학생 또는 외부인이어야 합니다.'),
-    );
+    assert(this.isStudent || this.isGuest, new Error('사용자는 학생 또는 외부인이어야 합니다.'));
   }
 
   update(properties: Partial<User>): User {
@@ -52,24 +49,40 @@ export default class User {
     return JSON.stringify(this);
   }
 
-  isStudent() {
+  get isStudent() {
     return this.studentId != null && this.phoneNumber == null;
   }
 
-  isGuest() {
+  get isGuest() {
     return this.studentId == null && this.phoneNumber != null;
   }
 
-  description() {
-    if (this.isStudent()) {
+  get identifierName() {
+    if (this.isStudent) {
+      return '학번';
+    } else {
+      return '전화번호';
+    }
+  }
+
+  get identifier() {
+    if (this.isStudent) {
+      return this.studentId;
+    } else {
+      return this.phoneNumber;
+    }
+  }
+
+  get description() {
+    if (this.isStudent) {
       return `학번이 ${this.studentId}인 사용자`;
     } else {
       return `전화번호가 ${this.phoneNumber}인 외부 사용자`;
     }
   }
 
-  rememberMeLoginParams() {
-    if (this.isStudent()) {
+  get rememberMeLoginParams() {
+    if (this.isStudent) {
       return {
         studentId: this.studentId!,
         rememberMeToken: this.rememberMeToken,

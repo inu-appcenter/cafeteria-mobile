@@ -34,7 +34,7 @@ export type MembershipNavigationParams = {
 };
 
 function MembershipScreen() {
-  const {isLoggedIn} = useUserState();
+  const {isLoggedIn, user} = useUserState();
 
   const Stack = createStackNavigator<MembershipNavigationParams>();
 
@@ -60,12 +60,7 @@ function MembershipScreen() {
   );
 
   const loginScreen = (
-    <Stack.Screen
-      key="login_screen"
-      name="Login"
-      component={Login}
-      options={{title: '로그인'}}
-    />
+    <Stack.Screen key="login_screen" name="Login" component={Login} options={{title: '로그인'}} />
   );
 
   return (
@@ -73,7 +68,7 @@ function MembershipScreen() {
       mode="modal"
       headerMode="screen"
       screenOptions={StackHeaderPresets.commonModalHeaderOptions}>
-      {isLoggedIn ? [barcodeScreen] : [onboardingScreen, loginScreen]}
+      {isLoggedIn && user?.isStudent ? [barcodeScreen] : [onboardingScreen, loginScreen]}
     </Stack.Navigator>
   );
 }

@@ -45,9 +45,9 @@ class Login extends UseCase<Params | void> {
       throw new Error('저장된 사용자 정보가 없어요!');
     }
 
-    console.log(`${user.description()} 자동로그인 하십니다.`);
+    console.log(`${user.description} 자동로그인 하십니다.`);
 
-    const result = await this.userRepository.login(user.rememberMeLoginParams());
+    const result = await this.userRepository.login(user.rememberMeLoginParams);
 
     user.update(result);
 

@@ -17,18 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useState} from 'react';
-import {ScrollView, StyleSheet, View} from 'react-native';
-import useStores from '../../hooks/useStores';
 import useApi from '../../hooks/useApi';
-import Unauthorized from '../../../data/exceptions/Unauthorized';
 import notify from '../../components/utils/notify';
-import handleApiError from '../../../common/utils/handleApiError';
-import palette from '../../res/palette';
-import ClearableTextInput from '../../components/ClearableTextInput';
-import PaperPresets from '../../components/utils/PaperPresets';
-import {Button} from 'react-native-paper';
 import colors from '../../res/colors';
+import palette from '../../res/palette';
+import useStores from '../../hooks/useStores';
+import PaperPresets from '../../components/utils/PaperPresets';
+import Unauthorized from '../../../data/exceptions/Unauthorized';
+import ItemSeparator from '../../components/ItemSeparator';
+import handleApiError from '../../../common/utils/handleApiError';
+import React, {useState} from 'react';
+import ClearableTextInput from '../../components/ClearableTextInput';
+import {Button, TextInput} from 'react-native-paper';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 export default function GuestLoginScreen() {
   const {userStore} = useStores();
@@ -36,6 +37,7 @@ export default function GuestLoginScreen() {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [passcode, setPasscode] = useState('');
   const [challengeRequestSucceeded, setChallengeRequestSucceeded] = useState(false);
+  const [lastChallengeRequestTime, setLastChallengeRequestTime] = useState(0);
 
   const [getChallengeLoading, invokeGetChallenge] = useApi(() => userStore.guestChallenge(phoneNumber));
   const [loginLoading, invokeLogin] = useApi(() => userStore.guestLogin(phoneNumber, passcode));
@@ -48,8 +50,17 @@ export default function GuestLoginScreen() {
       return;
     }
 
+    const elapsed = Date.now() - lastChallengeRequestTime;
+    if (elapsed < 1000 * 60) {
+      notify('인증번호는 1분에 한 번만 요청할 수 있습니다.');
+      return;
+    }
+
     invokeGetChallenge()
-      .then(() => setChallengeRequestSucceeded(true))
+      .then(() => {
+        setLastChallengeRequestTime(Date.now());
+        setChallengeRequestSucceeded(true);
+      })
       .catch(e => handleApiError(e));
   };
   const login = async () => {
@@ -88,10 +99,13 @@ export default function GuestLoginScreen() {
 
   const phase2 = (
     <View>
-      <ClearableTextInput
+      <ItemSeparator style={{marginTop: 18}} />
+
+      <TextInput
         {...PaperPresets.idTextInput}
         value={passcode}
         style={styles.input}
+        right={<TextInput.Icon onPress={getChallenge} name={'refresh'} color={colors.textSecondary} />}
         label="인증번호"
         maxLength={4}
         onChangeText={setPasscode}
@@ -113,7 +127,11 @@ export default function GuestLoginScreen() {
     <View style={[palette.fullSized, palette.whiteBackground]}>
       <ScrollView contentContainerStyle={palette.horizontalSpace}>
         {phase1}
+
         {challengeRequestSucceeded ? phase2 : undefined}
+
+        <Text style={styles.text}>통신망 상태에 따라 전달에 1분 정도 소요될 수 있습니다.</Text>
+        <Text style={styles.text}>1분 안에 인증번호가 도착하지 않으면 재전송을 눌러 주세요.</Text>
       </ScrollView>
     </View>
   );

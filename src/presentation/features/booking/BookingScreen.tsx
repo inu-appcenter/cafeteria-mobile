@@ -50,7 +50,7 @@ function BookingScreen() {
       key="booking_onboarding"
       name="BookingOnboarding"
       component={Onboarding}
-      options={{title: '식당 예약'}}
+      options={{headerShown: false}}
     />
   );
 

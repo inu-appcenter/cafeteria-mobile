@@ -55,11 +55,12 @@ export default class ClearableTextInput extends React.Component<Props, State> {
   render() {
     const clearButton = this.valueExists() ? (
       <TextInput.Icon
+        disabled={this.props.disabled}
         onPress={() => this.updateText('')}
         name={'close'}
         color={colors.textSecondary}
       />
-    ) : null;
+    ) : undefined;
 
     return (
       <TextInput

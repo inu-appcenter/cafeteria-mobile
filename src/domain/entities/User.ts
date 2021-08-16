@@ -18,34 +18,63 @@
  */
 
 import assert from 'assert';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {Expose, plainToClass} from 'class-transformer';
 
 export default class User {
+  @Expose()
   studentId?: string;
+
+  @Expose()
   phoneNumber?: string;
 
+  @Expose()
   rememberMeToken: string;
+
+  @Expose()
   barcode?: string;
+
+  static async find(): Promise<User | undefined> {
+    const serializedUserInfo = await AsyncStorage.getItem('user_info_serialized');
+    if (serializedUserInfo == null) {
+      return undefined;
+    }
+
+    return User.parse(serializedUserInfo);
+  }
+
+  async save(): Promise<this> {
+    await AsyncStorage.setItem('user_info_serialized', this.serialize());
+
+    return this;
+  }
+
+  async remove(): Promise<this> {
+    await AsyncStorage.removeItem('user_info_serialized');
+
+    return this;
+  }
 
   static parse(serialized: string): User {
     return User.create(JSON.parse(serialized));
   }
 
   static create(properties: Partial<User>): User {
-    const created = Object.assign(new User(), properties);
+    const created = plainToClass(User, properties, {excludeExtraneousValues: true});
     created.assertStudentOrGuest();
 
     return created;
   }
 
   private assertStudentOrGuest() {
-    assert(this.isStudent || this.isGuest, new Error('사용자는 학생 또는 외부인이어야 합니다.'));
+    assert(this.isStudent || this.isGuest, '사용자는 학생 또는 게스트여야 합니다.');
   }
 
   update(properties: Partial<User>): User {
     return Object.assign(this, properties);
   }
 
-  serialize() {
+  serialize(): string {
     return JSON.stringify(this);
   }
 

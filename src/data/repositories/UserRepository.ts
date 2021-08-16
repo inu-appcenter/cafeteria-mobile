@@ -17,21 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import User from '../../domain/entities/User';
 import axios from 'axios';
 import Config from '../../common/Config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class UserRepository {
   static instance = new UserRepository();
 
   private url = {
-    login: `${Config.baseUrl}/login`,
+    studentLogin: `${Config.baseUrl}/student/login`,
+    guestLogin: `${Config.baseUrl}/guest/login`,
     activateBarcode: `${Config.baseUrl}/activateBarcode`,
+    requestGuestChallenge: `${Config.baseUrl}/guest/challenge`,
   };
 
   async login(params: Record<string, string | undefined>) {
-    const {data} = await axios.post(this.url.login, params);
+    const url = params['studentId'] ? this.url.studentLogin : this.url.guestLogin;
+
+    const {data} = await axios.post(url, params);
     const {rememberMeToken, barcode} = data;
 
     return {
@@ -40,28 +42,11 @@ export default class UserRepository {
     };
   }
 
-  async hasSavedUserInfo() {
-    return (await this.getSavedUserInfo()) !== undefined;
-  }
-
-  async getSavedUserInfo() {
-    const serializedUserInfo = await AsyncStorage.getItem('user_info_serialized');
-    if (serializedUserInfo === null) {
-      return undefined;
-    }
-
-    return User.parse(serializedUserInfo);
-  }
-
-  async saveUserInfo(user: User) {
-    await AsyncStorage.setItem('user_info_serialized', user.serialize());
-  }
-
-  async removeUserInfo() {
-    await AsyncStorage.removeItem('user_info_serialized');
-  }
-
   async activateBarcode() {
     await axios.put(this.url.activateBarcode);
+  }
+
+  async requestGuestChallenge(phoneNumber: string) {
+    await axios.post(this.url.requestGuestChallenge, {phoneNumber});
   }
 }

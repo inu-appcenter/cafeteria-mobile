@@ -19,8 +19,8 @@
 
 import User from '../../../domain/entities/User';
 import Login from '../../../domain/usecases/Login';
-import GetUser from '../../../domain/usecases/GetUser';
 import {makeAutoObservable} from 'mobx';
+import RequestGuestChallenge from '../../../domain/usecases/RequestGuestChallenge';
 
 export default class UserStore {
   private _user?: User;
@@ -59,6 +59,12 @@ export default class UserStore {
     makeAutoObservable(this);
   }
 
+  /**
+   * 학번과 포탈 비밀번호로 로그인합니다.
+   *
+   * @param studentId 학번.
+   * @param password 포탈 비밀번호.
+   */
   async studentLogin(studentId: string, password: string) {
     try {
       await Login.run({studentId, password});
@@ -70,9 +76,38 @@ export default class UserStore {
     }
   }
 
+  /**
+   * 게스트 로그인을 위해 휴대전화 번호로 인증코드 발송을 요청합니다.
+   *
+   * @param phoneNumber 사용할 휴대전화 번호.
+   */
+  async guestChallenge(phoneNumber: string) {
+    await RequestGuestChallenge.run({phoneNumber});
+  }
+
+  /**
+   * 휴대전화 번호와 인증코드로 로그인합니다.
+   *
+   * @param phoneNumber 휴대전화 번호.
+   * @param passcode 인증번호.
+   */
+  async guestLogin(phoneNumber: string, passcode: string) {
+    try {
+      await Login.run({phoneNumber, passcode});
+
+      await this.onLoginSuccess();
+    } catch (e) {
+      await this.onLoginFail();
+      throw e;
+    }
+  }
+
+  /**
+   * 저장된 사용자 정보를 기반으로 자동 로그인 합니다.
+   */
   async rememberedLogin() {
-    const savedUserInfo = await GetUser.run();
-    if (savedUserInfo === undefined) {
+    const savedUserInfo = await User.find();
+    if (savedUserInfo == null) {
       return;
     }
 
@@ -91,8 +126,8 @@ export default class UserStore {
   }
 
   private async onLoginSuccess() {
-    const user = await GetUser.run();
-    if (user === undefined) {
+    const user = await User.find();
+    if (user == null) {
       console.error('로그인 성공했다면서 저장된 사용자가 없다구요!?!?');
       return;
     }

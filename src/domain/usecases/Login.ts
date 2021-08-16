@@ -20,11 +20,19 @@
 import UseCase from './UseCase';
 import UserRepository from '../../data/repositories/UserRepository';
 import User from '../entities/User';
+import assert from 'assert';
 
-type Params = {
+type StudentLoginParams = {
   studentId: string;
   password: string;
 };
+
+type GuestLoginParams = {
+  phoneNumber: string;
+  passcode: string;
+};
+
+type Params = StudentLoginParams | GuestLoginParams;
 
 class Login extends UseCase<Params | void> {
   constructor(private readonly userRepository: UserRepository) {
@@ -40,33 +48,27 @@ class Login extends UseCase<Params | void> {
   }
 
   private async tryLoginWithSavedCredentials() {
-    const user = await this.userRepository.getSavedUserInfo();
-    if (user === undefined) {
-      throw new Error('저장된 사용자 정보가 없어요!');
-    }
+    const user = await User.find();
+
+    assert(user, '저장된 사용자 정보가 없어요!');
 
     console.log(`${user.description} 자동로그인 하십니다.`);
 
-    const result = await this.userRepository.login(user.rememberMeLoginParams);
-
-    user.update(result);
-
-    await this.userRepository.saveUserInfo(user);
+    return await this.loginAndSaveResult(user, user.rememberMeLoginParams);
   }
 
-  private async tryLoginWithUserInput({studentId, password}: Params) {
-    const user = User.create({
-      studentId,
-    });
+  private async tryLoginWithUserInput(params: Params) {
+    const user = User.create(params);
 
-    const result = await this.userRepository.login({
-      studentId,
-      password,
-    });
+    return await this.loginAndSaveResult(user, params);
+  }
+
+  private async loginAndSaveResult(user: User, loginParams: Record<string, string | undefined>) {
+    const result = await this.userRepository.login(loginParams);
 
     user.update(result);
 
-    await this.userRepository.saveUserInfo(user);
+    await user.save();
   }
 }
 

@@ -19,16 +19,19 @@
 
 import UseCase from './UseCase';
 import UserRepository from '../../data/repositories/UserRepository';
-import User from '../entities/User';
 
-class GetUser extends UseCase<void, User | undefined> {
+type Params = {
+  phoneNumber: string;
+};
+
+class RequestGuestChallenge extends UseCase<Params> {
   constructor(private readonly userRepository: UserRepository) {
     super();
   }
 
-  async onExecute(_: void): Promise<User | undefined> {
-    return this.userRepository.getSavedUserInfo();
+  async onExecute({phoneNumber}: Params): Promise<void> {
+    return await this.userRepository.requestGuestChallenge(phoneNumber);
   }
 }
 
-export default new GetUser(UserRepository.instance);
+export default new RequestGuestChallenge(UserRepository.instance);

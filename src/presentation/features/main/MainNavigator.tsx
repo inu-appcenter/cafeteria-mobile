@@ -22,6 +22,7 @@ import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import BookingScreen from '../booking/BookingScreen';
 import SupportScreen from '../support/SupportScreen';
 import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
 import MembershipScreen from '../membership/MembershipScreen';
@@ -32,6 +33,7 @@ import tabBarIconSelector, {
 
 const icons: IconConfigs = {
   Cafeteria: ['restaurant', 'restaurant', MaterialIcons],
+  Booking: ['bookmarks', 'bookmarks-outline', Ionicons],
   Membership: ['barcode', 'barcode-outline', Ionicons],
   Support: ['support-agent', 'support-agent', MaterialIcons],
 };
@@ -53,6 +55,11 @@ export default function MainNavigator() {
         name="Cafeteria"
         component={CafeteriaScreen}
         options={{title: '식단'}}
+      />
+      <BottomTab.Screen
+        name="Booking"
+        component={BookingScreen}
+        options={{title: '예약'}}
       />
       <BottomTab.Screen
         name="Membership"

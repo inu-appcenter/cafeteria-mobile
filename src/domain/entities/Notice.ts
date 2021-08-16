@@ -17,18 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Expose} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 
 export default class Notice {
   @Expose()
   id: number = 0;
 
   @Expose()
-  title: string = '';
+  title: string;
 
   @Expose()
-  body: string = '';
+  body: string;
 
-  @Expose({name: 'created-at'})
-  createdAt: number = 0;
+  @Expose()
+  @Type(() => Date)
+  createdAt: Date;
 }

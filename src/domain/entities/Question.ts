@@ -18,17 +18,20 @@
  */
 
 import Answer from './Answer';
-import {Expose} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 
 export default class Question {
   @Expose()
-  id: number = 0;
+  id: number;
 
   @Expose()
-  content: string = '';
+  content: string;
 
-  @Expose({name: 'created-at'})
-  createdAt: number = 0;
+  @Expose()
+  @Type(() => Date)
+  askedAt: Date;
 
-  answer?: Answer = undefined;
+  @Expose()
+  @Type(() => Answer)
+  answer?: Answer;
 }

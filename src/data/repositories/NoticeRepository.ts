@@ -64,9 +64,7 @@ export default class NoticeRepository {
   }
 
   async getAllNotices(params: NoticeFetchParams) {
-    const rawNotices: object[] = await this.fetchNotices(params);
-
-    return rawNotices.map(rawNotice => plainToClass(Notice, rawNotice));
+    return plainToClass(Notice, await this.fetchNotices(params));
   }
 
   private async fetchNotices({os, appVersion}: NoticeFetchParams) {
@@ -81,8 +79,6 @@ export default class NoticeRepository {
   }
 
   async getDismissedNoticeId() {
-    return Number.parseInt(
-      (await AsyncStorage.getItem('dismissed_notice_id')) || '0',
-    );
+    return Number.parseInt((await AsyncStorage.getItem('dismissed_notice_id')) || '0');
   }
 }

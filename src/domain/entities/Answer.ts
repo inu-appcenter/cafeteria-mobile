@@ -17,21 +17,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Expose} from 'class-transformer';
+import {Expose, Type} from 'class-transformer';
 
 export default class Answer {
   @Expose()
-  id: number = 0;
+  id: number;
 
   @Expose()
-  title: string = '';
+  title: string;
 
   @Expose()
-  body: string = '';
+  body: string;
 
   @Expose()
-  read: boolean = false;
+  read: boolean;
 
-  @Expose({name: 'created-at'})
-  createdAt: number = 0;
+  @Expose()
+  @Type(() => Date)
+  answeredAt: Date;
 }

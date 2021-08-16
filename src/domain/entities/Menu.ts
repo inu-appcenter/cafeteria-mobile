@@ -22,11 +22,11 @@ import {Expose, Type} from 'class-transformer';
 export default class Menu {
   @Expose()
   @Type(() => String)
-  foods: string[] = [];
+  foods: string[];
 
   @Expose()
-  price: number = 0;
+  price: number;
 
   @Expose()
-  calorie: number = 0;
+  calorie: number;
 }

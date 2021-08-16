@@ -22,16 +22,16 @@ import Menu from './Menu';
 
 export default class Corner {
   @Expose()
-  id: number = 0;
+  id: number;
 
   @Expose()
-  name: string = '';
+  name: string;
 
   @Expose()
-  displayName: string = '';
+  displayName: string;
 
   @Expose()
-  availableAt: number = 0;
+  availableAt: number;
 
-  menus: Menu[] = [];
+  menus: Menu[];
 }

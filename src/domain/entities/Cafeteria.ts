@@ -28,17 +28,18 @@ export default class Cafeteria {
   name: string = '';
 
   @Expose()
-  displayName: string = '';
+  displayName: string;
 
   @Expose()
-  supportMenu: boolean = false;
+  supportMenu: boolean;
 
   @Expose()
-  supportDiscount: boolean = false;
+  supportDiscount: boolean;
 
   @Expose()
-  supportNotification: boolean = false;
+  supportNotification: boolean;
 
+  @Expose()
   @Type(() => Corner)
   corners: Corner[] = [];
 }

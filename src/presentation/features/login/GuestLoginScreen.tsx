@@ -30,14 +30,15 @@ import React, {useState} from 'react';
 import ClearableTextInput from '../../components/ClearableTextInput';
 import {Button, TextInput} from 'react-native-paper';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import TooManyRequests from '../../../data/exceptions/TooManyRequests';
 
 export default function GuestLoginScreen() {
   const {userStore} = useStores();
 
   const [phoneNumber, setPhoneNumber] = useState('');
   const [passcode, setPasscode] = useState('');
+
   const [challengeRequestSucceeded, setChallengeRequestSucceeded] = useState(false);
-  const [lastChallengeRequestTime, setLastChallengeRequestTime] = useState(0);
 
   const [getChallengeLoading, invokeGetChallenge] = useApi(() => userStore.guestChallenge(phoneNumber));
   const [loginLoading, invokeLogin] = useApi(() => userStore.guestLogin(phoneNumber, passcode));
@@ -50,19 +51,13 @@ export default function GuestLoginScreen() {
       return;
     }
 
-    const elapsed = Date.now() - lastChallengeRequestTime;
-    if (elapsed < 1000 * 60) {
-      notify('인증번호는 1분에 한 번만 요청할 수 있습니다.');
-      return;
-    }
-
     invokeGetChallenge()
-      .then(() => {
-        setLastChallengeRequestTime(Date.now());
-        setChallengeRequestSucceeded(true);
-      })
-      .catch(e => handleApiError(e));
+      .then(() => setChallengeRequestSucceeded(true))
+      .catch(e =>
+        e instanceof TooManyRequests ? notify('조금만 천천히 시도해주세요 :)') : handleApiError(e),
+      );
   };
+
   const login = async () => {
     if (loginLoading || !passcodeValid()) {
       return;

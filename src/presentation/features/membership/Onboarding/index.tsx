@@ -49,7 +49,7 @@ function Onboarding({navigation}: Props) {
         {...PaperPresets.wideThemedButton}
         style={styles.primaryButton}
         onPress={() => navigation.navigate('MembershipStudentLogin')}>
-        시작하기
+        학번으로 로그인
       </Button>
     </View>
   );

@@ -39,18 +39,15 @@ function Onboarding({navigation}: Props) {
 
   const choices = (
     <View style={styles.buttonArray}>
-      <Button
-        {...PaperPresets.wideThemedButton}
-        style={styles.primaryButton}
-        onPress={() => navigation.navigate('BookingStudentLogin')}>
-        재학생 로그인
+      <Button {...PaperPresets.wideThemedButton} onPress={() => navigation.navigate('BookingStudentLogin')}>
+        학번으로 로그인
       </Button>
       <Text style={[palette.textSubSecondary, styles.alternativeText]}>재학생이 아니신가요?</Text>
       <Button
         {...PaperPresets.wideNeutralButton}
         style={styles.secondaryButton}
         onPress={() => navigation.navigate('BookingGuestLogin')}>
-        게스트 로그인
+        전화번호로 로그인
       </Button>
     </View>
   );
@@ -98,7 +95,6 @@ const styles = StyleSheet.create({
     bottom: 12,
     position: 'absolute',
   },
-  primaryButton: {},
   secondaryButton: {
     marginTop: 8,
   },

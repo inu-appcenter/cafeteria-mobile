@@ -28,6 +28,7 @@
     "assert": "^2.0.0",
     "axios": "^0.21.1",
     "class-transformer": "^0.4.0",
+    "date-fns": "^2.23.0",
     "jsc-android": "^250230.2.1",
     "mobx": "^6.3.0",
     "mobx-react": "^7.1.0",

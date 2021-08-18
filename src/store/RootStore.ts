@@ -22,6 +22,7 @@ import QnAStore from '../presentation/features/support/QnA/QnAStore';
 import UserStore from '../presentation/features/login/UserStore';
 import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
 import VersionStore from '../presentation/features/support/Version/VersionStore';
+import BookingStore from '../presentation/features/booking/BookingStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
 
 export default class RootStore {
@@ -29,6 +30,7 @@ export default class RootStore {
   userStore = new UserStore();
   noticeStore = new NoticeStore();
   versionStore = new VersionStore();
+  bookingStore = new BookingStore();
   cafeteriaStore = new CafeteriaStore();
 
   private initializationStarted = false;
@@ -43,9 +45,7 @@ export default class RootStore {
       .catch(e => console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`));
 
     doLater(() =>
-      this.noticeStore
-        .fetchNewNotice()
-        .catch(e => console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`)),
+      this.noticeStore.fetchNewNotice().catch(e => console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`)),
     );
 
     this.initializationStarted = true;

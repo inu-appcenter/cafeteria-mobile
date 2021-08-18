@@ -17,9 +17,42 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import {Text} from 'react-native';
+import React, {useEffect} from 'react';
+import {FlatList} from 'react-native';
+import useStores from '../../../hooks/useStores';
+import {observer} from 'mobx-react';
+import useApi from '../../../hooks/useApi';
+import LoadingView from '../../../components/LoadingView';
+import palette from '../../../res/palette';
+import CafeteriaItem from './CafeteriaItem';
+import handleApiError from '../../../../common/utils/handleApiError';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {BookingNavigationParams} from '../BookingScreen';
 
-export default function List() {
-  return <Text>예약 가능한 식당 리스트!!</Text>;
+type Props = {
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
+};
+
+function List({navigation}: Props) {
+  const {bookingStore} = useStores();
+
+  const [loading, fetch] = useApi(() => bookingStore.fetchBookingOptions());
+
+  useEffect(() => {
+    fetch().catch(handleApiError);
+  }, []);
+
+  const loadingView = <LoadingView />;
+
+  const content = (
+    <FlatList
+      data={bookingStore.bookingOptions}
+      style={palette.whiteBackground}
+      renderItem={i => <CafeteriaItem navigation={navigation} cafeteria={i.item} />}
+    />
+  );
+
+  return loading ? loadingView : content;
 }
+
+export default observer(List);

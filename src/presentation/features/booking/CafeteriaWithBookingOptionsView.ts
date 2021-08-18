@@ -17,21 +17,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MenuView from './MenuView';
+import BookingOptionView from './BookingOptionView';
+import BookingOption from '../../../domain/entities/BookingOption';
 import Cafeteria from '../../../domain/entities/Cafeteria';
 
-export default class CafeteriaWithMenuView {
-  id: number;
+export default class CafeteriaWithBookingOptionsView {
   key: string;
   title: string;
-  menus: MenuView[];
+  options: BookingOptionView[];
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaWithMenuView {
-    return {
-      id: cafeteria.id,
-      key: `${cafeteria.id}`,
-      title: cafeteria.displayName,
-      menus: cafeteria.corners.map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner)).flat(),
-    };
+  static manyFromBookingOptionsAndCafeteria(
+    options: BookingOption[],
+    allCafeteria: Cafeteria[],
+  ): CafeteriaWithBookingOptionsView[] {
+    const cafeteriaIds = [...new Set(options.map(option => option.cafeteriaId))]; // 유니크!
+
+    return cafeteriaIds.map(id => {
+      const cafeteria = allCafeteria.find(c => c.id === id)!;
+      const optionsOfThisCafeteria = options.filter(option => option.cafeteriaId === id);
+
+      return {
+        key: `${cafeteria.id}`,
+        title: cafeteria.displayName,
+        options: optionsOfThisCafeteria.map(option => BookingOptionView.fromBookingOption(option)),
+      };
+    });
   }
 }

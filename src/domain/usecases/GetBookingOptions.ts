@@ -17,21 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MenuView from './MenuView';
-import Cafeteria from '../../../domain/entities/Cafeteria';
+import UseCase from './UseCase';
+import BookingOption from '../entities/BookingOption';
+import BookingRepository from '../../data/repositories/BookingRepository';
 
-export default class CafeteriaWithMenuView {
-  id: number;
-  key: string;
-  title: string;
-  menus: MenuView[];
+class GetBookingOptions extends UseCase<void, BookingOption[]> {
+  constructor(private readonly bookingRepository: BookingRepository) {
+    super();
+  }
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaWithMenuView {
-    return {
-      id: cafeteria.id,
-      key: `${cafeteria.id}`,
-      title: cafeteria.displayName,
-      menus: cafeteria.corners.map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner)).flat(),
-    };
+  async onExecute(params: void): Promise<BookingOption[]> {
+    return await this.bookingRepository.getAllBookingOptions();
   }
 }
+
+export default new GetBookingOptions(BookingRepository.instance);

@@ -29,6 +29,7 @@ import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import MyBookingsHeaderButton from './List/MyBookingsHeaderButton';
+import CafeteriaWithBookingOptionsView from './CafeteriaWithBookingOptionsView';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -36,7 +37,7 @@ export type BookingNavigationParams = {
   BookingGuestLogin: undefined;
 
   BookingList: undefined;
-  BookingDetail: undefined;
+  BookingDetail: {cafeteria: CafeteriaWithBookingOptionsView};
   BookingMyBookings: undefined;
 };
 

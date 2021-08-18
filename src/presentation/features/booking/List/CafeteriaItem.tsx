@@ -17,34 +17,24 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import palette from '../../../res/palette';
-import {RouteProp} from '@react-navigation/native';
-import {FlatList, Text} from 'react-native';
-import React, {useEffect} from 'react';
+import React from 'react';
+import {Text} from 'react-native';
+import CardView from '../../../components/CardView';
+import CafeteriaWithBookingOptionsView from '../CafeteriaWithBookingOptionsView';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
-  route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingDetail'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
+  cafeteria: CafeteriaWithBookingOptionsView;
 };
 
-export default function Detail({route, navigation}: Props) {
-  const {cafeteria} = route.params;
-
-  useEffect(() => {
-    navigation.setOptions({headerTitle: cafeteria.title});
-  });
-
+export default function CafeteriaItem({navigation, cafeteria}: Props) {
   return (
-    <FlatList
-      data={cafeteria.options}
-      style={palette.whiteBackground}
-      renderItem={i => (
-        <Text>
-          {i.item.timeSlotDisplayString}({i.item.used}/{i.item.capacity})
-        </Text>
-      )}
-    />
+    <CardView
+      style={{padding: 12, margin: 12}}
+      onPress={() => navigation.navigate('BookingDetail', {cafeteria})}>
+      <Text>{cafeteria.title}</Text>
+    </CardView>
   );
 }

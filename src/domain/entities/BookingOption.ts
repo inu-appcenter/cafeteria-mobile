@@ -17,21 +17,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MenuView from './MenuView';
-import Cafeteria from '../../../domain/entities/Cafeteria';
+import {Expose, Type} from 'class-transformer';
 
-export default class CafeteriaWithMenuView {
-  id: number;
-  key: string;
-  title: string;
-  menus: MenuView[];
+export default class BookingOption {
+  @Expose()
+  cafeteriaId: number;
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaWithMenuView {
-    return {
-      id: cafeteria.id,
-      key: `${cafeteria.id}`,
-      title: cafeteria.displayName,
-      menus: cafeteria.corners.map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner)).flat(),
-    };
-  }
+  @Expose()
+  @Type(() => Date)
+  timeSlot: Date;
+
+  @Expose()
+  used: number;
+
+  @Expose()
+  capacity: number;
 }

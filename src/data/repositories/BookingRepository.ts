@@ -1,3 +1,8 @@
+import Config from '../../common/Config';
+import axios from 'axios';
+import {plainToClass} from 'class-transformer';
+import BookingOption from '../../domain/entities/BookingOption';
+
 /**
  * This file is part of INU Cafeteria.
  *
@@ -17,21 +22,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MenuView from './MenuView';
-import Cafeteria from '../../../domain/entities/Cafeteria';
+export default class BookingRepository {
+  static instance = new BookingRepository();
 
-export default class CafeteriaWithMenuView {
-  id: number;
-  key: string;
-  title: string;
-  menus: MenuView[];
+  private url = {
+    options: `${Config.baseUrl}/booking/options`,
+  };
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaWithMenuView {
-    return {
-      id: cafeteria.id,
-      key: `${cafeteria.id}`,
-      title: cafeteria.displayName,
-      menus: cafeteria.corners.map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner)).flat(),
-    };
+  async getAllBookingOptions() {
+    return plainToClass(BookingOption, (await axios.get(this.url.options)).data as any[], {
+      excludeExtraneousValues: true,
+    });
   }
 }

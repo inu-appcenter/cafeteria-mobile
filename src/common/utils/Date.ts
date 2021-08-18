@@ -18,6 +18,7 @@
  */
 
 import moment from 'moment';
+import {format} from 'date-fns';
 
 moment.locale('ko'); // 한글사랑 합시다 후후
 
@@ -41,4 +42,8 @@ export function formatElapsedDate(date: Date) {
   } else {
     return then.format('YY/MM/DD');
   }
+}
+
+export function formatTime(date: Date) {
+  return format(date, 'hh:mm');
 }

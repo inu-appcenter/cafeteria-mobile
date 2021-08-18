@@ -17,21 +17,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MenuView from './MenuView';
-import Cafeteria from '../../../domain/entities/Cafeteria';
+import BookingOption from '../../../domain/entities/BookingOption';
+import {formatTime} from '../../../common/utils/Date';
 
-export default class CafeteriaWithMenuView {
-  id: number;
+export default class BookingOptionView {
   key: string;
-  title: string;
-  menus: MenuView[];
+  cafeteriaId: number;
+  timeSlotTimestamp: number;
+  timeSlotDisplayString: string;
+  used: number;
+  capacity: number;
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaWithMenuView {
+  static fromBookingOption(option: BookingOption): BookingOptionView {
     return {
-      id: cafeteria.id,
-      key: `${cafeteria.id}`,
-      title: cafeteria.displayName,
-      menus: cafeteria.corners.map(corner => MenuView.fromCafeteriaAndCorner(cafeteria, corner)).flat(),
+      key: `${option.cafeteriaId}-${option.timeSlot.getTime()}`,
+      cafeteriaId: option.cafeteriaId,
+      timeSlotTimestamp: option.timeSlot.getTime(),
+      timeSlotDisplayString: formatTime(option.timeSlot),
+      used: option.used,
+      capacity: option.capacity,
     };
   }
 }

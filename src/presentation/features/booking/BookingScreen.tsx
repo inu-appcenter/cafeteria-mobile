@@ -30,6 +30,7 @@ import GuestLoginScreen from '../login/GuestLoginScreen';
 import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
+import BookingInfoHeaderButton from './MyBookings/BookingInfoHeaderButton';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -85,6 +86,21 @@ function BookingScreen() {
   );
 
   /**
+   * 예약 내역 화면.
+   */
+  const myBookings = (
+    <Stack.Screen
+      key="booking_my_bookings"
+      name="BookingMyBookings"
+      component={MyBookings}
+      options={{
+        title: '예약 내역',
+        headerRight: () => <BookingInfoHeaderButton />,
+      }}
+    />
+  );
+
+  /**
    * 예약 가능 식당 목록.
    */
   const list = (
@@ -92,9 +108,9 @@ function BookingScreen() {
       key="booking_list"
       name="BookingList"
       component={List}
-      options={({navigation}) => ({
-        title: '식당 예약',
-      })}
+      options={{
+        title: '식당 선택',
+      }}
     />
   );
 
@@ -107,8 +123,7 @@ function BookingScreen() {
       name="BookingDetail"
       component={Detail}
       options={{
-        headerShown: true,
-        title: '예약 시간 조회',
+        title: '시간 선택',
       }}
     />
   );
@@ -124,20 +139,6 @@ function BookingScreen() {
       options={{
         headerShown: false,
         gestureEnabled: false,
-      }}
-    />
-  );
-
-  /**
-   * 내 예약 화면.
-   */
-  const myBookings = (
-    <Stack.Screen
-      key="booking_my_bookings"
-      name="BookingMyBookings"
-      component={MyBookings}
-      options={{
-        title: '예약 내역',
       }}
     />
   );

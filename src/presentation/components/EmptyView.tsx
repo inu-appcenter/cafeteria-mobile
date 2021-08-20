@@ -19,14 +19,14 @@
 
 import React from 'react';
 import {Text, View} from 'react-native';
-import colors from '../res/colors';
 import palette from '../res/palette';
-import {ActivityIndicator} from 'react-native-paper';
 
 export default function EmptyView() {
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
-      <Text>아무것도 없어요 ㅠ</Text>
+      <Text style={palette.textHeader}>앗...!</Text>
+
+      <Text style={{...palette.textSecondary, marginTop: 16}}>표시할 정보가 없습니다.</Text>
     </View>
   );
 }

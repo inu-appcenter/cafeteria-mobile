@@ -25,7 +25,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import useStores from '../../../hooks/useStores';
 import ConfirmModal from './ConfirmModal';
-import useApi, {useApiInContainer} from '../../../hooks/useApi';
+import useApi from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
 import {observer} from 'mobx-react';
 import BookingOptionItem from './BookingOptionItem';
@@ -66,7 +66,7 @@ function Detail({route, navigation}: Props) {
           justifyContent: 'space-between',
         }}>
         <View>
-          <Text style={palette.textHeader}>😋 {cafeteria.displayName}</Text>
+          <Text style={palette.textSubHeader}>😋 {cafeteria.displayName}</Text>
           <Text style={{...palette.textPrimary, marginTop: 8}}>{data[0]?.timeSlotDateString}</Text>
         </View>
         <View

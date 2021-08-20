@@ -17,38 +17,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export default {
-  white: '#ffffff',
-  grayishWhite: '#f6f6f9',
-  neutralGray: '#e8e9ed',
-  lightGray: '#A0A0A0',
-  gray: '#808080',
-  black: '#000000',
-  transparent: '#00000000',
+import Icon from 'react-native-vector-icons/Feather';
+import colors from '../../../res/colors';
+import {Alert} from 'react-native';
+import palette from '../../../res/palette';
+import React from 'react';
 
-  vividGreen: '#5ccb5c',
-  orange: '#ff8d2e',
-  red: '#f15f5f',
+export default function BookingInfoHeaderButton() {
+  const showBookingInfo = async () => {
+    Alert.alert(
+      `예약 내역 안내`,
+      `체크인하지 않은 예약 중 예약한 시각이 지나지 않은 예약이 여기에 표시됩니다.`,
+    );
+  };
 
-  textGreen: '#2c6e02',
-  textOrange: '#ce7938',
-  textRed: '#bb4747',
-
-  mainTint: '#3DB4F4',
-  lightBlueText: '#1c76a6',
-  lightBlueBackground: '#d3e8f5',
-
-  textPrimary: '#262B31',
-  textSecondary: '#70808D',
-  textTertiary: '#A5A7AD',
-  textDisabled: '#A5A7AD',
-
-  rippleColorLight: '#00000020',
-  rippleColorDark: '#FFFFFF40',
-
-  dividerColorLight: '#0000002F',
-  sectionHeaderBackground: '#e8e9ed',
-
-  shadow: '#555555',
-  darkComponentBackground: '#222222',
-};
+  return (
+    <Icon
+      name={'info'}
+      size={24}
+      color={colors.textPrimary}
+      style={palette.iconHeaderButton}
+      onPress={showBookingInfo}
+    />
+  );
+}

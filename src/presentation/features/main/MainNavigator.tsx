@@ -64,7 +64,7 @@ function MainNavigator() {
           tabBarBadgeStyle: {fontSize: 12},
         }}
       />
-      <BottomTab.Screen name="Membership" component={MembershipScreen} options={{title: '할인'}} />
+      <BottomTab.Screen name="Membership" component={MembershipScreen} options={{title: '멤버십'}} />
       <BottomTab.Screen name="Support" component={SupportScreen} options={{title: '지원'}} />
     </BottomTab.Navigator>
   );

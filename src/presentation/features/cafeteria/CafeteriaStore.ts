@@ -56,7 +56,6 @@ export default class CafeteriaStore {
   constructor() {
     makeAutoObservable(this);
 
-    this.fetchCafeteria();
     this.loadOrders();
   }
 

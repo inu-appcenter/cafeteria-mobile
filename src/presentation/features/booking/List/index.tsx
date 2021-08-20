@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {FlatList} from 'react-native';
@@ -25,6 +25,8 @@ import {observer} from 'mobx-react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import BookableCafeteriaItem from './BookableCafeteriaItem';
 import {BookingNavigationParams} from '../BookingScreen';
+import {useApiInContainer} from '../../../hooks/useApi';
+import handleApiError from '../../../../common/utils/handleApiError';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
@@ -33,14 +35,23 @@ type Props = {
 function List({navigation}: Props) {
   const {cafeteriaStore} = useStores();
 
-  const cafeteriaSupportingBooking = cafeteriaStore.cafeteria.filter(c => c.supportBooking);
+  const [Container, data, fetch] = useApiInContainer(
+    cafeteriaStore.cafeteria.filter(c => c.supportBooking),
+    () => cafeteriaStore.fetchCafeteria(),
+  );
+
+  useEffect(() => {
+    fetch().catch(handleApiError);
+  }, []);
 
   return (
-    <FlatList
-      data={cafeteriaSupportingBooking}
-      style={palette.whiteBackground}
-      renderItem={i => <BookableCafeteriaItem navigation={navigation} cafeteria={i.item} />}
-    />
+    <Container>
+      <FlatList
+        data={data}
+        style={palette.whiteBackground}
+        renderItem={i => <BookableCafeteriaItem navigation={navigation} cafeteria={i.item} />}
+      />
+    </Container>
   );
 }
 

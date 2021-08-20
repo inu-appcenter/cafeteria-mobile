@@ -43,9 +43,7 @@ function Detail({route, navigation}: Props) {
   const {cafeteria} = route.params;
   const {bookingStore} = useStores();
 
-  const [Container, data, fetch] = useApiInContainer(bookingStore.getBookingOptions(cafeteria.id), () =>
-    bookingStore.fetchBookingOptions(cafeteria),
-  );
+  const data = bookingStore.getBookingOptions(cafeteria.id);
 
   const [refreshing, refresh] = useApi(async () => bookingStore.fetchBookingOptions(cafeteria));
 
@@ -55,7 +53,7 @@ function Detail({route, navigation}: Props) {
 
   useEffect(() => {
     bookingStore.dismissCurrentOption();
-    fetch().catch(handleApiError);
+    refreshOptions();
   }, []);
 
   return (

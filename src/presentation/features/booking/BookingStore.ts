@@ -52,6 +52,10 @@ export default class BookingStore {
     this._myBookings = value;
   }
 
+  get hasBookings() {
+    return this._myBookings != null && this._myBookings.length > 0;
+  }
+
   constructor(private readonly cafeteriaStore: CafeteriaStore) {
     makeAutoObservable(this);
   }

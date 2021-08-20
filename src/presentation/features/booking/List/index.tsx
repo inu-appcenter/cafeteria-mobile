@@ -27,6 +27,8 @@ import BookableCafeteriaItem from './BookableCafeteriaItem';
 import {BookingNavigationParams} from '../BookingScreen';
 import {useApiInContainer} from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
+import {FAB} from 'react-native-paper';
+import colors from '../../../res/colors';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
@@ -49,7 +51,21 @@ function List({navigation}: Props) {
       <FlatList
         data={data}
         style={palette.whiteBackground}
+        contentContainerStyle={{paddingBottom: 25}}
         renderItem={i => <BookableCafeteriaItem navigation={navigation} cafeteria={i.item} />}
+      />
+      <FAB
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          end: 0,
+          margin: 16,
+          backgroundColor: colors.mainTint,
+        }}
+        icon="ticket-confirmation"
+        label="예약 내역"
+        color={'white'}
+        onPress={() => navigation.navigate('BookingMyBookings')}
       />
     </Container>
   );

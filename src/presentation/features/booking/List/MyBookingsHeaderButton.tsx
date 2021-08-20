@@ -22,20 +22,36 @@ import React from 'react';
 import palette from '../../../res/palette';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
+import {Badge} from 'react-native-paper';
+import {View} from 'react-native';
+import useStores from '../../../hooks/useStores';
+import {observer} from 'mobx-react';
+import Touchable from '../../../components/Touchable';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingMyBookings'>;
 };
 
-export default function MyBookingsHeaderButton({navigation}: Props) {
+function MyBookingsHeaderButton({navigation}: Props) {
+  const {bookingStore} = useStores();
+
+  const badge = (
+    <Badge style={{backgroundColor: 'red', position: 'absolute', top: 8, end: 30, fontSize: 12}}>
+      {bookingStore.myBookings?.length}
+    </Badge>
+  );
+
   return (
-    <Icon
-      name="person"
-      size={24}
-      style={palette.iconHeaderButton}
+    <Touchable
       onPress={() => {
         navigation.navigate('BookingMyBookings');
-      }}
-    />
+      }}>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <Icon name="confirmation-number" size={24} style={{paddingHorizontal: 18}} />
+        {bookingStore.hasBookings && badge}
+      </View>
+    </Touchable>
   );
 }
+
+export default observer(MyBookingsHeaderButton);

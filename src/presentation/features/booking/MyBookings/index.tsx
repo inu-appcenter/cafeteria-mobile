@@ -18,7 +18,7 @@
  */
 
 import React, {useEffect} from 'react';
-import {FlatList, Text} from 'react-native';
+import {FlatList, RefreshControl, Text} from 'react-native';
 import useStores from '../../../hooks/useStores';
 import palette from '../../../res/palette';
 import {observer} from 'mobx-react';
@@ -28,27 +28,29 @@ import useApi, {useApiInContainer} from '../../../hooks/useApi';
 import {cancelBookingAlert} from '../../../components/utils/alert';
 import toast from '../../../components/utils/toast';
 import BookingItem from './BookingItem';
+import EmptyView from '../../../components/EmptyView';
 
 function MyBookings() {
   const {bookingStore} = useStores();
 
-  const [Container, data, fetch] = useApiInContainer(bookingStore.myBookings, () =>
-    bookingStore.fetchMyBookings(),
+  const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
+
+  const myBookings = bookingStore.myBookings;
+  const getMyBookings = () => fetch().catch(handleApiError);
+
+  const emptyView = <EmptyView />;
+
+  const content = (
+    <FlatList
+      data={myBookings}
+      style={palette.whiteBackground}
+      contentContainerStyle={{paddingBottom: 25}}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={getMyBookings} />}
+      renderItem={i => <BookingItem booking={i.item} />}
+    />
   );
 
-  useEffect(() => {
-    fetch().catch(handleApiError);
-  }, []);
-
-  return (
-    <Container>
-      <FlatList
-        data={data}
-        style={palette.whiteBackground}
-        renderItem={i => <BookingItem booking={i.item} />}
-      />
-    </Container>
-  );
+  return bookingStore.hasBookings ? content : emptyView;
 }
 
 export default observer(MyBookings);

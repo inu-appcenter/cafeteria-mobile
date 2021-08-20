@@ -25,20 +25,26 @@ import {Button} from 'react-native-paper';
 import palette from '../../../res/palette';
 import PaperPresets from '../../../components/utils/PaperPresets';
 import ConfettiCannon from 'react-native-confetti-cannon';
+import useApi from '../../../hooks/useApi';
+import useStores from '../../../hooks/useStores';
+import handleApiError from '../../../../common/utils/handleApiError';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
 };
 
 export default function Complete({navigation}: Props) {
-  const {width, height} = useWindowDimensions();
+  const {width} = useWindowDimensions();
+  const {bookingStore} = useStores();
 
+  const [_, fetch] = useApi(() => bookingStore.fetchMyBookings());
   const [confettiVisible, setConfettiVisible] = useState(false);
 
   useEffect(() => {
     if (Platform.OS === 'ios') {
       setConfettiVisible(true);
     }
+    fetch().catch(handleApiError);
   }, []);
 
   const confetti = (

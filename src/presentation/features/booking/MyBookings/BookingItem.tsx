@@ -18,18 +18,17 @@
  */
 
 import React from 'react';
+import palette from '../../../res/palette';
+import CardView from '../../../components/CardView';
+import {Button} from 'react-native-paper';
+import useStores from '../../../hooks/useStores';
 import BookingView from '../BookingView';
 import {Text, View} from 'react-native';
-import {cancelBookingAlert} from '../../../components/utils/alert';
-import handleApiError from '../../../../common/utils/handleApiError';
-import useStores from '../../../hooks/useStores';
-import CardView from '../../../components/CardView';
-import palette from '../../../res/palette';
-import {Button} from 'react-native-paper';
 import PaperPresets from '../../../components/utils/PaperPresets';
-import QRCode from 'react-native-qrcode-svg';
-import useScreenBrightness from '../../../hooks/useScreenBrightness';
 import BorderedQRCode from './BorderedQRCode';
+import handleApiError from '../../../../common/utils/handleApiError';
+import useScreenBrightness from '../../../hooks/useScreenBrightness';
+import {cancelBookingAlert} from '../../../components/utils/alert';
 
 type Props = {
   booking: BookingView;

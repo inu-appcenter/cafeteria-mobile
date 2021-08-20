@@ -42,14 +42,33 @@ export default class RootStore {
       return;
     }
 
-    this.userStore
-      .rememberedLogin()
-      .catch(e => console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`));
-
-    doLater(() =>
-      this.noticeStore.fetchNewNotice().catch(e => console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`)),
-    );
+    this.initialize();
 
     this.initializationStarted = true;
+  }
+
+  private async initialize() {
+    await Promise.all([
+      this.userStore
+        .rememberedLogin()
+        .catch(e => console.log(`저장된 사용자 정보로 로그인하는 데에 실패했습니다: ${e}`)),
+      this.cafeteriaStore
+        .fetchCafeteria()
+        .catch(e => console.log(`카페테리아를 가져오는 데에 실패했습니다: ${e}`)),
+    ]);
+
+    try {
+      await this.bookingStore.fetchMyBookings();
+    } catch (e) {
+      console.log(`예약 내역을 가져오는 데에 실패했습니다: ${e}`);
+    }
+
+    doLater(async () => {
+      try {
+        await this.noticeStore.fetchNewNotice();
+      } catch (e) {
+        console.log(`새 공지를 가져오는 데에 실패했습니다: ${e}`);
+      }
+    });
   }
 }

@@ -19,7 +19,7 @@
 
 import Booking from '../../../domain/entities/Booking';
 import CafeteriaView from '../cafeteria/CafeteriaView';
-import {formatTime} from '../../../common/utils/Date';
+import {formatDate, formatTime} from '../../../common/utils/Date';
 
 export default class BookingView {
   id: number;
@@ -28,7 +28,8 @@ export default class BookingView {
   cafeteriaId: number;
   cafeteriaTitle: string;
   timeSlotTimestamp: number;
-  timeSlotDisplayString: string;
+  timeSlotDateString: string;
+  timeSlotTimeString: string;
 
   static fromBooking(booking: Booking, cafeteria: CafeteriaView): BookingView {
     return {
@@ -38,7 +39,8 @@ export default class BookingView {
       cafeteriaId: booking.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
       timeSlotTimestamp: booking.timeSlot.getTime(),
-      timeSlotDisplayString: formatTime(booking.timeSlot),
+      timeSlotDateString: formatDate(booking.timeSlot),
+      timeSlotTimeString: formatTime(booking.timeSlot),
     };
   }
 }

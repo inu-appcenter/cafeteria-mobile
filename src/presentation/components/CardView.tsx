@@ -34,7 +34,7 @@ export default class CardView extends React.Component<Props> {
 
     const card = <View style={[styles.card, style]}>{children}</View>;
 
-    if (onPress === undefined) {
+    if (onPress == null) {
       return card;
     } else {
       return (

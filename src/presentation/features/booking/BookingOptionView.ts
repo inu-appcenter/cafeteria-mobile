@@ -18,7 +18,7 @@
  */
 
 import BookingOption from '../../../domain/entities/BookingOption';
-import {formatTime} from '../../../common/utils/Date';
+import {formatDate, formatTime} from '../../../common/utils/Date';
 import CafeteriaView from '../cafeteria/CafeteriaView';
 
 export default class BookingOptionView {
@@ -26,9 +26,11 @@ export default class BookingOptionView {
   cafeteriaId: number;
   cafeteriaTitle: string;
   timeSlotTimestamp: number;
-  timeSlotDisplayString: string;
+  timeSlotDateString: string;
+  timeSlotTimeString: string;
   used: number;
   capacity: number;
+  full: boolean;
 
   static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
     return {
@@ -36,9 +38,11 @@ export default class BookingOptionView {
       cafeteriaId: option.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
       timeSlotTimestamp: option.timeSlot.getTime(),
-      timeSlotDisplayString: formatTime(option.timeSlot),
+      timeSlotDateString: formatDate(option.timeSlot),
+      timeSlotTimeString: formatTime(option.timeSlot),
       used: option.used,
       capacity: option.capacity,
+      full: option.used >= option.capacity,
     };
   }
 }

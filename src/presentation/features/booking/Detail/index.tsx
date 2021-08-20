@@ -19,18 +19,20 @@
 
 import palette from '../../../res/palette';
 import {RouteProp} from '@react-navigation/native';
-import {Text, View} from 'react-native';
+import {RefreshControl, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import useStores from '../../../hooks/useStores';
 import ConfirmModal from './ConfirmModal';
-import {useApiInContainer} from '../../../hooks/useApi';
+import useApi, {useApiInContainer} from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
 import {observer} from 'mobx-react';
 import BookingOptionItem from './BookingOptionItem';
 import {SectionGrid} from 'react-native-super-grid';
 import BookingOptionView from '../BookingOptionView';
+import colors from '../../../res/colors';
+import SpinningRefreshButton from '../../../components/SpinningRefreshButton';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
@@ -45,28 +47,60 @@ function Detail({route, navigation}: Props) {
     bookingStore.fetchBookingOptions(cafeteria),
   );
 
+  const [refreshing, refresh] = useApi(async () => bookingStore.fetchBookingOptions(cafeteria));
+
+  const refreshOptions = async () => {
+    refresh().catch(handleApiError);
+  };
+
   useEffect(() => {
     bookingStore.dismissCurrentOption();
-    navigation.setOptions({headerTitle: cafeteria.displayName});
     fetch().catch(handleApiError);
   }, []);
 
-  const optionsList = (
-    <SectionGrid
-      sections={splitItemsIntoSections(data)}
-      style={palette.whiteBackground}
-      renderItem={i => <BookingOptionItem bookingOption={i.item} />}
-      renderSectionHeader={({section}) => <Text style={{fontSize: 20}}>{section.title}</Text>}
-    />
-  );
-
   return (
-    <Container>
-      <View style={{flex: 1}}>
-        {optionsList}
-        <ConfirmModal navigation={navigation} />
+    <View style={[palette.whiteBackground, palette.fullSized]}>
+      <View
+        style={{
+          padding: 16,
+          backgroundColor: colors.grayishWhite,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
+        <View>
+          <Text style={palette.textHeader}>{cafeteria.displayName}</Text>
+          <Text style={{...palette.textPrimary, marginTop: 8}}>{data[0]?.timeSlotDateString}</Text>
+        </View>
+        <View
+          style={{
+            justifyContent: 'center',
+          }}>
+          <SpinningRefreshButton onPress={refreshOptions} />
+        </View>
       </View>
-    </Container>
+      <SectionGrid
+        style={palette.whiteBackground}
+        sections={splitItemsIntoSections(data)}
+        itemDimension={200}
+        spacing={8}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
+        renderItem={i => <BookingOptionItem bookingOption={i.item} />}
+        renderSectionHeader={({section}) => (
+          <Text
+            style={{
+              color: colors.textPrimary,
+              fontSize: 16,
+              fontWeight: 'bold',
+              backgroundColor: colors.sectionHeaderBackground,
+              paddingHorizontal: 16,
+              paddingVertical: 4,
+            }}>
+            {section.title}
+          </Text>
+        )}
+      />
+      <ConfirmModal navigation={navigation} />
+    </View>
   );
 }
 

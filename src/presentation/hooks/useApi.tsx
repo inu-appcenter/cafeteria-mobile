@@ -48,6 +48,7 @@ export default function useApi(apiCall: () => void): [boolean, () => Promise<voi
 
 /**
  * 화면마다 반복되는 LoadingView, EmptyView 를 위한 로직을 모아놓았습니다.
+ * 주의: RefreshControl 과 궁합이 안좋음..
  *
  * @param data Empty 의 기준이 되는 데이터.
  * @param apiCall 데이터를 끌어오는 API 호출 함수.
@@ -55,7 +56,7 @@ export default function useApi(apiCall: () => void): [boolean, () => Promise<voi
 export function useApiInContainer<ItemT, T extends ItemT[] | undefined>(
   data: T,
   apiCall: () => void,
-): [React.ComponentType, T, () => Promise<void>] {
+): [React.ComponentType, T, () => Promise<void>, boolean] {
   const [loading, fetch] = useApi(apiCall);
   const empty = data == null || data.length === 0;
 
@@ -67,5 +68,5 @@ export function useApiInContainer<ItemT, T extends ItemT[] | undefined>(
     return loading ? loadingView : empty ? emptyView : childrenWrapped;
   });
 
-  return [LoadingEmptyContainer, data, fetch];
+  return [LoadingEmptyContainer, data, fetch, loading];
 }

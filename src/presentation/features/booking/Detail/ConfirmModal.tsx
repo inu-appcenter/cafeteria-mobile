@@ -70,7 +70,7 @@ function ConfirmModal({navigation}: Props) {
       style={styles.modal}>
       <View style={styles.modalContentContainer}>
         <View style={styles.upperContainer}>
-          <Text style={styles.textTitle}>{bookingStore.currentOption?.timeSlotDisplayString} 예약</Text>
+          <Text style={styles.textTitle}>{bookingStore.currentOption?.timeSlotTimeString} 예약</Text>
           <Text style={styles.textBody}>{bookingStore.currentOption?.cafeteriaTitle}에 예약합니다.</Text>
         </View>
 

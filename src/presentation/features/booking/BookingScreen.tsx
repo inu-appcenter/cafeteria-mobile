@@ -108,7 +108,10 @@ function BookingScreen() {
       key="booking_detail"
       name="BookingDetail"
       component={Detail}
-      options={{headerShown: true}}
+      options={{
+        headerShown: true,
+        title: '예약 시간 조회',
+      }}
     />
   );
 

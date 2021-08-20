@@ -20,7 +20,10 @@
 import React from 'react';
 import BookingOptionView from '../BookingOptionView';
 import useStores from '../../../hooks/useStores';
-import {Text} from 'react-native';
+import {Text, View} from 'react-native';
+import colors from '../../../res/colors';
+import palette from '../../../res/palette';
+import Touchable from '../../../components/Touchable';
 
 type Props = {
   bookingOption: BookingOptionView;
@@ -29,9 +32,40 @@ type Props = {
 export default function BookingOptionItem({bookingOption}: Props) {
   const {bookingStore} = useStores();
 
-  return (
-    <Text onPress={() => bookingStore.askToConfirm(bookingOption)}>
-      {bookingOption.timeSlotDisplayString}({bookingOption.used}/{bookingOption.capacity})
-    </Text>
+  const available = !bookingOption.full;
+
+  const content = (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        padding: 8,
+        overflow: 'hidden',
+        borderRadius: 4,
+        backgroundColor: available ? colors.transparent : colors.transparent,
+      }}>
+      <Text
+        style={{
+          ...palette.textPrimary,
+          fontWeight: 'bold',
+          color: available ? colors.textPrimary : colors.textDisabled,
+        }}>
+        {bookingOption.timeSlotTimeString}
+      </Text>
+      <Text
+        style={{
+          ...palette.textPrimary,
+          color: available ? colors.textPrimary : colors.textDisabled,
+        }}>
+        {bookingOption.used}/{bookingOption.capacity}
+      </Text>
+    </View>
   );
+
+  const clickableContent = (
+    <Touchable onPress={() => bookingStore.askToConfirm(bookingOption)}>{content}</Touchable>
+  );
+
+  return available ? clickableContent : content;
 }

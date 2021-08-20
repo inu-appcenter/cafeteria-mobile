@@ -24,12 +24,14 @@ import NoticeStore from '../presentation/features/support/Notices/NoticeStore';
 import VersionStore from '../presentation/features/support/Version/VersionStore';
 import BookingStore from '../presentation/features/booking/BookingStore';
 import CafeteriaStore from '../presentation/features/cafeteria/CafeteriaStore';
+import HardwareStore from '../presentation/features/hardware/HardwareStore';
 
 export default class RootStore {
   qnaStore = new QnAStore();
   userStore = new UserStore();
   noticeStore = new NoticeStore();
   versionStore = new VersionStore();
+  hardwareStore = new HardwareStore();
   cafeteriaStore = new CafeteriaStore();
   bookingStore = new BookingStore(this.cafeteriaStore);
 

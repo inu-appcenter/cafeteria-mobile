@@ -52,3 +52,7 @@ export function formatDate(date: Date) {
 export function formatTime(date: Date) {
   return format(date, 'h시 mm분');
 }
+
+export function formatTimeShort(date: Date) {
+  return format(date, 'hh:mm');
+}

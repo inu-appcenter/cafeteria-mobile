@@ -27,6 +27,7 @@ import LoadingView from '../../../components/LoadingView';
 import useApi, {useApiInContainer} from '../../../hooks/useApi';
 import {cancelBookingAlert} from '../../../components/utils/alert';
 import toast from '../../../components/utils/toast';
+import BookingItem from './BookingItem';
 
 function MyBookings() {
   const {bookingStore} = useStores();
@@ -44,16 +45,7 @@ function MyBookings() {
       <FlatList
         data={data}
         style={palette.whiteBackground}
-        renderItem={i => (
-          <Text
-            onLongPress={() =>
-              cancelBookingAlert('예약 취소', '예약을 취소할까요?', () =>
-                bookingStore.cancelBooking(i.item.id).catch(handleApiError),
-              )
-            }>
-            {i.item.timeSlotTimeString}({i.item.cafeteriaTitle})
-          </Text>
-        )}
+        renderItem={i => <BookingItem booking={i.item} />}
       />
     </Container>
   );

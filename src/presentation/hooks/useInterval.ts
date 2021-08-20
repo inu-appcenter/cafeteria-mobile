@@ -17,12 +17,26 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// @ts-ignore
-import DeviceBrightness from '@adrianso/react-native-device-brightness';
-import useStores from './useStores';
+import React, {useEffect, useRef} from 'react';
 
-export default function useScreenBrightness() {
-  const {hardwareStore} = useStores();
+export default function useInterval(callback: (...args: any[]) => void, delay: number) {
+  const savedCallback = useRef();
 
-  return [() => hardwareStore.toggleBrightness()];
+  // Remember the latest callback.
+  useEffect(() => {
+    // @ts-ignore
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  useEffect(() => {
+    function tick() {
+      // @ts-ignore
+      savedCallback.current();
+    }
+    if (delay != null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }

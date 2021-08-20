@@ -17,28 +17,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import BookingOption from '../../../domain/entities/BookingOption';
-import {formatTime} from '../../../common/utils/Date';
-import CafeteriaView from '../cafeteria/CafeteriaView';
+import UseCase from './UseCase';
+import BookingRepository from '../../data/repositories/BookingRepository';
 
-export default class BookingOptionView {
-  key: string;
+type MakeBookingParams = {
   cafeteriaId: number;
-  cafeteriaTitle: string;
-  timeSlotTimestamp: number;
-  timeSlotDisplayString: string;
-  used: number;
-  capacity: number;
+  timeSlot: Date;
+};
 
-  static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
-    return {
-      key: `${option.cafeteriaId}-${option.timeSlot.getTime()}`,
-      cafeteriaId: option.cafeteriaId,
-      cafeteriaTitle: cafeteria.displayName,
-      timeSlotTimestamp: option.timeSlot.getTime(),
-      timeSlotDisplayString: formatTime(option.timeSlot),
-      used: option.used,
-      capacity: option.capacity,
-    };
+class MakeBooking extends UseCase<MakeBookingParams> {
+  constructor(private readonly bookingRepository: BookingRepository) {
+    super();
+  }
+
+  async onExecute({cafeteriaId, timeSlot}: MakeBookingParams): Promise<void> {
+    return await this.bookingRepository.makeBooking({
+      cafeteriaId: cafeteriaId.toString(),
+      timeSlot: timeSlot.toISOString(),
+    });
   }
 }
+
+export default new MakeBooking(BookingRepository.instance);

@@ -42,7 +42,7 @@ function NoticeModal() {
 
   return (
     <Modal
-      isVisible={noticeStore.currentNotice !== undefined}
+      isVisible={noticeStore.currentNotice != null}
       swipeDirection="down"
       onSwipeComplete={() => noticeStore.dismissCurrentNotice()}
       style={styles.modal}>

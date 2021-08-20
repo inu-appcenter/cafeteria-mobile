@@ -26,12 +26,17 @@ export default class BookingRepository {
   static instance = new BookingRepository();
 
   private url = {
-    options: `${Config.baseUrl}/booking/options`,
+    options: (cafeteriaId: number) => `${Config.baseUrl}/booking/options?cafeteriaId=${cafeteriaId}`,
+    bookings: `${Config.baseUrl}/booking/bookings`,
   };
 
-  async getAllBookingOptions() {
-    return plainToClass(BookingOption, (await axios.get(this.url.options)).data as any[], {
+  async getBookingOptions(cafeteriaId: number) {
+    return plainToClass(BookingOption, (await axios.get(this.url.options(cafeteriaId))).data as any[], {
       excludeExtraneousValues: true,
     });
+  }
+
+  async makeBooking(params: Record<string, string | undefined>) {
+    await axios.post(this.url.bookings, params);
   }
 }

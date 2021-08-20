@@ -17,32 +17,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../hooks/useApi';
-import useStores from '../../../hooks/useStores';
-import {FlatList} from 'react-native';
-import {observer} from 'mobx-react';
-import LoadingView from '../../../components/LoadingView';
-import palette from '../../../res/palette';
-import CafeteriaItem from './CafeteriaItem';
-import handleApiError from '../../../../common/utils/handleApiError';
-import React, {useEffect} from 'react';
+import React from 'react';
+import {Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
+import {Button} from 'react-native-paper';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
 };
 
-function List({navigation}: Props) {
-  const {cafeteriaStore} = useStores();
-
+export default function Complete({navigation}: Props) {
   return (
-    <FlatList
-      data={cafeteriaStore.cafeteria}
-      style={palette.whiteBackground}
-      renderItem={i => <CafeteriaItem navigation={navigation} cafeteria={i.item} />}
-    />
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}>
+      <Text>예약이 완료되었습니다.</Text>
+
+      <Button onPress={() => navigation.navigate('BookingList')}>돌아가기</Button>
+    </View>
   );
 }
-
-export default observer(List);

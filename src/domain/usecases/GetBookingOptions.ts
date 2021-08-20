@@ -21,13 +21,17 @@ import UseCase from './UseCase';
 import BookingOption from '../entities/BookingOption';
 import BookingRepository from '../../data/repositories/BookingRepository';
 
-class GetBookingOptions extends UseCase<void, BookingOption[]> {
+type Params = {
+  cafeteriaId: number;
+};
+
+class GetBookingOptions extends UseCase<Params, BookingOption[]> {
   constructor(private readonly bookingRepository: BookingRepository) {
     super();
   }
 
-  async onExecute(params: void): Promise<BookingOption[]> {
-    return await this.bookingRepository.getAllBookingOptions();
+  async onExecute({cafeteriaId}: Params): Promise<BookingOption[]> {
+    return await this.bookingRepository.getBookingOptions(cafeteriaId);
   }
 }
 

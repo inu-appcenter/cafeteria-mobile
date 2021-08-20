@@ -52,7 +52,7 @@ export default class NoticeStore {
 
   async fetchNewNotice() {
     const newNotice = await GetNewNotice.run();
-    if (newNotice === undefined) {
+    if (newNotice == null) {
       return;
     }
 

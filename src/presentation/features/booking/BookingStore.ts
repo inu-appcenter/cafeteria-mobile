@@ -18,30 +18,60 @@
  */
 
 import {makeAutoObservable} from 'mobx';
-import CafeteriaWithBookingOptionsView from './CafeteriaWithBookingOptionsView';
 import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
-import GetCafeteriaOnly from '../../../domain/usecases/GetCafeteriaOnly';
+import BookingOptionView from './BookingOptionView';
+import MakeBooking from '../../../domain/usecases/MakeBooking';
+import CafeteriaView from '../cafeteria/CafeteriaView';
 
 export default class BookingStore {
-  private _bookingOptions: CafeteriaWithBookingOptionsView[] = [];
-  get bookingOptions() {
-    return this._bookingOptions;
+  private _bookingOptions: Map<number, BookingOptionView[]> = new Map();
+  getBookingOptions(cafeteriaId: number) {
+    return this._bookingOptions.get(cafeteriaId) ?? [];
   }
-  set bookingOptions(value) {
-    this._bookingOptions = value;
+  setBookingOptions(cafeteriaId: number, options: BookingOptionView[]) {
+    this._bookingOptions.set(cafeteriaId, options);
+  }
+
+  private _currentOption?: BookingOptionView = undefined;
+  get currentOption() {
+    return this._currentOption;
+  }
+
+  set currentOption(value) {
+    this._currentOption = value;
   }
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  async fetchBookingOptions() {
-    const bookingOptions = await GetBookingOptions.run();
-    const allCafeteria = await GetCafeteriaOnly.run();
+  async fetchBookingOptions(cafeteria: CafeteriaView) {
+    const bookingOptions = await GetBookingOptions.run({cafeteriaId: cafeteria.id});
 
-    this.bookingOptions = CafeteriaWithBookingOptionsView.manyFromBookingOptionsAndCafeteria(
-      bookingOptions,
-      allCafeteria,
+    this.setBookingOptions(
+      cafeteria.id,
+      bookingOptions.map(option => BookingOptionView.fromBookingOption(option, cafeteria)),
     );
+  }
+
+  async askToConfirm(option: BookingOptionView) {
+    this.currentOption = option;
+  }
+
+  async confirmCurrentOption() {
+    await this.makeBooking(this.currentOption!);
+
+    this.currentOption = undefined;
+  }
+
+  private async makeBooking(option: BookingOptionView) {
+    await MakeBooking.run({
+      cafeteriaId: option.cafeteriaId,
+      timeSlot: new Date(option.timeSlotTimestamp),
+    });
+  }
+
+  async dismissCurrentOption() {
+    this.currentOption = undefined;
   }
 }

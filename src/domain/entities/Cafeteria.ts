@@ -34,6 +34,9 @@ export default class Cafeteria {
   supportMenu: boolean;
 
   @Expose()
+  supportBooking: boolean;
+
+  @Expose()
   supportDiscount: boolean;
 
   @Expose()

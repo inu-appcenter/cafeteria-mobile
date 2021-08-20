@@ -23,28 +23,50 @@ import {FlatList, Text} from 'react-native';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
+import useStores from '../../../hooks/useStores';
+import ConfirmModal from './ConfirmModal';
+import useApi from '../../../hooks/useApi';
+import handleApiError from '../../../../common/utils/handleApiError';
+import LoadingView from '../../../components/LoadingView';
+import {observer} from 'mobx-react';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingDetail'>;
 };
 
-export default function Detail({route, navigation}: Props) {
+function Detail({route, navigation}: Props) {
   const {cafeteria} = route.params;
+  const {bookingStore} = useStores();
+
+  const [loading, fetch] = useApi(() => bookingStore.fetchBookingOptions(cafeteria));
 
   useEffect(() => {
-    navigation.setOptions({headerTitle: cafeteria.title});
+    navigation.setOptions({headerTitle: cafeteria.displayName});
   });
 
-  return (
-    <FlatList
-      data={cafeteria.options}
-      style={palette.whiteBackground}
-      renderItem={i => (
-        <Text>
-          {i.item.timeSlotDisplayString}({i.item.used}/{i.item.capacity})
-        </Text>
-      )}
-    />
+  useEffect(() => {
+    fetch().catch(handleApiError);
+  }, []);
+
+  const loadingView = <LoadingView />;
+
+  const content = (
+    <>
+      <FlatList
+        data={bookingStore.getBookingOptions(cafeteria.id)}
+        style={palette.whiteBackground}
+        renderItem={i => (
+          <Text onPress={() => bookingStore.askToConfirm(i.item)}>
+            {i.item.timeSlotDisplayString}({i.item.used}/{i.item.capacity})
+          </Text>
+        )}
+      />
+      <ConfirmModal navigation={navigation} />
+    </>
   );
+
+  return loading ? loadingView : content;
 }
+
+export default observer(Detail);

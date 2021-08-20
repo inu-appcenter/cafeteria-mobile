@@ -29,7 +29,8 @@ import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import MyBookingsHeaderButton from './List/MyBookingsHeaderButton';
-import CafeteriaWithBookingOptionsView from './CafeteriaWithBookingOptionsView';
+import Complete from './Complete';
+import CafeteriaView from '../cafeteria/CafeteriaView';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -37,7 +38,8 @@ export type BookingNavigationParams = {
   BookingGuestLogin: undefined;
 
   BookingList: undefined;
-  BookingDetail: {cafeteria: CafeteriaWithBookingOptionsView};
+  BookingDetail: {cafeteria: CafeteriaView};
+  BookingComplete: undefined;
   BookingMyBookings: undefined;
 };
 
@@ -87,6 +89,18 @@ function BookingScreen() {
 
   const detail = <Stack.Screen key="booking_detail" name="BookingDetail" component={Detail} />;
 
+  const complete = (
+    <Stack.Screen
+      key="booking_complete"
+      name="BookingComplete"
+      component={Complete}
+      options={{
+        headerShown: false,
+        gestureEnabled: false,
+      }}
+    />
+  );
+
   const myBookings = (
     <Stack.Screen
       key="booking_my_bookings"
@@ -100,7 +114,7 @@ function BookingScreen() {
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedIn ? [list, detail, myBookings] : [onboarding, studentLogin, guestLogin]}
+      {isLoggedIn ? [list, detail, complete, myBookings] : [onboarding, studentLogin, guestLogin]}
     </Stack.Navigator>
   );
 }

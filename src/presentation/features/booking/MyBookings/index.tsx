@@ -51,7 +51,7 @@ function MyBookings() {
                 bookingStore.cancelBooking(i.item.id).catch(handleApiError),
               )
             }>
-            {i.item.timeSlotDisplayString}({i.item.cafeteriaTitle})
+            {i.item.timeSlotTimeString}({i.item.cafeteriaTitle})
           </Text>
         )}
       />

@@ -17,19 +17,34 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import {Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {Platform, Text, useWindowDimensions, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import {Button} from 'react-native-paper';
 import palette from '../../../res/palette';
 import PaperPresets from '../../../components/utils/PaperPresets';
+import ConfettiCannon from 'react-native-confetti-cannon';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
 };
 
 export default function Complete({navigation}: Props) {
+  const {width, height} = useWindowDimensions();
+
+  const [confettiVisible, setConfettiVisible] = useState(false);
+
+  useEffect(() => {
+    if (Platform.OS === 'ios') {
+      setConfettiVisible(true);
+    }
+  }, []);
+
+  const confetti = (
+    <ConfettiCannon count={200} explosionSpeed={800} fallSpeed={2000} origin={{x: width / 2, y: -10}} />
+  );
+
   return (
     <View
       style={{
@@ -53,6 +68,8 @@ export default function Complete({navigation}: Props) {
         onPress={() => navigation.navigate('BookingList')}>
         돌아가기
       </Button>
+
+      {confettiVisible && confetti}
     </View>
   );
 }

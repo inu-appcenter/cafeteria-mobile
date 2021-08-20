@@ -76,15 +76,15 @@ function ConfirmModal({navigation}: Props) {
       <View style={styles.modalContentContainer}>
         <View style={styles.upperContainer}>
           <Text style={styles.textTitle}>예약하시겠습니까?</Text>
-          <View style={{marginTop: 8}}>
+          <View style={{marginTop: 24}}>
             <Text style={styles.textBody}>
               • 일시: {bookingOption.timeSlotDateString} {bookingOption.timeSlotTimeString}
             </Text>
             <Text style={styles.textBody}>• 장소: {bookingOption.cafeteriaTitle}</Text>
           </View>
-          <View style={{marginTop: 22}}>
+          <View style={{marginTop: 32}}>
             <Text style={styles.textSmallBody}>• 예약 시간 전에 취소하실 수 있습니다.</Text>
-            <Text style={styles.textSmallBody}>• 같은 날 같은 시간에는 중복으로 예약할 수 없습니다..</Text>
+            <Text style={styles.textSmallBody}>• 같은 날 같은 시간에는 중복으로 예약할 수 없습니다.</Text>
           </View>
         </View>
 

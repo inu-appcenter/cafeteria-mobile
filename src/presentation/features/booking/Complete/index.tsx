@@ -71,7 +71,7 @@ export default function Complete({navigation}: Props) {
           start: 12,
           end: 12,
         }}
-        onPress={() => navigation.navigate('BookingList')}>
+        onPress={() => navigation.navigate('BookingMyBookings')}>
         돌아가기
       </Button>
 

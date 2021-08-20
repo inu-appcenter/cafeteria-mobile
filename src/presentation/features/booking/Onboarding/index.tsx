@@ -55,7 +55,7 @@ function Onboarding({navigation}: Props) {
   const onboardingContents = (
     <View style={styles.container}>
       <View style={styles.textSection}>
-        <Text style={styles.title}>! 예약 !</Text>
+        <Text style={styles.title}>🍽 식당 예약 🍽</Text>
         <Text style={styles.body}>
           {`식당에 예약하고 입장하실 수 있습니다.\n로그인하시고 이용해 보세요😊`}
         </Text>

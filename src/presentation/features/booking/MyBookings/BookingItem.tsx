@@ -42,7 +42,7 @@ export default function BookingItem({booking}: Props) {
   return (
     <CardView
       style={{
-        marginHorizontal: 16,
+        marginHorizontal: 22,
         marginTop: 21,
         padding: 16,
       }}

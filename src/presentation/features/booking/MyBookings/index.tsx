@@ -18,7 +18,7 @@
  */
 
 import React, {useEffect} from 'react';
-import {FlatList, RefreshControl, Text} from 'react-native';
+import {FlatList, RefreshControl, Text, View} from 'react-native';
 import useStores from '../../../hooks/useStores';
 import palette from '../../../res/palette';
 import {observer} from 'mobx-react';
@@ -29,8 +29,17 @@ import {cancelBookingAlert} from '../../../components/utils/alert';
 import toast from '../../../components/utils/toast';
 import BookingItem from './BookingItem';
 import EmptyView from '../../../components/EmptyView';
+import {FAB} from 'react-native-paper';
+import colors from '../../../res/colors';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {BookingNavigationParams} from '../BookingScreen';
+import NoBookingsView from './NoBookingsView';
 
-function MyBookings() {
+type Props = {
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingMyBookings'>;
+};
+
+function MyBookings({navigation}: Props) {
   const {bookingStore} = useStores();
 
   const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
@@ -38,19 +47,35 @@ function MyBookings() {
   const myBookings = bookingStore.myBookings;
   const getMyBookings = () => fetch().catch(handleApiError);
 
-  const emptyView = <EmptyView />;
+  const emptyView = <NoBookingsView />;
 
   const content = (
     <FlatList
       data={myBookings}
-      style={palette.whiteBackground}
-      contentContainerStyle={{paddingBottom: 25}}
+      contentContainerStyle={{paddingBottom: 90}}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={getMyBookings} />}
       renderItem={i => <BookingItem booking={i.item} />}
     />
   );
 
-  return bookingStore.hasBookings ? content : emptyView;
+  return (
+    <View style={[palette.whiteBackground, palette.fullSized]}>
+      {bookingStore.hasBookings ? content : emptyView}
+      <FAB
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          end: 0,
+          margin: 16,
+          backgroundColor: colors.mainTint,
+        }}
+        icon="ticket-confirmation"
+        label="예약하기"
+        color={'white'}
+        onPress={() => navigation.navigate('BookingList')}
+      />
+    </View>
+  );
 }
 
 export default observer(MyBookings);

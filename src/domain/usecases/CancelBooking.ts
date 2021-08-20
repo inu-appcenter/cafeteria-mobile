@@ -17,24 +17,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Alert} from 'react-native';
+import UseCase from './UseCase';
+import BookingRepository from '../../data/repositories/BookingRepository';
 
-export default function alert(title: string, message?: string) {
-  Alert.alert(title, message, [{text: '확인', style: 'default'}], {
-    cancelable: true,
-  });
+type Params = {
+  bookingId: number;
+};
+
+class CancelBooking extends UseCase<Params> {
+  constructor(private readonly bookingRepository: BookingRepository) {
+    super();
+  }
+
+  async onExecute({bookingId}: Params): Promise<void> {
+    return await this.bookingRepository.cancelBooking(bookingId);
+  }
 }
 
-export function cancelBookingAlert(title: string, message: string, onPress: () => void) {
-  Alert.alert(
-    title,
-    message,
-    [
-      {text: '닫기', style: 'cancel'},
-      {text: '예약 취소', style: 'destructive', onPress},
-    ],
-    {
-      cancelable: true,
-    },
-  );
-}
+export default new CancelBooking(BookingRepository.instance);

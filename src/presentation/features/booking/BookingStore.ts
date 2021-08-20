@@ -22,6 +22,10 @@ import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
 import BookingOptionView from './BookingOptionView';
 import MakeBooking from '../../../domain/usecases/MakeBooking';
 import CafeteriaView from '../cafeteria/CafeteriaView';
+import BookingView from './BookingView';
+import GetMyBookings from '../../../domain/usecases/GetMyBookings';
+import CafeteriaStore from '../cafeteria/CafeteriaStore';
+import CancelBooking from '../../../domain/usecases/CancelBooking';
 
 export default class BookingStore {
   private _bookingOptions: Map<number, BookingOptionView[]> = new Map();
@@ -36,12 +40,19 @@ export default class BookingStore {
   get currentOption() {
     return this._currentOption;
   }
-
   set currentOption(value) {
     this._currentOption = value;
   }
 
-  constructor() {
+  private _myBookings?: BookingView[] = [];
+  get myBookings() {
+    return this._myBookings;
+  }
+  set myBookings(value) {
+    this._myBookings = value;
+  }
+
+  constructor(private readonly cafeteriaStore: CafeteriaStore) {
     makeAutoObservable(this);
   }
 
@@ -73,5 +84,20 @@ export default class BookingStore {
 
   async dismissCurrentOption() {
     this.currentOption = undefined;
+  }
+
+  async fetchMyBookings() {
+    const myBookings = await GetMyBookings.run();
+    const allCafeteria = this.cafeteriaStore.cafeteria;
+
+    this.myBookings = myBookings.map(b =>
+      BookingView.fromBooking(b, allCafeteria.find(c => c.id === b.cafeteriaId)!),
+    );
+  }
+
+  async cancelBooking(bookingId: number) {
+    await CancelBooking.run({bookingId});
+
+    await this.fetchMyBookings();
   }
 }

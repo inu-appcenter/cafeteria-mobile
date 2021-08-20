@@ -2,6 +2,7 @@ import Config from '../../common/Config';
 import axios from 'axios';
 import {plainToClass} from 'class-transformer';
 import BookingOption from '../../domain/entities/BookingOption';
+import Booking from '../../domain/entities/Booking';
 
 /**
  * This file is part of INU Cafeteria.
@@ -28,6 +29,7 @@ export default class BookingRepository {
   private url = {
     options: (cafeteriaId: number) => `${Config.baseUrl}/booking/options?cafeteriaId=${cafeteriaId}`,
     bookings: `${Config.baseUrl}/booking/bookings`,
+    bookingsWithId: (bookingId: number) => `${Config.baseUrl}/booking/bookings/${bookingId}`,
   };
 
   async getBookingOptions(cafeteriaId: number) {
@@ -38,5 +40,15 @@ export default class BookingRepository {
 
   async makeBooking(params: Record<string, string | undefined>) {
     await axios.post(this.url.bookings, params);
+  }
+
+  async getMyBookings() {
+    return plainToClass(Booking, (await axios.get(this.url.bookings)).data as any[], {
+      excludeExtraneousValues: true,
+    });
+  }
+
+  async cancelBooking(bookingId: number) {
+    await axios.delete(this.url.bookingsWithId(bookingId));
   }
 }

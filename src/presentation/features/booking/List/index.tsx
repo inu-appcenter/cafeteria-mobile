@@ -17,15 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../hooks/useApi';
 import useStores from '../../../hooks/useStores';
 import {FlatList} from 'react-native';
 import {observer} from 'mobx-react';
-import LoadingView from '../../../components/LoadingView';
 import palette from '../../../res/palette';
 import CafeteriaItem from './CafeteriaItem';
-import handleApiError from '../../../../common/utils/handleApiError';
-import React, {useEffect} from 'react';
+import React from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 

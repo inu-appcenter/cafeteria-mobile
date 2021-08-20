@@ -30,8 +30,8 @@ export default class RootStore {
   userStore = new UserStore();
   noticeStore = new NoticeStore();
   versionStore = new VersionStore();
-  bookingStore = new BookingStore();
   cafeteriaStore = new CafeteriaStore();
+  bookingStore = new BookingStore(this.cafeteriaStore);
 
   private initializationStarted = false;
 

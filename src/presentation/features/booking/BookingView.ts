@@ -17,24 +17,28 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Alert} from 'react-native';
+import Booking from '../../../domain/entities/Booking';
+import CafeteriaView from '../cafeteria/CafeteriaView';
+import {formatTime} from '../../../common/utils/Date';
 
-export default function alert(title: string, message?: string) {
-  Alert.alert(title, message, [{text: '확인', style: 'default'}], {
-    cancelable: true,
-  });
-}
+export default class BookingView {
+  id: number;
+  key: string;
+  uuid: string;
+  cafeteriaId: number;
+  cafeteriaTitle: string;
+  timeSlotTimestamp: number;
+  timeSlotDisplayString: string;
 
-export function cancelBookingAlert(title: string, message: string, onPress: () => void) {
-  Alert.alert(
-    title,
-    message,
-    [
-      {text: '닫기', style: 'cancel'},
-      {text: '예약 취소', style: 'destructive', onPress},
-    ],
-    {
-      cancelable: true,
-    },
-  );
+  static fromBooking(booking: Booking, cafeteria: CafeteriaView): BookingView {
+    return {
+      id: booking.id,
+      key: `booking-${booking.uuid}`,
+      uuid: booking.uuid,
+      cafeteriaId: booking.cafeteriaId,
+      cafeteriaTitle: cafeteria.displayName,
+      timeSlotTimestamp: booking.timeSlot.getTime(),
+      timeSlotDisplayString: formatTime(booking.timeSlot),
+    };
+  }
 }

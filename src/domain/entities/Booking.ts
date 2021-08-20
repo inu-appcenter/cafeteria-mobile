@@ -17,24 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Alert} from 'react-native';
+import {Expose, Type} from 'class-transformer';
 
-export default function alert(title: string, message?: string) {
-  Alert.alert(title, message, [{text: '확인', style: 'default'}], {
-    cancelable: true,
-  });
-}
+export default class Booking {
+  @Expose()
+  id: number;
 
-export function cancelBookingAlert(title: string, message: string, onPress: () => void) {
-  Alert.alert(
-    title,
-    message,
-    [
-      {text: '닫기', style: 'cancel'},
-      {text: '예약 취소', style: 'destructive', onPress},
-    ],
-    {
-      cancelable: true,
-    },
-  );
+  @Expose()
+  uuid: string;
+
+  @Expose()
+  cafeteriaId: number;
+
+  @Expose()
+  @Type(() => Date)
+  timeSlot: Date;
+
+  @Expose()
+  @Type(() => Date)
+  bookedAt: Date;
 }

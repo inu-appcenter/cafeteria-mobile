@@ -32,7 +32,7 @@ export default class BookingOptionView {
 
   static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
     return {
-      key: `${option.cafeteriaId}-${option.timeSlot.getTime()}`,
+      key: `booking-option-${option.cafeteriaId}-${option.timeSlot.getTime()}`,
       cafeteriaId: option.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
       timeSlotTimestamp: option.timeSlot.getTime(),

@@ -70,16 +70,16 @@ export default class BookingStore {
   }
 
   async confirmCurrentOption() {
-    await this.makeBooking(this.currentOption!);
+    if (this.currentOption == null) {
+      return;
+    }
+
+    await MakeBooking.run({
+      cafeteriaId: this.currentOption.cafeteriaId,
+      timeSlot: new Date(this.currentOption.timeSlotTimestamp),
+    });
 
     this.currentOption = undefined;
-  }
-
-  private async makeBooking(option: BookingOptionView) {
-    await MakeBooking.run({
-      cafeteriaId: option.cafeteriaId,
-      timeSlot: new Date(option.timeSlotTimestamp),
-    });
   }
 
   async dismissCurrentOption() {

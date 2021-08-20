@@ -48,6 +48,10 @@ function BookingScreen() {
 
   const Stack = createStackNavigator<BookingNavigationParams>();
 
+  /**
+   * 로그인 유도하는 화면.
+   * 전체화면으로 보여줄거라서 헤더는 숨김.
+   */
   const onboarding = (
     <Stack.Screen
       key="booking_onboarding"
@@ -57,6 +61,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 학번으로 로그인하는 화면.
+   */
   const studentLogin = (
     <Stack.Screen
       key="booking_student_login"
@@ -66,6 +73,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 휴대전화번호로 로그인하는 화면.
+   */
   const guestLogin = (
     <Stack.Screen
       key="booking_guest_login"
@@ -75,6 +85,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 예약 가능 식당 목록.
+   */
   const list = (
     <Stack.Screen
       key="booking_list"
@@ -87,6 +100,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 식당 내 예약 가능 시간대 목록.
+   */
   const detail = (
     <Stack.Screen
       key="booking_detail"
@@ -96,6 +112,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 예약 완료 화면.
+   */
   const complete = (
     <Stack.Screen
       key="booking_complete"
@@ -108,6 +127,9 @@ function BookingScreen() {
     />
   );
 
+  /**
+   * 내 예약 화면.
+   */
   const myBookings = (
     <Stack.Screen
       key="booking_my_bookings"

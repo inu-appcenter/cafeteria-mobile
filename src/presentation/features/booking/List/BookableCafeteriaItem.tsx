@@ -18,12 +18,16 @@
  */
 
 import React from 'react';
-import {Text} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import CardView from '../../../components/CardView';
 import CafeteriaView from '../../cafeteria/CafeteriaView';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import palette from '../../../res/palette';
+import {Button} from 'react-native-paper';
+import colors from '../../../res/colors';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import ChevronRight from '../../../components/ChevronRight';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
@@ -41,9 +45,28 @@ export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
         padding: 16,
         flexDirection: 'column',
         alignItems: 'center',
-      }}
-      onPress={goToDetails}>
-      <Text style={palette.textSubHeader}>{cafeteria.displayName}</Text>
+      }}>
+      <Text style={{fontSize: 42}}>😋</Text>
+      <Text style={[palette.textSubHeader, {marginTop: 12}]}>{cafeteria.displayName}</Text>
+      <Text
+        style={[
+          palette.textSecondary,
+          {
+            marginTop: 8,
+            textAlign: 'center',
+            marginHorizontal: 12,
+          },
+        ]}>
+        붐비는 시간대에 편하게 입장할 수 있어요.
+      </Text>
+      <Button
+        mode="contained"
+        labelStyle={[palette.textPrimary, {color: colors.white, paddingVertical: 4}]}
+        color={colors.mainTint}
+        onPress={goToDetails}
+        style={{alignSelf: 'stretch', marginTop: 21}}>
+        {cafeteria.displayName} 예약하기
+      </Button>
     </CardView>
   );
 }

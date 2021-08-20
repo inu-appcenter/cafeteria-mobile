@@ -31,6 +31,22 @@ export default class UserStore {
     this._user = value;
   }
 
+  private _barcode?: string;
+  get barcode() {
+    return this._barcode;
+  }
+  set barcode(value) {
+    this._barcode = value;
+  }
+
+  private _studentId?: string;
+  get studentId() {
+    return this._studentId;
+  }
+  set studentId(value) {
+    this._studentId = value;
+  }
+
   private _isLoggedIn: boolean = false;
   get isLoggedIn() {
     return this._isLoggedIn;
@@ -133,12 +149,16 @@ export default class UserStore {
     }
 
     this.user = user;
+    this.barcode = user.barcode;
+    this.studentId = user.studentId;
     this.isLoggedIn = true;
     this.isLoggedInAsStudent = user.isStudent;
   }
 
   private async onLoginFail() {
     this.user = undefined;
+    this.barcode = undefined;
+    this.studentId = undefined;
     this.isLoggedIn = false;
     this.isLoggedInAsStudent = false;
   }

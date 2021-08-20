@@ -31,7 +31,7 @@ import React, {useEffect} from 'react';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
 
 function Barcode() {
-  const {user} = useUserState();
+  const {barcode, studentId} = useUserState();
 
   const [toggleBrightness] = useScreenBrightness();
   const [, activateBarcode] = useApi(() => ActivateBarcode.run());
@@ -67,8 +67,8 @@ function Barcode() {
 
   const userInfo = (
     <View style={{padding: 16}}>
-      <Text style={styles.userInfoIdLabel}>{user?.identifierName}</Text>
-      <Text style={styles.userInfoIdValue}>{user?.identifier}</Text>
+      <Text style={styles.userInfoIdLabel}>학번</Text>
+      <Text style={styles.userInfoIdValue}>{studentId}</Text>
     </View>
   );
 
@@ -77,8 +77,8 @@ function Barcode() {
   const barcodeImage = (
     <View style={{padding: 10}}>
       <BarcodeBuilder
-        text={user?.barcode}
-        value={user?.barcode || 'invalid'}
+        text={barcode}
+        value={barcode || 'invalid'}
         width={barcodeWidth}
         height={99}
         format="CODE128"

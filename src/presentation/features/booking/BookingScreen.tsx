@@ -20,17 +20,17 @@
 import List from './List';
 import React from 'react';
 import Detail from './Detail';
+import Complete from './Complete';
 import {observer} from 'mobx-react';
 import Onboarding from './Onboarding';
 import MyBookings from './MyBookings';
 import useUserState from '../../hooks/useUserState';
+import CafeteriaView from '../cafeteria/CafeteriaView';
 import GuestLoginScreen from '../login/GuestLoginScreen';
 import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import MyBookingsHeaderButton from './List/MyBookingsHeaderButton';
-import Complete from './Complete';
-import CafeteriaView from '../cafeteria/CafeteriaView';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -87,7 +87,14 @@ function BookingScreen() {
     />
   );
 
-  const detail = <Stack.Screen key="booking_detail" name="BookingDetail" component={Detail} />;
+  const detail = (
+    <Stack.Screen
+      key="booking_detail"
+      name="BookingDetail"
+      component={Detail}
+      options={{headerShown: true}}
+    />
+  );
 
   const complete = (
     <Stack.Screen

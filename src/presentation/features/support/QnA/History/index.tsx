@@ -17,11 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../../hooks/useApi';
+import {useApiInContainer} from '../../../../hooks/useApi';
 import palette from '../../../../res/palette';
 import useStores from '../../../../hooks/useStores';
 import {FlatList} from 'react-native';
-import LoadingView from '../../../../components/LoadingView';
 import QnAItem from './QnAItem';
 import ItemSeparator from '../../../../components/ItemSeparator';
 import handleApiError from '../../../../../common/utils/handleApiError';
@@ -31,28 +30,22 @@ import {observer} from 'mobx-react';
 function History() {
   const {qnaStore} = useStores();
 
-  const [loading, fetch] = useApi(() => qnaStore.fetchHistories());
-
-  const fetchHistories = () => {
-    fetch().catch(handleApiError);
-  };
+  const [Container, data, fetch] = useApiInContainer(qnaStore.histories, () => qnaStore.fetchHistories());
 
   useEffect(() => {
-    fetchHistories();
+    fetch().catch(handleApiError);
   }, []);
 
-  const loadingView = <LoadingView />;
-
-  const content = (
-    <FlatList
-      style={palette.whiteBackground}
-      data={qnaStore.histories}
-      renderItem={i => <QnAItem qna={i.item} />}
-      ItemSeparatorComponent={ItemSeparator}
-    />
+  return (
+    <Container>
+      <FlatList
+        style={palette.whiteBackground}
+        data={data}
+        renderItem={i => <QnAItem qna={i.item} />}
+        ItemSeparatorComponent={ItemSeparator}
+      />
+    </Container>
   );
-
-  return loading ? loadingView : content;
 }
 
 export default observer(History);

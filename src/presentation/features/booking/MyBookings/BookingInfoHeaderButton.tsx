@@ -27,7 +27,7 @@ export default function BookingInfoHeaderButton() {
   const showBookingInfo = async () => {
     Alert.alert(
       `예약 내역 안내`,
-      `체크인하지 않은 예약 중 예약한 시각이 지나지 않은 예약이 여기에 표시됩니다.`,
+      `체크인하지 않은 예약 중 아직 예약 일시가 다가오지 않은 예약이 여기에 표시됩니다.`,
     );
   };
 

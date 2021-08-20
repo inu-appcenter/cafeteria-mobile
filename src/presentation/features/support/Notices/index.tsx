@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import useApi from '../../../hooks/useApi';
+import useApi, {useApiInContainer} from '../../../hooks/useApi';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {FlatList} from 'react-native';
@@ -30,22 +30,22 @@ import LoadingView from '../../../components/LoadingView';
 export default function Notices() {
   const {noticeStore} = useStores();
 
-  const [loading, fetch] = useApi(() => noticeStore.fetchAllNotices());
+  const [Container, data, fetch] = useApiInContainer(noticeStore.notices, () =>
+    noticeStore.fetchAllNotices(),
+  );
 
   useEffect(() => {
     fetch().catch(handleApiError);
   }, []);
 
-  const loadingView = <LoadingView />;
-
-  const content = (
-    <FlatList
-      data={noticeStore.notices}
-      style={palette.whiteBackground}
-      renderItem={i => <NoticeItem notice={i.item} />}
-      ItemSeparatorComponent={ItemSeparator}
-    />
+  return (
+    <Container>
+      <FlatList
+        data={data}
+        style={palette.whiteBackground}
+        renderItem={i => <NoticeItem notice={i.item} />}
+        ItemSeparatorComponent={ItemSeparator}
+      />
+    </Container>
   );
-
-  return loading ? loadingView : content;
 }

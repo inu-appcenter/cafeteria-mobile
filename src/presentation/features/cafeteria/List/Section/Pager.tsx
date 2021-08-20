@@ -21,7 +21,7 @@ import React from 'react';
 import Carousel from '../../../../components/Carousel';
 import MenuView from '../../MenuView';
 import MenuCard from './MenuCard';
-import EmptyView from '../../../../components/EmptyView';
+import SomethingWentWrongView from '../../../../components/SomethingWentWrongView';
 import {StyleSheet} from 'react-native';
 import {divideArray} from '../../../../../common/utils/Array';
 
@@ -45,7 +45,7 @@ export default function Pager({menus, stackSize}: Props) {
   );
 
   const emptyView = (
-    <EmptyView
+    <SomethingWentWrongView
       whatWentWrong={'식당 정보는 있는데 메뉴를 불러오지는 못했습니다 ㅠ'}
       showBorder={true}
     />

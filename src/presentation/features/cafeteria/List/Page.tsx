@@ -21,7 +21,7 @@ import useApi from '../../../hooks/useApi';
 import Section from './Section';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
-import EmptyView from '../../../components/EmptyView';
+import SomethingWentWrongView from '../../../components/SomethingWentWrongView';
 import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
 import LoadingView from '../../../components/LoadingView';
@@ -64,7 +64,7 @@ function Page({route, navigation}: Props) {
   const loadingView = <LoadingView />;
 
   const emptyView = (
-    <EmptyView
+    <SomethingWentWrongView
       whatWentWrong={'서버로부터 식당 목록을 가져오지 못했습니다!'}
       showBorder={false}
       retry={fetch}

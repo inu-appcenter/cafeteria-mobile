@@ -24,45 +24,39 @@ import palette from '../../../res/palette';
 import {observer} from 'mobx-react';
 import handleApiError from '../../../../common/utils/handleApiError';
 import LoadingView from '../../../components/LoadingView';
-import useApi from '../../../hooks/useApi';
+import useApi, {useApiInContainer} from '../../../hooks/useApi';
 import {cancelBookingAlert} from '../../../components/utils/alert';
 import toast from '../../../components/utils/toast';
 
 function MyBookings() {
   const {bookingStore} = useStores();
 
-  const [fetchLoading, fetch] = useApi(() => bookingStore.fetchMyBookings());
-
-  const fetchMyBookings = () => {
-    fetch().catch(handleApiError);
-  };
-
-  const cancelBooking = (bookingId: number) => {
-    bookingStore.cancelBooking(bookingId).catch(handleApiError);
-  };
-
-  useEffect(() => {
-    fetchMyBookings();
-  }, []);
-
-  const loadingView = <LoadingView />;
-
-  const content = (
-    <FlatList
-      data={bookingStore.myBookings}
-      style={palette.whiteBackground}
-      renderItem={i => (
-        <Text
-          onLongPress={() =>
-            cancelBookingAlert('예약 취소', '예약을 취소할까요?', () => cancelBooking(i.item.id))
-          }>
-          {i.item.timeSlotDisplayString}({i.item.cafeteriaTitle})
-        </Text>
-      )}
-    />
+  const [Container, data, fetch] = useApiInContainer(bookingStore.myBookings, () =>
+    bookingStore.fetchMyBookings(),
   );
 
-  return fetchLoading ? loadingView : content;
+  useEffect(() => {
+    fetch().catch(handleApiError);
+  }, []);
+
+  return (
+    <Container>
+      <FlatList
+        data={data}
+        style={palette.whiteBackground}
+        renderItem={i => (
+          <Text
+            onLongPress={() =>
+              cancelBookingAlert('예약 취소', '예약을 취소할까요?', () =>
+                bookingStore.cancelBooking(i.item.id).catch(handleApiError),
+              )
+            }>
+            {i.item.timeSlotDisplayString}({i.item.cafeteriaTitle})
+          </Text>
+        )}
+      />
+    </Container>
+  );
 }
 
 export default observer(MyBookings);

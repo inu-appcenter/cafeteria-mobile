@@ -19,17 +19,18 @@
 
 import palette from '../../../res/palette';
 import {RouteProp} from '@react-navigation/native';
-import {FlatList, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import useStores from '../../../hooks/useStores';
 import ConfirmModal from './ConfirmModal';
-import useApi from '../../../hooks/useApi';
+import {useApiInContainer} from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
-import LoadingView from '../../../components/LoadingView';
 import {observer} from 'mobx-react';
 import BookingOptionItem from './BookingOptionItem';
+import {SectionGrid} from 'react-native-super-grid';
+import BookingOptionView from '../BookingOptionView';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
@@ -40,34 +41,42 @@ function Detail({route, navigation}: Props) {
   const {cafeteria} = route.params;
   const {bookingStore} = useStores();
 
-  const [loading, fetch] = useApi(() => bookingStore.fetchBookingOptions(cafeteria));
+  const [Container, data, fetch] = useApiInContainer(bookingStore.getBookingOptions(cafeteria.id), () =>
+    bookingStore.fetchBookingOptions(cafeteria),
+  );
 
   useEffect(() => {
+    bookingStore.dismissCurrentOption();
     navigation.setOptions({headerTitle: cafeteria.displayName});
-  });
-
-  useEffect(() => {
     fetch().catch(handleApiError);
   }, []);
 
-  const loadingView = <LoadingView />;
-
   const optionsList = (
-    <FlatList
-      data={bookingStore.getBookingOptions(cafeteria.id)}
+    <SectionGrid
+      sections={splitItemsIntoSections(data)}
       style={palette.whiteBackground}
       renderItem={i => <BookingOptionItem bookingOption={i.item} />}
+      renderSectionHeader={({section}) => <Text style={{fontSize: 20}}>{section.title}</Text>}
     />
   );
 
-  const content = (
-    <View style={{flex: 1}}>
-      {optionsList}
-      <ConfirmModal navigation={navigation} />
-    </View>
+  return (
+    <Container>
+      <View style={{flex: 1}}>
+        {optionsList}
+        <ConfirmModal navigation={navigation} />
+      </View>
+    </Container>
   );
-
-  return loading ? loadingView : content;
 }
 
 export default observer(Detail);
+
+function splitItemsIntoSections(options: BookingOptionView[]) {
+  return [...new Set(options.map(o => new Date(o.timeSlotTimestamp).getHours()))]
+    .sort((l, r) => l - r)
+    .map(hour => ({
+      title: `${hour}시`,
+      data: options.filter(o => new Date(o.timeSlotTimestamp).getHours() === hour),
+    }));
+}

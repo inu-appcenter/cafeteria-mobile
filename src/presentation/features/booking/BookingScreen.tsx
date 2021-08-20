@@ -30,7 +30,6 @@ import GuestLoginScreen from '../login/GuestLoginScreen';
 import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
-import MyBookingsHeaderButton from './List/MyBookingsHeaderButton';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -95,7 +94,6 @@ function BookingScreen() {
       component={List}
       options={({navigation}) => ({
         title: '식당 예약',
-        headerRight: () => <MyBookingsHeaderButton navigation={navigation} />,
       })}
     />
   );
@@ -139,14 +137,14 @@ function BookingScreen() {
       name="BookingMyBookings"
       component={MyBookings}
       options={{
-        title: '예약 목록',
+        title: '예약 내역',
       }}
     />
   );
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedIn ? [list, detail, complete, myBookings] : [onboarding, studentLogin, guestLogin]}
+      {isLoggedIn ? [myBookings, list, detail, complete] : [onboarding, studentLogin, guestLogin]}
     </Stack.Navigator>
   );
 }

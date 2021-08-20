@@ -65,6 +65,7 @@ function ConfirmModal({navigation}: Props) {
     <Modal
       isVisible={bookingStore.currentOption != null}
       swipeDirection="down"
+      onBackdropPress={() => bookingStore.dismissCurrentOption()}
       onSwipeComplete={() => bookingStore.dismissCurrentOption()}
       style={styles.modal}>
       <View style={styles.modalContentContainer}>

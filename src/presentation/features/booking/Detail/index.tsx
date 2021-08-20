@@ -19,7 +19,7 @@
 
 import palette from '../../../res/palette';
 import {RouteProp} from '@react-navigation/native';
-import {FlatList, Text} from 'react-native';
+import {FlatList, Text, View} from 'react-native';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
@@ -29,6 +29,7 @@ import useApi from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
 import LoadingView from '../../../components/LoadingView';
 import {observer} from 'mobx-react';
+import BookingOptionItem from './BookingOptionItem';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
@@ -51,19 +52,19 @@ function Detail({route, navigation}: Props) {
 
   const loadingView = <LoadingView />;
 
+  const optionsList = (
+    <FlatList
+      data={bookingStore.getBookingOptions(cafeteria.id)}
+      style={palette.whiteBackground}
+      renderItem={i => <BookingOptionItem bookingOption={i.item} />}
+    />
+  );
+
   const content = (
-    <>
-      <FlatList
-        data={bookingStore.getBookingOptions(cafeteria.id)}
-        style={palette.whiteBackground}
-        renderItem={i => (
-          <Text onPress={() => bookingStore.askToConfirm(i.item)}>
-            {i.item.timeSlotDisplayString}({i.item.used}/{i.item.capacity})
-          </Text>
-        )}
-      />
+    <View style={{flex: 1}}>
+      {optionsList}
       <ConfirmModal navigation={navigation} />
-    </>
+    </View>
   );
 
   return loading ? loadingView : content;

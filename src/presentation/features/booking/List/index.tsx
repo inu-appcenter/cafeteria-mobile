@@ -17,13 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import React from 'react';
+import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {FlatList} from 'react-native';
 import {observer} from 'mobx-react';
-import palette from '../../../res/palette';
-import CafeteriaItem from './CafeteriaItem';
-import React from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
+import BookableCafeteriaItem from './BookableCafeteriaItem';
 import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
@@ -33,11 +33,13 @@ type Props = {
 function List({navigation}: Props) {
   const {cafeteriaStore} = useStores();
 
+  const cafeteriaSupportingBooking = cafeteriaStore.cafeteria.filter(c => c.supportBooking);
+
   return (
     <FlatList
-      data={cafeteriaStore.cafeteria}
+      data={cafeteriaSupportingBooking}
       style={palette.whiteBackground}
-      renderItem={i => <CafeteriaItem navigation={navigation} cafeteria={i.item} />}
+      renderItem={i => <BookableCafeteriaItem navigation={navigation} cafeteria={i.item} />}
     />
   );
 }

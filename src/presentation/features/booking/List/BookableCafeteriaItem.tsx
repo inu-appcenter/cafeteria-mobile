@@ -20,21 +20,30 @@
 import React from 'react';
 import {Text} from 'react-native';
 import CardView from '../../../components/CardView';
+import CafeteriaView from '../../cafeteria/CafeteriaView';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import CafeteriaView from '../../cafeteria/CafeteriaView';
+import palette from '../../../res/palette';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
   cafeteria: CafeteriaView;
 };
 
-export default function CafeteriaItem({navigation, cafeteria}: Props) {
+export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
+  const goToDetails = () => navigation.navigate('BookingDetail', {cafeteria});
+
   return (
     <CardView
-      style={{padding: 12, margin: 12}}
-      onPress={() => navigation.navigate('BookingDetail', {cafeteria})}>
-      <Text>{cafeteria.displayName}</Text>
+      style={{
+        marginHorizontal: 16,
+        marginTop: 21,
+        padding: 16,
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+      onPress={goToDetails}>
+      <Text style={palette.textSubHeader}>{cafeteria.displayName}</Text>
     </CardView>
   );
 }

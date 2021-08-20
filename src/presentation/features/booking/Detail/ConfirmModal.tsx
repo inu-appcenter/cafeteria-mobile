@@ -48,6 +48,11 @@ function ConfirmModal({navigation}: Props) {
       .catch(e => handleApiError(e));
   };
 
+  const bookingOption = bookingStore.currentOption;
+  if (bookingOption == null) {
+    return null;
+  }
+
   const computedStyles = StyleSheet.create({
     cancelButtonLabel: {
       color: colors.textSecondary,
@@ -70,8 +75,17 @@ function ConfirmModal({navigation}: Props) {
       style={styles.modal}>
       <View style={styles.modalContentContainer}>
         <View style={styles.upperContainer}>
-          <Text style={styles.textTitle}>{bookingStore.currentOption?.timeSlotTimeString} 예약</Text>
-          <Text style={styles.textBody}>{bookingStore.currentOption?.cafeteriaTitle}에 예약합니다.</Text>
+          <Text style={styles.textTitle}>예약하시겠습니까?</Text>
+          <View style={{marginTop: 8}}>
+            <Text style={styles.textBody}>
+              • 일시: {bookingOption.timeSlotDateString} {bookingOption.timeSlotTimeString}
+            </Text>
+            <Text style={styles.textBody}>• 장소: {bookingOption.cafeteriaTitle}</Text>
+          </View>
+          <View style={{marginTop: 22}}>
+            <Text style={styles.textSmallBody}>• 예약 시간 전에 취소하실 수 있습니다.</Text>
+            <Text style={styles.textSmallBody}>• 같은 날 같은 시간에는 중복으로 예약할 수 없습니다..</Text>
+          </View>
         </View>
 
         <View style={{flexDirection: 'row', justifyContent: 'center'}}>
@@ -119,7 +133,11 @@ const styles = StyleSheet.create({
   },
   textBody: {
     ...palette.textPrimary,
-    marginTop: 16,
+    marginTop: 8,
+  },
+  textSmallBody: {
+    ...palette.textSecondary,
+    marginTop: 6,
   },
   primaryButton: {
     flex: 1,

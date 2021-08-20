@@ -56,9 +56,9 @@ export default function BookingOptionItem({bookingOption}: Props) {
       <Text
         style={{
           ...palette.textPrimary,
-          color: available ? colors.textPrimary : colors.textDisabled,
+          color: available ? bookingOption.statusColor : colors.textDisabled,
         }}>
-        {bookingOption.used}/{bookingOption.capacity}
+        {bookingOption.statusText}
       </Text>
     </View>
   );

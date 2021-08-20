@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   iconContainer: {
-    backgroundColor: colors.green,
+    backgroundColor: colors.vividGreen,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',

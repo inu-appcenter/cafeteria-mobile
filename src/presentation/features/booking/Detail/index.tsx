@@ -66,7 +66,7 @@ function Detail({route, navigation}: Props) {
           justifyContent: 'space-between',
         }}>
         <View>
-          <Text style={palette.textHeader}>{cafeteria.displayName}</Text>
+          <Text style={palette.textHeader}>😋 {cafeteria.displayName}</Text>
           <Text style={{...palette.textPrimary, marginTop: 8}}>{data[0]?.timeSlotDateString}</Text>
         </View>
         <View
@@ -91,7 +91,7 @@ function Detail({route, navigation}: Props) {
               fontWeight: 'bold',
               backgroundColor: colors.sectionHeaderBackground,
               paddingHorizontal: 16,
-              paddingVertical: 4,
+              paddingVertical: 5,
             }}>
             {section.title}
           </Text>

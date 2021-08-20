@@ -22,6 +22,8 @@ import {Text, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import {Button} from 'react-native-paper';
+import palette from '../../../res/palette';
+import PaperPresets from '../../../components/utils/PaperPresets';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
@@ -31,14 +33,26 @@ export default function Complete({navigation}: Props) {
   return (
     <View
       style={{
-        flex: 1,
+        ...palette.fullSized,
+        ...palette.whiteBackground,
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
       }}>
-      <Text>예약이 완료되었습니다.</Text>
+      <Text style={{fontSize: 42}}>✅</Text>
+      <Text style={{...palette.textSubHeader, marginTop: 18}}>예약이 완료되었습니다.</Text>
 
-      <Button onPress={() => navigation.navigate('BookingList')}>돌아가기</Button>
+      <Button
+        {...PaperPresets.wideThemedButton}
+        style={{
+          position: 'absolute',
+          bottom: 12,
+          start: 12,
+          end: 12,
+        }}
+        onPress={() => navigation.navigate('BookingList')}>
+        돌아가기
+      </Button>
     </View>
   );
 }

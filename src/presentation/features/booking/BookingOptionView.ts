@@ -20,6 +20,7 @@
 import BookingOption from '../../../domain/entities/BookingOption';
 import {formatDate, formatTime} from '../../../common/utils/Date';
 import CafeteriaView from '../cafeteria/CafeteriaView';
+import colors from '../../res/colors';
 
 export default class BookingOptionView {
   key: string;
@@ -29,10 +30,22 @@ export default class BookingOptionView {
   timeSlotDateString: string;
   timeSlotTimeString: string;
   used: number;
+  left: number;
   capacity: number;
   full: boolean;
+  statusText: string;
+  statusColor: string;
 
   static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
+    const left = option.capacity - option.used;
+    const full = option.used >= option.capacity;
+    const statusText = full ? '마감되었습니다.' : `${left}자리 남음`;
+
+    const underHalf = left < option.capacity * 0.5;
+    const almostGone = left < option.capacity * 0.2;
+
+    const statusColor = almostGone ? colors.textRed : underHalf ? colors.textOrange : colors.textGreen;
+
     return {
       key: `booking-option-${option.cafeteriaId}-${option.timeSlot.getTime()}`,
       cafeteriaId: option.cafeteriaId,
@@ -41,8 +54,11 @@ export default class BookingOptionView {
       timeSlotDateString: formatDate(option.timeSlot),
       timeSlotTimeString: formatTime(option.timeSlot),
       used: option.used,
+      left,
       capacity: option.capacity,
-      full: option.used >= option.capacity,
+      full,
+      statusText,
+      statusColor,
     };
   }
 }

@@ -37,33 +37,15 @@ export default function ToastPlaceHolder() {
 
   const toastConfig = {
     info: ({...rest}) => (
-      <BaseToast
-        {...rest}
-        {...defaultToastConfig}
-        style={{borderLeftColor: colors.mainTint}}
-      />
+      <BaseToast {...rest} {...defaultToastConfig} style={{borderLeftColor: colors.mainTint}} />
     ),
     success: ({...rest}) => (
-      <BaseToast
-        {...rest}
-        {...defaultToastConfig}
-        style={{borderLeftColor: colors.green}}
-      />
+      <BaseToast {...rest} {...defaultToastConfig} style={{borderLeftColor: colors.vividGreen}} />
     ),
     error: ({...rest}) => (
-      <BaseToast
-        {...rest}
-        {...defaultToastConfig}
-        style={{borderLeftColor: colors.red}}
-      />
+      <BaseToast {...rest} {...defaultToastConfig} style={{borderLeftColor: colors.red}} />
     ),
   };
 
-  return (
-    <Toast
-      config={toastConfig}
-      topOffset={top + 12}
-      ref={ref => Toast.setRef(ref)}
-    />
-  );
+  return <Toast config={toastConfig} topOffset={top + 12} ref={ref => Toast.setRef(ref)} />;
 }

@@ -18,19 +18,16 @@
  */
 
 import useApi from '../../hooks/useApi';
-import notify from '../../components/utils/notify';
 import colors from '../../res/colors';
 import palette from '../../res/palette';
 import useStores from '../../hooks/useStores';
 import PaperPresets from '../../components/utils/PaperPresets';
-import Unauthorized from '../../../data/exceptions/Unauthorized';
 import ItemSeparator from '../../components/ItemSeparator';
 import handleApiError from '../../../common/utils/handleApiError';
 import React, {useState} from 'react';
 import ClearableTextInput from '../../components/ClearableTextInput';
 import {Button, TextInput} from 'react-native-paper';
 import {ScrollView, StyleSheet, Text, View} from 'react-native';
-import TooManyRequests from '../../../data/exceptions/TooManyRequests';
 
 export default function GuestLoginScreen() {
   const {userStore} = useStores();
@@ -53,9 +50,7 @@ export default function GuestLoginScreen() {
 
     invokeGetChallenge()
       .then(() => setChallengeRequestSucceeded(true))
-      .catch(e =>
-        e instanceof TooManyRequests ? notify('조금만 천천히 시도해주세요 :)') : handleApiError(e),
-      );
+      .catch(handleApiError);
   };
 
   const login = async () => {
@@ -63,9 +58,7 @@ export default function GuestLoginScreen() {
       return;
     }
 
-    invokeLogin().catch(e =>
-      e instanceof Unauthorized ? notify('인증코드를 확인해 주세요 😉') : handleApiError(e),
-    );
+    invokeLogin().catch(handleApiError);
   };
 
   const phase1 = (

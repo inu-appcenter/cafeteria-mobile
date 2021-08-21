@@ -20,7 +20,5 @@
 import ApiError from './ApiError';
 
 export default class BadRequest extends ApiError {
-  constructor() {
-    super('😨 잘못된 요청입니다.');
-  }
+  protected defaultMessage = '😨 잘못된 요청입니다.';
 }

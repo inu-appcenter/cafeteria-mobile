@@ -17,8 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export default class ApiError extends Error {
-  constructor(message?: string) {
-    super(message || `😔 미처 처리하지 못한 오류입니다!`);
+export default abstract class ApiError extends Error {
+  protected abstract defaultMessage: string;
+
+  constructor(protected readonly statusCode?: number, protected readonly error?: string, message?: string) {
+    super(message);
+  }
+
+  get message(): string {
+    return super.message || this.defaultMessage || `😔 미처 처리하지 못한 오류입니다!`;
   }
 }
+
+export type ApiErrorConstructorType = {
+  new (statusCode?: number, error?: string, message?: string): ApiError;
+};

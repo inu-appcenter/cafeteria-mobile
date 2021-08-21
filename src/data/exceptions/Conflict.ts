@@ -20,7 +20,5 @@
 import ApiError from './ApiError';
 
 export default class Conflict extends ApiError {
-  constructor() {
-    super('😨 상태 불일치로 요청을 처리할 수 없습니다.');
-  }
+  protected defaultMessage = '😨 상태 불일치로 요청을 처리할 수 없습니다.';
 }

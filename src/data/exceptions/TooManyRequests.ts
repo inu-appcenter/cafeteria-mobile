@@ -20,7 +20,5 @@ import ApiError from './ApiError';
  */
 
 export default class TooManyRequests extends ApiError {
-  constructor() {
-    super('😨 너무 잦은 요청입니다.');
-  }
+  protected defaultMessage = '😨 너무 잦은 요청입니다.';
 }

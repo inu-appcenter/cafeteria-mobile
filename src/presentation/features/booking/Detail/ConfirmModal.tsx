@@ -45,7 +45,7 @@ function ConfirmModal({navigation}: Props) {
   const confirm = async () => {
     fetch()
       .then(() => navigation.navigate('BookingComplete'))
-      .catch(e => handleApiError(e));
+      .catch(handleApiError);
   };
 
   const bookingOption = bookingStore.currentOption;

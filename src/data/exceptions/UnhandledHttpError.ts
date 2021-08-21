@@ -20,7 +20,5 @@
 import ApiError from './ApiError';
 
 export default class UnhandledHttpError extends ApiError {
-  constructor(readonly statusCode: number) {
-    super(`🧐 응답 코드 ${statusCode}입니다.`);
-  }
+  protected defaultMessage = `🧐 응답 코드 ${this.statusCode}입니다.`;
 }

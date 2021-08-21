@@ -20,7 +20,5 @@
 import ApiError from './ApiError';
 
 export default class InternalError extends ApiError {
-  constructor() {
-    super('🤯 서버 내부에서 문제가 생겼습니다.');
-  }
+  protected defaultMessage = '🤯 서버 내부에서 문제가 생겼습니다.';
 }

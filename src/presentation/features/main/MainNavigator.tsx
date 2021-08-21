@@ -22,18 +22,14 @@ import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import BookingScreen from '../booking/BookingScreen';
 import SupportScreen from '../support/SupportScreen';
 import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
 import MembershipScreen from '../membership/MembershipScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import tabBarIconSelector, {
-  IconConfigs,
-} from '../../components/utils/tabBarIconSelector';
+import tabBarIconSelector, {IconConfigs} from '../../components/utils/tabBarIconSelector';
 
 const icons: IconConfigs = {
   Cafeteria: ['restaurant', 'restaurant', MaterialIcons],
-  Booking: ['bookmarks', 'bookmarks-outline', Ionicons],
   Membership: ['barcode', 'barcode-outline', Ionicons],
   Support: ['support-agent', 'support-agent', MaterialIcons],
 };
@@ -51,26 +47,9 @@ export default function MainNavigator() {
       screenOptions={({route}) => ({
         tabBarIcon: tabBarIconSelector(icons, route.name),
       })}>
-      <BottomTab.Screen
-        name="Cafeteria"
-        component={CafeteriaScreen}
-        options={{title: '식단'}}
-      />
-      <BottomTab.Screen
-        name="Booking"
-        component={BookingScreen}
-        options={{title: '예약'}}
-      />
-      <BottomTab.Screen
-        name="Membership"
-        component={MembershipScreen}
-        options={{title: '할인'}}
-      />
-      <BottomTab.Screen
-        name="Support"
-        component={SupportScreen}
-        options={{title: '지원'}}
-      />
+      <BottomTab.Screen name="Cafeteria" component={CafeteriaScreen} options={{title: '식단'}} />
+      <BottomTab.Screen name="Membership" component={MembershipScreen} options={{title: '할인'}} />
+      <BottomTab.Screen name="Support" component={SupportScreen} options={{title: '지원'}} />
     </BottomTab.Navigator>
   );
 }

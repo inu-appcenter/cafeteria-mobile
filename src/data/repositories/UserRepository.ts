@@ -26,7 +26,7 @@ export default class UserRepository {
   static instance = new UserRepository();
 
   private url = {
-    login: `${Config.baseUrl}/login`,
+    login: `${Config.baseUrl}/student/login`,
     activateBarcode: `${Config.baseUrl}/activateBarcode`,
   };
 
@@ -45,9 +45,7 @@ export default class UserRepository {
   }
 
   async getSavedUserInfo() {
-    const serializedUserInfo = await AsyncStorage.getItem(
-      'user_info_serialized',
-    );
+    const serializedUserInfo = await AsyncStorage.getItem('user_info_serialized');
     if (serializedUserInfo === null) {
       return undefined;
     }

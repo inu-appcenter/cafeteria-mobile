@@ -20,8 +20,8 @@ import {Platform} from 'react-native';
  */
 
 export default {
-  //baseUrl: 'https://api.inu-cafeteria.app',
-  baseUrl: 'http://10.0.1.10:9999', // 로컬 서버
+  baseUrl: 'https://api.inu-cafeteria.app',
+  // baseUrl: 'http://10.0.1.10:9999', // 로컬 서버
 
   contacts: {
     uicoopPhoneNumber: '0328359795',

@@ -21,6 +21,6 @@ import ApiError from './ApiError';
 
 export default class Unauthorized extends ApiError {
   constructor() {
-    super('인증에 실패하였습니다.');
+    super('😨 인증되지 않은 요청입니다.');
   }
 }

@@ -21,6 +21,6 @@ import ApiError from './ApiError';
 
 export default class CannotReachServer extends ApiError {
   constructor() {
-    super(`서버에 연결할 수 없습니다.`);
+    super('🥺 서버에 연결할 수 없습니다. 인터넷 상태를 확인해 주세요!');
   }
 }

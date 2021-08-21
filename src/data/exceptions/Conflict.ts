@@ -19,8 +19,8 @@
 
 import ApiError from './ApiError';
 
-export default class BadRequest extends ApiError {
+export default class Conflict extends ApiError {
   constructor() {
-    super('😨 잘못된 요청입니다.');
+    super('😨 상태 불일치로 요청을 처리할 수 없습니다.');
   }
 }

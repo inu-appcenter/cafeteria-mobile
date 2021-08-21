@@ -19,8 +19,8 @@
 
 import ApiError from './ApiError';
 
-export default class BadRequest extends ApiError {
+export default class Forbidden extends ApiError {
   constructor() {
-    super('😨 잘못된 요청입니다.');
+    super('😨 허용되지 않은 요청입니다.');
   }
 }

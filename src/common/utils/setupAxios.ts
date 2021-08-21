@@ -25,6 +25,8 @@ import CannotReachServer from '../../data/exceptions/CannotReachServer';
 import UnhandledHttpError from '../../data/exceptions/UnhandledHttpError';
 import TooManyRequests from '../../data/exceptions/TooManyRequests';
 import BadRequest from '../../data/exceptions/BadRequest';
+import Conflict from '../../data/exceptions/Conflict';
+import Forbidden from '../../data/exceptions/Forbidden';
 
 export default function setupAxios() {
   axios.interceptors.response.use(undefined, (error: any) => {
@@ -46,6 +48,10 @@ function createResponseError(statusCode: number): ApiError {
       return new BadRequest();
     case 401:
       return new Unauthorized();
+    case 403:
+      return new Forbidden();
+    case 409:
+      return new Conflict();
     case 429:
       return new TooManyRequests();
     case 500:

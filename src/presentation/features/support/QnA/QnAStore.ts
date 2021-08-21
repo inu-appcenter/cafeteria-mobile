@@ -17,13 +17,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import MakeInquiry from '../../../../domain/usecases/MakeInquiry';
+import Ask from '../../../../domain/usecases/Ask';
 import MarkAnswerRead from '../../../../domain/usecases/MarkAnswerRead';
-import GetInquiryHistories from '../../../../domain/usecases/GetInquiryHistories';
+import GetQnAHistories from '../../../../domain/usecases/GetQnAHistories';
 import {makeAutoObservable} from 'mobx';
 import QuestionWithAnswerView from './QuestionWithAnswerView';
 
-export default class DirectInquiryStore {
+export default class QnAStore {
   private _histories: QuestionWithAnswerView[] = [];
   get histories() {
     return this._histories;
@@ -37,15 +37,13 @@ export default class DirectInquiryStore {
   }
 
   async fetchHistories() {
-    const histories = await GetInquiryHistories.run();
+    const histories = await GetQnAHistories.run();
 
-    this.histories = histories.map(question =>
-      QuestionWithAnswerView.fromQuestion(question),
-    );
+    this.histories = histories.map(question => QuestionWithAnswerView.fromQuestion(question));
   }
 
   async ask(content: string) {
-    await MakeInquiry.run({content});
+    await Ask.run({content});
   }
 
   async markAnswerRead(answerId: number) {

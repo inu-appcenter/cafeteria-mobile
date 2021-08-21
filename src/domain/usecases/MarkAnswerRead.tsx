@@ -18,22 +18,20 @@
  */
 
 import UseCase from './UseCase';
-import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
+import QnARepository from '../../data/repositories/QnARepository';
 
 type Params = {
   answerId: number;
 };
 
 class MarkAnswerRead extends UseCase<Params, void> {
-  constructor(
-    private readonly directInquiryRepository: DirectInquiryRepository,
-  ) {
+  constructor(private readonly qnaRepository: QnARepository) {
     super();
   }
 
   async onExecute(params: Params): Promise<void> {
-    await this.directInquiryRepository.markAnswerRead(params.answerId);
+    await this.qnaRepository.markAnswerRead(params.answerId);
   }
 }
 
-export default new MarkAnswerRead(DirectInquiryRepository.instance);
+export default new MarkAnswerRead(QnARepository.instance);

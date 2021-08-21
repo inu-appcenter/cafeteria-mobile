@@ -24,3 +24,17 @@ export default function alert(title: string, message?: string) {
     cancelable: true,
   });
 }
+
+export function cancelBookingAlert(title: string, message: string, onPress: () => void) {
+  Alert.alert(
+    title,
+    message,
+    [
+      {text: '닫기', style: 'cancel'},
+      {text: '예약 취소', style: 'destructive', onPress},
+    ],
+    {
+      cancelable: true,
+    },
+  );
+}

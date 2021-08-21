@@ -129,9 +129,7 @@ class FetchResultReducer {
   }
 
   reduce(fillContents: boolean = true) {
-    const cafeteriaUnfilled = this.cafeteria.map(rawCafeteria =>
-      plainToClass(Cafeteria, rawCafeteria, this.transformOptions),
-    );
+    const cafeteriaUnfilled = plainToClass(Cafeteria, this.cafeteria, this.transformOptions);
 
     if (!fillContents) {
       return cafeteriaUnfilled;

@@ -64,7 +64,10 @@ export default class NoticeRepository {
   }
 
   async getAllNotices(params: NoticeFetchParams) {
-    return plainToClass(Notice, (await this.fetchNotices(params)) as any[]);
+    // 최신순부터
+    return plainToClass(Notice, (await this.fetchNotices(params)) as any[]).sort(
+      (a, b) => b.createdAt.getTime() - a.createdAt.getTime(),
+    );
   }
 
   private async fetchNotices({os, appVersion}: NoticeFetchParams) {

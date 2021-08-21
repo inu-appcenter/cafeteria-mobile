@@ -70,7 +70,9 @@ export default class CafeteriaStore {
   }
 
   async fetchCafeteria() {
-    this.cafeteria = await GetCafeteriaOnly.run();
+    const cafeteria = await GetCafeteriaOnly.run();
+
+    this.cafeteria = cafeteria.map(c => CafeteriaView.fromCafeteria(c));
   }
 
   async fetchCafeteriaWithMenusPerDay(dateOffset: number) {

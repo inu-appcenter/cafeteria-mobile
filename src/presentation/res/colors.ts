@@ -19,15 +19,24 @@
 
 export default {
   white: '#ffffff',
-  grayishWhite: '#F8F8F8',
+  grayishWhite: '#f6f6f9',
+  neutralGray: '#e8e9ed',
   lightGray: '#A0A0A0',
-  green: '#5ccb5c',
-  red: '#f15f5f',
   gray: '#808080',
   black: '#000000',
   transparent: '#00000000',
 
+  vividGreen: '#5ccb5c',
+  orange: '#ff8d2e',
+  red: '#f15f5f',
+
+  textGreen: '#2c6e02',
+  textOrange: '#ce7938',
+  textRed: '#bb4747',
+
   mainTint: '#3DB4F4',
+  lightBlueText: '#1c76a6',
+  lightBlueBackground: '#d3e8f5',
 
   textPrimary: '#262B31',
   textSecondary: '#70808D',
@@ -38,6 +47,7 @@ export default {
   rippleColorDark: '#FFFFFF40',
 
   dividerColorLight: '#0000002F',
+  sectionHeaderBackground: '#e8e9ed',
 
   shadow: '#555555',
   darkComponentBackground: '#222222',

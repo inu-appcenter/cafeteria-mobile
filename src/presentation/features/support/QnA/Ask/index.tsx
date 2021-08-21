@@ -29,12 +29,12 @@ import React, {useState} from 'react';
 import {ScrollView, StyleSheet, TextInput, View} from 'react-native';
 
 export default function Ask() {
-  const {directInquiryStore} = useStores();
+  const {qnaStore} = useStores();
 
   const [content, setContent] = useState('');
 
-  const [loading, ask] = useApi(() => directInquiryStore.ask(content));
-  const [, fetchHistories] = useApi(() => directInquiryStore.fetchHistories());
+  const [loading, ask] = useApi(() => qnaStore.ask(content));
+  const [, fetchHistories] = useApi(() => qnaStore.fetchHistories());
 
   const submitQuestion = async () => {
     if (loading) {
@@ -68,7 +68,7 @@ export default function Ask() {
         />
         <Button
           {...PaperPresets.wideThemedButton}
-          style={styles.button}
+          style={styles.primaryButton}
           onPress={submitQuestion}
           loading={loading}
           disabled={content.length <= 0}>
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
   },
-  button: {
+  primaryButton: {
     marginHorizontal: 16,
   },
 });

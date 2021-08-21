@@ -25,26 +25,28 @@ import CardView from '../../../components/CardView';
 import ChevronRight from '../../../components/ChevronRight';
 import {SupportMainNavigation} from '../SupportScreen';
 import {StyleSheet, Text, View} from 'react-native';
+import useStores from '../../../hooks/useStores';
 
 type Props = {
   navigation: SupportMainNavigation;
 };
 
 export default function ContactsButton({navigation}: Props) {
+  const {userStore} = useStores();
+
   return (
     <CardView
-      style={styles.helpCard}
+      style={styles.cafeteriaCard}
+      onLongPress={() => userStore.logout()} // TODO
       onPress={() => navigation.navigate('SupportContacts')}>
       <View style={styles.container}>
-        <View style={styles.callIconContainer}>
+        <View style={styles.iconContainer}>
           <Icon name="phone" size={24} color={colors.white} />
         </View>
         <View style={styles.rightContainer}>
-          <View style={styles.helpCardTextContainer}>
-            <Text style={styles.helpCardTitleText}>
-              서비스 이용에 불편을 겪고 계신가요?
-            </Text>
-            <Text style={styles.helpCardBodyText}>문의 가능한 연락처 보기</Text>
+          <View style={styles.textContainer}>
+            <Text style={styles.titleText}>서비스 이용에 불편을 겪고 계신가요?</Text>
+            <Text style={styles.bodyText}>문의 가능한 연락처 보기</Text>
           </View>
           <ChevronRight />
         </View>
@@ -54,7 +56,7 @@ export default function ContactsButton({navigation}: Props) {
 }
 
 const styles = StyleSheet.create({
-  helpCard: {
+  cafeteriaCard: {
     paddingVertical: 12,
     paddingStart: 12,
     paddingEnd: 4,
@@ -65,8 +67,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
   },
-  callIconContainer: {
-    backgroundColor: colors.green,
+  iconContainer: {
+    backgroundColor: colors.vividGreen,
     borderRadius: 8,
     alignItems: 'center',
     justifyContent: 'center',
@@ -80,14 +82,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginStart: 12,
   },
-  helpCardTextContainer: {
+  textContainer: {
     flex: 1,
   },
-  helpCardTitleText: {
+  titleText: {
     ...palette.textPrimary,
     fontWeight: 'bold',
   },
-  helpCardBodyText: {
+  bodyText: {
     color: colors.textSecondary,
     fontSize: 14,
     marginTop: 4,

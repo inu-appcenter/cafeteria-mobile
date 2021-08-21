@@ -21,7 +21,7 @@ import useApi from '../../../hooks/useApi';
 import Section from './Section';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
-import EmptyView from '../../../components/EmptyView';
+import SomethingWentWrongView from '../../../components/SomethingWentWrongView';
 import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
 import LoadingView from '../../../components/LoadingView';
@@ -35,10 +35,7 @@ import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
   route: RouteProp<CafeteriaDateTabNavigationParams, 'DateTab1'>;
-  navigation: MaterialTopTabNavigationProp<
-    CafeteriaDateTabNavigationParams,
-    'DateTab1'
-  >;
+  navigation: MaterialTopTabNavigationProp<CafeteriaDateTabNavigationParams, 'DateTab1'>;
 };
 
 function Page({route, navigation}: Props) {
@@ -46,9 +43,7 @@ function Page({route, navigation}: Props) {
   const {cafeteriaStore} = useStores();
   const data = cafeteriaStore.getCafeteriaWithMenus(dateOffset);
 
-  const [loading, invoke] = useApi(() =>
-    cafeteriaStore.fetchCafeteriaWithMenusPerDay(dateOffset),
-  );
+  const [loading, invoke] = useApi(() => cafeteriaStore.fetchCafeteriaWithMenusPerDay(dateOffset));
 
   const fetch = () => invoke().catch(handleApiError);
 
@@ -56,6 +51,11 @@ function Page({route, navigation}: Props) {
     fetch();
   }, []);
 
+  /**
+   * 부모 컴포넌트가 주는 navigation을 통해 중첩된 어떤 상위 navigation도 접근할 수 있습니다.
+   * 그런데 Props로 받을 때에는 navigation의 타입을 직계 부모로 설정해야만 합니다.
+   * 따라서 조부모 세대의 navigation을 사용하기 위해 강제 타입 캐스팅을 적용합니다.
+   */
   const parentNavigation = navigation as unknown as StackNavigationProp<
     CafeteriaListDetailNavigationParams,
     'CafeteriaList'
@@ -64,7 +64,7 @@ function Page({route, navigation}: Props) {
   const loadingView = <LoadingView />;
 
   const emptyView = (
-    <EmptyView
+    <SomethingWentWrongView
       whatWentWrong={'서버로부터 식당 목록을 가져오지 못했습니다!'}
       showBorder={false}
       retry={fetch}
@@ -75,9 +75,7 @@ function Page({route, navigation}: Props) {
     <Animated.FlatList
       style={palette.whiteBackground}
       data={data}
-      renderItem={item => (
-        <Section navigation={parentNavigation} cafeteria={item.item} />
-      )}
+      renderItem={item => <Section navigation={parentNavigation} cafeteria={item.item} />}
       keyExtractor={i => i.title}
       contentContainerStyle={styles.rootListContentContainer}
     />

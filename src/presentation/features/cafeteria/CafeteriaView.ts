@@ -20,14 +20,18 @@
 import Cafeteria from '../../../domain/entities/Cafeteria';
 
 export default class CafeteriaView {
-  id: number = 0;
-  displayName: string = '';
-  supportDiscount: boolean = false;
+  id: number;
+  displayName: string;
+  supportMenu: boolean;
+  supportBooking: boolean;
+  supportDiscount: boolean;
 
   static fromCafeteria(cafeteria: Cafeteria): CafeteriaView {
     return {
       id: cafeteria.id,
       displayName: cafeteria.displayName,
+      supportMenu: cafeteria.supportMenu,
+      supportBooking: cafeteria.supportBooking,
       supportDiscount: cafeteria.supportDiscount,
     };
   }

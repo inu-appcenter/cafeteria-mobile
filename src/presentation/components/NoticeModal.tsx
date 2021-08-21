@@ -42,22 +42,20 @@ function NoticeModal() {
 
   return (
     <Modal
-      isVisible={noticeStore.currentNotice !== undefined}
+      isVisible={noticeStore.currentNotice != null}
       swipeDirection="down"
       onSwipeComplete={() => noticeStore.dismissCurrentNotice()}
       style={styles.modal}>
       <View style={styles.modalContentContainer}>
         <View style={styles.upperContainer}>
-          <Text style={styles.textTitle}>
-            {noticeStore.currentNotice?.title}
-          </Text>
+          <Text style={styles.textTitle}>{noticeStore.currentNotice?.title}</Text>
           <Text style={styles.textBody}>{noticeStore.currentNotice?.body}</Text>
         </View>
 
         <Button
           {...PaperPresets.wideThemedButton}
           labelStyle={computedStyles.buttonLabel}
-          style={styles.button}
+          style={styles.primaryButton}
           onPress={() => noticeStore.dismissCurrentNotice()}>
           닫기
         </Button>
@@ -91,7 +89,7 @@ const styles = StyleSheet.create({
     ...palette.textPrimary,
     marginTop: 16,
   },
-  button: {
+  primaryButton: {
     borderRadius: 0,
   },
 });

@@ -29,7 +29,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {MembershipNavigationParams} from '../MembershipScreen';
 
 type Props = {
-  navigation: StackNavigationProp<MembershipNavigationParams, 'Onboarding'>;
+  navigation: StackNavigationProp<MembershipNavigationParams, 'MembershipOnboarding'>;
 };
 
 function Onboarding({navigation}: Props) {
@@ -47,9 +47,9 @@ function Onboarding({navigation}: Props) {
       </View>
       <Button
         {...PaperPresets.wideThemedButton}
-        style={styles.button}
-        onPress={() => navigation.navigate('Login')}>
-        시작하기
+        style={styles.primaryButton}
+        onPress={() => navigation.navigate('MembershipStudentLogin')}>
+        학번으로 로그인
       </Button>
     </View>
   );
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 18,
     textAlign: 'center',
   },
-  button: {
+  primaryButton: {
     end: 12,
     start: 12,
     bottom: 12,

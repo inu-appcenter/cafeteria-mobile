@@ -23,9 +23,11 @@ export default function useUserState() {
   const {userStore} = useStores();
 
   return {
-    userId: userStore.userId,
+    user: userStore.user,
     barcode: userStore.barcode,
+    studentId: userStore.studentId,
     isLoggedIn: userStore.isLoggedIn,
+    isLoggedInAsStudent: userStore.isLoggedInAsStudent,
     isTryingRememberedLogin: userStore.isTryingRememberedLogin,
   };
 }

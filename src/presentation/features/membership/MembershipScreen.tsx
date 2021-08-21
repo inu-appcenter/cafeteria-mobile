@@ -18,39 +18,48 @@
  */
 
 import React from 'react';
-import Login from './Login';
 import Barcode from './Barcode';
 import Onboarding from './Onboarding';
 import {observer} from 'mobx-react';
 import useUserState from '../../hooks/useUserState';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
+import StudentLoginScreen from './../login/StudentLoginScreen';
 import {createStackNavigator} from '@react-navigation/stack';
 import MembershipInfoHeaderButton from './Barcode/MembershipInfoHeaderButton';
 
 export type MembershipNavigationParams = {
-  Onboarding: undefined;
-  Login: undefined;
-  Barcode: undefined;
+  MembershipOnboarding: undefined;
+  MembershipStudentLogin: undefined;
+  MembershipBarcode: undefined;
 };
 
 function MembershipScreen() {
-  const {isLoggedIn} = useUserState();
+  const {isLoggedInAsStudent} = useUserState();
 
   const Stack = createStackNavigator<MembershipNavigationParams>();
 
   const onboardingScreen = (
     <Stack.Screen
-      key="onboarding_screen"
-      name="Onboarding"
+      key="membership_onboarding_screen"
+      name="MembershipOnboarding"
       component={Onboarding}
       options={{headerShown: false}}
     />
   );
 
+  const loginScreen = (
+    <Stack.Screen
+      key="membership_student_login_screen"
+      name="MembershipStudentLogin"
+      component={StudentLoginScreen}
+      options={{title: '로그인'}}
+    />
+  );
+
   const barcodeScreen = (
     <Stack.Screen
-      key="barcode_screen"
-      name="Barcode"
+      key="membership_barcode_screen"
+      name="MembershipBarcode"
       component={Barcode}
       options={{
         title: '멤버십',
@@ -59,21 +68,9 @@ function MembershipScreen() {
     />
   );
 
-  const loginScreen = (
-    <Stack.Screen
-      key="login_screen"
-      name="Login"
-      component={Login}
-      options={{title: '로그인'}}
-    />
-  );
-
   return (
-    <Stack.Navigator
-      mode="modal"
-      headerMode="screen"
-      screenOptions={StackHeaderPresets.commonModalHeaderOptions}>
-      {isLoggedIn ? [barcodeScreen] : [onboardingScreen, loginScreen]}
+    <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
+      {isLoggedInAsStudent ? [barcodeScreen] : [onboardingScreen, loginScreen]}
     </Stack.Navigator>
   );
 }

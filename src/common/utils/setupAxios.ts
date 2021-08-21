@@ -18,16 +18,24 @@
  */
 
 import axios from 'axios';
-import ApiError from '../../data/exceptions/ApiError';
+import ApiError, {ApiErrorConstructorType} from '../../data/exceptions/ApiError';
 import Unauthorized from '../../data/exceptions/Unauthorized';
 import InternalError from '../../data/exceptions/InternalError';
 import CannotReachServer from '../../data/exceptions/CannotReachServer';
 import UnhandledHttpError from '../../data/exceptions/UnhandledHttpError';
+import TooManyRequests from '../../data/exceptions/TooManyRequests';
+import BadRequest from '../../data/exceptions/BadRequest';
+import Conflict from '../../data/exceptions/Conflict';
+import Forbidden from '../../data/exceptions/Forbidden';
 
 export default function setupAxios() {
   axios.interceptors.response.use(undefined, (error: any) => {
     if (error.response) {
-      throw createResponseError(error.response.status);
+      throw createResponseError(
+        error.response.status,
+        error.response.data?.error,
+        error.response.data?.message,
+      );
     } else {
       throw createConnectionError();
     }
@@ -38,13 +46,17 @@ function createConnectionError(): ApiError {
   return new CannotReachServer();
 }
 
-function createResponseError(statusCode: number): ApiError {
-  switch (statusCode) {
-    case 401:
-      return new Unauthorized();
-    case 500:
-      return new InternalError();
-    default:
-      return new UnhandledHttpError(statusCode);
-  }
+function createResponseError(statusCode: number, error?: string, message?: string): ApiError {
+  const mapping: Record<number, ApiErrorConstructorType> = {
+    400: BadRequest,
+    401: Unauthorized,
+    403: Forbidden,
+    409: Conflict,
+    429: TooManyRequests,
+    500: InternalError,
+  };
+
+  const errorClass = mapping[statusCode] || UnhandledHttpError;
+
+  return new errorClass(statusCode, error, message);
 }

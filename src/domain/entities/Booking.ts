@@ -17,18 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import UseCase from './UseCase';
-import UserRepository from '../../data/repositories/UserRepository';
-import User from '../entities/User';
+import {Expose, Type} from 'class-transformer';
 
-class GetUser extends UseCase<void, User | undefined> {
-  constructor(private readonly userRepository: UserRepository) {
-    super();
-  }
+export default class Booking {
+  @Expose()
+  id: number;
 
-  async onExecute(_: void): Promise<User | undefined> {
-    return this.userRepository.getSavedUserInfo();
-  }
+  @Expose()
+  uuid: string;
+
+  @Expose()
+  cafeteriaId: number;
+
+  @Expose()
+  @Type(() => Date)
+  timeSlot: Date;
+
+  @Expose()
+  @Type(() => Date)
+  bookedAt: Date;
 }
-
-export default new GetUser(UserRepository.instance);

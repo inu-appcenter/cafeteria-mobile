@@ -17,15 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  Text,
-  View,
-  Image,
-  Platform,
-  ScrollView,
-  StyleSheet,
-  Dimensions,
-} from 'react-native';
+import {Text, View, Image, Platform, ScrollView, StyleSheet, Dimensions} from 'react-native';
 import useApi from '../../../hooks/useApi';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
@@ -39,7 +31,8 @@ import React, {useEffect} from 'react';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
 
 function Barcode() {
-  const {userId, barcode} = useUserState();
+  const {barcode, studentId} = useUserState();
+
   const [toggleBrightness] = useScreenBrightness();
   const [, activateBarcode] = useApi(() => ActivateBarcode.run());
 
@@ -54,9 +47,7 @@ function Barcode() {
         source={require('../../../res/images/uicoop_logo.png')}
         resizeMode="contain"
       />
-      <Text style={[palette.textPrimary, palette.boldText]}>
-        소비자생활협동조합
-      </Text>
+      <Text style={[palette.textPrimary, palette.boldText]}>소비자생활협동조합</Text>
     </View>
   );
 
@@ -77,7 +68,7 @@ function Barcode() {
   const userInfo = (
     <View style={{padding: 16}}>
       <Text style={styles.userInfoIdLabel}>학번</Text>
-      <Text style={styles.userInfoIdValue}>{userId}</Text>
+      <Text style={styles.userInfoIdValue}>{studentId}</Text>
     </View>
   );
 

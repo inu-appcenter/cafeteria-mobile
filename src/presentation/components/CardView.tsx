@@ -17,13 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {
-  Platform,
-  StyleSheet,
-  TouchableWithoutFeedbackProps,
-  View,
-  ViewStyle,
-} from 'react-native';
+import {Platform, StyleSheet, TouchableWithoutFeedbackProps, View, ViewStyle} from 'react-native';
 import React from 'react';
 import colors from '../res/colors';
 import Touchable from './Touchable';
@@ -36,17 +30,18 @@ interface Props extends TouchableWithoutFeedbackProps {
 
 export default class CardView extends React.Component<Props> {
   render() {
-    const {style, children, onPress} = this.props;
+    const {style, children, onPress, onLongPress} = this.props;
 
     const card = <View style={[styles.card, style]}>{children}</View>;
 
-    if (onPress === undefined) {
+    if (onPress == null) {
       return card;
     } else {
       return (
         <Touchable
           style={styles.fullSizedWrapper}
-          onPress={e => onPress?.call(undefined, e)}>
+          onPress={e => onPress?.call(undefined, e)}
+          onLongPress={e => onLongPress?.call(undefined, e)}>
           {card}
         </Touchable>
       );

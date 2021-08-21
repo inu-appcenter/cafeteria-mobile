@@ -18,27 +18,20 @@
  */
 
 import UseCase from './UseCase';
-import DeviceInfo from 'react-native-device-info';
-import PackageInfo from '../../common/PackageInfo';
-import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
+import BookingRepository from '../../data/repositories/BookingRepository';
 
 type Params = {
-  content: string;
+  bookingId: number;
 };
 
-class MakeInquiry extends UseCase<Params, void> {
-  constructor(
-    private readonly directInquiryRepository: DirectInquiryRepository,
-  ) {
+class CancelBooking extends UseCase<Params> {
+  constructor(private readonly bookingRepository: BookingRepository) {
     super();
   }
 
-  async onExecute(params: Params): Promise<void> {
-    const deviceInfo = `${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}; ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`;
-    const version = PackageInfo.version;
-
-    await this.directInquiryRepository.ask(deviceInfo, version, params.content);
+  async onExecute({bookingId}: Params): Promise<void> {
+    return await this.bookingRepository.cancelBooking(bookingId);
   }
 }
 
-export default new MakeInquiry(DirectInquiryRepository.instance);
+export default new CancelBooking(BookingRepository.instance);

@@ -22,25 +22,19 @@ import Corner from '../../../domain/entities/Corner';
 import Menu from '../../../domain/entities/Menu';
 
 export default class MenuView {
-  key: string = '';
-  cornerName: string = '';
-  availableAt: number = 0;
-  foodsText: string = '';
-  priceAndCalorieText: string = '';
+  key: string;
+  cornerName: string;
+  availableAt: number;
+  foodsText: string;
+  priceAndCalorieText: string;
 
-  static fromCafeteriaAndCorner(
-    cafeteria: Cafeteria,
-    corner: Corner,
-  ): MenuView[] {
+  static fromCafeteriaAndCorner(cafeteria: Cafeteria, corner: Corner): MenuView[] {
     const priceAndCalorieString = (menu: Menu) => {
       const {price, calorie} = menu;
 
-      const caloriePart =
-        calorie > 0 ? `${Number(calorie).toLocaleString()}kcal` : '';
-      const pricePart =
-        price > 0 ? `${Number(menu.price).toLocaleString()}원` : '';
-      const separatorPart =
-        caloriePart.length > 0 && pricePart.length > 0 ? ' · ' : '';
+      const caloriePart = calorie > 0 ? `${Number(calorie).toLocaleString()}kcal` : '';
+      const pricePart = price > 0 ? `${Number(menu.price).toLocaleString()}원` : '';
+      const separatorPart = caloriePart.length > 0 && pricePart.length > 0 ? ' · ' : '';
 
       return caloriePart + separatorPart + pricePart;
     };

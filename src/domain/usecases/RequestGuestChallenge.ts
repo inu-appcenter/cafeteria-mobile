@@ -17,29 +17,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {useState} from 'react';
+import UseCase from './UseCase';
+import UserRepository from '../../data/repositories/UserRepository';
 
-/**
- * 스테이트-풀 한 로직 재활용해 봅시다!!!!!!!!!!!!
- * @param apiCall
- */
-export default function useApi(
-  apiCall: () => void,
-): [boolean, () => Promise<void>] {
-  const [loading, setLoading] = useState(false);
+type Params = {
+  phoneNumber: string;
+};
 
-  const invoke = async () => {
-    if (loading) {
-      return;
-    }
+class RequestGuestChallenge extends UseCase<Params> {
+  constructor(private readonly userRepository: UserRepository) {
+    super();
+  }
 
-    try {
-      setLoading(true);
-      await apiCall();
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return [loading, invoke];
+  async onExecute({phoneNumber}: Params): Promise<void> {
+    return await this.userRepository.requestGuestChallenge(phoneNumber);
+  }
 }
+
+export default new RequestGuestChallenge(UserRepository.instance);

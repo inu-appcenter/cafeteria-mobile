@@ -18,19 +18,17 @@
  */
 
 import UseCase from './UseCase';
-import Question from '../entities/Question';
-import DirectInquiryRepository from '../../data/repositories/DirectInquiryRepository';
+import Booking from '../entities/Booking';
+import BookingRepository from '../../data/repositories/BookingRepository';
 
-class GetInquiryHistories extends UseCase<void, Question[]> {
-  constructor(
-    private readonly directInquiryRepository: DirectInquiryRepository,
-  ) {
+class GetMyBookings extends UseCase<void, Booking[]> {
+  constructor(private readonly bookingRepository: BookingRepository) {
     super();
   }
 
-  async onExecute(params: void): Promise<Question[]> {
-    return this.directInquiryRepository.getHistories();
+  async onExecute(params: void): Promise<Booking[]> {
+    return await this.bookingRepository.getMyBookings();
   }
 }
 
-export default new GetInquiryHistories(DirectInquiryRepository.instance);
+export default new GetMyBookings(BookingRepository.instance);

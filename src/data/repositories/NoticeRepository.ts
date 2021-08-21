@@ -64,7 +64,7 @@ export default class NoticeRepository {
   }
 
   async getAllNotices(params: NoticeFetchParams) {
-    return plainToClass(Notice, await this.fetchNotices(params));
+    return plainToClass(Notice, (await this.fetchNotices(params)) as any[]);
   }
 
   private async fetchNotices({os, appVersion}: NoticeFetchParams) {

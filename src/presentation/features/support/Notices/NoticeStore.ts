@@ -22,6 +22,7 @@ import GetNewNotice from '../../../../domain/usecases/GetNewNotice';
 import DismissNotice from '../../../../domain/usecases/DismissNotice';
 import GetAllNotices from '../../../../domain/usecases/GetAllNotices';
 import {makeAutoObservable} from 'mobx';
+import doLater from '../../../../common/utils/doLater';
 
 export default class NoticeStore {
   private _notices: NoticeView[] = [];
@@ -56,7 +57,9 @@ export default class NoticeStore {
       return;
     }
 
-    this.currentNotice = NoticeView.fromNotice(newNotice);
+    doLater(() => {
+      this.currentNotice = NoticeView.fromNotice(newNotice);
+    });
   }
 
   async dismissCurrentNotice() {

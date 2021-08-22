@@ -125,6 +125,14 @@ const palette = StyleSheet.create({
     start: 12,
     end: 12,
   },
+
+  floatingActionButton: {
+    position: 'absolute',
+    bottom: 0,
+    end: 0,
+    margin: 16,
+    backgroundColor: colors.mainTint,
+  },
 });
 
 export default palette;

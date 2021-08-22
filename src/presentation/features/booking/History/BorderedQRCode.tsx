@@ -18,11 +18,12 @@
  */
 
 import React from 'react';
-import {View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 // @ts-ignore
 import {AnimatedSVGPath} from 'react-native-svg-animations';
+import palette from '../../../res/palette';
 
 type Props = {
   value: string;
@@ -32,29 +33,27 @@ export default function BorderedQRCode({value}: Props) {
   const d = 'M5 5H120V120H5z';
 
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
+    <View style={palette.centeringContainer}>
       <AnimatedSVGPath
-        strokeDashArray={[120, 120]}
-        strokeColor={'red'}
-        strokeWidth={2}
-        duration={3000}
-        height={120}
-        width={120}
-        delay={0}
         d={d}
         loop={true}
+        delay={0}
+        width={120}
+        height={120}
+        duration={3000}
+        strokeWidth={2}
+        strokeColor={'red'}
+        strokeDashArray={[120, 120]}
       />
-      <View
-        style={{
-          position: 'absolute',
-        }}>
+      <View style={styles.concrete}>
         <QRCode value={value} size={100} />
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  concrete: {
+    position: 'absolute',
+  },
+});

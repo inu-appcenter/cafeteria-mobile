@@ -23,12 +23,12 @@ import CardView from '../../../components/CardView';
 import {Button} from 'react-native-paper';
 import useStores from '../../../hooks/useStores';
 import BookingView from '../BookingView';
-import {Text, View} from 'react-native';
 import PaperPresets from '../../../components/utils/PaperPresets';
 import BorderedQRCode from './BorderedQRCode';
 import handleApiError from '../../../../common/utils/handleApiError';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
 import {cancelBookingAlert} from '../../../components/utils/alert';
+import {StyleSheet, Text, View} from 'react-native';
 
 type Props = {
   booking: BookingView;
@@ -39,49 +39,62 @@ export default function BookingItem({booking}: Props) {
 
   const [toggleBrightness] = useScreenBrightness();
 
+  const promptDelete = () =>
+    cancelBookingAlert('예약 취소', '예약을 취소할까요?', () =>
+      bookingStore.cancelBooking(booking.id).catch(handleApiError),
+    );
+
   return (
-    <CardView
-      style={{
-        marginHorizontal: 22,
-        marginTop: 21,
-        padding: 16,
-      }}
-      onPress={toggleBrightness}>
+    <CardView style={styles.bookingCard} onPress={toggleBrightness}>
       <Text style={palette.textSecondary}>{booking.timeSlotDateString}</Text>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 8}}>
+      <View style={styles.titleContainer}>
         <Text style={palette.textHeader}>{booking.cafeteriaTitle}</Text>
         <Text style={palette.textHeader}>{booking.timeSlotShortTimeString}</Text>
       </View>
 
-      <View
-        style={{
-          alignItems: 'center',
-          marginVertical: 12,
-        }}>
+      <View style={styles.qrcodeContainer}>
         <BorderedQRCode value={booking.uuid} />
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 8}}>
+      <View style={styles.extraContainer}>
         <Text style={palette.textSecondary}>예약 확인 번호</Text>
         <Text style={palette.textSecondary}>{booking.uuid.split('-').pop()}</Text>
       </View>
 
-      <View style={{flexDirection: 'row', justifyContent: 'space-between', marginTop: 8}}>
+      <View style={styles.extraContainer}>
         <Text style={palette.textSecondary}>식당 확인 식별자</Text>
         <Text style={palette.textSecondary}>{booking.cafeteriaId}</Text>
       </View>
 
-      <Button
-        {...PaperPresets.wideNeutralButton}
-        style={{marginTop: 12}}
-        onPress={() =>
-          cancelBookingAlert('예약 취소', '예약을 취소할까요?', () =>
-            bookingStore.cancelBooking(booking.id).catch(handleApiError),
-          )
-        }>
+      <Button {...PaperPresets.wideNeutralButton} style={styles.topSpaced} onPress={promptDelete}>
         예약 취소
       </Button>
     </CardView>
   );
 }
+
+const styles = StyleSheet.create({
+  bookingCard: {
+    marginHorizontal: 22,
+    marginTop: 21,
+    padding: 16,
+  },
+  titleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 8,
+  },
+  qrcodeContainer: {
+    alignItems: 'center',
+    marginVertical: 12,
+  },
+  extraContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 8,
+  },
+  topSpaced: {
+    marginTop: 12,
+  },
+});

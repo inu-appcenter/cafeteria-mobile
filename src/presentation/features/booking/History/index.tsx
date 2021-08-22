@@ -18,7 +18,6 @@
  */
 
 import {FAB} from 'react-native-paper';
-import colors from '../../../res/colors';
 import useApi from '../../../hooks/useApi';
 import palette from '../../../res/palette';
 import {observer} from 'mobx-react';
@@ -29,7 +28,7 @@ import NoBookingsView from './NoBookingsView';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import {FlatList, RefreshControl, View} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingHistory'>;
@@ -52,30 +51,34 @@ function History({navigation}: Props) {
   const content = (
     <FlatList
       data={myBookings}
-      contentContainerStyle={{paddingBottom: 90}}
-      refreshControl={<RefreshControl refreshing={loading} onRefresh={getMyBookings} />}
       renderItem={i => <BookingItem booking={i.item} />}
+      refreshControl={<RefreshControl refreshing={loading} onRefresh={getMyBookings} />}
+      contentContainerStyle={style.bottomSpaced}
+    />
+  );
+
+  const makeBookingButton = (
+    <FAB
+      style={palette.floatingActionButton}
+      icon="ticket-confirmation"
+      label="예약하기"
+      color={'white'}
+      onPress={() => navigation.navigate('BookingOptionsList')}
     />
   );
 
   return (
-    <View style={[palette.whiteBackground, palette.fullSized]}>
+    <View style={palette.whiteFullSized}>
       {bookingStore.hasBookings ? content : emptyView}
-      <FAB
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          end: 0,
-          margin: 16,
-          backgroundColor: colors.mainTint,
-        }}
-        icon="ticket-confirmation"
-        label="예약하기"
-        color={'white'}
-        onPress={() => navigation.navigate('BookingOptionsList')}
-      />
+      {makeBookingButton}
     </View>
   );
 }
 
 export default observer(History);
+
+const style = StyleSheet.create({
+  bottomSpaced: {
+    paddingBottom: 90,
+  },
+});

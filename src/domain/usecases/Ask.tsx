@@ -31,11 +31,11 @@ class Ask extends UseCase<Params, void> {
     super();
   }
 
-  async onExecute(params: Params): Promise<void> {
+  async onExecute({content}: Params): Promise<void> {
     const deviceInfo = `${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}; ${DeviceInfo.getSystemName()} ${DeviceInfo.getSystemVersion()}`;
-    const version = PackageInfo.version;
+    const appVersion = PackageInfo.version;
 
-    await this.qnaRepository.ask(deviceInfo, version, params.content);
+    await this.qnaRepository.ask({deviceInfo, appVersion, content});
   }
 }
 

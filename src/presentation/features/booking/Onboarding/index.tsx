@@ -35,18 +35,18 @@ type Props = {
 function Onboarding({navigation}: Props) {
   const {isTryingRememberedLogin} = useUserState();
 
+  const goStudentLogin = () => navigation.navigate('BookingStudentLogin');
+  const goGuestLogin = () => navigation.navigate('BookingGuestLogin');
+
   const loadingView = <LoadingView />;
 
   const choices = (
     <View style={styles.buttonArray}>
-      <Button {...PaperPresets.wideThemedButton} onPress={() => navigation.navigate('BookingStudentLogin')}>
+      <Button {...PaperPresets.wideThemedButton} onPress={goStudentLogin}>
         학번으로 로그인
       </Button>
-      <Text style={[palette.textSubSecondary, styles.alternativeText]}>재학생이 아니신가요?</Text>
-      <Button
-        {...PaperPresets.wideNeutralButton}
-        style={styles.secondaryButton}
-        onPress={() => navigation.navigate('BookingGuestLogin')}>
+      <Text style={styles.alternativeText}>재학생이 아니신가요?</Text>
+      <Button {...PaperPresets.wideNeutralButton} style={styles.secondaryButton} onPress={goGuestLogin}>
         전화번호로 로그인
       </Button>
     </View>
@@ -99,6 +99,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   alternativeText: {
+    ...palette.textSubSecondary,
     marginTop: 8,
     alignSelf: 'center',
   },

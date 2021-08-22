@@ -21,6 +21,11 @@ import {Platform, StyleSheet} from 'react-native';
 import colors from './colors';
 
 const palette = StyleSheet.create({
+  whiteFullSized: {
+    flex: 1,
+    backgroundColor: colors.white,
+  },
+
   centeringContainer: {
     flex: 1,
     alignItems: 'center',
@@ -112,6 +117,13 @@ const palette = StyleSheet.create({
 
   iconHeaderButton: {
     paddingHorizontal: 18,
+  },
+
+  bottomButton: {
+    position: 'absolute',
+    bottom: 12,
+    start: 12,
+    end: 12,
   },
 });
 

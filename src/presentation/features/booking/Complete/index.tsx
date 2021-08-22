@@ -17,8 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import palette from '../../../res/palette';
 import useApi from '../../../hooks/useApi';
+import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import useStores from '../../../hooks/useStores';
 import PaperPresets from '../../../components/utils/PaperPresets';
@@ -27,7 +27,7 @@ import handleApiError from '../../../../common/utils/handleApiError';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 import React, {useEffect, useState} from 'react';
-import {Platform, Text, useWindowDimensions, View} from 'react-native';
+import {Platform, StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
@@ -41,9 +41,8 @@ export default function Complete({navigation}: Props) {
   const [confettiVisible, setConfettiVisible] = useState(false);
 
   useEffect(() => {
-    if (Platform.OS === 'ios') {
-      setConfettiVisible(true);
-    }
+    setConfettiVisible(Platform.OS === 'ios');
+
     fetch().catch(handleApiError);
   }, []);
 
@@ -52,25 +51,13 @@ export default function Complete({navigation}: Props) {
   );
 
   return (
-    <View
-      style={{
-        ...palette.fullSized,
-        ...palette.whiteBackground,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}>
-      <Text style={{fontSize: 42}}>✅</Text>
-      <Text style={{...palette.textSubHeader, marginTop: 18}}>예약이 완료되었습니다.</Text>
+    <View style={[palette.whiteFullSized, palette.centeringContainer]}>
+      <Text style={styles.bigEmojiText}>✅</Text>
+      <Text style={styles.mainTitleText}>예약이 완료되었습니다.</Text>
 
       <Button
         {...PaperPresets.wideThemedButton}
-        style={{
-          position: 'absolute',
-          bottom: 12,
-          start: 12,
-          end: 12,
-        }}
+        style={palette.bottomButton}
         onPress={() => navigation.navigate('BookingHistory')}>
         돌아가기
       </Button>
@@ -79,3 +66,14 @@ export default function Complete({navigation}: Props) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  bigEmojiText: {
+    fontSize: 42,
+  },
+  mainTitleText: {
+    ...palette.textSubHeader,
+    marginTop: 18,
+  },
+  backButton: {},
+});

@@ -33,12 +33,14 @@ export default class BookingOptionView {
   left: number;
   capacity: number;
   full: boolean;
+  available: boolean;
   statusText: string;
   statusColor: string;
 
   static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
     const left = option.capacity - option.used;
     const full = option.used >= option.capacity;
+    const available = !full;
     const statusText = full ? '마감되었습니다.' : `${left}자리 남음`;
 
     const underHalf = left < option.capacity * 0.5;
@@ -57,6 +59,7 @@ export default class BookingOptionView {
       left,
       capacity: option.capacity,
       full,
+      available,
       statusText,
       statusColor,
     };

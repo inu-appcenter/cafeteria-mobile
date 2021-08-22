@@ -22,7 +22,7 @@ import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import Touchable from '../../../components/Touchable';
-import {Text, View} from 'react-native';
+import {Text, View, StyleSheet} from 'react-native';
 import BookingOptionView from '../BookingOptionView';
 
 type Props = {
@@ -34,32 +34,16 @@ export default function BookingOptionItem({bookingOption}: Props) {
 
   const available = !bookingOption.full;
 
+  const containerBackgroundColor = available ? colors.transparent : colors.transparent;
+  const highlightedTextColor = available ? colors.textPrimary : colors.textDisabled;
+  const statusTextColor = available ? bookingOption.statusColor : colors.textDisabled;
+
   const content = (
-    <View
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        padding: 8,
-        overflow: 'hidden',
-        borderRadius: 4,
-        backgroundColor: available ? colors.transparent : colors.transparent,
-      }}>
-      <Text
-        style={{
-          ...palette.textPrimary,
-          fontWeight: 'bold',
-          color: available ? colors.textPrimary : colors.textDisabled,
-        }}>
+    <View style={{...styles.container, backgroundColor: containerBackgroundColor}}>
+      <Text style={{...styles.highlightedText, color: highlightedTextColor}}>
         {bookingOption.timeSlotTimeString}
       </Text>
-      <Text
-        style={{
-          ...palette.textPrimary,
-          color: available ? bookingOption.statusColor : colors.textDisabled,
-        }}>
-        {bookingOption.statusText}
-      </Text>
+      <Text style={{...palette.textPrimary, color: statusTextColor}}>{bookingOption.statusText}</Text>
     </View>
   );
 
@@ -69,3 +53,16 @@ export default function BookingOptionItem({bookingOption}: Props) {
 
   return available ? clickableContent : content;
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    padding: 8,
+  },
+  highlightedText: {
+    ...palette.textPrimary,
+    fontWeight: 'bold',
+  },
+});

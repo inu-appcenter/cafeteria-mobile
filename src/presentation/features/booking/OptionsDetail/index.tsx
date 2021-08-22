@@ -25,6 +25,7 @@ import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
 import ConfirmModal from './ConfirmModal';
 import {SectionGrid} from 'react-native-super-grid';
+import SectionHeader from './SectionHeader';
 import handleApiError from '../../../../common/utils/handleApiError';
 import BookingOptionView from '../BookingOptionView';
 import BookingOptionItem from './BookingOptionItem';
@@ -32,7 +33,7 @@ import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import SpinningRefreshButton from '../../../components/SpinningRefreshButton';
 import {BookingNavigationParams} from '../BookingScreen';
-import {RefreshControl, Text, View} from 'react-native';
+import {RefreshControl, StyleSheet, Text, View} from 'react-native';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingOptionsDetail'>;
@@ -44,6 +45,7 @@ function OptionsDetail({route, navigation}: Props) {
   const {bookingStore} = useStores();
 
   const data = bookingStore.getBookingOptions(cafeteria.id);
+  const dateString = data[0]?.timeSlotDateString;
 
   const [refreshing, refresh] = useApi(async () => bookingStore.fetchBookingOptions(cafeteria));
 
@@ -57,45 +59,24 @@ function OptionsDetail({route, navigation}: Props) {
   }, []);
 
   return (
-    <View style={[palette.whiteBackground, palette.fullSized]}>
-      <View
-        style={{
-          padding: 16,
-          backgroundColor: colors.grayishWhite,
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}>
+    <View style={palette.whiteFullSized}>
+      <View style={styles.headerPlate}>
         <View>
           <Text style={palette.textSubHeader}>😋 {cafeteria.displayName}</Text>
-          <Text style={{...palette.textPrimary, marginTop: 8}}>{data[0]?.timeSlotDateString}</Text>
+          <Text style={styles.headerDateText}>{dateString}</Text>
         </View>
-        <View
-          style={{
-            justifyContent: 'center',
-          }}>
+        <View style={styles.spinnerContainer}>
           <SpinningRefreshButton onPress={refreshOptions} />
         </View>
       </View>
       <SectionGrid
         style={palette.whiteBackground}
-        sections={splitItemsIntoSections(data)}
-        itemDimension={200}
         spacing={8}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
+        sections={splitItemsIntoSections(data)}
         renderItem={i => <BookingOptionItem bookingOption={i.item} />}
-        renderSectionHeader={({section}) => (
-          <Text
-            style={{
-              color: colors.textPrimary,
-              fontSize: 16,
-              fontWeight: 'bold',
-              backgroundColor: colors.sectionHeaderBackground,
-              paddingHorizontal: 16,
-              paddingVertical: 5,
-            }}>
-            {section.title}
-          </Text>
-        )}
+        itemDimension={200}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
+        renderSectionHeader={SectionHeader}
       />
       <ConfirmModal navigation={navigation} />
     </View>
@@ -104,6 +85,9 @@ function OptionsDetail({route, navigation}: Props) {
 
 export default observer(OptionsDetail);
 
+/**
+ * 예약 옵션을 시간(hour)별로 섹션화합니다.
+ */
 function splitItemsIntoSections(options: BookingOptionView[]) {
   return [...new Set(options.map(o => new Date(o.timeSlotTimestamp).getHours()))]
     .sort((l, r) => l - r)
@@ -112,3 +96,19 @@ function splitItemsIntoSections(options: BookingOptionView[]) {
       data: options.filter(o => new Date(o.timeSlotTimestamp).getHours() === hour),
     }));
 }
+
+const styles = StyleSheet.create({
+  headerPlate: {
+    padding: 16,
+    backgroundColor: colors.grayishWhite,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  headerDateText: {
+    ...palette.textPrimary,
+    marginTop: 8,
+  },
+  spinnerContainer: {
+    justifyContent: 'center',
+  },
+});

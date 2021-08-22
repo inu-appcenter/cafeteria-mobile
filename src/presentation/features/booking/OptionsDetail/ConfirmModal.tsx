@@ -68,32 +68,32 @@ function ConfirmModal({navigation}: Props) {
 
   return (
     <Modal
+      style={styles.modal}
       isVisible={bookingStore.currentOption != null}
       swipeDirection="down"
       onBackdropPress={() => bookingStore.dismissCurrentOption()}
-      onSwipeComplete={() => bookingStore.dismissCurrentOption()}
-      style={styles.modal}>
+      onSwipeComplete={() => bookingStore.dismissCurrentOption()}>
       <View style={styles.modalContentContainer}>
         <View style={styles.upperContainer}>
           <Text style={styles.textTitle}>예약하시겠습니까?</Text>
-          <View style={{marginTop: 24}}>
+          <View style={styles.textContainer}>
             <Text style={styles.textBody}>
               • 일시: {bookingOption.timeSlotDateString} {bookingOption.timeSlotTimeString}
             </Text>
             <Text style={styles.textBody}>• 장소: {bookingOption.cafeteriaTitle}</Text>
           </View>
-          <View style={{marginTop: 32}}>
+          <View style={styles.smallTextContainer}>
             <Text style={styles.textSmallBody}>• 예약 시간 전에 취소하실 수 있습니다.</Text>
             <Text style={styles.textSmallBody}>• 같은 날 같은 시간에는 중복으로 예약할 수 없습니다.</Text>
           </View>
         </View>
 
-        <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <View style={styles.buttonBar}>
           <Button
             {...PaperPresets.wideNeutralButton}
-            labelStyle={computedStyles.cancelButtonLabel}
             style={styles.primaryButton}
-            onPress={() => bookingStore.dismissCurrentOption()}>
+            onPress={() => bookingStore.dismissCurrentOption()}
+            labelStyle={computedStyles.cancelButtonLabel}>
             취소
           </Button>
           <Button
@@ -131,9 +131,15 @@ const styles = StyleSheet.create({
   textTitle: {
     ...palette.textSubHeader,
   },
+  textContainer: {
+    marginTop: 24,
+  },
   textBody: {
     ...palette.textPrimary,
     marginTop: 8,
+  },
+  smallTextContainer: {
+    marginTop: 32,
   },
   textSmallBody: {
     ...palette.textSecondary,
@@ -143,5 +149,9 @@ const styles = StyleSheet.create({
     flex: 1,
     borderRadius: 0,
     elevation: 0,
+  },
+  buttonBar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
   },
 });

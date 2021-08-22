@@ -19,11 +19,11 @@
 
 import React from 'react';
 import colors from '../../../res/colors';
-import {Text} from 'react-native';
 import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import CardView from '../../../components/CardView';
 import CafeteriaView from '../../cafeteria/CafeteriaView';
+import {StyleSheet, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
 
@@ -36,35 +36,51 @@ export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
   const goToDetails = () => navigation.navigate('BookingOptionsDetail', {cafeteria});
 
   return (
-    <CardView
-      style={{
-        marginHorizontal: 16,
-        marginTop: 21,
-        padding: 16,
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
-      <Text style={{fontSize: 42}}>😋</Text>
-      <Text style={[palette.textSubHeader, {marginTop: 12}]}>{cafeteria.displayName}</Text>
-      <Text
-        style={[
-          palette.textSecondary,
-          {
-            marginTop: 8,
-            textAlign: 'center',
-            marginHorizontal: 12,
-          },
-        ]}>
-        붐비는 시간대에 편하게 입장할 수 있어요.
-      </Text>
+    <CardView style={styles.container}>
+      <Text style={styles.emojiText}>😋</Text>
+      <Text style={styles.titleText}>{cafeteria.displayName}</Text>
+      <Text style={styles.descriptionText}>붐비는 시간대에 편하게 입장할 수 있어요.</Text>
       <Button
         mode="contained"
-        labelStyle={[palette.textPrimary, {color: colors.white, paddingVertical: 4}]}
         color={colors.mainTint}
+        style={styles.makeBookingButton}
         onPress={goToDetails}
-        style={{alignSelf: 'stretch', marginTop: 21}}>
+        labelStyle={styles.makeBookingButtonLabel}>
         {cafeteria.displayName} 예약하기
       </Button>
     </CardView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 16,
+    marginTop: 21,
+    padding: 16,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  emojiText: {
+    fontSize: 42,
+  },
+  titleText: {
+    ...palette.textSubHeader,
+    marginTop: 12,
+  },
+  descriptionText: {
+    ...palette.textSecondary,
+    marginTop: 8,
+    textAlign: 'center',
+    marginHorizontal: 12,
+  },
+  makeBookingButtonLabel: {
+    ...palette.textPrimary,
+    color: colors.white,
+    paddingVertical: 4,
+  },
+
+  makeBookingButton: {
+    alignSelf: 'stretch',
+    marginTop: 21,
+  },
+});

@@ -19,7 +19,7 @@
 
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
-import {FlatList} from 'react-native';
+import {FlatList, StyleSheet} from 'react-native';
 import {observer} from 'mobx-react';
 import handleApiError from '../../../../common/utils/handleApiError';
 import React, {useEffect} from 'react';
@@ -49,7 +49,7 @@ function OptionsList({navigation}: Props) {
       <FlatList
         data={data}
         style={palette.whiteBackground}
-        contentContainerStyle={{paddingBottom: 25}}
+        contentContainerStyle={styles.bottomSpaced}
         renderItem={i => <BookableCafeteriaItem navigation={navigation} cafeteria={i.item} />}
       />
     </Container>
@@ -57,3 +57,9 @@ function OptionsList({navigation}: Props) {
 }
 
 export default observer(OptionsList);
+
+const styles = StyleSheet.create({
+  bottomSpaced: {
+    paddingBottom: 25,
+  },
+});

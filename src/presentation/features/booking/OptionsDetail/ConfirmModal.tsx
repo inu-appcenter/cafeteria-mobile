@@ -17,20 +17,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {observer} from 'mobx-react';
-import useStores from '../../../hooks/useStores';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {StyleSheet, Text, View} from 'react-native';
 import Modal from 'react-native-modal';
-import {Button} from 'react-native-paper';
-import PaperPresets from '../../../components/utils/PaperPresets';
 import React from 'react';
+import useApi from '../../../hooks/useApi';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
-import useApi from '../../../hooks/useApi';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {BookingNavigationParams} from '../BookingScreen';
+import {Button} from 'react-native-paper';
+import useStores from '../../../hooks/useStores';
+import {observer} from 'mobx-react';
+import PaperPresets from '../../../components/utils/PaperPresets';
 import handleApiError from '../../../../common/utils/handleApiError';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {StyleSheet, Text, View} from 'react-native';
+import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsDetail'>;

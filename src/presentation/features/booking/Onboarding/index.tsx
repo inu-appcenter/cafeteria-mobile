@@ -18,14 +18,14 @@
  */
 
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import useUserState from '../../../hooks/useUserState';
-import LoadingView from '../../../components/LoadingView';
-import {Button} from 'react-native-paper';
-import PaperPresets from '../../../components/utils/PaperPresets';
-import {observer} from 'mobx-react';
 import palette from '../../../res/palette';
+import {Button} from 'react-native-paper';
+import {observer} from 'mobx-react';
+import LoadingView from '../../../components/LoadingView';
+import useUserState from '../../../hooks/useUserState';
+import PaperPresets from '../../../components/utils/PaperPresets';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {StyleSheet, Text, View} from 'react-native';
 import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {

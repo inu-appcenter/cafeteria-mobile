@@ -17,17 +17,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useEffect, useState} from 'react';
-import {Platform, Text, useWindowDimensions, View} from 'react-native';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {BookingNavigationParams} from '../BookingScreen';
-import {Button} from 'react-native-paper';
 import palette from '../../../res/palette';
+import useApi from '../../../hooks/useApi';
+import {Button} from 'react-native-paper';
+import useStores from '../../../hooks/useStores';
 import PaperPresets from '../../../components/utils/PaperPresets';
 import ConfettiCannon from 'react-native-confetti-cannon';
-import useApi from '../../../hooks/useApi';
-import useStores from '../../../hooks/useStores';
 import handleApiError from '../../../../common/utils/handleApiError';
+import {StackNavigationProp} from '@react-navigation/stack';
+import {BookingNavigationParams} from '../BookingScreen';
+import React, {useEffect, useState} from 'react';
+import {Platform, Text, useWindowDimensions, View} from 'react-native';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;

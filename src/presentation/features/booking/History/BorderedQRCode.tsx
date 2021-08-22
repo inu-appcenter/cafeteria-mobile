@@ -17,11 +17,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-// @ts-ignore
-import {AnimatedSVGPath} from 'react-native-svg-animations';
 import React from 'react';
 import {View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+
+// @ts-ignore
+import {AnimatedSVGPath} from 'react-native-svg-animations';
 
 type Props = {
   value: string;

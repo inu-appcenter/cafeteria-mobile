@@ -17,10 +17,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import BookingOption from '../../../domain/entities/BookingOption';
-import {formatDate, formatTime} from '../../../common/utils/Date';
-import CafeteriaView from '../cafeteria/CafeteriaView';
 import colors from '../../res/colors';
+import BookingOption from '../../../domain/entities/BookingOption';
+import CafeteriaView from '../cafeteria/CafeteriaView';
+import {formatDate, formatTime} from '../../../common/utils/Date';
 
 export default class BookingOptionView {
   key: string;

@@ -17,15 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {makeAutoObservable} from 'mobx';
-import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
-import BookingOptionView from './BookingOptionView';
 import MakeBooking from '../../../domain/usecases/MakeBooking';
-import CafeteriaView from '../cafeteria/CafeteriaView';
 import BookingView from './BookingView';
+import CafeteriaView from '../cafeteria/CafeteriaView';
+import CancelBooking from '../../../domain/usecases/CancelBooking';
 import GetMyBookings from '../../../domain/usecases/GetMyBookings';
 import CafeteriaStore from '../cafeteria/CafeteriaStore';
-import CancelBooking from '../../../domain/usecases/CancelBooking';
+import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
+import BookingOptionView from './BookingOptionView';
+import {makeAutoObservable} from 'mobx';
 
 export default class BookingStore {
   private _bookingOptions: Map<number, BookingOptionView[]> = new Map();

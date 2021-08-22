@@ -17,16 +17,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useEffect} from 'react';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {FlatList} from 'react-native';
 import {observer} from 'mobx-react';
+import handleApiError from '../../../../common/utils/handleApiError';
+import React, {useEffect} from 'react';
+import {useApiInContainer} from '../../../hooks/useApi';
 import {StackNavigationProp} from '@react-navigation/stack';
 import BookableCafeteriaItem from './BookableCafeteriaItem';
 import {BookingNavigationParams} from '../BookingScreen';
-import {useApiInContainer} from '../../../hooks/useApi';
-import handleApiError from '../../../../common/utils/handleApiError';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;

@@ -17,22 +17,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import colors from '../../../res/colors';
+import useApi from '../../../hooks/useApi';
 import palette from '../../../res/palette';
+import useStores from '../../../hooks/useStores';
+import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
-import {RefreshControl, Text, View} from 'react-native';
+import ConfirmModal from './ConfirmModal';
+import {SectionGrid} from 'react-native-super-grid';
+import handleApiError from '../../../../common/utils/handleApiError';
+import BookingOptionView from '../BookingOptionView';
+import BookingOptionItem from './BookingOptionItem';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {BookingNavigationParams} from '../BookingScreen';
-import useStores from '../../../hooks/useStores';
-import ConfirmModal from './ConfirmModal';
-import useApi from '../../../hooks/useApi';
-import handleApiError from '../../../../common/utils/handleApiError';
-import {observer} from 'mobx-react';
-import BookingOptionItem from './BookingOptionItem';
-import {SectionGrid} from 'react-native-super-grid';
-import BookingOptionView from '../BookingOptionView';
-import colors from '../../../res/colors';
 import SpinningRefreshButton from '../../../components/SpinningRefreshButton';
+import {BookingNavigationParams} from '../BookingScreen';
+import {RefreshControl, Text, View} from 'react-native';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingOptionsDetail'>;

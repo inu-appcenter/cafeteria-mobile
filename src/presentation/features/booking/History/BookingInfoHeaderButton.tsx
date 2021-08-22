@@ -18,10 +18,10 @@
  */
 
 import Icon from 'react-native-vector-icons/Feather';
+import React from 'react';
 import colors from '../../../res/colors';
 import {Alert} from 'react-native';
 import palette from '../../../res/palette';
-import React from 'react';
 
 export default function BookingInfoHeaderButton() {
   const showBookingInfo = async () => {

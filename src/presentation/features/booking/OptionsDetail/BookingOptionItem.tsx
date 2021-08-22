@@ -18,12 +18,12 @@
  */
 
 import React from 'react';
-import BookingOptionView from '../BookingOptionView';
-import useStores from '../../../hooks/useStores';
-import {Text, View} from 'react-native';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
+import useStores from '../../../hooks/useStores';
 import Touchable from '../../../components/Touchable';
+import {Text, View} from 'react-native';
+import BookingOptionView from '../BookingOptionView';
 
 type Props = {
   bookingOption: BookingOptionView;

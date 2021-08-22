@@ -18,14 +18,14 @@
  */
 
 import React from 'react';
+import colors from '../../../res/colors';
 import {Text} from 'react-native';
+import palette from '../../../res/palette';
+import {Button} from 'react-native-paper';
 import CardView from '../../../components/CardView';
 import CafeteriaView from '../../cafeteria/CafeteriaView';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import palette from '../../../res/palette';
-import {Button} from 'react-native-paper';
-import colors from '../../../res/colors';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;

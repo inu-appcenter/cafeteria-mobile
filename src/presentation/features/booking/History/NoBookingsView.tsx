@@ -17,11 +17,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
-import {Text, View} from 'react-native';
-import palette from '../../../res/palette';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import React from 'react';
 import colors from '../../../res/colors';
+import palette from '../../../res/palette';
+import {Text, View} from 'react-native';
 
 export default function NoBookingsView() {
   return (

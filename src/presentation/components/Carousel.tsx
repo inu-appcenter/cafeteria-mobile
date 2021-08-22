@@ -117,7 +117,6 @@ export default class Carousel<ItemT = any> extends React.Component<
         paddingHorizontal: this.IS_ANDROID ? horizontalPaddingAmongList : 0,
       },
 
-      // iOS only.
       contentOffset: {
         x: -horizontalPaddingAmongList,
         y: 0,

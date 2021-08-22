@@ -18,17 +18,13 @@
  */
 
 import React, {useEffect} from 'react';
-import {FlatList, RefreshControl, Text, View} from 'react-native';
+import {FlatList, RefreshControl, View} from 'react-native';
 import useStores from '../../../hooks/useStores';
 import palette from '../../../res/palette';
 import {observer} from 'mobx-react';
 import handleApiError from '../../../../common/utils/handleApiError';
-import LoadingView from '../../../components/LoadingView';
-import useApi, {useApiInContainer} from '../../../hooks/useApi';
-import {cancelBookingAlert} from '../../../components/utils/alert';
-import toast from '../../../components/utils/toast';
+import useApi from '../../../hooks/useApi';
 import BookingItem from './BookingItem';
-import EmptyView from '../../../components/EmptyView';
 import {FAB} from 'react-native-paper';
 import colors from '../../../res/colors';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -46,6 +42,10 @@ function MyBookings({navigation}: Props) {
 
   const myBookings = bookingStore.myBookings;
   const getMyBookings = () => fetch().catch(handleApiError);
+
+  useEffect(() => {
+    getMyBookings();
+  }, []);
 
   const emptyView = <NoBookingsView />;
 

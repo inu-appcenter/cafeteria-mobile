@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Text, View, Image, Platform, ScrollView, StyleSheet, Dimensions} from 'react-native';
+import {Dimensions, Image, Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import useApi from '../../../hooks/useApi';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';

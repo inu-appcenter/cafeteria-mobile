@@ -24,8 +24,8 @@ export default function useUserState() {
 
   return {
     user: userStore.user,
-    barcode: userStore.barcode,
-    studentId: userStore.studentId,
+    barcode: userStore.user?.barcode,
+    studentId: userStore.user?.studentId,
     isLoggedIn: userStore.isLoggedIn,
     isLoggedInAsStudent: userStore.isLoggedInAsStudent,
     isTryingRememberedLogin: userStore.isTryingRememberedLogin,

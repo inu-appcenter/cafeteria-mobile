@@ -23,28 +23,12 @@ import {makeAutoObservable} from 'mobx';
 import RequestGuestChallenge from '../../../domain/usecases/RequestGuestChallenge';
 
 export default class UserStore {
-  private _user?: User;
+  private _user?: User = undefined; // 기본값 달아주어야 합니다.
   get user() {
     return this._user;
   }
   set user(value) {
     this._user = value;
-  }
-
-  private _barcode?: string;
-  get barcode() {
-    return this._barcode;
-  }
-  set barcode(value) {
-    this._barcode = value;
-  }
-
-  private _studentId?: string;
-  get studentId() {
-    return this._studentId;
-  }
-  set studentId(value) {
-    this._studentId = value;
   }
 
   private _isLoggedIn: boolean = false;
@@ -148,17 +132,15 @@ export default class UserStore {
       return;
     }
 
+    console.log('로그인된 사용자: ', user);
+
     this.user = user;
-    this.barcode = user.barcode;
-    this.studentId = user.studentId;
     this.isLoggedIn = true;
     this.isLoggedInAsStudent = user.isStudent;
   }
 
   private async onLoginFail() {
     this.user = undefined;
-    this.barcode = undefined;
-    this.studentId = undefined;
     this.isLoggedIn = false;
     this.isLoggedInAsStudent = false;
   }

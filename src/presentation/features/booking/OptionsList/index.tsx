@@ -19,13 +19,13 @@
 
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
-import {FlatList, StyleSheet} from 'react-native';
 import {observer} from 'mobx-react';
 import handleApiError from '../../../../common/utils/handleApiError';
 import React, {useEffect} from 'react';
 import {useApiInContainer} from '../../../hooks/useApi';
 import {StackNavigationProp} from '@react-navigation/stack';
 import BookableCafeteriaItem from './BookableCafeteriaItem';
+import {FlatList, StyleSheet} from 'react-native';
 import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {

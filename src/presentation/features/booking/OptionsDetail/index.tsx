@@ -35,11 +35,11 @@ import colors from '../../../res/colors';
 import SpinningRefreshButton from '../../../components/SpinningRefreshButton';
 
 type Props = {
-  route: RouteProp<BookingNavigationParams, 'BookingDetail'>;
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingDetail'>;
+  route: RouteProp<BookingNavigationParams, 'BookingOptionsDetail'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsDetail'>;
 };
 
-function Detail({route, navigation}: Props) {
+function OptionsDetail({route, navigation}: Props) {
   const {cafeteria} = route.params;
   const {bookingStore} = useStores();
 
@@ -102,7 +102,7 @@ function Detail({route, navigation}: Props) {
   );
 }
 
-export default observer(Detail);
+export default observer(OptionsDetail);
 
 function splitItemsIntoSections(options: BookingOptionView[]) {
   return [...new Set(options.map(o => new Date(o.timeSlotTimestamp).getHours()))]

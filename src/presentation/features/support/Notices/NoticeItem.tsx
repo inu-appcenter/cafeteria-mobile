@@ -59,7 +59,7 @@ export default function NoticeItem({notice}: Props) {
     <TouchableWithoutFeedback onPress={toggleExpanded}>
       <View>
         {titleArea}
-        {expanded ? bodyArea : null}
+        {expanded && bodyArea}
       </View>
     </TouchableWithoutFeedback>
   );

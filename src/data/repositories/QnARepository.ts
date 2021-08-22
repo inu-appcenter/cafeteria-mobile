@@ -31,8 +31,8 @@ export default class QnARepository {
     markAnswerRead: (answerId: number) => `${Config.baseUrl}/markAnswerRead/${answerId}`,
   };
 
-  async ask(deviceInfo: string, version: string, content: string) {
-    await axios.post(this.url.ask, {deviceInfo, version, content});
+  async ask(params: Record<string, any>) {
+    await axios.post(this.url.ask, params);
   }
 
   private async fetchQuestions() {

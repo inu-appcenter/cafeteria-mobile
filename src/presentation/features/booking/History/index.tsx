@@ -17,25 +17,25 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useEffect} from 'react';
-import {FlatList, RefreshControl, View} from 'react-native';
-import useStores from '../../../hooks/useStores';
-import palette from '../../../res/palette';
-import {observer} from 'mobx-react';
-import handleApiError from '../../../../common/utils/handleApiError';
-import useApi from '../../../hooks/useApi';
-import BookingItem from './BookingItem';
 import {FAB} from 'react-native-paper';
 import colors from '../../../res/colors';
+import useApi from '../../../hooks/useApi';
+import palette from '../../../res/palette';
+import {observer} from 'mobx-react';
+import useStores from '../../../hooks/useStores';
+import BookingItem from './BookingItem';
+import handleApiError from '../../../../common/utils/handleApiError';
+import NoBookingsView from './NoBookingsView';
+import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import NoBookingsView from './NoBookingsView';
+import {FlatList, RefreshControl, View} from 'react-native';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingMyBookings'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingHistory'>;
 };
 
-function MyBookings({navigation}: Props) {
+function History({navigation}: Props) {
   const {bookingStore} = useStores();
 
   const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
@@ -72,10 +72,10 @@ function MyBookings({navigation}: Props) {
         icon="ticket-confirmation"
         label="예약하기"
         color={'white'}
-        onPress={() => navigation.navigate('BookingList')}
+        onPress={() => navigation.navigate('BookingOptionsList')}
       />
     </View>
   );
 }
 
-export default observer(MyBookings);
+export default observer(History);

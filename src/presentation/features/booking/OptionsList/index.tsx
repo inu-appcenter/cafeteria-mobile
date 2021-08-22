@@ -29,10 +29,10 @@ import {useApiInContainer} from '../../../hooks/useApi';
 import handleApiError from '../../../../common/utils/handleApiError';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;
 };
 
-function List({navigation}: Props) {
+function OptionsList({navigation}: Props) {
   const {cafeteriaStore} = useStores();
 
   const [Container, data, fetch] = useApiInContainer(
@@ -56,4 +56,4 @@ function List({navigation}: Props) {
   );
 }
 
-export default observer(List);
+export default observer(OptionsList);

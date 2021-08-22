@@ -17,30 +17,30 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import List from './List';
 import React from 'react';
-import Detail from './Detail';
+import History from './History';
 import Complete from './Complete';
 import {observer} from 'mobx-react';
 import Onboarding from './Onboarding';
-import MyBookings from './MyBookings';
+import OptionsList from './OptionsList';
 import useUserState from '../../hooks/useUserState';
+import OptionsDetail from './OptionsDetail';
 import CafeteriaView from '../cafeteria/CafeteriaView';
 import GuestLoginScreen from '../login/GuestLoginScreen';
 import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
-import BookingInfoHeaderButton from './MyBookings/BookingInfoHeaderButton';
+import BookingInfoHeaderButton from './History/BookingInfoHeaderButton';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
   BookingStudentLogin: undefined;
   BookingGuestLogin: undefined;
 
-  BookingList: undefined;
-  BookingDetail: {cafeteria: CafeteriaView};
+  BookingHistory: undefined;
+  BookingOptionsList: undefined;
+  BookingOptionsDetail: {cafeteria: CafeteriaView};
   BookingComplete: undefined;
-  BookingMyBookings: undefined;
 };
 
 function BookingScreen() {
@@ -88,11 +88,11 @@ function BookingScreen() {
   /**
    * 예약 내역 화면.
    */
-  const myBookings = (
+  const history = (
     <Stack.Screen
       key="booking_my_bookings"
-      name="BookingMyBookings"
-      component={MyBookings}
+      name="BookingHistory"
+      component={History}
       options={{
         title: '예약 내역',
         headerRight: () => <BookingInfoHeaderButton />,
@@ -105,9 +105,9 @@ function BookingScreen() {
    */
   const list = (
     <Stack.Screen
-      key="booking_list"
-      name="BookingList"
-      component={List}
+      key="booking_options_list"
+      name="BookingOptionsList"
+      component={OptionsList}
       options={{
         title: '식당 선택',
       }}
@@ -119,9 +119,9 @@ function BookingScreen() {
    */
   const detail = (
     <Stack.Screen
-      key="booking_detail"
-      name="BookingDetail"
-      component={Detail}
+      key="booking_options_detail"
+      name="BookingOptionsDetail"
+      component={OptionsDetail}
       options={{
         title: '시간 선택',
       }}
@@ -145,7 +145,7 @@ function BookingScreen() {
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedIn ? [myBookings, list, detail, complete] : [onboarding, studentLogin, guestLogin]}
+      {isLoggedIn ? [history, list, detail, complete] : [onboarding, studentLogin, guestLogin]}
     </Stack.Navigator>
   );
 }

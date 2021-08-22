@@ -18,7 +18,7 @@
  */
 
 import React from 'react';
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
 import CardView from '../../../components/CardView';
 import CafeteriaView from '../../cafeteria/CafeteriaView';
 import {StackNavigationProp} from '@react-navigation/stack';
@@ -26,16 +26,14 @@ import {BookingNavigationParams} from '../BookingScreen';
 import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import colors from '../../../res/colors';
-import Icon from 'react-native-vector-icons/FontAwesome';
-import ChevronRight from '../../../components/ChevronRight';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingList'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;
   cafeteria: CafeteriaView;
 };
 
 export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
-  const goToDetails = () => navigation.navigate('BookingDetail', {cafeteria});
+  const goToDetails = () => navigation.navigate('BookingOptionsDetail', {cafeteria});
 
   return (
     <CardView

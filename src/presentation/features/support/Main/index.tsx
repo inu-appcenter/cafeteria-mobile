@@ -65,7 +65,7 @@ function Main({navigation}: Props) {
 
   const support = (
     <SupportOption.Section navigation={navigation}>
-      {isLoggedIn ? qnaOption : null}
+      {isLoggedIn && qnaOption}
       <SupportOption.Item
         icon={['archive', Feather]}
         title="자주 묻는 질문"

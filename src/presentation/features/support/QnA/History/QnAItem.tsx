@@ -86,7 +86,7 @@ export default function QnAItem({qna}: Props) {
     <Touchable onPress={focusAnswer}>
       <View style={styles.container}>
         {questionPart}
-        {qna.answer ? answerPart : null}
+        {qna.answer && answerPart}
       </View>
     </Touchable>
   );

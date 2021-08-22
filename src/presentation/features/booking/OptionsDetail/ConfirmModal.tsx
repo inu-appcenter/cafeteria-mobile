@@ -33,7 +33,7 @@ import {BookingNavigationParams} from '../BookingScreen';
 import handleApiError from '../../../../common/utils/handleApiError';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingDetail'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsDetail'>;
 };
 
 function ConfirmModal({navigation}: Props) {

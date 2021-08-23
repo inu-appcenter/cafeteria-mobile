@@ -50,9 +50,9 @@ export function formatDate(date: Date) {
 }
 
 export function formatTime(date: Date) {
-  return format(date, 'h시 m분');
+  return format(date, 'H시 m분');
 }
 
 export function formatTimeShort(date: Date) {
-  return format(date, 'hh:mm');
+  return format(date, 'HH:mm');
 }

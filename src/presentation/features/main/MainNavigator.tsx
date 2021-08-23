@@ -55,7 +55,7 @@ function MainNavigator() {
         tabBarIcon: tabBarIconSelector(icons, route.name),
       })}>
       <BottomTab.Screen name="Cafeteria" component={CafeteriaScreen} options={{title: '식단'}} />
-      {/*<BottomTab.Screen
+      <BottomTab.Screen
         name="Booking"
         component={BookingScreen}
         options={{
@@ -63,7 +63,7 @@ function MainNavigator() {
           tabBarBadge: bookingStore.hasBookings ? bookingStore.myBookings?.length : undefined,
           tabBarBadgeStyle: {fontSize: 12},
         }}
-      />*/}
+      />
       <BottomTab.Screen name="Membership" component={MembershipScreen} options={{title: '멤버십'}} />
       <BottomTab.Screen name="Support" component={SupportScreen} options={{title: '지원'}} />
     </BottomTab.Navigator>

@@ -38,7 +38,9 @@ function Version() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainerWrapper}>
-        <TouchableWithoutFeedback onPress={() => HaveSomeFun.run()}>
+        <TouchableWithoutFeedback
+          onPress={() => HaveSomeFun.run()}
+          onLongPress={() => versionStore.enableBetaFeature()}>
           <View style={styles.contentContainer}>
             <Icons
               name={versionStore.pendingUpdate ? 'autorenew' : 'check'}
@@ -48,13 +50,10 @@ function Version() {
             />
 
             <Text style={[palette.textSubHeader, styles.marginOnTop]}>
-              {versionStore.pendingUpdate
-                ? '대기중인 업데이트가 있습니다.'
-                : '최신 버전입니다.'}
+              {versionStore.pendingUpdate ? '대기중인 업데이트가 있습니다.' : '최신 버전입니다.'}
             </Text>
             <Text style={[palette.textSecondary, styles.marginOnTop]}>
-              현재 버전 {PackageInfo.version}(
-              {versionStore.runningUpdate?.label || '-'})
+              현재 버전 {PackageInfo.version}({versionStore.runningUpdate?.label || '-'})
             </Text>
           </View>
         </TouchableWithoutFeedback>

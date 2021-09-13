@@ -1,5 +1,3 @@
-import {Platform} from 'react-native';
-
 /**
  * This file is part of INU Cafeteria.
  *
@@ -18,6 +16,8 @@ import {Platform} from 'react-native';
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+import {Platform} from 'react-native';
 
 export default {
   baseUrl: 'https://api.inu-cafeteria.app',

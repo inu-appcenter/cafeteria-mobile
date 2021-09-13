@@ -40,9 +40,21 @@ const icons: IconConfigs = {
 };
 
 function MainNavigator() {
-  const {bookingStore} = useStores();
+  const {bookingStore, versionStore} = useStores();
 
   const BottomTab = createBottomTabNavigator();
+
+  const bookingTab = (
+    <BottomTab.Screen
+      name="Booking"
+      component={BookingScreen}
+      options={{
+        title: '예약',
+        tabBarBadge: bookingStore.hasBookings ? bookingStore.myBookings?.length : undefined,
+        tabBarBadgeStyle: {fontSize: 12},
+      }}
+    />
+  );
 
   return (
     <BottomTab.Navigator
@@ -55,15 +67,7 @@ function MainNavigator() {
         tabBarIcon: tabBarIconSelector(icons, route.name),
       })}>
       <BottomTab.Screen name="Cafeteria" component={CafeteriaScreen} options={{title: '식단'}} />
-      <BottomTab.Screen
-        name="Booking"
-        component={BookingScreen}
-        options={{
-          title: '예약',
-          tabBarBadge: bookingStore.hasBookings ? bookingStore.myBookings?.length : undefined,
-          tabBarBadgeStyle: {fontSize: 12},
-        }}
-      />
+      {versionStore.betaFeatureEnabled && bookingTab}
       <BottomTab.Screen name="Membership" component={MembershipScreen} options={{title: '멤버십'}} />
       <BottomTab.Screen name="Support" component={SupportScreen} options={{title: '지원'}} />
     </BottomTab.Navigator>

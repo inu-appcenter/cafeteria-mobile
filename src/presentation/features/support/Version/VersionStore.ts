@@ -37,22 +37,25 @@ export default class VersionStore {
     this._pendingUpdate = value;
   }
 
+  /** TEST-ONLY */
+  private _betaFeatureEnabled: Boolean = false;
+  get betaFeatureEnabled() {
+    return this._betaFeatureEnabled;
+  }
+  set betaFeatureEnabled(value) {
+    this._betaFeatureEnabled = value;
+  }
+
   constructor() {
     makeAutoObservable(this);
   }
 
   async fetchVersionInfo() {
     try {
-      this.runningUpdate = await this.fetchMetadata(
-        codePush.UpdateState.RUNNING,
-      );
-      this.pendingUpdate = await this.fetchMetadata(
-        codePush.UpdateState.PENDING,
-      );
+      this.runningUpdate = await this.fetchMetadata(codePush.UpdateState.RUNNING);
+      this.pendingUpdate = await this.fetchMetadata(codePush.UpdateState.PENDING);
     } catch (e) {
-      console.log(
-        'CodePush 업데이트 정보를 가져오지 못했습니다. 아마 deployment key가 없나봐요',
-      );
+      console.log('CodePush 업데이트 정보를 가져오지 못했습니다. 아마 deployment key가 없나봐요');
     }
   }
 
@@ -60,5 +63,10 @@ export default class VersionStore {
     const result = await codePush.getUpdateMetadata(state);
 
     return result || undefined;
+  }
+
+  /** TEST-ONLY */
+  async enableBetaFeature() {
+    this.betaFeatureEnabled = true;
   }
 }

@@ -20,11 +20,17 @@
 import React from 'react';
 import {Button} from 'react-native-paper';
 import useStores from '../../hooks/useStores';
+import {View} from 'react-native';
+import palette from '../../res/palette';
 
 export default function AgreementScreen() {
   const {userStore} = useStores();
 
   const agree = () => userStore.agreePrivacyPolicy();
 
-  return <Button onPress={agree}>동의? 어 보감</Button>;
+  return (
+    <View style={palette.whiteFullSized}>
+      <Button onPress={agree}>동의? 어 보감</Button>
+    </View>
+  );
 }

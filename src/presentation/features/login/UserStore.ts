@@ -19,8 +19,11 @@
 
 import User from '../../../domain/entities/User';
 import Login from '../../../domain/usecases/Login';
+import notify from '../../components/utils/notify';
+import AgreePrivacyPolicy from '../../../domain/usecases/AgreePrivacyPolicy';
 import {makeAutoObservable} from 'mobx';
 import RequestGuestChallenge from '../../../domain/usecases/RequestGuestChallenge';
+import CheckAgreementRequired from '../../../domain/usecases/CheckAgreementRequired';
 
 export default class UserStore {
   private _user?: User = undefined; // 기본값 달아주어야 합니다.
@@ -53,6 +56,14 @@ export default class UserStore {
   }
   set isTryingRememberedLogin(value) {
     this._isTryingRememberedLogin = value;
+  }
+
+  private _isAgreementRequired: boolean = false;
+  get isAgreementRequired() {
+    return this._isAgreementRequired;
+  }
+  set isAgreementRequired(value) {
+    this._isAgreementRequired = value;
   }
 
   constructor() {
@@ -137,6 +148,9 @@ export default class UserStore {
     this.user = user;
     this.isLoggedIn = true;
     this.isLoggedInAsStudent = user.isStudent;
+
+    // 어떤 경로로 로그인하든, 로그인 성공시에는 개인정보처리방침 동의가 필요한지 체크합니다.
+    await this.checkAgreementRequired();
   }
 
   private async onLoginFail() {
@@ -148,5 +162,23 @@ export default class UserStore {
   // TODO
   async logout() {
     await this.onLoginFail();
+  }
+
+  /**
+   * 개인정보처리방침 동의가 필요한지 확인합니다.
+   */
+  async checkAgreementRequired() {
+    this.isAgreementRequired = await CheckAgreementRequired.run();
+  }
+
+  /**
+   * 개인정보처리방침에 동의합니다.
+   */
+  async agreePrivacyPolicy() {
+    // await AgreePrivacyPolicy.run();
+
+    notify(`${new Date().toLocaleDateString()} 기준 개인정보처리방침 동의가 완료되었습니다.`);
+
+    this.isAgreementRequired = false;
   }
 }

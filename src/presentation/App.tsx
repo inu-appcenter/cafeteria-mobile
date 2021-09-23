@@ -21,6 +21,7 @@ import Main from './features/main/Main';
 import Splash from './components/Splash';
 import RootStore from '../store/RootStore';
 import StoreProvider from './hooks/StoreProvider';
+import {navigationRef} from './global/GlobalNavigation';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import React, {useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
@@ -43,7 +44,7 @@ export default function App() {
   return (
     <StoreProvider store={rootStore}>
       <SafeAreaProvider>
-        <NavigationContainer>
+        <NavigationContainer ref={navigationRef}>
           <Main />
         </NavigationContainer>
       </SafeAreaProvider>

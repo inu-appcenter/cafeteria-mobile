@@ -18,23 +18,19 @@
  */
 
 import React from 'react';
-import {View} from 'react-native';
-import palette from '../../res/palette';
-import {observer} from 'mobx-react';
-import ToastModal from '../../components/ToastModal';
-import NoticeModal from '../../components/NoticeModal';
-import WhiteStatusBar from '../../components/WhiteStatusBar';
-import MainModal from './MainModal';
+import {NavigationContainerRef} from '@react-navigation/native';
 
-function Main() {
-  return (
-    <View style={palette.fullSized}>
-      <WhiteStatusBar />
-      <NoticeModal />
-      <ToastModal />
-      <MainModal />
-    </View>
-  );
+/**
+ * 전역에서 사용할 네비게이션 ref입니다.
+ */
+export const navigationRef = React.createRef<NavigationContainerRef>();
+
+/**
+ * 네비게이션 컴포넌트 없이 전역 네비게이션을 사용할 수 있습니다.
+ *
+ * @param name 목적지 라우트 이름.
+ * @param params 파라미터.
+ */
+export function navigateGlobal(name: string, params?: Record<string, any>) {
+  navigationRef.current?.navigate(name, params);
 }
-
-export default observer(Main);

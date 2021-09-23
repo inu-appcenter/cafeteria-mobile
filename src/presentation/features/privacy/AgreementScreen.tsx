@@ -18,23 +18,13 @@
  */
 
 import React from 'react';
-import {View} from 'react-native';
-import palette from '../../res/palette';
-import {observer} from 'mobx-react';
-import ToastModal from '../../components/ToastModal';
-import NoticeModal from '../../components/NoticeModal';
-import WhiteStatusBar from '../../components/WhiteStatusBar';
-import MainModal from './MainModal';
+import {Button} from 'react-native-paper';
+import useStores from '../../hooks/useStores';
 
-function Main() {
-  return (
-    <View style={palette.fullSized}>
-      <WhiteStatusBar />
-      <NoticeModal />
-      <ToastModal />
-      <MainModal />
-    </View>
-  );
+export default function AgreementScreen() {
+  const {userStore} = useStores();
+
+  const agree = () => userStore.agreePrivacyPolicy();
+
+  return <Button onPress={agree}>동의? 어 보감</Button>;
 }
-
-export default observer(Main);

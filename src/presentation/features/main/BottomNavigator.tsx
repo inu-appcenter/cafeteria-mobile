@@ -21,16 +21,16 @@ import React from 'react';
 import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useStores from '../../hooks/useStores';
+import {observer} from 'mobx-react';
 import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import BookingScreen from '../booking/BookingScreen';
 import SupportScreen from '../support/SupportScreen';
 import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
 import MembershipScreen from '../membership/MembershipScreen';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import tabBarIconSelector, {IconConfigs} from '../../components/utils/tabBarIconSelector';
-import {observer} from 'mobx-react';
 
 const icons: IconConfigs = {
   Cafeteria: ['restaurant', 'restaurant', MaterialIcons],
@@ -39,7 +39,7 @@ const icons: IconConfigs = {
   Support: ['support-agent', 'support-agent', MaterialIcons],
 };
 
-function MainNavigator() {
+function BottomNavigator() {
   const {bookingStore, versionStore} = useStores();
 
   const BottomTab = createBottomTabNavigator();
@@ -74,7 +74,7 @@ function MainNavigator() {
   );
 }
 
-export default observer(MainNavigator);
+export default observer(BottomNavigator);
 
 const styles = StyleSheet.create({
   tabBarLabel: {

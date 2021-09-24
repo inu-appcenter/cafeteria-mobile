@@ -17,13 +17,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import alert from './alert';
-import {Platform, ToastAndroid} from 'react-native';
+import Toast from 'react-native-simple-toast';
 
 export default function notify(message: string) {
-  if (Platform.OS === 'android') {
-    ToastAndroid.show(message, ToastAndroid.SHORT);
-  } else {
-    alert(message);
-  }
+  Toast.show(message);
 }

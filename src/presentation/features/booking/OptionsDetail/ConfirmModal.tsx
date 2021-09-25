@@ -54,15 +54,10 @@ function ConfirmModal({navigation}: Props) {
   }
 
   const computedStyles = StyleSheet.create({
-    cancelButtonLabel: {
-      color: colors.textSecondary,
-      fontSize: 16,
-      paddingBottom: bottom,
-    },
-    confirmButtonLabel: {
-      color: 'white',
-      fontSize: 16,
-      paddingBottom: bottom,
+    buttonBar: {
+      flexDirection: 'row',
+      marginHorizontal: 24,
+      marginBottom: bottom,
     },
   });
 
@@ -84,23 +79,23 @@ function ConfirmModal({navigation}: Props) {
           </View>
           <View style={styles.smallTextContainer}>
             <Text style={styles.textSmallBody}>• 예약 시간 전에 취소하실 수 있습니다.</Text>
-            <Text style={styles.textSmallBody}>• 같은 날 같은 시간에는 중복으로 예약할 수 없습니다.</Text>
+            <Text style={styles.textSmallBody}>• 같은 식당에 중복으로 예약할 수 없습니다.</Text>
           </View>
         </View>
 
-        <View style={styles.buttonBar}>
+        <View style={computedStyles.buttonBar}>
           <Button
             {...PaperPresets.wideNeutralButton}
             style={styles.primaryButton}
-            onPress={() => bookingStore.dismissCurrentOption()}
-            labelStyle={computedStyles.cancelButtonLabel}>
+            labelStyle={styles.cancelButtonLabel}
+            onPress={() => bookingStore.dismissCurrentOption()}>
             취소
           </Button>
           <Button
             {...PaperPresets.wideThemedButton}
-            labelStyle={computedStyles.confirmButtonLabel}
             style={styles.primaryButton}
             loading={loading}
+            labelStyle={styles.confirmButtonLabel}
             onPress={confirm}>
             예약
           </Button>
@@ -147,11 +142,16 @@ const styles = StyleSheet.create({
   },
   primaryButton: {
     flex: 1,
-    borderRadius: 0,
-    elevation: 0,
+    marginHorizontal: 4,
   },
-  buttonBar: {
-    flexDirection: 'row',
-    justifyContent: 'center',
+  cancelButtonLabel: {
+    color: colors.textSecondary,
+    fontSize: 18,
+    paddingVertical: 2,
+  },
+  confirmButtonLabel: {
+    color: 'white',
+    fontSize: 18,
+    paddingVertical: 2,
   },
 });

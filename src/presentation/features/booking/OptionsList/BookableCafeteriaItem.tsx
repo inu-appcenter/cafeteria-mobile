@@ -26,6 +26,7 @@ import CafeteriaView from '../../cafeteria/CafeteriaView';
 import {StyleSheet, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
+import PaperPresets from '../../../components/utils/PaperPresets';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;
@@ -40,12 +41,7 @@ export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
       <Text style={styles.emojiText}>😋</Text>
       <Text style={styles.titleText}>{cafeteria.displayName}</Text>
       <Text style={styles.descriptionText}>붐비는 시간대에 편하게 입장할 수 있어요.</Text>
-      <Button
-        mode="contained"
-        color={colors.mainTint}
-        style={styles.makeBookingButton}
-        onPress={goToDetails}
-        labelStyle={styles.makeBookingButtonLabel}>
+      <Button {...PaperPresets.wideThemedButton} style={styles.makeBookingButton} onPress={goToDetails}>
         {cafeteria.displayName} 예약하기
       </Button>
     </CardView>

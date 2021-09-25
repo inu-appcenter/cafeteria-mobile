@@ -57,7 +57,7 @@ const wideThemedButton: typeof Button.defaultProps = {
   contentStyle: {
     paddingVertical: 4,
   },
-  labelStyle: {color: 'white', fontSize: 16},
+  labelStyle: {color: 'white', fontSize: 18},
   color: colors.mainTint,
   mode: 'contained',
 };
@@ -66,7 +66,7 @@ const wideNeutralButton: typeof Button.defaultProps = {
   contentStyle: {
     paddingVertical: 4,
   },
-  labelStyle: {color: colors.textSecondary, fontSize: 16},
+  labelStyle: {color: colors.textSecondary, fontSize: 18},
   color: colors.neutralGray,
   mode: 'contained',
 };

@@ -46,14 +46,22 @@ export default class BookingStore {
 
   private _myBookings?: BookingView[] = [];
   get myBookings() {
-    return this._myBookings;
+    return this._myBookings ?? [];
   }
   set myBookings(value) {
     this._myBookings = value;
   }
 
-  get hasBookings() {
-    return this._myBookings != null && this._myBookings.length > 0;
+  get hasBookings(): boolean {
+    return this.myBookings.length > 0;
+  }
+
+  get activeBookings(): BookingView[] {
+    return this.myBookings.filter(booking => booking.isActive);
+  }
+
+  get hasActiveBookings(): boolean {
+    return this.activeBookings.length > 0;
   }
 
   constructor(private readonly cafeteriaStore: CafeteriaStore) {

@@ -62,6 +62,7 @@ export default class BookingView {
   cancelable: boolean;
 
   status: string;
+  isActive: boolean;
 
   dimOut: boolean;
   badgeLabel?: string;
@@ -82,6 +83,7 @@ export default class BookingView {
       cancelable: booking.isAvailable,
 
       status: booking.status,
+      isActive: booking.isAvailable,
 
       dimOut: !booking.isAvailable,
       badgeLabel: booking.statusLabel,

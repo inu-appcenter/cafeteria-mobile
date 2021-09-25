@@ -50,7 +50,7 @@ function BottomNavigator() {
       component={BookingScreen}
       options={{
         title: '예약',
-        tabBarBadge: bookingStore.hasBookings ? bookingStore.myBookings?.length : undefined,
+        tabBarBadge: bookingStore.hasActiveBookings ? bookingStore.activeBookings?.length : undefined,
         tabBarBadgeStyle: {fontSize: 12},
       }}
     />

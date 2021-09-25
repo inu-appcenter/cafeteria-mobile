@@ -28,7 +28,7 @@ import NoBookingsView from './NoBookingsView';
 import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import {FlatList, RefreshControl, StyleSheet, View} from 'react-native';
+import {FlatList, RefreshControl, StyleSheet, Text, View} from 'react-native';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingHistory'>;
@@ -64,7 +64,8 @@ function History({navigation}: Props) {
       data={myBookings}
       renderItem={i => <BookingItem booking={i.item} />}
       refreshControl={<RefreshControl refreshing={loading} onRefresh={getMyBookings} />}
-      contentContainerStyle={style.bottomSpaced}
+      contentContainerStyle={styles.bottomSpaced}
+      ListFooterComponent={<Text style={styles.footerText}>최근 3일 동안의 예약 내역이 표시됩니다.</Text>}
     />
   );
 
@@ -88,8 +89,13 @@ function History({navigation}: Props) {
 
 export default observer(History);
 
-const style = StyleSheet.create({
+const styles = StyleSheet.create({
   bottomSpaced: {
     paddingBottom: 90,
+  },
+  footerText: {
+    ...palette.textSecondary,
+    textAlign: 'center',
+    marginTop: 24,
   },
 });

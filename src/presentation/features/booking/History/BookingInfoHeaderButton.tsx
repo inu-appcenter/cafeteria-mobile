@@ -27,7 +27,7 @@ export default function BookingInfoHeaderButton() {
   const showBookingInfo = async () => {
     Alert.alert(
       `예약 내역 안내`,
-      `체크인하지 않은 예약 중 아직 예약 일시가 다가오지 않은 예약이 여기에 표시됩니다.`,
+      `최근 3일 동안의 예약 내역이 여기에 표시됩니다. 1초마다 자동으로 새로고침됩니다.`,
     );
   };
 

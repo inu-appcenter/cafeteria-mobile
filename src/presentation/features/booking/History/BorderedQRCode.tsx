@@ -27,12 +27,13 @@ import palette from '../../../res/palette';
 
 type Props = {
   value: string;
+  showBorderAnimation: boolean;
 };
 
-export default function BorderedQRCode({value}: Props) {
+export default function BorderedQRCode({value, showBorderAnimation}: Props) {
   const d = 'M5 5H120V120H5z';
 
-  return (
+  const withBorder = (
     <View style={palette.centeringContainer}>
       <AnimatedSVGPath
         d={d}
@@ -50,6 +51,10 @@ export default function BorderedQRCode({value}: Props) {
       </View>
     </View>
   );
+
+  const withoutBorder = <QRCode value={value} size={100} />;
+
+  return showBorderAnimation ? withBorder : withoutBorder;
 }
 
 const styles = StyleSheet.create({

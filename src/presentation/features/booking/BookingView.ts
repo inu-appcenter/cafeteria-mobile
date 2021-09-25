@@ -21,16 +21,52 @@ import Booking from '../../../domain/entities/Booking';
 import CafeteriaView from '../cafeteria/CafeteriaView';
 import {formatDate, formatTime, formatTimeShort} from '../../../common/utils/Date';
 
+const qrCodeSubstitutes = [
+  '😄',
+  '😃',
+  '😀',
+  '😊',
+  '😉',
+  '😗',
+  '😙',
+  '😜',
+  '😝',
+  '😛',
+  '😁',
+  '😌',
+  '😣',
+  '😂',
+  '😅',
+  '😖',
+  '😆',
+  '😋',
+  '😷',
+  '😎',
+  '😴',
+  '😵',
+  '😲',
+  '😧',
+  '😮',
+  '😬',
+  '😇',
+];
+
 export default class BookingView {
   id: number;
   key: string;
   uuid: string;
   cafeteriaId: number;
   cafeteriaTitle: string;
-  timeSlotTimestamp: number;
   timeSlotDateString: string;
-  timeSlotTimeString: string;
   timeSlotShortTimeString: string;
+  cancelable: boolean;
+
+  dimOut: boolean;
+  badgeLabel?: string;
+  consumedQrCodeSubstitute: string;
+  showQrCode: boolean;
+  showBorderAnimation: boolean;
+  checkInAvailableTimeExplanation: string;
 
   static fromBooking(booking: Booking, cafeteria: CafeteriaView): BookingView {
     return {
@@ -39,10 +75,18 @@ export default class BookingView {
       uuid: booking.uuid,
       cafeteriaId: booking.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
-      timeSlotTimestamp: booking.timeSlot.getTime(),
       timeSlotDateString: formatDate(booking.timeSlot),
-      timeSlotTimeString: formatTime(booking.timeSlot),
       timeSlotShortTimeString: formatTimeShort(booking.timeSlot),
+      cancelable: booking.isAvailable,
+
+      dimOut: !booking.isAvailable,
+      badgeLabel: booking.statusLabel,
+      consumedQrCodeSubstitute: qrCodeSubstitutes[booking.id % qrCodeSubstitutes.length],
+      showQrCode: !booking.isUsed,
+      showBorderAnimation: booking.isAvailable,
+      checkInAvailableTimeExplanation: `${formatTime(booking.timeSlot)} ~ ${formatTime(
+        booking.nextTimeSlot,
+      )} 사이에 입장 가능합니다.`,
     };
   }
 }

@@ -41,6 +41,30 @@ export default class Booking {
   @Type(() => Date)
   bookedAt: Date;
 
-  @Expose()
-  status: string;
+  // @Expose()
+  status: string = 'UNUSED_LATE';
+
+  get isAvailable() {
+    return this.status === 'UNUSED_AVAILABLE';
+  }
+
+  get isLate() {
+    return this.status === 'UNUSED_LATE';
+  }
+
+  get isUsed() {
+    return this.status === 'USED';
+  }
+
+  get statusLabel() {
+    if (this.isAvailable) {
+      return undefined;
+    } else if (this.isLate) {
+      return '사용 불가능한 예약입니다.';
+    } else if (this.isUsed) {
+      return '입장 완료된 예약입니다.';
+    } else {
+      return undefined;
+    }
+  }
 }

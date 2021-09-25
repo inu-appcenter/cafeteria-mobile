@@ -41,8 +41,8 @@ export default class Booking {
   @Type(() => Date)
   bookedAt: Date;
 
-  // @Expose()
-  status: string = 'UNUSED_LATE';
+  @Expose()
+  status: string;
 
   get isAvailable() {
     return this.status === 'UNUSED_AVAILABLE';

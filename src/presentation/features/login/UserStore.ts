@@ -175,8 +175,7 @@ export default class UserStore {
    * 개인정보처리방침에 동의합니다.
    */
   async agreePrivacyPolicy() {
-    // TODO 테스트용임! 추후에 주석 해제할 것.
-    // await AgreePrivacyPolicy.run();
+    await AgreePrivacyPolicy.run();
 
     notify(`${new Date().toLocaleDateString()} 개인정보 수집 및 제공 동의가 완료되었습니다.`);
 

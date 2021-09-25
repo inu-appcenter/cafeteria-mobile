@@ -29,7 +29,6 @@ import handleApiError from '../../../../common/utils/handleApiError';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
 import {cancelBookingAlert} from '../../../components/utils/alert';
 import {StyleSheet, Text, View} from 'react-native';
-import colors from '../../../res/colors';
 
 type Props = {
   booking: BookingView;
@@ -164,13 +163,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   qrSubstituteEmoji: {
-    fontSize: 80,
+    fontSize: 60,
   },
   badgeLabelText: {
     ...palette.textSubHeader,
     width: '100%',
     padding: 8,
     textAlign: 'center',
-    backgroundColor: colors.sectionHeaderBackground,
+    backgroundColor: '#e8e9edbb',
   },
 });

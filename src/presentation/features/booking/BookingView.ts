@@ -61,6 +61,8 @@ export default class BookingView {
   timeSlotShortTimeString: string;
   cancelable: boolean;
 
+  status: string;
+
   dimOut: boolean;
   badgeLabel?: string;
   consumedQrCodeSubstitute: string;
@@ -78,6 +80,8 @@ export default class BookingView {
       timeSlotDateString: formatDate(booking.timeSlot),
       timeSlotShortTimeString: formatTimeShort(booking.timeSlot),
       cancelable: booking.isAvailable,
+
+      status: booking.status,
 
       dimOut: !booking.isAvailable,
       badgeLabel: booking.statusLabel,

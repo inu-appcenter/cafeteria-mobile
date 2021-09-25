@@ -17,7 +17,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import palette from '../../../res/palette';
 import CardView from '../../../components/CardView';
 import {Button} from 'react-native-paper';
@@ -46,6 +46,16 @@ export default function BookingItem({booking}: Props) {
   const [dimmed, setDimmed] = useState(booking.dimOut);
   const [badge, setBadge] = useState(booking.badgeLabel);
 
+  /**
+   * dimmed와 badge는 사용자와의 상호작용으로 인해 바뀔 수도 있지만,
+   * 만약 prop으로 들어온 booking의 status가 바뀌는 경우에는
+   * prop의 값으로 맞추어 줍니다.
+   */
+  useEffect(() => {
+    setDimmed(booking.dimOut);
+    setBadge(booking.badgeLabel);
+  }, [booking.status]);
+
   const computedStyles = StyleSheet.create({
     cardContent: {
       opacity: dimmed ? 0.25 : 1.0,
@@ -57,9 +67,11 @@ export default function BookingItem({booking}: Props) {
       toggleBrightness();
     }
 
-    // 지각으로 인해 사용 불가능 상태인 바코드일지라도 일단 스캔 가능하게 만들어 줍니다.
-    setDimmed(false);
-    setBadge(undefined);
+    if (booking.dimOut && booking.badgeLabel && booking.showQrCode) {
+      // 지각으로 인해 사용 불가능 상태인 바코드일지라도 일단 스캔 가능하게 만들어 줍니다.
+      setDimmed(false);
+      setBadge(undefined);
+    }
   };
 
   const promptDelete = () => {

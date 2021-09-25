@@ -38,12 +38,23 @@ function History({navigation}: Props) {
   const {bookingStore} = useStores();
 
   const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
+  const [_, refresh] = useApi(() => bookingStore.fetchMyBookings());
 
   const myBookings = bookingStore.myBookings;
   const getMyBookings = () => fetch().catch(handleApiError);
+  const silentRefresh = () => refresh().catch();
+
+  const timer = () => {
+    setTimeout(() => {
+      silentRefresh();
+
+      timer();
+    }, 1000);
+  };
 
   useEffect(() => {
     getMyBookings();
+    timer();
   }, []);
 
   const emptyView = <NoBookingsView />;

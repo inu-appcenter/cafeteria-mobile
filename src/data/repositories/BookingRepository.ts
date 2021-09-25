@@ -38,7 +38,7 @@ export default class BookingRepository {
     });
   }
 
-  async makeBooking(params: Record<string, string | undefined>) {
+  async makeBooking(params: Record<string, any>) {
     await axios.post(this.url.bookings, params);
   }
 

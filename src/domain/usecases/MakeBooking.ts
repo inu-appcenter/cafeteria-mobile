@@ -32,7 +32,7 @@ class MakeBooking extends UseCase<MakeBookingParams> {
 
   async onExecute({cafeteriaId, timeSlot}: MakeBookingParams): Promise<void> {
     return await this.bookingRepository.makeBooking({
-      cafeteriaId: cafeteriaId.toString(),
+      cafeteriaId: cafeteriaId.toString(), // TODO 숫자 그대로 보내자
       timeSlot: timeSlot.toISOString(),
     });
   }

@@ -168,7 +168,8 @@ export default class UserStore {
    * 개인정보처리방침 동의가 필요한지 확인합니다.
    */
   async checkAgreementRequired() {
-    this.isAgreementRequired = await CheckAgreementRequired.run();
+    // TODO [런칭 후 수정]
+    // this.isAgreementRequired = await CheckAgreementRequired.run();
   }
 
   /**

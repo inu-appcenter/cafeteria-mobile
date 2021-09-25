@@ -37,7 +37,7 @@ export default function ContactsButton({navigation}: Props) {
   return (
     <CardView
       style={styles.cafeteriaCard}
-      onLongPress={() => userStore.logout()} // TODO
+      onLongPress={() => userStore.logout()} // TODO [런칭 후 수정]
       onPress={() => navigation.navigate('SupportContacts')}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>

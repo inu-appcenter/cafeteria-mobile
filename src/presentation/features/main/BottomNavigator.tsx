@@ -44,6 +44,7 @@ function BottomNavigator() {
 
   const BottomTab = createBottomTabNavigator();
 
+  // TODO [런칭 후 수정]
   const bookingTab = (
     <BottomTab.Screen
       name="Booking"

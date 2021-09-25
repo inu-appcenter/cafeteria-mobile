@@ -37,7 +37,7 @@ export default class VersionStore {
     this._pendingUpdate = value;
   }
 
-  /** TEST-ONLY */
+  /** TODO [런칭 후 수정] */
   private _betaFeatureEnabled: Boolean = false;
   get betaFeatureEnabled() {
     return this._betaFeatureEnabled;

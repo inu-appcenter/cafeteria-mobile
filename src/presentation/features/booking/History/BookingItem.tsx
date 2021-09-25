@@ -40,17 +40,11 @@ export default function BookingItem({booking}: Props) {
 
   const [toggleBrightness] = useScreenBrightness();
 
+  /**
+   * 일부 속성들은 사용자와의 상호작용으로 인해 내부적으로 변경될 수 있습니다.
+   */
   const [dimmed, setDimmed] = useState(booking.dimOut);
   const [badge, setBadge] = useState(booking.badgeLabel);
-
-  const onCardClick = () => {
-    if (booking.showQrCode) {
-      toggleBrightness();
-    }
-
-    setDimmed(false);
-    setBadge(undefined);
-  };
 
   const computedStyles = StyleSheet.create({
     cardContent: {
@@ -58,13 +52,24 @@ export default function BookingItem({booking}: Props) {
     },
   });
 
-  const promptDelete = () =>
+  const onClickCard = () => {
+    if (booking.showQrCode) {
+      toggleBrightness();
+    }
+
+    // 지각으로 인해 사용 불가능 상태인 바코드일지라도 일단 스캔 가능하게 만들어 줍니다.
+    setDimmed(false);
+    setBadge(undefined);
+  };
+
+  const promptDelete = () => {
     cancelBookingAlert('예약 취소', '예약을 취소할까요?', () =>
       bookingStore.cancelBooking(booking.id).catch(handleApiError),
     );
+  };
 
   return (
-    <CardView style={styles.bookingCard} onPress={onCardClick}>
+    <CardView style={styles.bookingCard} onPress={onClickCard}>
       <View style={computedStyles.cardContent}>
         <Text style={palette.textSecondary}>{booking.timeSlotDateString}</Text>
 

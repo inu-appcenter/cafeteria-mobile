@@ -18,12 +18,12 @@
  */
 
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import palette from '../../../res/palette';
+import {StyleSheet, View} from 'react-native';
 
 // @ts-ignore
 import {AnimatedSVGPath} from 'react-native-svg-animations';
-import palette from '../../../res/palette';
 
 type Props = {
   value: string;

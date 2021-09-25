@@ -178,7 +178,7 @@ export default class UserStore {
     // TODO 테스트용임! 추후에 주석 해제할 것.
     // await AgreePrivacyPolicy.run();
 
-    notify(`${new Date().toLocaleDateString()} 기준 개인정보처리방침 동의가 완료되었습니다.`);
+    notify(`${new Date().toLocaleDateString()} 개인정보 수집 및 제공 동의가 완료되었습니다.`);
 
     this.isAgreementRequired = false;
   }

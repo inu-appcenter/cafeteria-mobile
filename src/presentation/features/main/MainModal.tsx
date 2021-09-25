@@ -59,7 +59,7 @@ function MainModal() {
       <RootStack.Screen
         name="PrivacyPolicyAgreement"
         component={AgreementScreen}
-        options={{title: '개인정보처리방침', headerLeft: () => null, gestureEnabled: false}}
+        options={{title: '개인정보 수집 및 제공 동의', headerLeft: () => null, gestureEnabled: false}}
       />
     </RootStack.Navigator>
   );

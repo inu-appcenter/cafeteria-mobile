@@ -35,5 +35,12 @@ export default class Booking {
 
   @Expose()
   @Type(() => Date)
+  nextTimeSlot: Date;
+
+  @Expose()
+  @Type(() => Date)
   bookedAt: Date;
+
+  @Expose()
+  status: string;
 }

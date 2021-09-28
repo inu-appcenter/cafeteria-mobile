@@ -78,7 +78,7 @@ function ConfirmModal({navigation}: Props) {
             <Text style={styles.textBody}>• 장소: {bookingOption.cafeteriaTitle}</Text>
           </View>
           <View style={styles.smallTextContainer}>
-            <Text style={styles.textSmallBody}>• 예약 시간 전에 취소하실 수 있습니다.</Text>
+            <Text style={styles.textSmallBody}>• 예약 시간 전에 취소할 수 있습니다.</Text>
             <Text style={styles.textSmallBody}>• 같은 식당에 중복으로 예약할 수 없습니다.</Text>
           </View>
         </View>

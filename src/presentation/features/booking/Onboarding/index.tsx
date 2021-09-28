@@ -44,7 +44,7 @@ export default function Onboarding() {
         right: 0,
         left: 0,
         padding: 12,
-        paddingTop: 24,
+        paddingTop: 36,
       }}>
       <Button {...PaperPresets.wideThemedButton} onPress={doneOnboarding}>
         시작하기

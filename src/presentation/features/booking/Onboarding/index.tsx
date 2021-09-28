@@ -65,7 +65,7 @@ export default function Onboarding() {
               paddingBottom: 96,
             }}>
             <Text style={styles.title}>
-              천원의 아침,{'\n'}미리 예약하고{'\n'}안전하게 입장하세요
+              천원의 아침,{'\n'}미리 예약하고{'\n'}안전하게 이용하세요
             </Text>
             <Text style={styles.titleComplementary}>QR 체크인으로 방역에 동참해주세요</Text>
             {!expanded && (

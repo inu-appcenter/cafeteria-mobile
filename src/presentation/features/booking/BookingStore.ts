@@ -26,8 +26,17 @@ import CafeteriaStore from '../cafeteria/CafeteriaStore';
 import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
 import BookingOptionView from './BookingOptionView';
 import {makeAutoObservable} from 'mobx';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default class BookingStore {
+  private _onboardingHasShown = false;
+  get onboardingHasShown() {
+    return this._onboardingHasShown;
+  }
+  set onboardingHasShown(value) {
+    this._onboardingHasShown = value;
+  }
+
   private _bookingOptions: Map<number, BookingOptionView[]> = new Map();
   getBookingOptions(cafeteriaId: number) {
     return this._bookingOptions.get(cafeteriaId) ?? [];
@@ -66,6 +75,14 @@ export default class BookingStore {
 
   constructor(private readonly cafeteriaStore: CafeteriaStore) {
     makeAutoObservable(this);
+  }
+
+  async fetchOnboardingShownStatus() {
+    this.onboardingHasShown = (await AsyncStorage.getItem('booking_onboarding_has_shown')) === 'true';
+  }
+
+  async persistOnboardingShownStatus() {
+    await AsyncStorage.setItem('booking_onboarding_has_shown', String(this.onboardingHasShown));
   }
 
   async fetchBookingOptions(cafeteria: CafeteriaView) {

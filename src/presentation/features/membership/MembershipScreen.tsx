@@ -38,7 +38,7 @@ function MembershipScreen() {
 
   const Stack = createStackNavigator<MembershipNavigationParams>();
 
-  const needLoginScreen = (
+  const needLogin = (
     <Stack.Screen
       key="membership_need_login_screen"
       name="MembershipNeedLogin"
@@ -47,7 +47,7 @@ function MembershipScreen() {
     />
   );
 
-  const loginScreen = (
+  const studentLogin = (
     <Stack.Screen
       key="membership_student_login_screen"
       name="MembershipStudentLogin"
@@ -56,7 +56,7 @@ function MembershipScreen() {
     />
   );
 
-  const barcodeScreen = (
+  const barcode = (
     <Stack.Screen
       key="membership_barcode_screen"
       name="MembershipBarcode"
@@ -70,7 +70,7 @@ function MembershipScreen() {
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedInAsStudent ? [barcodeScreen] : [needLoginScreen, loginScreen]}
+      {isLoggedInAsStudent ? [barcode] : [needLogin, studentLogin]}
     </Stack.Navigator>
   );
 }

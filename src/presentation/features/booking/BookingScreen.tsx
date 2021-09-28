@@ -21,7 +21,7 @@ import React from 'react';
 import History from './History';
 import Complete from './Complete';
 import {observer} from 'mobx-react';
-import Onboarding from './Onboarding';
+import NeedLogin from './NeedLogin';
 import OptionsList from './OptionsList';
 import useUserState from '../../hooks/useUserState';
 import OptionsDetail from './OptionsDetail';
@@ -33,7 +33,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import BookingInfoHeaderButton from './History/BookingInfoHeaderButton';
 
 export type BookingNavigationParams = {
-  BookingOnboarding: undefined;
+  BookingNeedLogin: undefined;
   BookingStudentLogin: undefined;
   BookingGuestLogin: undefined;
 
@@ -52,11 +52,11 @@ function BookingScreen() {
    * 로그인 유도하는 화면.
    * 전체화면으로 보여줄거라서 헤더는 숨김.
    */
-  const onboarding = (
+  const needLogin = (
     <Stack.Screen
       key="booking_onboarding"
-      name="BookingOnboarding"
-      component={Onboarding}
+      name="BookingNeedLogin"
+      component={NeedLogin}
       options={{headerShown: false}}
     />
   );
@@ -145,7 +145,7 @@ function BookingScreen() {
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedIn ? [history, list, detail, complete] : [onboarding, studentLogin, guestLogin]}
+      {isLoggedIn ? [history, list, detail, complete] : [needLogin, studentLogin, guestLogin]}
     </Stack.Navigator>
   );
 }

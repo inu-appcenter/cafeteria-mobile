@@ -29,10 +29,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import {BookingNavigationParams} from '../BookingScreen';
 
 type Props = {
-  navigation: StackNavigationProp<BookingNavigationParams, 'BookingOnboarding'>;
+  navigation: StackNavigationProp<BookingNavigationParams, 'BookingNeedLogin'>;
 };
 
-function Onboarding({navigation}: Props) {
+function NeedLogin({navigation}: Props) {
   const {isTryingRememberedLogin} = useUserState();
 
   const goStudentLogin = () => navigation.navigate('BookingStudentLogin');
@@ -67,7 +67,7 @@ function Onboarding({navigation}: Props) {
   return isTryingRememberedLogin ? loadingView : onboardingContents;
 }
 
-export default observer(Onboarding);
+export default observer(NeedLogin);
 
 const styles = StyleSheet.create({
   container: {

@@ -81,7 +81,7 @@ function BookingScreen() {
       key="booking_guest_login"
       name="BookingGuestLogin"
       component={GuestLoginScreen}
-      options={{title: '휴대전화로 로그인'}}
+      options={{title: '전화번호로 로그인'}}
     />
   );
 

@@ -29,10 +29,10 @@ import {StyleSheet, Text, View} from 'react-native';
 import {MembershipNavigationParams} from '../MembershipScreen';
 
 type Props = {
-  navigation: StackNavigationProp<MembershipNavigationParams, 'MembershipOnboarding'>;
+  navigation: StackNavigationProp<MembershipNavigationParams, 'MembershipNeedLogin'>;
 };
 
-function Onboarding({navigation}: Props) {
+function NeedLogin({navigation}: Props) {
   const {isTryingRememberedLogin} = useUserState();
 
   const loadingView = <LoadingView />;
@@ -57,7 +57,7 @@ function Onboarding({navigation}: Props) {
   return isTryingRememberedLogin ? loadingView : onboardingContents;
 }
 
-export default observer(Onboarding);
+export default observer(NeedLogin);
 
 const styles = StyleSheet.create({
   container: {

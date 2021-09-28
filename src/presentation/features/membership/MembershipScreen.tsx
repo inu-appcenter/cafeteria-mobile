@@ -19,7 +19,7 @@
 
 import React from 'react';
 import Barcode from './Barcode';
-import Onboarding from './Onboarding';
+import NeedLogin from './NeedLogin';
 import {observer} from 'mobx-react';
 import useUserState from '../../hooks/useUserState';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
@@ -28,7 +28,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import MembershipInfoHeaderButton from './Barcode/MembershipInfoHeaderButton';
 
 export type MembershipNavigationParams = {
-  MembershipOnboarding: undefined;
+  MembershipNeedLogin: undefined;
   MembershipStudentLogin: undefined;
   MembershipBarcode: undefined;
 };
@@ -38,11 +38,11 @@ function MembershipScreen() {
 
   const Stack = createStackNavigator<MembershipNavigationParams>();
 
-  const onboardingScreen = (
+  const needLoginScreen = (
     <Stack.Screen
-      key="membership_onboarding_screen"
-      name="MembershipOnboarding"
-      component={Onboarding}
+      key="membership_need_login_screen"
+      name="MembershipNeedLogin"
+      component={NeedLogin}
       options={{headerShown: false}}
     />
   );
@@ -70,7 +70,7 @@ function MembershipScreen() {
 
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedInAsStudent ? [barcodeScreen] : [onboardingScreen, loginScreen]}
+      {isLoggedInAsStudent ? [barcodeScreen] : [needLoginScreen, loginScreen]}
     </Stack.Navigator>
   );
 }

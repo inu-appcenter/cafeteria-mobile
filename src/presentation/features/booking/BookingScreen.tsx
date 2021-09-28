@@ -31,8 +31,11 @@ import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import BookingInfoHeaderButton from './History/BookingInfoHeaderButton';
+import Onboarding from './Onboarding';
+import useStores from '../../hooks/useStores';
 
 export type BookingNavigationParams = {
+  BookingOnboarding: undefined;
   BookingNeedLogin: undefined;
   BookingStudentLogin: undefined;
   BookingGuestLogin: undefined;
@@ -45,8 +48,21 @@ export type BookingNavigationParams = {
 
 function BookingScreen() {
   const {isLoggedIn} = useUserState();
+  const {bookingStore} = useStores();
 
   const Stack = createStackNavigator<BookingNavigationParams>();
+
+  /**
+   * 초기 안내(온보딩) 화면.
+   */
+  const onboarding = (
+    <Stack.Screen
+      key="booking_onboarding"
+      name="BookingOnboarding"
+      component={Onboarding}
+      options={{headerShown: false}}
+    />
+  );
 
   /**
    * 로그인 유도하는 화면.
@@ -54,7 +70,7 @@ function BookingScreen() {
    */
   const needLogin = (
     <Stack.Screen
-      key="booking_onboarding"
+      key="booking_need_login"
       name="BookingNeedLogin"
       component={NeedLogin}
       options={{headerShown: false}}
@@ -143,9 +159,14 @@ function BookingScreen() {
     />
   );
 
+  const beforeOnboarding = [onboarding];
+  const afterOnboarding = isLoggedIn
+    ? [history, list, detail, complete]
+    : [needLogin, studentLogin, guestLogin];
+
   return (
     <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
-      {isLoggedIn ? [history, list, detail, complete] : [needLogin, studentLogin, guestLogin]}
+      {bookingStore.onboardingHasShown ? afterOnboarding : beforeOnboarding}
     </Stack.Navigator>
   );
 }

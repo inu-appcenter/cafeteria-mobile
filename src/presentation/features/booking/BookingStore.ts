@@ -81,8 +81,9 @@ export default class BookingStore {
     this.onboardingHasShown = (await AsyncStorage.getItem('booking_onboarding_has_shown')) === 'true';
   }
 
-  async persistOnboardingShownStatus() {
-    await AsyncStorage.setItem('booking_onboarding_has_shown', String(this.onboardingHasShown));
+  async doneOnboarding() {
+    this.onboardingHasShown = true;
+    // await AsyncStorage.setItem('booking_onboarding_has_shown', String(this.onboardingHasShown));
   }
 
   async fetchBookingOptions(cafeteria: CafeteriaView) {

@@ -41,7 +41,7 @@ function NeedLogin({navigation}: Props) {
   const loadingView = <LoadingView />;
 
   const choices = (
-    <View style={styles.buttonArray}>
+    <View style={palette.bottomButton}>
       <Button {...PaperPresets.wideThemedButton} onPress={goStudentLogin}>
         학번으로 로그인
       </Button>
@@ -88,12 +88,6 @@ const styles = StyleSheet.create({
     ...palette.textSecondary,
     marginTop: 18,
     textAlign: 'center',
-  },
-  buttonArray: {
-    end: 12,
-    start: 12,
-    bottom: 12,
-    position: 'absolute',
   },
   secondaryButton: {
     marginTop: 8,

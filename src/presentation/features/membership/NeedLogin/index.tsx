@@ -47,7 +47,7 @@ function NeedLogin({navigation}: Props) {
       </View>
       <Button
         {...PaperPresets.wideThemedButton}
-        style={styles.primaryButton}
+        style={palette.bottomButton}
         onPress={() => navigation.navigate('MembershipStudentLogin')}>
         학번으로 로그인
       </Button>
@@ -78,11 +78,5 @@ const styles = StyleSheet.create({
     ...palette.textSecondary,
     marginTop: 18,
     textAlign: 'center',
-  },
-  primaryButton: {
-    end: 12,
-    start: 12,
-    bottom: 12,
-    position: 'absolute',
   },
 });

@@ -63,7 +63,7 @@ export default function AgreementScreen() {
 
         <Button
           {...PaperPresets.wideThemedButton}
-          style={styles.primaryButton}
+          style={palette.bottomButton}
           onPress={agree}
           disabled={!agreeToFirst || !agreeToSecond}>
           동의
@@ -82,12 +82,5 @@ const styles = StyleSheet.create({
   titleText: {
     ...palette.textHeader,
     marginTop: 16,
-  },
-
-  primaryButton: {
-    end: 12,
-    start: 12,
-    bottom: 0,
-    position: 'absolute',
   },
 });

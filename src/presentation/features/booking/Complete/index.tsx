@@ -26,8 +26,9 @@ import ConfettiCannon from 'react-native-confetti-cannon';
 import handleApiError from '../../../../common/utils/handleApiError';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
+import ReactNativeHapticFeedback from 'react-native-haptic-feedback';
 import React, {useEffect, useState} from 'react';
-import {Platform, StyleSheet, Text, useWindowDimensions, View} from 'react-native';
+import {StyleSheet, Text, useWindowDimensions, View} from 'react-native';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingComplete'>;
@@ -40,8 +41,18 @@ export default function Complete({navigation}: Props) {
   const [_, fetch] = useApi(() => bookingStore.fetchMyBookings());
   const [confettiVisible, setConfettiVisible] = useState(false);
 
+  const triggerHapticEffect = () => {
+    setTimeout(() => {
+      ReactNativeHapticFeedback.trigger('notificationSuccess', {
+        enableVibrateFallback: false,
+        ignoreAndroidSystemSettings: false,
+      });
+    }, 200);
+  };
+
   useEffect(() => {
-    setConfettiVisible(Platform.OS === 'ios');
+    triggerHapticEffect();
+    setConfettiVisible(true);
 
     fetch().catch(handleApiError);
   }, []);

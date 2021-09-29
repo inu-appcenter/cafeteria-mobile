@@ -17,15 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useState} from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import useStores from '../../../hooks/useStores';
 import PaperPresets from '../../../components/utils/PaperPresets';
 import colors from '../../../res/colors';
-import AutoHeightImage from 'react-native-auto-height-image';
 import LinearGradient from 'react-native-linear-gradient';
+import AutoHeightImage from 'react-native-auto-height-image';
+import React, {useState} from 'react';
+import {Dimensions, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 export default function Onboarding() {
   const {bookingStore} = useStores();
@@ -34,18 +34,10 @@ export default function Onboarding() {
 
   const doneOnboarding = () => bookingStore.doneOnboarding();
 
+  const {width} = Dimensions.get('window');
+
   const letsGo = (
-    <LinearGradient
-      colors={['#ffffff00', 'white', 'white', 'white']}
-      style={{
-        width: '100%',
-        position: 'absolute',
-        bottom: 0,
-        right: 0,
-        left: 0,
-        padding: 12,
-        paddingTop: 36,
-      }}>
+    <LinearGradient colors={['#ffffff00', 'white', 'white', 'white']} style={styles.letsGoButton}>
       <Button {...PaperPresets.wideThemedButton} onPress={doneOnboarding}>
         시작하기
       </Button>
@@ -56,23 +48,16 @@ export default function Onboarding() {
     <SafeAreaView style={palette.whiteFullSized}>
       <View style={palette.whiteFullSized}>
         <ScrollView>
-          <View
-            style={{
-              flex: 1,
-              flexDirection: 'column',
-              alignItems: 'flex-start',
-              marginHorizontal: 24,
-              paddingBottom: 96,
-            }}>
+          <View style={styles.scrolledContentContainer}>
             <Text style={styles.title}>
               천원의 아침,{'\n'}미리 예약하고{'\n'}안전하게 이용하세요
             </Text>
             <Text style={styles.titleComplementary}>QR 체크인으로 방역에 동참해주세요</Text>
             {!expanded && (
               <Button
-                labelStyle={{color: 'white', fontSize: 14}}
+                labelStyle={styles.moreButtonLabel}
+                style={styles.moreButton}
                 color={colors.mainTint}
-                style={{borderRadius: 25, marginTop: 18}}
                 mode="contained"
                 onPress={() => setExpanded(true)}>
                 예약제를 도입한 계기
@@ -90,32 +75,28 @@ export default function Onboarding() {
               </Text>
             )}
 
-            <AutoHeightImage
-              source={require('../../../res/images/qr_code.png')}
-              width={300}
-              style={{alignSelf: 'center', marginVertical: 72}}
-            />
+            <AutoHeightImage source={onboardingImages.qr} width={width * 0.8} style={styles.mainImage} />
             <Text style={styles.secondTitle}>이렇게 해보세요</Text>
 
             <Text style={styles.instructionText}>1. 화면 하단의 예약 버튼을 누른다</Text>
             <AutoHeightImage
-              source={require('../../../res/images/booking_onboarding_1.png')}
-              width={300}
-              style={{alignSelf: 'center', marginBottom: 36}}
+              source={onboardingImages.instruction1}
+              width={width * 0.8}
+              style={styles.instructionImage}
             />
 
             <Text style={styles.instructionText}>2. 식당과 날짜를 고르고 예약한다</Text>
             <AutoHeightImage
-              source={require('../../../res/images/booking_onboarding_2.png')}
-              width={300}
-              style={{alignSelf: 'center', marginBottom: 36}}
+              source={onboardingImages.instruction2}
+              width={width * 0.8}
+              style={styles.instructionImage}
             />
 
             <Text style={styles.instructionText}>3. 예약증을 관리자에게 보여준다</Text>
             <AutoHeightImage
-              source={require('../../../res/images/booking_onboarding_3.png')}
-              width={300}
-              style={{alignSelf: 'center', marginBottom: 36}}
+              source={onboardingImages.instruction3}
+              width={width * 0.8}
+              style={styles.instructionImage}
             />
           </View>
         </ScrollView>
@@ -126,6 +107,22 @@ export default function Onboarding() {
 }
 
 const styles = StyleSheet.create({
+  letsGoButton: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    padding: 12,
+    paddingTop: 36,
+  },
+  scrolledContentContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    marginHorizontal: 24,
+    paddingBottom: 96,
+  },
   title: {
     ...palette.textBigHeader,
     marginTop: 36,
@@ -135,10 +132,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginTop: 14,
   },
+  moreButton: {
+    borderRadius: 25,
+    marginTop: 18,
+  },
+  moreButtonLabel: {
+    color: 'white',
+    fontSize: 14,
+  },
   body: {
     color: colors.textSecondary,
     fontSize: 18,
     marginTop: 18,
+  },
+  mainImage: {
+    alignSelf: 'center',
+    marginVertical: 72,
   },
   secondTitle: {
     ...palette.textHeader,
@@ -149,4 +158,15 @@ const styles = StyleSheet.create({
     marginTop: 24,
     marginBottom: 36,
   },
+  instructionImage: {
+    alignSelf: 'center',
+    marginBottom: 36,
+  },
 });
+
+const onboardingImages = {
+  qr: require('../../../res/images/qr_code.png'),
+  instruction1: require('../../../res/images/booking_onboarding_1.png'),
+  instruction2: require('../../../res/images/booking_onboarding_2.png'),
+  instruction3: require('../../../res/images/booking_onboarding_3.png'),
+};

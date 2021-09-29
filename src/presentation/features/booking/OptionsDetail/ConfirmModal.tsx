@@ -57,7 +57,7 @@ function ConfirmModal({navigation}: Props) {
     buttonBar: {
       flexDirection: 'row',
       marginHorizontal: 24,
-      marginBottom: bottom,
+      marginBottom: bottom + 24,
     },
   });
 
@@ -116,7 +116,8 @@ const styles = StyleSheet.create({
     width: '100%',
     minHeight: 240,
     backgroundColor: colors.white,
-    borderRadius: 20,
+    borderTopStartRadius: 20,
+    borderTopEndRadius: 20,
     justifyContent: 'space-between',
   },
   upperContainer: {

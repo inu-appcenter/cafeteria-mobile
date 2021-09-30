@@ -20,8 +20,10 @@
 import React from 'react';
 import History from './History';
 import Complete from './Complete';
-import {observer} from 'mobx-react';
 import NeedLogin from './NeedLogin';
+import useStores from '../../hooks/useStores';
+import {observer} from 'mobx-react';
+import Onboarding from './Onboarding';
 import OptionsList from './OptionsList';
 import useUserState from '../../hooks/useUserState';
 import OptionsDetail from './OptionsDetail';
@@ -31,8 +33,8 @@ import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import BookingInfoHeaderButton from './History/BookingInfoHeaderButton';
-import Onboarding from './Onboarding';
-import useStores from '../../hooks/useStores';
+
+import BookingOptionInfoHeaderButton from './OptionsDetail/BookingOptionInfoHeaderButton';
 
 export type BookingNavigationParams = {
   BookingOnboarding: undefined;
@@ -140,6 +142,7 @@ function BookingScreen() {
       component={OptionsDetail}
       options={{
         title: '시간 선택',
+        headerRight: () => <BookingOptionInfoHeaderButton />,
       }}
     />
   );

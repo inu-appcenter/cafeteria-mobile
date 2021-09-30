@@ -17,24 +17,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Cafeteria from '../../../domain/entities/Cafeteria';
+import Icon from 'react-native-vector-icons/Feather';
+import React from 'react';
+import colors from '../../../res/colors';
+import {Alert} from 'react-native';
+import palette from '../../../res/palette';
 
-export default class CafeteriaView {
-  id: number;
-  displayName: string;
-  comment: string;
-  supportMenu: boolean;
-  supportBooking: boolean;
-  supportDiscount: boolean;
+export default function BookingOptionInfoHeaderButton() {
+  const showBookingInfo = async () => {
+    Alert.alert(
+      `예약 옵션 안내`,
+      `오늘 또는 다음 날만 예약이 가능하며, 오늘 예약 운영 시간이 지나면 다음 날 예약 가능한 옵션이 표시됩니다.`,
+    );
+  };
 
-  static fromCafeteria(cafeteria: Cafeteria): CafeteriaView {
-    return {
-      id: cafeteria.id,
-      displayName: cafeteria.displayName,
-      comment: cafeteria.comment,
-      supportMenu: cafeteria.supportMenu,
-      supportBooking: cafeteria.supportBooking,
-      supportDiscount: cafeteria.supportDiscount,
-    };
-  }
+  return (
+    <Icon
+      name={'info'}
+      size={24}
+      color={colors.textPrimary}
+      style={palette.iconHeaderButton}
+      onPress={showBookingInfo}
+    />
+  );
 }

@@ -24,7 +24,6 @@ import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
 import {RouteProp} from '@react-navigation/native';
 import ConfirmModal from './ConfirmModal';
-import {SectionGrid} from 'react-native-super-grid';
 import SectionHeader from './SectionHeader';
 import handleApiError from '../../../../common/utils/handleApiError';
 import BookingOptionView from '../BookingOptionView';
@@ -44,8 +43,8 @@ function OptionsDetail({route, navigation}: Props) {
   const {cafeteria} = route.params;
   const {bookingStore} = useStores();
 
-  const data = bookingStore.getBookingOptions(cafeteria.id);
-  const dateString = data[0]?.timeSlotDateString;
+  const groupedOptions = bookingStore.getGroupedBookingOptions(cafeteria.id);
+  const isEmpty = groupedOptions?.isEmpty ?? false;
 
   const [refreshing, refresh] = useApi(async () => bookingStore.fetchBookingOptions(cafeteria));
 
@@ -58,25 +57,36 @@ function OptionsDetail({route, navigation}: Props) {
     refreshOptions();
   }, []);
 
+  const content = (
+    <SectionList
+      style={styles.list}
+      sections={splitItemsIntoSections(groupedOptions?.options || [])}
+      renderItem={i => <BookingOptionItem bookingOption={i.item} />}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
+      initialNumToRender={groupedOptions?.options.length}
+      renderSectionHeader={SectionHeader}
+    />
+  );
+
+  const emptyView = (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text style={styles.helpText}>예약 가능한 옵션이 없습니다.</Text>
+      <Text style={styles.helpTextSmall}>식당 운영일 전날 오전 10시 이후에{'\n'}예약 옵션이 표시됩니다.</Text>
+    </View>
+  );
+
   return (
     <View style={palette.whiteFullSized}>
       <View style={styles.headerPlate}>
         <View>
-          <Text style={palette.textSubHeader}>😋 {cafeteria.displayName}</Text>
-          <Text style={styles.headerDateText}>{dateString}</Text>
+          <Text style={palette.textSubHeader}>{cafeteria.displayName}</Text>
+          <Text style={styles.headerDateText}>{groupedOptions?.timeSlotDateString}</Text>
         </View>
         <View style={styles.spinnerContainer}>
           <SpinningRefreshButton onPress={refreshOptions} />
         </View>
       </View>
-      <SectionList
-        style={styles.list}
-        sections={splitItemsIntoSections(data)}
-        renderItem={i => <BookingOptionItem bookingOption={i.item} />}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
-        initialNumToRender={data.length}
-        renderSectionHeader={SectionHeader}
-      />
+      {isEmpty ? emptyView : content}
       <ConfirmModal navigation={navigation} />
     </View>
   );
@@ -105,6 +115,8 @@ const styles = StyleSheet.create({
   },
   headerDateText: {
     ...palette.textPrimary,
+    color: colors.lightBlueText,
+    fontWeight: 'bold',
     marginTop: 8,
   },
   spinnerContainer: {
@@ -113,5 +125,19 @@ const styles = StyleSheet.create({
   list: {
     ...palette.whiteBackground,
     flex: 0, // https://github.com/facebook/react-native/issues/15990#issuecomment-456974250
+  },
+  helpText: {
+    ...palette.textTertiary,
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginHorizontal: 16,
+  },
+  helpTextSmall: {
+    ...palette.textTertiary,
+    fontSize: 16,
+    textAlign: 'center',
+    marginTop: 16,
+    marginHorizontal: 16,
   },
 });

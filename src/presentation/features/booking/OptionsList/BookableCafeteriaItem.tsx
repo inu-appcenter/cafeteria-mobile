@@ -40,7 +40,7 @@ export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
     <CardView style={styles.container}>
       <Text style={styles.emojiText}>😋</Text>
       <Text style={styles.titleText}>{cafeteria.displayName}</Text>
-      <Text style={styles.descriptionText}>붐비는 시간대에 편하게 입장할 수 있어요.</Text>
+      <Text style={styles.descriptionText}>{cafeteria.comment}</Text>
       <Button {...PaperPresets.wideThemedButton} style={styles.makeBookingButton} onPress={goToDetails}>
         {cafeteria.displayName} 예약하기
       </Button>

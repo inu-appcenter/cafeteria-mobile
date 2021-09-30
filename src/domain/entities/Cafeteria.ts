@@ -31,6 +31,9 @@ export default class Cafeteria {
   displayName: string;
 
   @Expose()
+  comment: string;
+
+  @Expose()
   supportMenu: boolean;
 
   @Expose()

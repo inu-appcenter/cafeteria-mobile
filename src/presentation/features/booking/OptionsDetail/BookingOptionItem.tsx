@@ -59,7 +59,8 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 12,
+    paddingVertical: 12,
+    paddingHorizontal: 16,
   },
   highlightedText: {
     ...palette.textPrimary,

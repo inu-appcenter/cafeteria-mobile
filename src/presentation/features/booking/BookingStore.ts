@@ -19,6 +19,7 @@
 
 import MakeBooking from '../../../domain/usecases/MakeBooking';
 import BookingView from './BookingView';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import CafeteriaView from '../cafeteria/CafeteriaView';
 import CancelBooking from '../../../domain/usecases/CancelBooking';
 import GetMyBookings from '../../../domain/usecases/GetMyBookings';
@@ -26,7 +27,7 @@ import CafeteriaStore from '../cafeteria/CafeteriaStore';
 import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
 import BookingOptionView from './BookingOptionView';
 import {makeAutoObservable} from 'mobx';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import GroupedBookingOptionsView from './GroupedBookingOptionsView';
 
 export default class BookingStore {
   private _onboardingHasShown = false;
@@ -37,12 +38,12 @@ export default class BookingStore {
     this._onboardingHasShown = value;
   }
 
-  private _bookingOptions: Map<number, BookingOptionView[]> = new Map();
-  getBookingOptions(cafeteriaId: number) {
-    return this._bookingOptions.get(cafeteriaId) ?? [];
+  private _groupedBookingOptions: Map<number, GroupedBookingOptionsView> = new Map();
+  getGroupedBookingOptions(cafeteriaId: number) {
+    return this._groupedBookingOptions.get(cafeteriaId);
   }
-  setBookingOptions(cafeteriaId: number, options: BookingOptionView[]) {
-    this._bookingOptions.set(cafeteriaId, options);
+  setGroupedBookingOptions(cafeteriaId: number, options: GroupedBookingOptionsView) {
+    this._groupedBookingOptions.set(cafeteriaId, options);
   }
 
   private _currentOption?: BookingOptionView = undefined;
@@ -98,9 +99,9 @@ export default class BookingStore {
   async fetchBookingOptions(cafeteria: CafeteriaView) {
     const bookingOptions = await GetBookingOptions.run({cafeteriaId: cafeteria.id});
 
-    this.setBookingOptions(
+    this.setGroupedBookingOptions(
       cafeteria.id,
-      bookingOptions.map(option => BookingOptionView.fromBookingOption(option, cafeteria)),
+      GroupedBookingOptionsView.fromBookingOptionsAndCafeteria(bookingOptions, cafeteria),
     );
   }
 

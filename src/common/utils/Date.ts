@@ -18,7 +18,7 @@
  */
 
 import moment from 'moment';
-import {format} from 'date-fns';
+import {format, isToday, isTomorrow} from 'date-fns';
 import {ko} from 'date-fns/locale';
 
 moment.locale('ko'); // 한글사랑 합시다 후후
@@ -47,6 +47,13 @@ export function formatElapsedDate(date: Date) {
 
 export function formatDate(date: Date) {
   return format(date, 'yyyy년 M월 d일 cccc', {locale: ko});
+}
+
+export function formatDateDiffWithDate(date: Date) {
+  const dateDiffString = isToday(date) ? '오늘' : isTomorrow(date) ? '내일' : format(date, 'M월 d일');
+  const dayString = format(date, 'cccc', {locale: ko});
+
+  return `${dateDiffString}(${dayString})`;
 }
 
 export function formatTime(date: Date) {

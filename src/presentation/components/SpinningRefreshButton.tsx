@@ -58,7 +58,7 @@ export default function SpinningRefreshButton({onPress, onLongPress}: Props) {
       }}
       onLongPress={onLongPress}>
       <Animated.View style={animatedStyle}>
-        <Icon name={'refresh'} size={27} style={{padding: 8}} color={colors.textSecondary} />
+        <Icon name={'refresh'} size={27} style={{padding: 0}} color={colors.textSecondary} />
       </Animated.View>
     </Touchable>
   );

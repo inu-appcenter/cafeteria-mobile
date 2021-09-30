@@ -33,7 +33,6 @@ import StudentLoginScreen from '../login/StudentLoginScreen';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import {createStackNavigator} from '@react-navigation/stack';
 import BookingInfoHeaderButton from './History/BookingInfoHeaderButton';
-
 import BookingOptionInfoHeaderButton from './OptionsDetail/BookingOptionInfoHeaderButton';
 
 export type BookingNavigationParams = {

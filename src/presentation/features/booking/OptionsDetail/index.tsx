@@ -69,7 +69,7 @@ function OptionsDetail({route, navigation}: Props) {
   );
 
   const emptyView = (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+    <View style={styles.emptyView}>
       <Text style={styles.helpText}>예약 가능한 옵션이 없습니다.</Text>
       <Text style={styles.helpTextSmall}>식당 운영일 전날 오전 10시 이후에{'\n'}예약 옵션이 표시됩니다.</Text>
     </View>
@@ -125,6 +125,11 @@ const styles = StyleSheet.create({
   list: {
     ...palette.whiteBackground,
     flex: 0, // https://github.com/facebook/react-native/issues/15990#issuecomment-456974250
+  },
+  emptyView: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   helpText: {
     ...palette.textTertiary,

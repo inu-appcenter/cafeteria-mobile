@@ -18,15 +18,26 @@
  */
 
 import React from 'react';
-import {Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import palette from '../res/palette';
 
 export default function EmptyView() {
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
-      <Text style={palette.textHeader}>앗...!</Text>
+      <Text style={styles.title}>앗...!</Text>
 
-      <Text style={{...palette.textSecondary, marginTop: 16}}>표시할 정보가 없습니다.</Text>
+      <Text style={styles.body}>표시할 정보가 없습니다.</Text>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  title: {
+    ...palette.textHeader,
+  },
+  body: {
+    ...palette.textSecondary,
+    fontSize: 16,
+    marginTop: 16,
+  },
+});

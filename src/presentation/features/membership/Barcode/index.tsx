@@ -94,6 +94,9 @@ function Barcode() {
         {userInfo}
         {barcodeImage}
       </CardView>
+      <Text style={styles.footerText}>• 바코드를 클릭하면 밝아집니다.</Text>
+      <Text style={styles.footerText}>• 바코드는 앱이 켜져 있는 동안에만 사용하실 수 있습니다.</Text>
+      <Text style={styles.footerText}>• 같은 식당에서는 하루에 한 번만 할인받으실 수 있습니다.</Text>
     </ScrollView>
   );
 }
@@ -141,5 +144,9 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
     fontSize: 24,
     marginTop: Platform.OS === 'android' ? 0 : 6,
+  },
+  footerText: {
+    ...palette.textTertiary,
+    marginHorizontal: 24,
   },
 });

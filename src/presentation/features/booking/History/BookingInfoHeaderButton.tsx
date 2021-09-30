@@ -25,10 +25,7 @@ import palette from '../../../res/palette';
 
 export default function BookingInfoHeaderButton() {
   const showBookingInfo = async () => {
-    Alert.alert(
-      `예약 내역 안내`,
-      `최근 3일 동안의 예약 내역이 여기에 표시됩니다. 1초마다 자동으로 새로고침됩니다.`,
-    );
+    Alert.alert(`예약 내역 안내`, `최근 3일 동안의 예약 내역이 여기에 표시됩니다. 자동으로 새로고침됩니다.`);
   };
 
   return (

@@ -116,7 +116,6 @@ const styles = StyleSheet.create({
   headerDateText: {
     ...palette.textPrimary,
     color: colors.lightBlueText,
-    fontWeight: 'bold',
     marginTop: 8,
   },
   spinnerContainer: {

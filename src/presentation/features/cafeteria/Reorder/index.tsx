@@ -25,9 +25,7 @@ import ItemSeparator from '../../../components/ItemSeparator';
 import CafeteriaView from '../CafeteriaView';
 import ReorderableRow from './ReorderableRow';
 import React, {useCallback, useEffect} from 'react';
-import DraggableFlatList, {
-  RenderItemParams,
-} from 'react-native-draggable-flatlist';
+import DraggableFlatList, {RenderItemParams} from 'react-native-draggable-flatlist';
 
 function Reorder() {
   const {cafeteriaStore} = useStores();

@@ -41,9 +41,7 @@ export default function Contacts() {
         <ContactItem
           imageSource={require('../../../res/images/potato.png')}
           title="서비스 관리자"
-          body={
-            '대부분의 문제는 서비스 개발자/관리자에게\n직접 문의하시면 빠르게 해결됩니다.'
-          }
+          body={'대부분의 문제는 서비스 개발자/관리자에게\n직접 문의하시면 빠르게 해결됩니다.'}
           buttonText="전화하기"
           action={urlOpener(`tel:${Config.contacts.serviceAdminPhoneNumber}`)}
         />

@@ -33,7 +33,7 @@ import React, {useEffect} from 'react';
 import {StackNavigationProp} from '@react-navigation/stack';
 import SpinningRefreshButton from '../../../components/SpinningRefreshButton';
 import {BookingNavigationParams} from '../BookingScreen';
-import {RefreshControl, StyleSheet, Text, View} from 'react-native';
+import {RefreshControl, SectionList, StyleSheet, Text, View} from 'react-native';
 
 type Props = {
   route: RouteProp<BookingNavigationParams, 'BookingOptionsDetail'>;
@@ -69,13 +69,12 @@ function OptionsDetail({route, navigation}: Props) {
           <SpinningRefreshButton onPress={refreshOptions} />
         </View>
       </View>
-      <SectionGrid
-        style={palette.whiteBackground}
-        spacing={8}
+      <SectionList
+        style={styles.list}
         sections={splitItemsIntoSections(data)}
         renderItem={i => <BookingOptionItem bookingOption={i.item} />}
-        itemDimension={200}
         refreshControl={<RefreshControl refreshing={refreshing} onRefresh={refreshOptions} />}
+        initialNumToRender={data.length}
         renderSectionHeader={SectionHeader}
       />
       <ConfirmModal navigation={navigation} />
@@ -110,5 +109,9 @@ const styles = StyleSheet.create({
   },
   spinnerContainer: {
     justifyContent: 'center',
+  },
+  list: {
+    ...palette.whiteBackground,
+    flex: 0, // https://github.com/facebook/react-native/issues/15990#issuecomment-456974250
   },
 });

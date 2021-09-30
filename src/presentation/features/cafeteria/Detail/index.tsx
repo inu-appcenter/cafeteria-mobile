@@ -27,10 +27,7 @@ import {CafeteriaListDetailNavigationParams} from '../CafeteriaScreen';
 
 type Props = {
   route: RouteProp<CafeteriaListDetailNavigationParams, 'CafeteriaDetail'>;
-  navigation: StackNavigationProp<
-    CafeteriaListDetailNavigationParams,
-    'CafeteriaDetail'
-  >;
+  navigation: StackNavigationProp<CafeteriaListDetailNavigationParams, 'CafeteriaDetail'>;
 };
 
 export default function Detail({route, navigation}: Props) {
@@ -41,9 +38,7 @@ export default function Detail({route, navigation}: Props) {
   });
 
   return (
-    <ScrollView
-      style={palette.whiteBackground}
-      contentContainerStyle={styles.detailContentContainer}>
+    <ScrollView style={palette.whiteBackground} contentContainerStyle={styles.detailContentContainer}>
       <Pager menus={cafeteria.menus} />
     </ScrollView>
   );

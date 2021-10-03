@@ -38,6 +38,14 @@ export default class BookingStore {
     this._onboardingHasShown = value;
   }
 
+  protected _usedToBookingFeature = false;
+  get usedToBookingFeature() {
+    return this._usedToBookingFeature;
+  }
+  set usedToBookingFeature(value) {
+    this._usedToBookingFeature = value;
+  }
+
   private _groupedBookingOptions: Map<number, GroupedBookingOptionsView> = new Map();
   getGroupedBookingOptions(cafeteriaId: number) {
     return this._groupedBookingOptions.get(cafeteriaId);
@@ -78,22 +86,40 @@ export default class BookingStore {
     makeAutoObservable(this);
   }
 
-  async fetchOnboardingShownStatus() {
+  async fetchFlags() {
     this.onboardingHasShown = (await AsyncStorage.getItem('booking_onboarding_has_shown')) === 'true';
+    this.usedToBookingFeature = (await AsyncStorage.getItem('used_to_booking_feature')) === 'true';
   }
 
+  /**
+   * 온보딩 완료로 마크하고 플래그를 영속합니다.
+   */
   async doneOnboarding() {
     this.onboardingHasShown = true;
-    await this.persistOnboardingShownStatus();
+    await this.persistFlags();
   }
 
+  /**
+   * 온보딩 필요로 마크하나, 플래그를 영속하지는 않습니다.
+   * 온보딩을 완료한 사람에게도 한 번 보여주기 위한 용도입니다.
+   */
+  async showOnboardingOnce() {
+    this.onboardingHasShown = false;
+  }
+
+  /**
+   * 온보딩 필요로 마크하고, 플래그를 영속합니다.
+   * 온보딩을 한 적이 없는 것처럼 됩니다.
+   */
   async resetOnboarding() {
     this.onboardingHasShown = false;
-    await this.persistOnboardingShownStatus();
+    this.usedToBookingFeature = false;
+    await this.persistFlags();
   }
 
-  protected async persistOnboardingShownStatus() {
+  protected async persistFlags() {
     await AsyncStorage.setItem('booking_onboarding_has_shown', String(this.onboardingHasShown));
+    await AsyncStorage.setItem('used_to_booking_feature', String(this.usedToBookingFeature));
   }
 
   async fetchBookingOptions(cafeteria: CafeteriaView) {
@@ -120,6 +146,11 @@ export default class BookingStore {
     });
 
     this.currentOption = undefined;
+
+    // 예약을 1회 이상 한 시점에서는
+    // usedToBookingFeature(예약 기능에 익숙한가)가 true.
+    this.usedToBookingFeature = true;
+    await this.persistFlags();
   }
 
   async dismissCurrentOption() {

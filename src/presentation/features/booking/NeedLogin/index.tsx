@@ -49,7 +49,7 @@ function NeedLogin({navigation}: Props) {
         학번으로 로그인
       </Button>
       <Text onPress={goGuestLogin} style={styles.alternativeText}>
-        재학생이 아니신가요? 전화번호로 로그인해주세요
+        재학생이 아니신가요? 전화번호로 로그인
       </Text>
     </View>
   );

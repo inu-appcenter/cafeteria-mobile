@@ -32,13 +32,8 @@ type Props = {
 };
 
 export default function ContactsButton({navigation}: Props) {
-  const {userStore} = useStores();
-
   return (
-    <CardView
-      style={styles.cafeteriaCard}
-      onLongPress={() => userStore.logout()} // TODO [런칭 후 수정]
-      onPress={() => navigation.navigate('SupportContacts')}>
+    <CardView style={styles.cafeteriaCard} onPress={() => navigation.navigate('SupportContacts')}>
       <View style={styles.container}>
         <View style={styles.iconContainer}>
           <Icon name="phone" size={24} color={colors.white} />

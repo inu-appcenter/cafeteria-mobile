@@ -159,17 +159,11 @@ export default class UserStore {
     this.isLoggedInAsStudent = false;
   }
 
-  // TODO
-  async logout() {
-    await this.onLoginFail();
-  }
-
   /**
    * 개인정보처리방침 동의가 필요한지 확인합니다.
    */
   async checkAgreementRequired() {
-    // TODO [런칭 후 수정]
-    // this.isAgreementRequired = await CheckAgreementRequired.run();
+    this.isAgreementRequired = await CheckAgreementRequired.run();
   }
 
   /**

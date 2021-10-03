@@ -37,15 +37,6 @@ export default class VersionStore {
     this._pendingUpdate = value;
   }
 
-  /** TODO [런칭 후 수정] */
-  private _betaFeatureEnabled: Boolean = false;
-  get betaFeatureEnabled() {
-    return this._betaFeatureEnabled;
-  }
-  set betaFeatureEnabled(value) {
-    this._betaFeatureEnabled = value;
-  }
-
   constructor() {
     makeAutoObservable(this);
   }
@@ -63,10 +54,5 @@ export default class VersionStore {
     const result = await codePush.getUpdateMetadata(state);
 
     return result || undefined;
-  }
-
-  /** TEST-ONLY */
-  async enableBetaFeature() {
-    this.betaFeatureEnabled = true;
   }
 }

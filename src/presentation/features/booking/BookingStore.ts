@@ -107,16 +107,6 @@ export default class BookingStore {
     this.onboardingHasShown = false;
   }
 
-  /**
-   * 온보딩 필요로 마크하고, 플래그를 영속합니다.
-   * 온보딩을 한 적이 없는 것처럼 됩니다.
-   */
-  async resetOnboarding() {
-    this.onboardingHasShown = false;
-    this.usedToBookingFeature = false;
-    await this.persistFlags();
-  }
-
   protected async persistFlags() {
     await AsyncStorage.setItem('booking_onboarding_has_shown', String(this.onboardingHasShown));
     await AsyncStorage.setItem('used_to_booking_feature', String(this.usedToBookingFeature));

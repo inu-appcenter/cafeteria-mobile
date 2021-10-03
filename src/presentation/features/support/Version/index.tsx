@@ -29,7 +29,7 @@ import Config from '../../../../common/Config';
 import HaveSomeFun from '../../../../domain/usecases/HaveSomeFun';
 
 function Version() {
-  const {versionStore, bookingStore} = useStores();
+  const {versionStore} = useStores();
 
   useEffect(() => {
     versionStore.fetchVersionInfo();
@@ -38,9 +38,7 @@ function Version() {
   return (
     <View style={styles.container}>
       <View style={styles.contentContainerWrapper}>
-        <TouchableWithoutFeedback
-          onPress={() => HaveSomeFun.run()}
-          onLongPress={() => versionStore.enableBetaFeature() && bookingStore.resetOnboarding()}>
+        <TouchableWithoutFeedback onPress={() => HaveSomeFun.run()}>
           <View style={styles.contentContainer}>
             <Icons
               name={versionStore.pendingUpdate ? 'autorenew' : 'check'}

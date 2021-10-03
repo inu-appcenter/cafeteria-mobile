@@ -24,6 +24,7 @@ import PaperPresets from '../../components/utils/PaperPresets';
 import CheckBoxItem from './CheckBoxItem';
 import React, {useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default function AgreementScreen() {
   const {userStore} = useStores();
@@ -32,6 +33,14 @@ export default function AgreementScreen() {
   const [agreeToSecond, setAgreeToSecond] = useState(false);
 
   const agree = () => userStore.agreePrivacyPolicy();
+
+  const agreeButton = (
+    <LinearGradient colors={['#ffffff00', 'white', 'white', 'white']} style={styles.agreeButtonBackdrop}>
+      <Button {...PaperPresets.wideThemedButton} onPress={agree} disabled={!agreeToFirst || !agreeToSecond}>
+        동의
+      </Button>
+    </LinearGradient>
+  );
 
   return (
     <SafeAreaView style={palette.whiteFullSized}>
@@ -61,13 +70,7 @@ export default function AgreementScreen() {
           </View>
         </ScrollView>
 
-        <Button
-          {...PaperPresets.wideThemedButton}
-          style={palette.bottomButton}
-          onPress={agree}
-          disabled={!agreeToFirst || !agreeToSecond}>
-          동의
-        </Button>
+        {agreeButton}
       </View>
     </SafeAreaView>
   );
@@ -76,11 +79,20 @@ export default function AgreementScreen() {
 const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
-    marginHorizontal: 12,
+    marginHorizontal: 24,
   },
-
   titleText: {
     ...palette.textHeader,
-    marginTop: 16,
+    marginTop: 24,
+  },
+  agreeButtonBackdrop: {
+    width: '100%',
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    left: 0,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    paddingTop: 36,
   },
 });

@@ -37,7 +37,7 @@ export default function Onboarding() {
   const {width} = Dimensions.get('window');
 
   const letsGo = (
-    <LinearGradient colors={['#ffffff00', 'white', 'white', 'white']} style={styles.letsGoButton}>
+    <LinearGradient colors={['#ffffff00', 'white', 'white', 'white']} style={styles.letsGoBackdrop}>
       <Button {...PaperPresets.wideThemedButton} onPress={doneOnboarding}>
         시작하기
       </Button>
@@ -109,13 +109,14 @@ export default function Onboarding() {
 }
 
 const styles = StyleSheet.create({
-  letsGoButton: {
+  letsGoBackdrop: {
     width: '100%',
     position: 'absolute',
     bottom: 0,
     right: 0,
     left: 0,
-    padding: 12,
+    paddingHorizontal: 16,
+    paddingBottom: 16,
     paddingTop: 36,
   },
   scrolledContentContainer: {

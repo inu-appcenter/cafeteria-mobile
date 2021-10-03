@@ -36,6 +36,7 @@ export default function CheckBoxItem({name, content, onCheckChanged}: Props) {
     <CardView style={styles.cardView}>
       <BouncyCheckbox
         text={name}
+        style={styles.checkBox}
         fillColor={colors.mainTint}
         textStyle={styles.checkBoxText}
         onPress={isChecked => onCheckChanged(isChecked ?? false)}
@@ -43,7 +44,7 @@ export default function CheckBoxItem({name, content, onCheckChanged}: Props) {
 
       <Divider style={{marginVertical: 8}} />
 
-      <Text style={palette.textSecondary}>{content}</Text>
+      <Text style={styles.checkBoxContent}>{content}</Text>
     </CardView>
   );
 }
@@ -51,12 +52,18 @@ export default function CheckBoxItem({name, content, onCheckChanged}: Props) {
 const styles = StyleSheet.create({
   cardView: {
     padding: 12,
+    paddingHorizontal: 24,
     marginTop: 24,
   },
+  checkBox: {},
   checkBoxText: {
     ...palette.textPrimary,
     fontWeight: 'bold',
     paddingVertical: 8,
     textDecorationLine: 'none',
+  },
+  checkBoxContent: {
+    ...palette.textSecondary,
+    paddingVertical: 4,
   },
 });

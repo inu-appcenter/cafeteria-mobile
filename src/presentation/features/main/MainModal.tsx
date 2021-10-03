@@ -33,6 +33,10 @@ function MainModal() {
   const RootStack = createStackNavigator();
   const {userStore} = useStores();
 
+  /**
+   * 이 부분은 그냥 조건부 렌더링으로 했다가는 네비게이션이 어색해져서
+   * 이렇게 수동으로 처리했습니다.
+   */
   observe(userStore, changes => {
     if (changes.name !== '_isAgreementRequired') {
       return;

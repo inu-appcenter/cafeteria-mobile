@@ -69,6 +69,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: 36,
     height: 36,
+    paddingTop: 2, // 미세한 높이 틀어짐 있음.
   },
   rightContainer: {
     flex: 1,

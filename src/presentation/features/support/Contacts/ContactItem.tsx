@@ -22,7 +22,8 @@ import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import CardView from '../../../components/CardView';
-import {Image, ImageSourcePropType, Text, ViewProps} from 'react-native';
+import {Image, ImageSourcePropType, StyleSheet, Text, ViewProps} from 'react-native';
+import PaperPresets from '../../../components/utils/PaperPresets';
 
 type Props = ViewProps & {
   imageSource: ImageSourcePropType;
@@ -32,50 +33,43 @@ type Props = ViewProps & {
   action: () => void;
 };
 
-export default function ContactItem({
-  imageSource,
-  title,
-  body,
-  buttonText,
-  action,
-}: Props) {
+export default function ContactItem({imageSource, title, body, buttonText, action}: Props) {
   return (
-    <CardView
-      style={{
-        marginHorizontal: 16,
-        marginTop: 21,
-        padding: 16,
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}>
-      <Image
-        resizeMode="contain"
-        style={{height: 37, marginVertical: 8}}
-        source={imageSource}
-      />
-      <Text style={[palette.textSubHeader, {marginTop: 12}]}>{title}</Text>
-      <Text
-        style={[
-          palette.textSecondary,
-          {
-            marginTop: 8,
-            textAlign: 'center',
-            marginHorizontal: 12,
-          },
-        ]}>
-        {body}
-      </Text>
-      <Button
-        mode="contained"
-        labelStyle={[
-          palette.textPrimary,
-          {color: colors.white, paddingVertical: 4},
-        ]}
-        color={colors.mainTint}
-        onPress={action}
-        style={{alignSelf: 'stretch', marginTop: 21}}>
+    <CardView style={styles.container}>
+      <Image resizeMode="contain" style={styles.image} source={imageSource} />
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.body}>{body}</Text>
+      <Button {...PaperPresets.wideThemedButton} onPress={action} style={styles.button}>
         {buttonText}
       </Button>
     </CardView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginHorizontal: 16,
+    marginTop: 21,
+    padding: 16,
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  image: {
+    height: 37,
+    marginVertical: 8,
+  },
+  title: {
+    ...palette.textSubHeader,
+    marginTop: 12,
+  },
+  body: {
+    ...palette.textSecondary,
+    marginTop: 8,
+    textAlign: 'center',
+    marginHorizontal: 12,
+  },
+  button: {
+    alignSelf: 'stretch',
+    marginTop: 21,
+  },
+});

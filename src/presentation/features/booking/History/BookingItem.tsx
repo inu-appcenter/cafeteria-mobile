@@ -17,7 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React, {useEffect, useState} from 'react';
 import palette from '../../../res/palette';
 import CardView from '../../../components/CardView';
 import {Button} from 'react-native-paper';
@@ -29,6 +28,7 @@ import handleApiError from '../../../../common/utils/handleApiError';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
 import {cancelBookingAlert} from '../../../components/utils/alert';
 import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
 
 type Props = {
   booking: BookingView;

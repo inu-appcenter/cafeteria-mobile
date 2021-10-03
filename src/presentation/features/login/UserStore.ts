@@ -60,6 +60,9 @@ export default class UserStore {
 
   private _isAgreementRequired: boolean = false;
   get isAgreementRequired() {
+    // Getter는 안 쓰지만,
+    // MainModal에서 _isAgreementRequired를 사용함.
+    // 지우면 안됨!
     return this._isAgreementRequired;
   }
   set isAgreementRequired(value) {

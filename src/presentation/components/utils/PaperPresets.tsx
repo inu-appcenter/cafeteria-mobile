@@ -55,18 +55,24 @@ const wideButton: typeof Button.defaultProps = {
 
 const wideThemedButton: typeof Button.defaultProps = {
   contentStyle: {
-    paddingVertical: 4,
+    paddingVertical: 6,
   },
-  labelStyle: {color: 'white', fontSize: 18},
+  theme: {
+    roundness: 10,
+  },
+  labelStyle: {color: 'white', fontSize: 16},
   color: colors.mainTint,
   mode: 'contained',
 };
 
 const wideNeutralButton: typeof Button.defaultProps = {
   contentStyle: {
-    paddingVertical: 4,
+    paddingVertical: 6,
   },
-  labelStyle: {color: colors.textSecondary, fontSize: 18},
+  theme: {
+    roundness: 10,
+  },
+  labelStyle: {color: colors.textSecondary, fontSize: 16},
   color: colors.neutralGray,
   mode: 'contained',
 };

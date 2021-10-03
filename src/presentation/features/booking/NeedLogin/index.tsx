@@ -27,6 +27,8 @@ import PaperPresets from '../../../components/utils/PaperPresets';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {StyleSheet, Text, View} from 'react-native';
 import {BookingNavigationParams} from '../BookingScreen';
+import useStores from '../../../hooks/useStores';
+import OnboardingHintCard from '../OnboardingHintCard';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingNeedLogin'>;
@@ -34,6 +36,7 @@ type Props = {
 
 function NeedLogin({navigation}: Props) {
   const {isTryingRememberedLogin} = useUserState();
+  const {bookingStore} = useStores();
 
   const goStudentLogin = () => navigation.navigate('BookingStudentLogin');
   const goGuestLogin = () => navigation.navigate('BookingGuestLogin');
@@ -41,26 +44,27 @@ function NeedLogin({navigation}: Props) {
   const loadingView = <LoadingView />;
 
   const choices = (
-    <View style={palette.bottomButton}>
+    <View style={styles.buttons}>
       <Button {...PaperPresets.wideThemedButton} onPress={goStudentLogin}>
         학번으로 로그인
       </Button>
-      <Text style={styles.alternativeText}>재학생이 아니신가요?</Text>
-      <Button {...PaperPresets.wideNeutralButton} style={styles.secondaryButton} onPress={goGuestLogin}>
-        전화번호로 로그인
-      </Button>
+      <Text onPress={goGuestLogin} style={styles.alternativeText}>
+        재학생이 아니신가요? 전화번호로 로그인해주세요
+      </Text>
     </View>
   );
 
   const onboardingContents = (
     <View style={styles.container}>
       <View style={styles.textSection}>
-        <Text style={styles.title}>🍽 식당 예약 🍽</Text>
+        <Text style={styles.title}>🍽 로그인이 필요해요 🍽</Text>
         <Text style={styles.body}>
           {`식당에 예약하고 입장하실 수 있습니다.\n로그인하시고 이용해 보세요😊`}
         </Text>
       </View>
       {choices}
+
+      {!bookingStore.usedToBookingFeature && <OnboardingHintCard style={styles.hintContainer} />}
     </View>
   );
 
@@ -92,9 +96,23 @@ const styles = StyleSheet.create({
   secondaryButton: {
     marginTop: 8,
   },
+  buttons: {
+    position: 'absolute',
+    bottom: 0,
+    start: 16,
+    end: 16,
+  },
   alternativeText: {
     ...palette.textSubSecondary,
-    marginTop: 8,
+    paddingVertical: 12,
     alignSelf: 'center',
+    textDecorationLine: 'underline',
+  },
+  hintContainer: {
+    position: 'absolute',
+    padding: 16,
+    bottom: 108,
+    left: 16,
+    right: 16,
   },
 });

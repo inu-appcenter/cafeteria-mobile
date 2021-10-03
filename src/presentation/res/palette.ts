@@ -127,8 +127,8 @@ const palette = StyleSheet.create({
   bottomButton: {
     position: 'absolute',
     bottom: 12,
-    start: 12,
-    end: 12,
+    start: 16,
+    end: 16,
   },
 
   floatingActionButton: {

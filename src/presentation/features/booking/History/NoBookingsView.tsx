@@ -46,11 +46,11 @@ export default function NoBookingsView() {
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
       <View style={styles.emptyViewContainer}>
         <Icon name="ticket-confirmation" size={112} color={colors.textTertiary} />
-        <Text style={styles.emptyViewTitle}>😉 예약 내역을 여기에서 볼 수 있어요</Text>
-        <Text style={styles.emptyViewBody}>오른쪽 아래 버튼을 눌러서 새로운 예약을 만들어보세요 :)</Text>
-
-        {!bookingStore.usedToBookingFeature && onboardingHint}
+        <Text style={styles.emptyViewTitle}>😉 예약 내역이 여기에 나타나요</Text>
+        <Text style={styles.emptyViewBody}>오른쪽 아래 버튼을 눌러서{'\n'}새로운 예약을 만들어보세요 :)</Text>
       </View>
+
+      {!bookingStore.usedToBookingFeature && onboardingHint}
     </View>
   );
 }
@@ -74,9 +74,9 @@ const styles = StyleSheet.create({
   hintContainer: {
     position: 'absolute',
     padding: 16,
-    bottom: 64,
-    left: 0,
-    right: 0,
+    bottom: 84,
+    left: 16,
+    right: 16,
   },
   hintTitle: {
     ...palette.textSecondary,

@@ -23,7 +23,7 @@ import palette from '../res/palette';
 import Toast, {BaseToast} from 'react-native-toast-message';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 
-export default function ToastPlaceHolder() {
+export default function ToastModal() {
   const {top} = useSafeAreaInsets();
 
   const defaultToastConfig = {

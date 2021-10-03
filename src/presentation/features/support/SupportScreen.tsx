@@ -17,20 +17,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+import QnA from './QnA';
 import Main from './Main';
 import React from 'react';
 import Version from './Version';
+import palette from '../../res/palette';
 import Notices from './Notices';
 import Contacts from './Contacts';
 import ServiceHelp from './ServiceManual';
-import QnA from './QnA';
+import BookingQuestions from './BookingQuestions';
 import FrequentQuestions from './FrequentQuestions';
 import TermsAndConditions from './TermsAndConditions';
 import StackHeaderPresets from '../../components/utils/StackHeaderPresets';
 import OpenSourceLicenses from './OpenSourceLicenses';
-import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 import UpdateInfoHeaderButton from './Version/UpdateInfoHeaderButton';
-import palette from '../../res/palette';
+import {createStackNavigator, StackNavigationProp} from '@react-navigation/stack';
 
 export type SupportNavigationParams = {
   SupportMain: undefined;
@@ -38,6 +39,7 @@ export type SupportNavigationParams = {
   SupportVersion: undefined;
   SupportContacts: undefined;
   SupportServiceManual: undefined;
+  SupportBookingQuestions: undefined;
   SupportQuestionAndAnswer: undefined;
   SupportFrequentQuestions: undefined;
   SupportTermsAndConditions: undefined;
@@ -50,9 +52,7 @@ const Stack = createStackNavigator<SupportNavigationParams>();
 
 export default function SupportScreen() {
   return (
-    <Stack.Navigator
-      headerMode="screen"
-      screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
+    <Stack.Navigator headerMode="screen" screenOptions={StackHeaderPresets.commonStackHeaderOptions}>
       <Stack.Screen name="SupportMain" component={Main} options={{title: '지원'}} />
       <Stack.Screen name="SupportContacts" component={Contacts} options={{title: '문의 연락처'}} />
       <Stack.Screen name="SupportNotices" component={Notices} options={{title: '공지'}} />
@@ -73,6 +73,11 @@ export default function SupportScreen() {
         name="SupportFrequentQuestions"
         component={FrequentQuestions}
         options={{title: '자주 묻는 질문'}}
+      />
+      <Stack.Screen
+        name="SupportBookingQuestions"
+        component={BookingQuestions}
+        options={{title: '입장 예약 FAQ'}}
       />
       <Stack.Screen
         name="SupportServiceManual"

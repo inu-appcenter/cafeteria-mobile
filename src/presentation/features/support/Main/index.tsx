@@ -72,6 +72,11 @@ function Main({navigation}: Props) {
         navigationDestination="SupportFrequentQuestions"
       />
       <SupportOption.Item
+        icon={['ticket-confirmation-outline', MaterialCommunityIcons]}
+        title="입장 예약 FAQ"
+        navigationDestination="SupportBookingQuestions"
+      />
+      <SupportOption.Item
         icon={['help-circle', Feather]}
         title="서비스 이용 안내"
         navigationDestination="SupportServiceManual"

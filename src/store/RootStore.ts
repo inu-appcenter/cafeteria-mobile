@@ -54,7 +54,7 @@ export default class RootStore {
     // 로그인이 필요없는 flow
     const gettingCafeteria = () => this.cafeteriaStore.fetchCafeteria();
     const fetchingNewNotice = () => this.noticeStore.fetchNewNotice();
-    const fetchOnboardingShownStatus = () => this.bookingStore.fetchOnboardingShownStatus();
+    const fetchBookingFlags = () => this.bookingStore.fetchFlags();
 
     const thoseNeedLogin = loggingIn()
       .then(fetchingMyBookings)
@@ -63,7 +63,7 @@ export default class RootStore {
     const thoseNeedNoLogin = Promise.all([
       gettingCafeteria(),
       fetchingNewNotice(),
-      fetchOnboardingShownStatus(),
+      fetchBookingFlags(),
     ]).catch(e =>
       console.log(
         `[카페테리아 & 새 공지 & 예약 온보딩 화면 보여주었는지 여부]를 가져오는 데에 실패했습니다: ${e}`,

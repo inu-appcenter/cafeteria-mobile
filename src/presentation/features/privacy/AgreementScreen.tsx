@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     marginHorizontal: 24,
+    paddingBottom: 36, // 안드로이드 그림자 안 잘리게..^^
   },
   titleText: {
     ...palette.textHeader,

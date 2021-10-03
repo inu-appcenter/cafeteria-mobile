@@ -105,6 +105,7 @@ const styles = StyleSheet.create({
   alternativeText: {
     ...palette.textSubSecondary,
     paddingVertical: 12,
+    paddingHorizontal: 36,
     alignSelf: 'center',
     textDecorationLine: 'underline',
   },

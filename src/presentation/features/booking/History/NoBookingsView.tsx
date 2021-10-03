@@ -21,18 +21,70 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
-import {Text, View} from 'react-native';
+import {Button} from 'react-native-paper';
+import CardView from '../../../components/CardView';
+import useStores from '../../../hooks/useStores';
+import {StyleSheet, Text, View} from 'react-native';
 
 export default function NoBookingsView() {
+  const {bookingStore} = useStores();
+
+  const onboardingHint = (
+    <CardView style={styles.hintContainer}>
+      <Text style={styles.hintTitle}>새로운 예약 기능에 대해 알려 드릴까요?</Text>
+      <Button
+        mode="contained"
+        style={styles.hintButton}
+        color={colors.textSecondary}
+        onPress={() => bookingStore.showOnboardingOnce()}>
+        알아보기
+      </Button>
+    </CardView>
+  );
+
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
-      <View style={{...palette.centeringContainer, margin: 21, paddingBottom: 128}}>
+      <View style={styles.emptyViewContainer}>
         <Icon name="ticket-confirmation" size={112} color={colors.textTertiary} />
-        <Text style={{...palette.textSubHeader, marginTop: 24}}>😉 예약 내역을 여기에서 볼 수 있어요</Text>
-        <Text style={{...palette.textSecondary, textAlign: 'center', marginTop: 16}}>
-          오른쪽 아래 버튼을 눌러서 새로운 예약을 만들어보세요 :)
-        </Text>
+        <Text style={styles.emptyViewTitle}>😉 예약 내역을 여기에서 볼 수 있어요</Text>
+        <Text style={styles.emptyViewBody}>오른쪽 아래 버튼을 눌러서 새로운 예약을 만들어보세요 :)</Text>
+
+        {!bookingStore.usedToBookingFeature && onboardingHint}
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  emptyViewContainer: {
+    ...palette.centeringContainer,
+    margin: 21,
+    paddingBottom: 128,
+  },
+  emptyViewTitle: {
+    ...palette.textSubHeader,
+    marginTop: 24,
+  },
+  emptyViewBody: {
+    ...palette.textSecondary,
+    textAlign: 'center',
+    marginTop: 16,
+  },
+
+  hintContainer: {
+    position: 'absolute',
+    padding: 16,
+    bottom: 64,
+    left: 0,
+    right: 0,
+  },
+  hintTitle: {
+    ...palette.textSecondary,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  hintButton: {
+    marginTop: 16,
+    alignSelf: 'center',
+  },
+});

@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
   emptyViewContainer: {
     ...palette.centeringContainer,
     margin: 21,
-    paddingBottom: 128,
+    paddingBottom: 154,
   },
   emptyViewTitle: {
     ...palette.textSubHeader,

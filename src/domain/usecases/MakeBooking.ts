@@ -22,7 +22,7 @@ import BookingRepository from '../../data/repositories/BookingRepository';
 
 type MakeBookingParams = {
   cafeteriaId: number;
-  timeSlot: Date;
+  timeSlotStart: Date;
 };
 
 class MakeBooking extends UseCase<MakeBookingParams> {
@@ -30,10 +30,10 @@ class MakeBooking extends UseCase<MakeBookingParams> {
     super();
   }
 
-  async onExecute({cafeteriaId, timeSlot}: MakeBookingParams): Promise<void> {
+  async onExecute({cafeteriaId, timeSlotStart}: MakeBookingParams): Promise<void> {
     return await this.bookingRepository.makeBooking({
-      cafeteriaId: cafeteriaId.toString(), // TODO 숫자 그대로 보내자
-      timeSlot: timeSlot.toISOString(),
+      cafeteriaId,
+      timeSlotStart,
     });
   }
 }

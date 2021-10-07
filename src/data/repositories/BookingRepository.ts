@@ -1,9 +1,3 @@
-import Config from '../../common/Config';
-import axios from 'axios';
-import {plainToClass} from 'class-transformer';
-import BookingOption from '../../domain/entities/BookingOption';
-import Booking from '../../domain/entities/Booking';
-
 /**
  * This file is part of INU Cafeteria.
  *
@@ -22,6 +16,12 @@ import Booking from '../../domain/entities/Booking';
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
+
+import Config from '../../common/Config';
+import axios from 'axios';
+import {plainToClass} from 'class-transformer';
+import BookingOption from '../../domain/entities/BookingOption';
+import Booking from '../../domain/entities/Booking';
 
 export default class BookingRepository {
   static instance = new BookingRepository();

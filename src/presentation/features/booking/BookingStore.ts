@@ -132,7 +132,7 @@ export default class BookingStore {
 
     await MakeBooking.run({
       cafeteriaId: this.currentOption.cafeteriaId,
-      timeSlot: new Date(this.currentOption.timeSlotTimestamp),
+      timeSlotStart: new Date(this.currentOption.timeSlotTimestamp),
     });
 
     this.currentOption = undefined;

@@ -69,8 +69,8 @@ export default class BookingView {
       uuid: booking.uuid,
       cafeteriaId: booking.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
-      timeSlotDateString: formatDate(booking.timeSlot),
-      timeSlotShortTimeString: formatTimeShort(booking.timeSlot),
+      timeSlotDateString: formatDate(booking.timeSlotStart),
+      timeSlotShortTimeString: formatTimeShort(booking.timeSlotStart),
       cancelable: booking.isAvailable,
 
       status: booking.status,
@@ -81,8 +81,8 @@ export default class BookingView {
       consumedQrCodeSubstitute: qrCodeSubstitutes[booking.id % qrCodeSubstitutes.length],
       showQrCode: !booking.isUsed,
       showBorderAnimation: booking.isAvailable,
-      checkInAvailableTimeExplanation: `${formatTime(booking.timeSlot)} ~ ${formatTime(
-        booking.nextTimeSlot,
+      checkInAvailableTimeExplanation: `${formatTime(booking.timeSlotStart)} ~ ${formatTime(
+        booking.timeSlotEnd,
       )} 사이에 입장 가능합니다.`,
     };
   }

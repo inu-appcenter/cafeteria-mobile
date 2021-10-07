@@ -31,11 +31,11 @@ export default class Booking {
 
   @Expose()
   @Type(() => Date)
-  timeSlot: Date;
+  timeSlotStart: Date;
 
   @Expose()
   @Type(() => Date)
-  nextTimeSlot: Date;
+  timeSlotEnd: Date;
 
   @Expose()
   @Type(() => Date)

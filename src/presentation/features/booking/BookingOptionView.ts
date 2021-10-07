@@ -38,8 +38,8 @@ export default class BookingOptionView {
   statusColor: string;
 
   static fromBookingOption(option: BookingOption, cafeteria: CafeteriaView): BookingOptionView {
-    const left = option.capacity - option.used;
-    const full = option.used >= option.capacity;
+    const left = option.capacity - option.reserved;
+    const full = option.reserved >= option.capacity;
     const available = !full;
     const statusText = full ? '마감되었습니다.' : `${left}자리 남음`;
 
@@ -49,13 +49,13 @@ export default class BookingOptionView {
     const statusColor = almostGone ? colors.textRed : underHalf ? colors.textOrange : colors.textGreen;
 
     return {
-      key: `booking-option-${option.cafeteriaId}-${option.timeSlot.getTime()}`,
+      key: `booking-option-${option.cafeteriaId}-${option.timeSlotStart.getTime()}`,
       cafeteriaId: option.cafeteriaId,
       cafeteriaTitle: cafeteria.displayName,
-      timeSlotTimestamp: option.timeSlot.getTime(),
-      timeSlotDateString: formatDate(option.timeSlot),
-      timeSlotTimeString: formatTime(option.timeSlot),
-      used: option.used,
+      timeSlotTimestamp: option.timeSlotStart.getTime(),
+      timeSlotDateString: formatDate(option.timeSlotStart),
+      timeSlotTimeString: formatTime(option.timeSlotStart),
+      used: option.reserved,
       left,
       capacity: option.capacity,
       full,

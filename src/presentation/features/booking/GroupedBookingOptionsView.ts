@@ -38,7 +38,9 @@ export default class GroupedBookingOptionsView {
   ): GroupedBookingOptionsView {
     const optionsView = options.map(o => BookingOptionView.fromBookingOption(o, cafeteria));
     const isEmpty = optionsView.length === 0;
-    const dateString = isEmpty ? '예약 가능한 날짜가 없어요' : formatDateDiffWithDate(options[0].timeSlot);
+    const dateString = isEmpty
+      ? '예약 가능한 날짜가 없어요'
+      : formatDateDiffWithDate(options[0].timeSlotStart);
 
     return {
       key: cafeteria.displayName,

@@ -25,11 +25,15 @@ export default class BookingOption {
 
   @Expose()
   @Type(() => Date)
-  timeSlot: Date;
+  timeSlotStart: Date;
 
   @Expose()
-  used: number;
+  @Type(() => Date)
+  timeSlotEnd: Date;
 
   @Expose()
   capacity: number;
+
+  @Expose()
+  reserved: number;
 }

@@ -20,15 +20,17 @@
 import React from 'react';
 import palette from '../../../res/palette';
 import Feather from 'react-native-vector-icons/Feather';
+import useStores from '../../../hooks/useStores';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import {observer} from 'mobx-react';
 import useUserState from '../../../hooks/useUserState';
+import {logoutAlert} from '../../../components/utils/alert';
 import SupportOption from './SupportOption';
 import ItemSeparator from '../../../components/ItemSeparator';
 import ContactsButton from './ContactsButton';
-import {ScrollView, View} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {SupportMainNavigation} from '../SupportScreen';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 
 type Props = {
   navigation: SupportMainNavigation;
@@ -36,9 +38,16 @@ type Props = {
 
 function Main({navigation}: Props) {
   const {isLoggedIn} = useUserState();
+  const {userStore} = useStores();
 
   const contacts = <ContactsButton navigation={navigation} />;
   const separator = <ItemSeparator style={{marginVertical: 12}} />;
+
+  const askForLogout = async () => {
+    logoutAlert('로그아웃', '로그아웃 하시겠습니까?', async () => {
+      await userStore.logout();
+    });
+  };
 
   const qnaOption = (
     <SupportOption.Item
@@ -99,6 +108,12 @@ function Main({navigation}: Props) {
     </SupportOption.Section>
   );
 
+  const logout = isLoggedIn && (
+    <Text style={styles.logoutButton} onPress={askForLogout}>
+      로그아웃
+    </Text>
+  );
+
   return (
     <ScrollView style={palette.whiteBackground}>
       <View>
@@ -109,9 +124,18 @@ function Main({navigation}: Props) {
         {separator}
         {terms}
         {separator}
+        {logout}
       </View>
     </ScrollView>
   );
 }
 
 export default observer(Main);
+
+const styles = StyleSheet.create({
+  logoutButton: {
+    ...palette.textSecondary,
+    marginStart: 22,
+    textDecorationLine: 'underline',
+  },
+});

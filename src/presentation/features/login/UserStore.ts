@@ -19,6 +19,7 @@
 
 import User from '../../../domain/entities/User';
 import Login from '../../../domain/usecases/Login';
+import Logout from '../../../domain/usecases/Logout';
 import notify from '../../components/utils/notify';
 import AgreePrivacyPolicy from '../../../domain/usecases/AgreePrivacyPolicy';
 import {makeAutoObservable} from 'mobx';
@@ -178,5 +179,16 @@ export default class UserStore {
     notify(`${new Date().toLocaleDateString()} 개인정보 수집 및 제공 동의가 완료되었습니다.`);
 
     this.isAgreementRequired = false;
+  }
+
+  /**
+   * 로그아웃하고 사용자의 정보를 기기에서 삭제합니다.
+   */
+  async logout() {
+    this.user = undefined;
+    this.isLoggedIn = false;
+    this.isLoggedInAsStudent = false;
+
+    await Logout.run();
   }
 }

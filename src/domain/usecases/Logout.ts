@@ -17,38 +17,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Alert} from 'react-native';
+import User from '../entities/User';
+import UseCase from './UseCase';
 
-export default function alert(title: string, message?: string) {
-  Alert.alert(title, message, [{text: '확인', style: 'default'}], {
-    cancelable: true,
-  });
+class Logout extends UseCase<void, void> {
+  async onExecute(params: void): Promise<void> {
+    const user = await User.find();
+
+    user?.remove();
+  }
 }
 
-export function cancelBookingAlert(title: string, message: string, onPress: () => void) {
-  Alert.alert(
-    title,
-    message,
-    [
-      {text: '닫기', style: 'cancel'},
-      {text: '예약 취소', style: 'destructive', onPress},
-    ],
-    {
-      cancelable: true,
-    },
-  );
-}
-
-export function logoutAlert(title: string, message: string, onPress: () => void) {
-  Alert.alert(
-    title,
-    message,
-    [
-      {text: '닫기', style: 'cancel'},
-      {text: '로그아웃', style: 'destructive', onPress},
-    ],
-    {
-      cancelable: true,
-    },
-  );
-}
+export default new Logout();

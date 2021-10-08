@@ -1,0 +1,15 @@
+diff --git a/node_modules/react-native-paper/src/components/FAB/FAB.tsx b/node_modules/react-native-paper/src/components/FAB/FAB.tsx
+index f0f5216..10827f5 100644
+--- a/node_modules/react-native-paper/src/components/FAB/FAB.tsx
++++ b/node_modules/react-native-paper/src/components/FAB/FAB.tsx
+@@ -272,8 +272,8 @@ const styles = StyleSheet.create({
+     width: 40,
+   },
+   extended: {
+-    height: 48,
+-    paddingHorizontal: 16,
++    height: 56,
++    paddingHorizontal: 18,
+   },
+   content: {
+     flexDirection: 'row',

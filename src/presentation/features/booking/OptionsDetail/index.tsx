@@ -71,7 +71,9 @@ function OptionsDetail({route, navigation}: Props) {
   const emptyView = (
     <View style={styles.emptyView}>
       <Text style={styles.helpText}>예약 가능한 옵션이 없습니다.</Text>
-      <Text style={styles.helpTextSmall}>식당 운영일 전날 오전 10시 이후에{'\n'}예약 옵션이 표시됩니다.</Text>
+      <Text style={styles.helpTextSmall}>
+        식당 운영일 전날 예약 마감 시간 이후에{'\n'}예약 옵션이 표시됩니다.
+      </Text>
     </View>
   );
 

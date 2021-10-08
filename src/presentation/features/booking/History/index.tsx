@@ -19,6 +19,7 @@
 
 import {FAB} from 'react-native-paper';
 import useApi from '../../../hooks/useApi';
+import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
@@ -70,13 +71,21 @@ function History({navigation}: Props) {
   );
 
   const makeBookingButton = (
-    <FAB
-      style={palette.floatingActionButton}
-      icon="ticket-confirmation"
-      label="예약하기"
-      color={'white'}
-      onPress={() => navigation.navigate('BookingOptionsList')}
-    />
+    <View style={styles.fabContainer}>
+      <FAB
+        style={styles.fabNeutral}
+        icon="help"
+        color={colors.textSecondary}
+        onPress={() => bookingStore.showOnboardingOnce()}
+      />
+      <FAB
+        style={styles.fabMain}
+        icon="ticket-confirmation"
+        label="예약하기"
+        color={'white'}
+        onPress={() => navigation.navigate('BookingOptionsList')}
+      />
+    </View>
   );
 
   return (
@@ -97,5 +106,23 @@ const styles = StyleSheet.create({
     ...palette.textSecondary,
     textAlign: 'center',
     marginTop: 24,
+  },
+  fabContainer: {
+    position: 'absolute',
+    bottom: 0,
+    end: 0,
+    margin: 16,
+
+    flex: 1,
+    flexDirection: 'row',
+  },
+  fabNeutral: {
+    backgroundColor: colors.neutralGray,
+    alignSelf: 'center',
+  },
+  fabMain: {
+    backgroundColor: colors.mainTint,
+    marginStart: 12,
+    alignSelf: 'center',
   },
 });

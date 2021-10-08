@@ -22,12 +22,8 @@ import React from 'react';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import {StyleSheet, Text, View} from 'react-native';
-import useStores from '../../../hooks/useStores';
-import OnboardingHintCard from '../OnboardingHintCard';
 
 export default function NoBookingsView() {
-  const {bookingStore} = useStores();
-
   return (
     <View style={[palette.centeringContainer, palette.whiteBackground]}>
       <View style={styles.emptyViewContainer}>
@@ -35,8 +31,6 @@ export default function NoBookingsView() {
         <Text style={styles.emptyViewTitle}>😉 예약 내역이 여기에 나타나요</Text>
         <Text style={styles.emptyViewBody}>오른쪽 아래 버튼을 눌러서{'\n'}새로운 예약을 만들어보세요 :)</Text>
       </View>
-
-      {!bookingStore.usedToBookingFeature && <OnboardingHintCard style={styles.hintContainer} />}
     </View>
   );
 }
@@ -55,12 +49,5 @@ const styles = StyleSheet.create({
     ...palette.textSecondary,
     textAlign: 'center',
     marginTop: 16,
-  },
-  hintContainer: {
-    position: 'absolute',
-    padding: 16,
-    bottom: 84,
-    left: 16,
-    right: 16,
   },
 });

@@ -40,7 +40,8 @@ export default class BookingStore {
 
   protected _usedToBookingFeature = false;
   get usedToBookingFeature() {
-    return this._usedToBookingFeature;
+    // 항상 false로 오버라이드합니다.
+    return false;
   }
   set usedToBookingFeature(value) {
     this._usedToBookingFeature = value;

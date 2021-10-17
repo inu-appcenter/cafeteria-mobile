@@ -76,8 +76,8 @@ android {
         applicationId "com.inu.cafeteria"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 426
-        versionName "4.8.2"
+        versionCode 427
+        versionName "4.8.3"
     }
 
     splits {

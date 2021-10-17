@@ -43,29 +43,30 @@ export default function MenuItem({menu}: Props) {
   const EXPANDED_MAX_LINES = 5;
 
   const [lines, setLines] = useState(COLLAPSED_MAX_LINES);
+  const [extrasVisible, setExtrasVisible] = useState(false);
+
+  const expand = () => {
+    setLines(EXPANDED_MAX_LINES);
+    setExtrasVisible(true);
+  };
 
   return (
-    <Touchable onPress={() => setLines(EXPANDED_MAX_LINES)}>
-      {/* Root */}
+    <Touchable onPress={() => expand()}>
       <View style={styles.rootContainer}>
-        {/* Available time view */}
-        <Image
-          style={styles.availableTimeImage}
-          resizeMode="contain"
-          source={images[menu.availableAt]}
-        />
+        {/* 이용 가능 시간 이미지 */}
+        <Image style={styles.availableTimeImage} resizeMode="contain" source={images[menu.availableAt]} />
 
-        {/* The rest */}
+        {/* 나머지 */}
         <View style={styles.textPartContainer}>
-          {/* Foods */}
-          <Text
-            numberOfLines={lines}
-            ellipsizeMode="tail"
-            style={styles.foodsText}>
+          {/* 메뉴들 */}
+          <Text numberOfLines={lines} ellipsizeMode="tail" style={styles.foodsText}>
             {menu.foodsText}
           </Text>
 
-          {/* Price and calorie */}
+          {/* 상세 정보 */}
+          {extrasVisible && menu.hasExtras && <Text style={styles.extrasText}>{menu.extrasText}</Text>}
+
+          {/* 가격과 열량 */}
           <View style={styles.bottomTextContainer}>
             <Text style={styles.metadataText}>{menu.cornerName}</Text>
             <Text style={styles.metadataText}>{menu.priceAndCalorieText}</Text>
@@ -82,30 +83,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 12,
   },
-
   availableTimeImage: {
     width: 50,
     height: 50,
   },
-
   textPartContainer: {
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
     marginStart: 12,
   },
-
   foodsText: {
     ...palette.textSubPrimary,
     fontWeight: 'bold',
   },
-
+  extrasText: {
+    marginTop: 8,
+    ...palette.textSecondary,
+  },
   bottomTextContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 8,
   },
-
   metadataText: {
     ...palette.textSecondary,
   },

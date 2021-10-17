@@ -29,4 +29,8 @@ export default class Menu {
 
   @Expose()
   calorie: number;
+
+  @Expose()
+  @Type(() => String)
+  extras: string[];
 }

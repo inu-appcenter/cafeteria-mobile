@@ -27,6 +27,8 @@ export default class MenuView {
   availableAt: number;
   foodsText: string;
   priceAndCalorieText: string;
+  hasExtras: boolean;
+  extrasText: string;
 
   static fromCafeteriaAndCorner(cafeteria: Cafeteria, corner: Corner): MenuView[] {
     const priceAndCalorieString = (menu: Menu) => {
@@ -45,6 +47,8 @@ export default class MenuView {
       availableAt: corner.availableAt,
       foodsText: menu.foods.join(', '),
       priceAndCalorieText: priceAndCalorieString(menu),
+      hasExtras: menu.extras.length > 0,
+      extrasText: menu.extras.map(extra => `• ${extra}`).join('\n'),
     }));
   }
 }

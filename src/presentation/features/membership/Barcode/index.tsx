@@ -17,18 +17,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import {Dimensions, Image, Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 import useApi from '../../../hooks/useApi';
 import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import CardView from '../../../components/CardView';
 import {observer} from 'mobx-react';
+import useInterval from '../../../hooks/useInterval';
 import useUserState from '../../../hooks/useUserState';
+import handleApiError from '../../../../common/utils/handleApiError';
 import BarcodeBuilder from 'react-native-barcode-builder';
 import VerticalShadow from '../../../components/VerticalShadow';
 import ActivateBarcode from '../../../../domain/usecases/ActivateBarcode';
 import React, {useEffect} from 'react';
 import useScreenBrightness from '../../../hooks/useScreenBrightness';
+import {Dimensions, Image, Platform, ScrollView, StyleSheet, Text, View} from 'react-native';
 
 function Barcode() {
   const {barcode, studentId} = useUserState();
@@ -37,8 +39,12 @@ function Barcode() {
   const [, activateBarcode] = useApi(() => ActivateBarcode.run());
 
   useEffect(() => {
-    activateBarcode();
+    activateBarcode().catch(handleApiError);
   }, []);
+
+  useInterval(() => {
+    activateBarcode().catch();
+  }, 1000 * 60 * 5 /* 5분에 한번씩 */);
 
   const header = (
     <View style={styles.header}>

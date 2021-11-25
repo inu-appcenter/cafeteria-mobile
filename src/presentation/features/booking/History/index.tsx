@@ -23,6 +23,7 @@ import colors from '../../../res/colors';
 import palette from '../../../res/palette';
 import useStores from '../../../hooks/useStores';
 import {observer} from 'mobx-react';
+import useInterval from '../../../hooks/useInterval';
 import BookingItem from './BookingItem';
 import handleApiError from '../../../../common/utils/handleApiError';
 import NoBookingsView from './NoBookingsView';
@@ -39,24 +40,18 @@ function History({navigation}: Props) {
   const {bookingStore} = useStores();
 
   const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
-  const [_, refresh] = useApi(() => bookingStore.fetchMyBookings());
+  const [, refresh] = useApi(() => bookingStore.fetchMyBookings());
 
   const myBookings = bookingStore.myBookings;
   const getMyBookings = () => fetch().catch(handleApiError);
-  const silentRefresh = () => refresh().catch();
-
-  const timer = () => {
-    setTimeout(() => {
-      silentRefresh();
-
-      timer();
-    }, 1000);
-  };
 
   useEffect(() => {
     getMyBookings();
-    timer();
   }, []);
+
+  useInterval(() => {
+    refresh().catch();
+  }, 1000 /* 1초에 한번씩 */);
 
   const emptyView = <NoBookingsView />;
 

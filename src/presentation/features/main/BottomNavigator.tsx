@@ -22,12 +22,12 @@ import colors from '../../res/colors';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import useStores from '../../hooks/useStores';
 import {observer} from 'mobx-react';
-import {StyleSheet} from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import BookingScreen from '../booking/BookingScreen';
 import SupportScreen from '../support/SupportScreen';
 import CafeteriaScreen from '../cafeteria/CafeteriaScreen';
 import MembershipScreen from '../membership/MembershipScreen';
+import useBottomTabBarOptions from '../../hooks/useBottomTabBarOptions';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import tabBarIconSelector, {IconConfigs} from '../../components/utils/tabBarIconSelector';
@@ -49,7 +49,7 @@ function BottomNavigator() {
       tabBarOptions={{
         activeTintColor: colors.textPrimary,
         inactiveTintColor: colors.textDisabled,
-        labelStyle: styles.tabBarLabel,
+        ...useBottomTabBarOptions(),
       }}
       screenOptions={({route}) => ({
         tabBarIcon: tabBarIconSelector(icons, route.name),
@@ -71,9 +71,3 @@ function BottomNavigator() {
 }
 
 export default observer(BottomNavigator);
-
-const styles = StyleSheet.create({
-  tabBarLabel: {
-    fontSize: 12,
-  },
-});

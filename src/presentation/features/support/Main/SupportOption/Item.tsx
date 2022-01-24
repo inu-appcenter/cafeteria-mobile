@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,10 +25,7 @@ import {IconProps} from 'react-native-vector-icons/Icon';
 import ChevronRight from '../../../../components/ChevronRight';
 import React, {ComponentType} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {
-  SupportMainNavigation,
-  SupportNavigationParams,
-} from '../../SupportScreen';
+import {SupportMainNavigation, SupportNavigationParams} from '../../SupportScreen';
 
 export type SupportOptionProps = {
   icon: [string, ComponentType<IconProps>?];
@@ -37,33 +34,19 @@ export type SupportOptionProps = {
   navigationDestination: keyof SupportNavigationParams;
 };
 
-export default function Item({
-  icon,
-  title,
-  navigation,
-  navigationDestination,
-}: SupportOptionProps) {
+export default function Item({icon, title, navigation, navigationDestination}: SupportOptionProps) {
   if (navigation === undefined) {
-    console.warn(
-      'SupportOption.Item must be provided a navigation from its direct parent!',
-    );
+    console.warn('SupportOption.Item must be provided a navigation from its direct parent!');
     return null;
   }
 
   const IconClass = icon[1] || Ionicons;
 
   return (
-    <Touchable
-      style={{alignSelf: 'stretch'}}
-      onPress={() => navigation.navigate(navigationDestination)}>
+    <Touchable style={{alignSelf: 'stretch'}} onPress={() => navigation.navigate(navigationDestination)}>
       <View style={styles.rootContainer}>
         <View style={styles.leftContainer}>
-          <IconClass
-            name={icon[0]}
-            size={22}
-            color={colors.textPrimary}
-            style={styles.icon}
-          />
+          <IconClass name={icon[0]} size={22} color={colors.textPrimary} style={styles.icon} />
           <Text style={styles.titleText}>{title}</Text>
         </View>
         <ChevronRight />

@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -32,18 +32,9 @@ import colors from '../res/colors';
 export default class Touchable extends React.Component<TouchableWithoutFeedbackProps> {
   render() {
     if (Platform.OS === 'android') {
-      const ripple = TouchableNativeFeedback.Ripple(
-        colors.rippleColorLight,
-        false,
-      );
+      const ripple = TouchableNativeFeedback.Ripple(colors.rippleColorLight, false);
 
-      return (
-        <TouchableNativeFeedback
-          background={ripple}
-          useForeground={true}
-          {...this.props}
-        />
-      );
+      return <TouchableNativeFeedback background={ripple} useForeground={true} {...this.props} />;
     } else {
       return <TouchableOpacity activeOpacity={0.5} {...this.props} />;
     }

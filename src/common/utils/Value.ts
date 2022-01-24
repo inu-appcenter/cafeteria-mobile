@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,8 +17,6 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-export function notEmpty<TValue>(
-  value: TValue | null | undefined,
-): value is TValue {
+export function notEmpty<TValue>(value: TValue | null | undefined): value is TValue {
   return value !== null && value !== undefined;
 }

@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -22,10 +22,7 @@ import {IconProps} from 'react-native-vector-icons/Icon';
 import React, {ComponentType} from 'react';
 import {BottomTabNavigationOptions} from '@react-navigation/bottom-tabs/src/types';
 
-export type IconConfigs = Record<
-  string,
-  [string, string, ComponentType<IconProps>?]
->;
+export type IconConfigs = Record<string, [string, string, ComponentType<IconProps>?]>;
 
 /**
  * Tab bar icon selector generator for BottomTabNavigator.
@@ -43,12 +40,6 @@ export default function tabBarIconSelector(
   return ({focused, color, size}) => {
     const IconClass = icons[screenName]?.[2] || Ionicons;
 
-    return (
-      <IconClass
-        name={icons[screenName]?.[focused ? 0 : 1] || 'error'}
-        size={size}
-        color={color}
-      />
-    );
+    return <IconClass name={icons[screenName]?.[focused ? 0 : 1] || 'error'} size={size} color={color} />;
   };
 }

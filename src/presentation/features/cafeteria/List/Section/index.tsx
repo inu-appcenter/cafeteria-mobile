@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,10 +26,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {CafeteriaListDetailNavigationParams} from '../../CafeteriaScreen';
 
 type Props = {
-  navigation: StackNavigationProp<
-    CafeteriaListDetailNavigationParams,
-    'CafeteriaList'
-  >;
+  navigation: StackNavigationProp<CafeteriaListDetailNavigationParams, 'CafeteriaList'>;
   cafeteria: CafeteriaWithMenuView;
 };
 
@@ -38,9 +35,7 @@ export default function Section({navigation, cafeteria}: Props) {
     <View>
       <Header
         title={cafeteria.title}
-        onClickMore={() =>
-          navigation.navigate('CafeteriaDetail', {cafeteria: cafeteria})
-        }
+        onClickMore={() => navigation.navigate('CafeteriaDetail', {cafeteria: cafeteria})}
       />
 
       <Pager menus={cafeteria.menus} stackSize={3} />

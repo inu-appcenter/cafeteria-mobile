@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -53,9 +53,7 @@ class CheckAndInstallUpdate extends UseCase {
     console.log(`업데이트가 존재합니다: ${JSON.stringify(update)}.`);
 
     return await update.download(progress => {
-      console.log(
-        `업데이트 다운로드 중: ${progress.receivedBytes}/${progress.totalBytes}Bytes`,
-      );
+      console.log(`업데이트 다운로드 중: ${progress.receivedBytes}/${progress.totalBytes}Bytes`);
     });
   }
 }

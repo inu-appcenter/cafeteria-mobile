@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,14 +26,7 @@ type Props = ViewProps & {
 };
 
 export default function VerticalShadow({style, reversed}: Props) {
-  const colors = reversed
-    ? ['#00000000', '#0000000D']
-    : ['#0000000D', '#00000000'];
+  const colors = reversed ? ['#00000000', '#0000000D'] : ['#0000000D', '#00000000'];
 
-  return (
-    <LinearGradient
-      style={[{height: 4, width: '100%'}, style]}
-      colors={colors}
-    />
-  );
+  return <LinearGradient style={[{height: 4, width: '100%'}, style]} colors={colors} />;
 }

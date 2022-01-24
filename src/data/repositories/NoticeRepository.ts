@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,8 +33,7 @@ export default class NoticeRepository {
   static instance = new NoticeRepository();
 
   private url = {
-    notices: (os: string, version: string) =>
-      `${Config.baseUrl}/notices?os=${os}&version=${version}`,
+    notices: (os: string, version: string) => `${Config.baseUrl}/notices?os=${os}&version=${version}`,
     latestNotice: (os: string, version: string) =>
       `${Config.baseUrl}/notices/latest?os=${os}&version=${version}`,
   };

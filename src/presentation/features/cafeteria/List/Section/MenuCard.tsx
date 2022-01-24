@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -37,9 +37,7 @@ export default function MenuCard({menus}: Props) {
         listKey={menus[0].key}
         renderItem={i => <MenuItem menu={i.item} />}
         keyExtractor={i => i.key}
-        ItemSeparatorComponent={() => (
-          <ItemSeparator style={styles.separator} />
-        )}
+        ItemSeparatorComponent={() => <ItemSeparator style={styles.separator} />}
       />
     </CardView>
   );

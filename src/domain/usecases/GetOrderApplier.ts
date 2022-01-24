@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -33,21 +33,13 @@ class GetOrderApplier extends SyncUseCase<number[], OrderApplier> {
         return [];
       }
 
-      const effectiveOrderedIds = orderedIds.filter(id =>
-        items.map(c => c.id).includes(id),
-      );
+      const effectiveOrderedIds = orderedIds.filter(id => items.map(c => c.id).includes(id));
 
-      const thoseCounted = items.filter(c =>
-        effectiveOrderedIds.includes(c.id),
-      );
+      const thoseCounted = items.filter(c => effectiveOrderedIds.includes(c.id));
 
-      const thoseNotCounted = items.filter(
-        c => !effectiveOrderedIds.includes(c.id),
-      );
+      const thoseNotCounted = items.filter(c => !effectiveOrderedIds.includes(c.id));
 
-      const ordered = effectiveOrderedIds
-        .map(id => thoseCounted.find(c => c.id === id))
-        .filter(notEmpty);
+      const ordered = effectiveOrderedIds.map(id => thoseCounted.find(c => c.id === id)).filter(notEmpty);
 
       return [...thoseNotCounted, ...ordered];
     };

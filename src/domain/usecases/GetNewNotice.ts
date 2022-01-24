@@ -1,7 +1,7 @@
 /**
  * This file is part of INU Cafeteria.
  *
- * Copyright (C) 2021 INU Global App Center <potados99@gmail.com>
+ * Copyright 2021 INU Global App Center <potados99@gmail.com>
  *
  * INU Cafeteria is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -38,8 +38,7 @@ class GetNewNotice extends UseCase<void, Notice | undefined> {
       return undefined;
     }
 
-    const dismissedNoticeId =
-      await this.noticeRepository.getDismissedNoticeId();
+    const dismissedNoticeId = await this.noticeRepository.getDismissedNoticeId();
 
     if (latestNotice.id <= dismissedNoticeId) {
       // 최신 공지가 사용자에게도 최신이 아니면(확인한 적이 있으면) undefined를 반환하는 것으로 끝냅니다.

@@ -18,7 +18,7 @@
  */
 
 export default async function sleep(timeMillis: number) {
-  return new Promise(res => {
+  return new Promise<void>(res => {
     setTimeout(() => res(), timeMillis);
   });
 }

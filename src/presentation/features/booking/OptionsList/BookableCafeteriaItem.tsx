@@ -17,16 +17,18 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import React from 'react';
 import colors from '../../../res/colors';
+import Config from '../../../../common/Config';
 import palette from '../../../res/palette';
 import {Button} from 'react-native-paper';
 import CardView from '../../../components/CardView';
+import {randomPick} from '../../../../common/utils/Array';
+import PaperPresets from '../../../components/utils/PaperPresets';
 import CafeteriaView from '../../cafeteria/CafeteriaView';
+import React, {useState} from 'react';
 import {StyleSheet, Text} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {BookingNavigationParams} from '../BookingScreen';
-import PaperPresets from '../../../components/utils/PaperPresets';
 
 type Props = {
   navigation: StackNavigationProp<BookingNavigationParams, 'BookingOptionsList'>;
@@ -35,10 +37,15 @@ type Props = {
 
 export default function BookableCafeteriaItem({navigation, cafeteria}: Props) {
   const goToDetails = () => navigation.navigate('BookingOptionsDetail', {cafeteria});
+  const nextEmoji = () => randomPick(Config.emoji.bank);
+
+  const [emoji, setEmoji] = useState(nextEmoji());
 
   return (
     <CardView style={styles.container}>
-      <Text style={styles.emojiText}>😋</Text>
+      <Text style={styles.emojiText} onPress={() => setEmoji(nextEmoji())}>
+        {emoji}
+      </Text>
       <Text style={styles.titleText}>{cafeteria.displayName}</Text>
       <Text style={styles.descriptionText}>{cafeteria.comment}</Text>
       <Button {...PaperPresets.wideThemedButton} style={styles.makeBookingButton} onPress={goToDetails}>
@@ -74,7 +81,6 @@ const styles = StyleSheet.create({
     color: colors.white,
     paddingVertical: 4,
   },
-
   makeBookingButton: {
     alignSelf: 'stretch',
     marginTop: 21,

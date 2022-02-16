@@ -10,7 +10,7 @@
     "android": "react-native run-android",
     "preversion": "npm test",
     "postinstall": "patch-package",
-    "postversion": "react-native-version && git push && git push --tags"
+    "postversion": "react-native-version --amend && git push && git push --tags"
   },
   "dependencies": {
     "@adrianso/react-native-device-brightness": "^1.2.4",

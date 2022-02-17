@@ -40,18 +40,22 @@ function History({navigation}: Props) {
   const {bookingStore} = useStores();
 
   const [loading, fetch] = useApi(() => bookingStore.fetchMyBookings());
-  const [, refresh] = useApi(() => bookingStore.fetchMyBookings());
 
-  const myBookings = bookingStore.myBookings;
   const getMyBookings = () => fetch().catch(handleApiError);
+  const myBookings = bookingStore.myBookings;
 
   useEffect(() => {
+    // 한번 loading view 포함해서 땡겨놓고,
     getMyBookings();
-  }, []);
 
-  useInterval(() => {
-    refresh().catch();
-  }, 1000 /* 1초에 한번씩 */);
+    // 그 다음 변화부터는 listening 시작.
+    bookingStore.listenForMyBookings();
+
+    return () => {
+      // Unmount 시점에는 연결 제거.
+      bookingStore.stopListeningForMyBookings();
+    };
+  }, []);
 
   const emptyView = <NoBookingsView />;
 

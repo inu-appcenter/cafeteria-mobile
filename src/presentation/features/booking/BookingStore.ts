@@ -21,11 +21,12 @@ import MakeBooking from '../../../domain/usecases/MakeBooking';
 import BookingView from './BookingView';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CafeteriaView from '../cafeteria/CafeteriaView';
-import CancelBooking from '../../../domain/usecases/CancelBooking';
 import GetMyBookings from '../../../domain/usecases/GetMyBookings';
+import CancelBooking from '../../../domain/usecases/CancelBooking';
 import CafeteriaStore from '../cafeteria/CafeteriaStore';
 import GetBookingOptions from '../../../domain/usecases/GetBookingOptions';
 import BookingOptionView from './BookingOptionView';
+import ListenForMyBookings from '../../../domain/usecases/ListenForMyBookings';
 import {makeAutoObservable} from 'mobx';
 import GroupedBookingOptionsView from './GroupedBookingOptionsView';
 
@@ -41,6 +42,8 @@ export default class BookingStore {
   protected _usedToBookingFeature = false;
   get usedToBookingFeature() {
     // 항상 false로 오버라이드합니다.
+    // 그래야 OnboardingHintCard가 항상 표시됩니다.
+    // 이거슨 클라이언트의 요청에 의한 것입니다.
     return false;
   }
   set usedToBookingFeature(value) {
@@ -141,6 +144,7 @@ export default class BookingStore {
     // 예약을 1회 이상 한 시점에서는
     // usedToBookingFeature(예약 기능에 익숙한가)가 true.
     this.usedToBookingFeature = true;
+
     await this.persistFlags();
   }
 
@@ -155,6 +159,31 @@ export default class BookingStore {
     this.myBookings = myBookings.map(b =>
       BookingView.fromBooking(b, allCafeteria.find(c => c.id === b.cafeteriaId)!),
     );
+  }
+
+  /**
+   * SSE로 예약 내역 수신 시작!
+   */
+  async listenForMyBookings() {
+    await ListenForMyBookings.run({
+      onBookings: bookings => {
+        console.log(`예약 내역 업데이트 도착!`);
+
+        const myBookings = bookings;
+        const allCafeteria = this.cafeteriaStore.cafeteria;
+
+        this.myBookings = myBookings.map(b =>
+          BookingView.fromBooking(b, allCafeteria.find(c => c.id === b.cafeteriaId)!),
+        );
+      },
+    });
+  }
+
+  /**
+   * SSE로 예약 내역 수신 중단!
+   */
+  async stopListeningForMyBookings() {
+    await ListenForMyBookings.run({});
   }
 
   async cancelBooking(bookingId: number) {

@@ -17,20 +17,23 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import Config from '../../common/Config';
 import axios from 'axios';
-import {plainToClass} from 'class-transformer';
-import BookingOption from '../../domain/entities/BookingOption';
+import Config from '../../common/Config';
 import Booking from '../../domain/entities/Booking';
+import EventSource from 'react-native-event-source';
+import BookingOption from '../../domain/entities/BookingOption';
+import {plainToClass} from 'class-transformer';
 
 export default class BookingRepository {
   static instance = new BookingRepository();
 
   private url = {
     options: (cafeteriaId: number) => `${Config.baseUrl}/booking/options?cafeteriaId=${cafeteriaId}`,
-    bookings: `${Config.baseUrl}/booking/bookings`,
+    bookings: (sse: boolean = false) => `${Config.baseUrl}/booking/bookings?sse=${sse}`,
     bookingsWithId: (bookingId: number) => `${Config.baseUrl}/booking/bookings/${bookingId}`,
   };
+
+  private previousEventSource?: EventSource = undefined;
 
   async getBookingOptions(cafeteriaId: number) {
     return plainToClass(BookingOption, (await axios.get(this.url.options(cafeteriaId))).data as any[], {
@@ -39,13 +42,37 @@ export default class BookingRepository {
   }
 
   async makeBooking(params: Record<string, any>) {
-    await axios.post(this.url.bookings, params);
+    await axios.post(this.url.bookings(), params);
   }
 
   async getMyBookings() {
-    return plainToClass(Booking, (await axios.get(this.url.bookings)).data as any[], {
+    return plainToClass(Booking, (await axios.get(this.url.bookings())).data as any[], {
       excludeExtraneousValues: true,
     });
+  }
+
+  listenForMyBookings(onBookings: (bookings: Booking[]) => void) {
+    this.previousEventSource?.close();
+
+    const eventSource = new EventSource(this.url.bookings(true), {withCredentials: true});
+
+    eventSource.addEventListener('bookings', event => {
+      const payload = event['data'] as string;
+
+      const bookings = plainToClass(Booking, JSON.parse(payload) as any[], {
+        excludeExtraneousValues: true,
+      });
+
+      onBookings(bookings);
+    });
+
+    this.previousEventSource = eventSource;
+  }
+
+  stopListeningForMyBookings() {
+    this.previousEventSource?.removeAllListeners();
+    this.previousEventSource?.close();
+    this.previousEventSource = undefined;
   }
 
   async cancelBooking(bookingId: number) {

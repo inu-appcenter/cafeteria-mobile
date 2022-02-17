@@ -21,17 +21,26 @@ import UseCase from './UseCase';
 import Booking from '../entities/Booking';
 import BookingRepository from '../../data/repositories/BookingRepository';
 
+type Params = {
+  onBookings?: (bookings: Booking[]) => void;
+};
+
 /**
- * REST 요청으로 예약 내역을 즉시 가져옵니다.
+ * SSE로 예약 내역을 구독합니다.
+ * 인자로 undefined를 넘기면 구독 중단입니다.
  */
-class GetMyBookings extends UseCase<void, Booking[]> {
+class ListenForMyBookings extends UseCase<Params, void> {
   constructor(private readonly bookingRepository: BookingRepository) {
     super();
   }
 
-  async onExecute(params: void): Promise<Booking[]> {
-    return await this.bookingRepository.getMyBookings();
+  async onExecute({onBookings}: Params): Promise<void> {
+    if (onBookings == null) {
+      this.bookingRepository.stopListeningForMyBookings();
+    } else {
+      this.bookingRepository.listenForMyBookings(onBookings);
+    }
   }
 }
 
-export default new GetMyBookings(BookingRepository.instance);
+export default new ListenForMyBookings(BookingRepository.instance);

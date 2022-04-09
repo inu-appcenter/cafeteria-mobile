@@ -34,7 +34,7 @@
     "jsc-android": "^250230.2.1",
     "mobx": "^6.3.0",
     "mobx-react": "^7.1.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "patch-package": "^6.4.7",
     "react": "17.0.1",
     "react-dom": "^17.0.2",
